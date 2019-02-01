@@ -116,7 +116,8 @@ def PageSignature():
         section.right_margin = Cm(2)
     
     '''Logos de l'en-tete'''
-    p = document.add_paragraph()
+    header = section.header
+    p = header.paragraphs[0]
     r = p.add_run() 
     r.add_picture('imageGauche.png')
     r.add_text('                                                                                                                                     ')
@@ -209,5 +210,11 @@ def PageSignature():
                     font.size= docx.shared.Pt(11)
                     font.name = 'Times New Roman'
   
+    '''Pied de page'''
+    footer = section.footer
+    p = footer.paragraphs[0]
+    r = p.add_run('Version n°X du XX/XX/201X	                               CONFIDENTIEL                                                Page 3 sur 14') 
+    r.font.name = 'Times New Roman'
+    r.font.size = docx.shared.Pt(11)
     
     document.save("page_signature.docx")                   #sauvegarde
