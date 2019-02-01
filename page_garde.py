@@ -10,9 +10,9 @@ from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.shared import Cm
 
 
-def PageGarde():
+def PageGarde(document):
     
-    document = docx.Document()
+ #   document = docx.Document()
     
     '''Marge de la page'''
     sections = document.sections
@@ -100,12 +100,12 @@ def PageGarde():
     run2.font.name = 'Times New Roman'
     run2.font.size = docx.shared.Pt(10) 
     
-       
-    document.save("page_garde.docx")                   #sauvegarde
    
-def PageSignature():
+  #  document.save("page_garde.docx")                   #sauvegarde
+   
+def PageSignature(document):
     
-    document = docx.Document()
+  #  document = docx.Document()
     
     '''Marge de la page'''
     sections = document.sections
@@ -216,5 +216,6 @@ def PageSignature():
     r = p.add_run('Version n°X du XX/XX/201X	                               CONFIDENTIEL                                                Page 3 sur 14') 
     r.font.name = 'Times New Roman'
     r.font.size = docx.shared.Pt(11)
+
     
-    document.save("page_signature.docx")                   #sauvegarde
+  #  document.save("page_signature.docx")                   #sauvegarde
