@@ -10,6 +10,7 @@ Created on Fri Feb  1 15:43:54 2019
 #import gestion_tableau
 import page_garde
 import docx
+from docx.shared import Cm
 
 #def extraction_info():
 
@@ -17,6 +18,15 @@ import docx
 def construit_doc():
     
     document = docx.Document()
+    
+    '''Marge des page'''
+    sections = document.sections
+    for section in sections:
+        section.top_margin = Cm(2)
+        section.bottom_margin = Cm(2)
+        section.left_margin = Cm(2)
+        section.right_margin = Cm(2)
+    
     
     page_garde.PageGarde(document)
     #historique des mises a jour

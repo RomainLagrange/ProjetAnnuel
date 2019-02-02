@@ -7,24 +7,23 @@ Created on Thu Dec  6 16:44:16 2018
 """
 import docx
 from docx.enum.text import WD_ALIGN_PARAGRAPH
-from docx.shared import Cm
+#from docx.enum.section import WD_SECTION
+from docx.enum.text import WD_BREAK
 
 
 def PageGarde(document):
     
  #   document = docx.Document()
     
-    '''Marge de la page'''
     sections = document.sections
-    for section in sections:
-        section.top_margin = Cm(2)
-        section.bottom_margin = Cm(2)
-        section.left_margin = Cm(2)
-        section.right_margin = Cm(2)
+    page_garde = sections[0]
+        
     
     '''Logos de l'en-tete'''
-    p = document.add_paragraph()
-    r = p.add_run()
+    header = page_garde.header
+    header.is_linked_to_previous = False
+    p = header.paragraphs[0]
+    r = p.add_run() 
     r.add_picture('imageGauche.png')
     r.add_text('                                                                                                                                     ')
     r.add_picture('imageDroite.png')
@@ -98,7 +97,19 @@ def PageGarde(document):
     run1.underline = True
     run2 = paragraph.add_run(' EST LA PROPRIETE DU CHU DE POITIERS.\nAUCUNE INFORMATION NON PUBLIEE FIGURANT DANS CE DOCUMENT NE PEUT ETRE DIVULGUEE SANS AUTORISATION ECRITE PREALABLE DU CHU DE POITIERS')
     run2.font.name = 'Times New Roman'
-    run2.font.size = docx.shared.Pt(10) 
+    run2.font.size = docx.shared.Pt(10)
+    
+    '''Pied de page'''
+    footer = page_garde.footer
+    footer.is_linked_to_previous = False
+    p = footer.paragraphs[0]
+    r = p.add_run(' ')
+    
+
+    '''Fin de page'''
+    run = paragraph.add_run()
+    run.add_break(WD_BREAK.PAGE)
+
     
    
   #  document.save("page_garde.docx")                   #sauvegarde
@@ -106,22 +117,20 @@ def PageGarde(document):
 def PageSignature(document):
     
   #  document = docx.Document()
-    
-    '''Marge de la page'''
-    sections = document.sections
-    for section in sections:
-        section.top_margin = Cm(0.5)
-        section.bottom_margin = Cm(2)
-        section.left_margin = Cm(2)
-        section.right_margin = Cm(2)
-    
+ 
     '''Logos de l'en-tete'''
-    header = section.header
-    p = header.paragraphs[0]
+    
+    page_sign = document.add_section()
+    header2 = page_sign.header
+    header2.is_linked_to_previous = False
+    p = header2.paragraphs[0]
     r = p.add_run() 
-    r.add_picture('imageGauche.png')
-    r.add_text('                                                                                                                                     ')
-    r.add_text('ACRONYME')
+    r.add_text("\t\tACRONYME")
+    p2 = header2.add_paragraph()
+    r2 = p2.add_run() 
+    r2.add_picture('imageGauche.png')
+    
+#    p.style = document.styles["Header"]
         
     '''Titre'''
     paragraph2 = document.add_paragraph()
@@ -174,7 +183,7 @@ def PageSignature(document):
     
     '''Deuxieme case'''
     table2 = document.add_table(rows=1, cols=1, style='Table Grid')
-    text5 = "Investigateur Coordonnateur : Dr/ Pr XXXXX\n(Prénom NOM)\n\n\n\n"
+    text5 = "Investigateur Coordonnateur : Dr/ Pr XXXXX\n(Prénom NOM)\n\n\n"
     text6 = "Signature : ……………………………………………..                          Date : ___________________\n" 
     table2.cell(0,0).text = text5 + text6
     for row in table2.rows:
@@ -198,7 +207,7 @@ def PageSignature(document):
     
     '''Troisieme case'''
     table3 = document.add_table(rows=1, cols=1, style='Table Grid')
-    text5 = "Promoteur : Jean-Pierre DEWITTE\nPour le Directeur Général et par délégation\nle Directeur de la Recherche,\n\n\n\n"
+    text5 = "Promoteur : Jean-Pierre DEWITTE\nPour le Directeur Général et par délégation\nle Directeur de la Recherche,\n\n\n"
     text6 = "Signature : ……………………………………………..                          Date : ___________________\n" 
     table3.cell(0,0).text = text5 + text6
     for row in table3.rows:
@@ -211,11 +220,18 @@ def PageSignature(document):
                     font.name = 'Times New Roman'
   
     '''Pied de page'''
-    footer = section.footer
+    footer = page_sign.footer
+    footer.is_linked_to_previous = False
     p = footer.paragraphs[0]
-    r = p.add_run('Version n°X du XX/XX/201X	                               CONFIDENTIEL                                                Page 3 sur 14') 
+    r = p.add_run('Version n°X du XX/XX/201X\tCONFIDENTIEL\tPage 3 sur 14')
     r.font.name = 'Times New Roman'
     r.font.size = docx.shared.Pt(11)
+    
+    
+    '''Fin de page'''
+    paragraph = document.add_paragraph()
+    run = paragraph.add_run()
+    run.add_break(WD_BREAK.PAGE)
 
     
   #  document.save("page_signature.docx")                   #sauvegarde
