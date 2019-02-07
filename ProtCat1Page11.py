@@ -8,10 +8,9 @@ Created on Thu Jan 31 13:32:03 2019
 import docx
 from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_UNDERLINE, WD_LINE_SPACING, WD_COLOR_INDEX
 from docx.enum.style import WD_STYLE_TYPE
-from docx.shared import Cm, Pt
-from docx.shared import RGBColor
+from docx.shared import Cm, Pt, RGBColor, Inches
 
-#COUleur Titre1 + indentation + soulignae titre2 + organisation texte + saut à la ligne
+#COUleur Titre1 +  soulignae titre2 + organisation texte + saut à la ligne, non soulignement chiffre
 
 
 def Page11():
@@ -45,11 +44,11 @@ def Page11():
                 
 
     
-    #definition du style pour le texte indicatif   ESPACEMENT LIGNES
+    #definition du style pour le texte indicatif   ESPACEMENT LIGNES paragraphe
     styleIndic = styles.add_style('TexteItalic', WD_STYLE_TYPE.PARAGRAPH)
     styleIndic.base_style = styles['Normal']
     fontIndic = styleIndic.font
-    fontIndic.name = 'Times New Roman'   #INDENTATION
+    fontIndic.name = 'Times New Roman'   
     fontIndic.size = docx.shared.Pt(11)
     fontIndic.italic= True
     
@@ -60,7 +59,7 @@ def Page11():
     paragraph1.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
 
 
-    #Definition du Titre2    INDENTATION + NON SOULIGNEMENT CHIFFRE
+    #Definition du Titre2   NON SOULIGNEMENT CHIFFRE
     styleTitre2 = styles.add_style('Titre2', WD_STYLE_TYPE.PARAGRAPH, WD_ALIGN_PARAGRAPH.JUSTIFY)
     styleTitre2.base_style = styles['Heading2']
     fontTitre2 = styleTitre2.font
@@ -68,8 +67,14 @@ def Page11():
     fontTitre2.size = docx.shared.Pt(14)
     fontTitre2.bold= True
     fontTitre2.color.rgb = RGBColor(0x0,0x0,0x0)
+    styleTitre2.paragraph_format.left_indent = Inches(0.59) #indentation en pouce, ici 1,5cm
     #ecriture du titre1.1
-    document.add_paragraph('1.1	Etat actuel des connaissances', style='Titre2') 
+    document.add_paragraph('1.1	Etat actuel des connaissances\n', style='Titre2') 
+#    p=document.add_paragraph('1.1 ')
+#    run=p.add_run(document.add_paragraph('Etat actuel des connaissances\n', style='Titre2'))
+   
+
+            
 
     #Definition du Titre3
     styleTitre3 = styles.add_style('Titre3', WD_STYLE_TYPE.PARAGRAPH)
@@ -79,9 +84,10 @@ def Page11():
     fontTitre3.size = docx.shared.Pt(12)
     fontTitre3.bold= True
     fontTitre3.underline= True
+    styleTitre3.paragraph_format.left_indent = Inches(0.98) #indentation en pouce, ici 2,5cm
     fontTitre3.color.rgb = RGBColor(0x0,0x0,0x0)
     #ecriture du titre1.1.1
-    document.add_paragraph('1.1.1	Sur la pathologie', style='Titre3')  
+    document.add_paragraph('1.1.1	Sur la pathologie\n', style='Titre3')  
             #ajuster style
     
     #Texte indicatif en italique TEST    #UTILISER, style ='TexteItalic'
@@ -92,7 +98,7 @@ def Page11():
     sentence.font.size = docx.shared.Pt(11)
     
     #ecriture du titre1.1.2
-    document.add_paragraph('1.1.2	Sur les traitements, stratégies et procédures de référence et à l’étude', 
+    document.add_paragraph('1.1.2	Sur les traitements, stratégies et procédures de référence et à l’étude\n', 
                            style='Titre3')  
             #ajuster style
     
@@ -123,7 +129,7 @@ def Page11():
                                         
                                         
     #ecriture du titre1.2
-    document.add_paragraph('1.2	Hypothèse de la recherche et résultats attendus', style='Titre2')
+    document.add_paragraph('1.2	Hypothèse de la recherche et résultats attendus\n', style='Titre2')
     #Texte indicatif en italique
     paragraph5 = document.add_paragraph ('Définir précisément l’hypothèse, \
     physiopathologique ou autre, qui justifie la mise en place de la recherche\
@@ -135,7 +141,7 @@ def Page11():
      
      
      #ecriture du titre1.3
-    document.add_paragraph('1.3	Justification des choix méthodologiques', style='Titre2')
+    document.add_paragraph('1.3	Justification des choix méthodologiques\n', style='Titre2')
     #definition style texte surligné en gris   CENTRER + COULEUR 
     styles = document.styles
     styleBackgroundGrey = styles.add_style('BackgroundGrey', WD_STYLE_TYPE.PARAGRAPH, WD_ALIGN_PARAGRAPH.CENTER)
@@ -160,10 +166,10 @@ def Page11():
     
     
      #ecriture du titre1.4
-    document.add_paragraph('1.4	Rapport bénéfices / risques prévisibles'
+    document.add_paragraph('1.4	Rapport bénéfices / risques prévisibles\n'
                            , style='Titre2')
     #ecriture du titre1.4.1
-    document.add_paragraph('1.4.1	Bénéfices', style='Titre3')  
+    document.add_paragraph('1.4.1	Bénéfices\n', style='Titre3')  
      #Texte indicatif en italique
     paragraph8 = document.add_paragraph('Expliquer quel(s) est (sont) le(s) \
     bénéfice(s) individuel(s) et collectif(s), le(s) risque(s) prévisible(s) et\
@@ -173,7 +179,7 @@ def Page11():
     qui se prêtent à la recherche.', style='TexteItalic')
     
     #ecriture du titre1.4.2
-    document.add_paragraph('1.4.2	Risques', style='Titre3')  
+    document.add_paragraph('1.4.2	Risques\n', style='Titre3')  
      #Texte indicatif en italique
     paragraph9 = document.add_paragraph('Décrire les risques prévisibles liés \
     au traitement et aux procédures d’investigation de la recherche (incluant \
@@ -183,7 +189,7 @@ def Page11():
     
     
      #ecriture du titre1.5
-    document.add_paragraph('1.5	Retombées attendues', style='Titre2')
+    document.add_paragraph('1.5	Retombées attendues\n', style='Titre2')
      #Texte indicatif en italique
     paragraph10 = document.add_paragraph('Description détaillée des retombées \
     attendues par cette recherche (en terme d’amélioration des connaissances \
