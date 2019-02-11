@@ -11,11 +11,22 @@ Created on Fri Feb  1 15:43:54 2019
 import page_garde
 import docx
 from docx.shared import Cm
+from docx import Document
 
 #def extraction_info():
 
 # construire un document 
 def construit_doc():
+    
+    #Pour le moment c'est histoire de faire quelque test pour les abréviations, faudra remplacer
+    #par l'extract à partir de la trame
+    
+    f1 = open('V1.docx', 'rb') #ouvre le premier fichier
+    doc = Document(f1)
+    fullText = []
+    for para in doc.paragraphs:
+        fullText.append(para.text)  #copie tout le texte dans une liste
+    f1.close() 
     
     document = docx.Document()
     
@@ -33,7 +44,7 @@ def construit_doc():
     page_garde.PageSignature(document)
     #principaux correspondants
     #sommaire
-    #liste des abréviations
+    page_garde.liste_abreviation(document,fullText)
     #resume du proto version XX
     #abstract
     #grand I justification
