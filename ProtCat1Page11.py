@@ -6,17 +6,19 @@ Created on Thu Jan 31 13:32:03 2019
 """
 
 import docx
+from StyleProt1 import Style
 from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_UNDERLINE, WD_LINE_SPACING, WD_COLOR_INDEX
 from docx.enum.style import WD_STYLE_TYPE
 from docx.shared import Cm, Pt, RGBColor, Inches
 
-#Cadre bas titre1 + texte surligné gris + organisation texte + saut à la ligne
 
 
 def Page11():
     'Creation de la page 11 du protcole de catégorie 1'
     document = docx.Document()
-    
+    styles = document.styles
+
+
 #   Marge de la page
     sections = document.sections
     for section in sections:
@@ -25,10 +27,8 @@ def Page11():
         section.left_margin = Cm(2)
         section.right_margin = Cm(2)
  
-    
-    #essai = document.add_paragraph('test',style='Title') TROUVER COMMENT FAIRE LA MEME LIGNE 
 
-    styles = document.styles
+    
 #   definition du style Titre1 --> AJOUTER LA BORDURE EN BAS
     styleTitre1 = styles.add_style('Titre1', WD_STYLE_TYPE.PARAGRAPH, WD_ALIGN_PARAGRAPH.CENTER)
     styleTitre1.base_style = styles['Heading1']
@@ -60,48 +60,52 @@ def Page11():
 
 
     #Definition du Titre2, correspond par exemple au 1.1 ou 1.2
-    styleTitre2 = styles.add_style('Titre2', WD_STYLE_TYPE.CHARACTER)
+    styleTitre2 = styles.add_style('Titre2', WD_STYLE_TYPE.PARAGRAPH)
     styleTitre2.base_style = styles['Heading2']
     fontTitre2 = styleTitre2.font
     fontTitre2.name = 'Times New Roman'
     fontTitre2.size = docx.shared.Pt(14)
     fontTitre2.bold= True
     fontTitre2.color.rgb = RGBColor(0x0,0x0,0x0)
+    styleTitre2.paragraph_format.left_indent = Inches(0.59)
     
-   #Définition du ListeTitre2, correspond au nom du titre après le 1.1 ou 1.2    
-    styleTitreListe2 = styles.add_style('ListeTitre2', WD_STYLE_TYPE.CHARACTER)
-    styleTitreListe2.base_style = styles['Heading2']
-    fontTitreListe2 = styleTitreListe2.font
-    fontTitreListe2.name = 'Times New Roman'
-    fontTitreListe2.size = docx.shared.Pt(14)
-    fontTitreListe2.bold= False
-    fontTitreListe2.color.rgb = RGBColor(0x0,0x0,0x0)
+   # Ecriture du 1.1  
+    document.add_paragraph('1.1	Etat actuel des connaissances\n', style='Titre2')  
 
-   # Ecriture du 1.1    
-    p=document.add_heading()
-    p.paragraph_format.left_indent = Inches(0.59) #indentation en pouce, ici 1,5cm
-    run1=p.add_run()
-    run1.text='1.1 '
-    run1.style='Titre2'
-    run2=p.add_run()
-    run2.text='Etat actuel des connaissances\n'
-    run2.style='ListeTitre2'
         
-
     #Definition du Titre3; correspond aux 1.1.1 ou 1.1.2...
-    styleTitre3 = styles.add_style('Titre3', WD_STYLE_TYPE.PARAGRAPH)
+    styleTitre3 = styles.add_style('Titre3', WD_STYLE_TYPE.CHARACTER)
   #  styleTitre3 = styles.add_style('Titre3', WD_STYLE_TYPE.CHARACTER)
     styleTitre3.base_style = styles['Heading3']
     fontTitre3 = styleTitre3.font
     fontTitre3.name = 'Times New Roman'
     fontTitre3.size = docx.shared.Pt(12)
-    fontTitre3.bold= True
+    fontTitre3.bold= False
     fontTitre3.underline= True
-    styleTitre3.paragraph_format.left_indent = Inches(0.98) #indentation en pouce, ici 2,5cm
+#    styleTitre3.paragraph_format.left_indent = Inches(0.98) #indentation en pouce, ici 2,5cm
     fontTitre3.color.rgb = RGBColor(0x0,0x0,0x0)
     
-    #Ecriture du titre1.1.1 --> AJUSTER STYLE
-    document.add_paragraph('1.1.1	Sur la pathologie\n', style='Titre3')  
+    
+   #Définition du ListeTitre3, correspond au nom du titre après le 1.1.1 ou 1.2.1    
+    styleTitreListe3 = styles.add_style('ListeTitre3', WD_STYLE_TYPE.CHARACTER)
+    styleTitreListe3.base_style = styles['Heading3']
+    fontTitreListe3 = styleTitreListe3.font
+    fontTitreListe3.name = 'Times New Roman'
+    fontTitreListe3.size = docx.shared.Pt(12)
+    fontTitreListe3.bold= True
+    fontTitreListe3.underline= False
+    fontTitreListe3.color.rgb = RGBColor(0x0,0x0,0x0)    
+    
+    
+    #Ecriture du titre1.1.1
+    p=document.add_heading()
+    p.paragraph_format.left_indent = Inches(0.98) #indentation en pouce, ici 1,5cm
+    run1=p.add_run()
+    run1.text='1.1.1     '
+    run1.style='ListeTitre3'
+    run2=p.add_run()
+    run2.text='Sur la pathologie\n'
+    run2.style='Titre3'
     
     #Texte indicatif en italique TEST    #UTILISER, style ='TexteItalic'
     paragraph2 = document.add_paragraph() 
@@ -111,8 +115,14 @@ def Page11():
     sentence.font.size = docx.shared.Pt(11)
     
     #ecriture du titre1.1.2
-    document.add_paragraph('1.1.2	Sur les traitements, stratégies et procédures de référence et à l’étude\n', 
-                           style='Titre3')  
+    p=document.add_heading()
+    p.paragraph_format.left_indent = Inches(0.98) #indentation en pouce, ici 1,5cm
+    run1=p.add_run()
+    run1.text='1.1.2     '
+    run1.style='ListeTitre3'
+    run2=p.add_run()
+    run2.text='Sur les traitements, stratégies et procédures de référence et à l’étude\n'
+    run2.style='Titre3'
     
 
     #Texte indicatif en italique
@@ -141,33 +151,20 @@ def Page11():
                                         
                                         
     #ecriture du titre1.2
-    p=document.add_heading()
-    p.paragraph_format.left_indent = Inches(0.59) #indentation en pouce, ici 1,5cm
-    run1=p.add_run()
-    run1.text='1.2 '
-    run1.style='Titre2'
-    run2=p.add_run()
-    run2.text='Hypothèse de la recherche et résultats attendus\n'
-    run2.style='ListeTitre2'
+    document.add_paragraph('1.2	Hypothèse de la recherche et résultats attendus\n', style='Titre2') 
+
     #Texte indicatif en italique
-#    paragraph5 = document.add_paragraph ('Définir précisément l’hypothèse, \
-#    physiopathologique ou autre, qui justifie la mise en place de la recherche\
-#    , en mentionnant le traitement/ la stratégie/la procédure à l’étude, \
-#    la population cible (justifier le choix de mener la recherche sur des \
-#    volontaires sains/patients) et le critère sur lequel il sera jugé.', 
-#    style='TexteItalic')
-#
-#     
-#     
+    paragraph5 = document.add_paragraph ('Définir précisément l’hypothèse, \
+    physiopathologique ou autre, qui justifie la mise en place de la recherche\
+    , en mentionnant le traitement/ la stratégie/la procédure à l’étude, \
+    la population cible (justifier le choix de mener la recherche sur des \
+    volontaires sains/patients) et le critère sur lequel il sera jugé.', 
+    style='TexteItalic')
+
+
      #Ecriture du titre1.3
-    p=document.add_heading()
-    p.paragraph_format.left_indent = Inches(0.59) #indentation en pouce, ici 1,5cm
-    run1=p.add_run()
-    run1.text='1.3 '
-    run1.style='Titre2'
-    run2=p.add_run()
-    run2.text='Justification des choix méthodologiques\n'
-    run2.style='ListeTitre2'
+    document.add_paragraph('1.3 Justification des choix méthodologiques\n', style='Titre2') 
+
     
     #Definition style texte surligné en gris   CENTRER + COULEUR 
     styles = document.styles
@@ -192,51 +189,54 @@ def Page11():
 
    
      #Ecriture du titre1.4
-    p=document.add_heading()
-    p.paragraph_format.left_indent = Inches(0.59) #indentation en pouce, ici 1,5cm
-    run1=p.add_run()
-    run1.text='1.4 '
-    run1.style='Titre2'
-    run2=p.add_run()
-    run2.text='Rapport bénéfices / risques prévisibles\n'
-    run2.style='ListeTitre2'
+    document.add_paragraph('1.4 Rapport bénéfices / risques prévisibles\n', style='Titre2')
+
     
     #Ecriture du titre1.4.1
-    document.add_paragraph('1.4.1	Bénéfices\n', style='Titre3')  
+    p=document.add_heading()
+    p.paragraph_format.left_indent = Inches(0.98) #indentation en pouce, ici 1,5cm
+    run1=p.add_run()
+    run1.text='1.4.1     '
+    run1.style='ListeTitre3'
+    run2=p.add_run()
+    run2.text='Bénéfices\n'
+    run2.style='Titre3'
 #     #Texte indicatif en italique
-#    paragraph8 = document.add_paragraph('Expliquer quel(s) est (sont) le(s) \
-#    bénéfice(s) individuel(s) et collectif(s), le(s) risque(s) prévisible(s) et\
-#    les contraintes liées à la recherche. Juger le rapport qui permet de \
-#    proposer ce protocole à l’étude. Indiquer les bénéfices et les risques que \
-#    présente la recherche, notamment les bénéfices escomptés pour les personnes\
-#    qui se prêtent à la recherche.', style='TexteItalic')
+    paragraph8 = document.add_paragraph('Expliquer quel(s) est (sont) le(s) \
+    bénéfice(s) individuel(s) et collectif(s), le(s) risque(s) prévisible(s) et\
+    les contraintes liées à la recherche. Juger le rapport qui permet de \
+    proposer ce protocole à l’étude. Indiquer les bénéfices et les risques que \
+    présente la recherche, notamment les bénéfices escomptés pour les personnes\
+    qui se prêtent à la recherche.', style='TexteItalic')
 
    
     #Ecriture du titre1.4.2
-    document.add_paragraph('1.4.2	Risques\n', style='Titre3')  
+    p=document.add_heading()
+    p.paragraph_format.left_indent = Inches(0.98) #indentation en pouce, ici 1,5cm
+    run1=p.add_run()
+    run1.text='1.4.2     '
+    run1.style='ListeTitre3'
+    run2=p.add_run()
+    run2.text='Risques\n'
+    run2.style='Titre3'
 #     #Texte indicatif en italique
-#    paragraph9 = document.add_paragraph('Décrire les risques prévisibles liés \
-#    au traitement et aux procédures d’investigation de la recherche (incluant \
-#    notamment la douleur, l’inconfort, l’atteinte à l’intégrité physique des\
-#    personnes se prêtant à la recherche, les mesures visant à éviter et/ou \
-#    prendre en charge les événements inattendus).', style='TexteItalic')
+    paragraph9 = document.add_paragraph('Décrire les risques prévisibles liés \
+    au traitement et aux procédures d’investigation de la recherche (incluant \
+    notamment la douleur, l’inconfort, l’atteinte à l’intégrité physique des\
+    personnes se prêtant à la recherche, les mesures visant à éviter et/ou \
+    prendre en charge les événements inattendus).', style='TexteItalic')
 #    
     
      #Ecriture du titre1.5
-    p=document.add_heading()
-    p.paragraph_format.left_indent = Inches(0.59) #indentation en pouce, ici 1,5cm
-    run1=p.add_run()
-    run1.text='1.5 '
-    run1.style='Titre2'
-    run2=p.add_run()
-    run2.text='Retombées attendues\n'
-    run2.style='ListeTitre2'
+    document.add_paragraph('1.5 Retombées attendues\n', style='Titre2')
+     
      #Texte indicatif en italique
-#    paragraph10 = document.add_paragraph('Description détaillée des retombées \
-#    attendues par cette recherche (en terme d’amélioration des connaissances \
-#    sur une pathologie, d’augmentation de l’arsenal thérapeutique,…)..',
-#    style='TexteItalic')
+    paragraph10 = document.add_paragraph('Description détaillée des retombées \
+    attendues par cette recherche (en terme d’amélioration des connaissances \
+    sur une pathologie, d’augmentation de l’arsenal thérapeutique,…)..',
+    style='TexteItalic')
 
 
 
     document.save("page11.docx")   
+    
