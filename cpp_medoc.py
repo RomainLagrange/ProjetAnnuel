@@ -126,7 +126,7 @@ def cpp_medoc(document):
 
     #Tableau central
     table=document.add_table(rows=16, cols=1, style='Table Grid')
-    
+
 
     table.cell(0,0).text=("DOSSIER ADMINISTRATIF")
     table.cell(1,0).text=("Courrier de demande d’avis daté et signé")
