@@ -11,13 +11,15 @@ from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_UNDERLINE, WD_LINE_SPACING, WD
 from docx.enum.style import WD_STYLE_TYPE
 from docx.shared import Cm, Pt, RGBColor, Inches
 
-
+#revoir titre1 et texte encardé gris
 
 def Page11():
     'Creation de la page 11 du protcole de catégorie 1'
     document = docx.Document()
     styles = document.styles
 
+    from docx.oxml.ns import nsdecls
+    from docx.oxml import parse_xml
 
 #   Marge de la page
     sections = document.sections
@@ -27,6 +29,7 @@ def Page11():
         section.left_margin = Cm(2)
         section.right_margin = Cm(2)
  
+    shading_elm = parse_xml(r'<w:shd {} w:fill="D9D9D9"/>'.format(nsdecls('w'))) #CREER LE FOND GRIS
 
     
 #   definition du style Titre1 --> AJOUTER LA BORDURE EN BAS
@@ -166,18 +169,30 @@ def Page11():
     document.add_paragraph('1.3 Justification des choix méthodologiques\n', style='Titre2') 
 
     
-    #Definition style texte surligné en gris   CENTRER + COULEUR 
+    #Definition style texte surligné en gris   --> SUPPRIMER ESPACE EN BAS
     styles = document.styles
-    styleBackgroundGrey = styles.add_style('BackgroundGrey', WD_STYLE_TYPE.PARAGRAPH, WD_ALIGN_PARAGRAPH.CENTER)
-    styleBackgroundGrey.base_style = styles['Normal']
+    styleBackgroundGrey = styles.add_style('BackgroundGrey', WD_STYLE_TYPE.CHARACTER)
+    styleBackgroundGrey.base_style = styles['No Spacing']
     fontBackgroundGrey = styleBackgroundGrey.font
     fontBackgroundGrey.name = 'Times New Roman'
     fontBackgroundGrey.size = docx.shared.Pt(11)
     fontBackgroundGrey.bold = True
     fontBackgroundGrey.small_caps = True
-    fontBackgroundGrey.highlight_color = WD_COLOR_INDEX.GRAY_25
-    #Texte sur fond gris
-    paragraph6 = document.add_paragraph ('prendre contact avec la plateforme de\ methodologie \n pour aide a la redaction du paragraphe 2.3', style = 'BackgroundGrey')
+#    fontBackgroundGrey.highlight_color = WD_COLOR_INDEX.GRAY_25
+    
+    #Texte sur fond gris   
+    table = document.add_table(rows = 1, cols = 1)
+    row = table.rows[0].cells
+    para_text = 'prendre contact avec la plateforme de methodologie \n pour aide a la redaction du paragraphe 2.3'
+    cell = row[0]
+    pt = cell.paragraphs[0]
+    t = pt.text = ''
+    p = pt.add_run(para_text)
+    cell._tc.get_or_add_tcPr().append(shading_elm)
+    p.style='BackgroundGrey'
+    pt.alignment=WD_ALIGN_PARAGRAPH.CENTER
+
+    
     #Texte indicatif en italique
     paragraph7 = document.add_paragraph() 
     paragraph7.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
