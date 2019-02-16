@@ -251,7 +251,7 @@ def liste_abreviation(document,extract):
       texte=''
       ansm=amm=arc=bpc=cis=cnil=cpp=crf=e_crf=evi=evig=eig=eigi=ide=mr=rcp=susar=tec=False #pour savoir si on les a deja trouvés une fois
       '''Parcours tout l'extract pour voir si on trouve le mot quelque part dans le texte'''
-      for para in extract:
+      for para in extract.values():
           #ANSM
           if (re.search(r"ANSM",para) and ansm==False): #si on trouve le mot (re.search renvoi True s'il trouve le mot) pour la première fois
               texte+='ANSM\t\t\tAgence Nationale de Sécurité du Médicaments et des produits de santé\n' #alors on ajoute la ligne a texte
@@ -324,7 +324,7 @@ def liste_abreviation(document,extract):
               rcp=True
           #SUSAR
           if re.search(r"SUSAR",para) and susar==False: 
-              texte+='SUSAR\t\t\tSuspected Unexpected Serious Adverse Reaction\n'
+              texte+='SUSAR\t\t\tSssuspected Unexpected Serious Adverse Reaction\n'
               susar=True
           
           #TEC
