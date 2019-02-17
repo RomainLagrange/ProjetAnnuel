@@ -11,9 +11,11 @@ from docx.api import Document
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.shared import Cm
 from docx.enum.style import WD_STYLE_TYPE
-from docx.shared import Inches, Pt
+from docx.shared import Inches, Pt, RGBColor
 from docx.oxml.ns import nsdecls
 from docx.oxml import parse_xml
+from docx.oxml import OxmlElement
+import qn
 #from docx.shared import RGBColor
 
 #docmuents du cpp pour les dispositifs médicaux
@@ -174,7 +176,67 @@ def cpp_hps(document):
     
 def page2_cpp_hps(document):
     document.add_page_break()
+    styles= document.styles
+    style=styles.add_style('debut_page', WD_STYLE_TYPE.PARAGRAPH)
+    paragraph_format = style.paragraph_format
+    paragraph_format.space_before
+    paragraph_format.space_after
+    fontdebut = style.font
+    fontdebut.name = 'Arial Narrow'
+    fontdebut.size = docx.shared.Pt(10) 
+    
+    paragraph = document.add_paragraph("Annexe 1\nFormulaire de damande d'avis au comité de protection des personnes pour une recherche\nmentionnée au 1° ou au 2° de l'article L.1121-1 du code de la santé publique et ne portant pas\nsur un produit de santé\n", style="debut_page")
+    paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    
+    sentence=("Demande d'avis au comite de protection des personnes pour une recherche\nmentionnee au 1° ou 2° de l'article L.1121-1 du code de la sante publique et ne\nportant pas sur un produit mentionne a\nl'article L. 5311-1 du code de la sante publique\n")
+    sentence.upper()
+    
+    table = document.add_table(rows=1, cols=1, style='Table Grid')
+    table.cell(0,0).text=sentence
+    for row in table.rows:
+        for cell in row.cells:
+            paragraphs = cell.paragraphs
+            for paragraph in paragraphs:
+                paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                for run in paragraph.runs:
+                    fontdebut = run.font
+                    fontdebut.bold = True
+                    fontdebut.name = 'Arial Narrow'
+                    fontdebut.size = docx.shared.Pt(10)
+                    fontdebut.color.rgb = RGBColor(0x0,0x70,0xC0)
+                    
+    
+ #   modifyBorder(table)
 
+
+#def modifyBorder(table):
+#    tbl = table._tbl # get xml element in table
+#    for cell in tbl.iter_tcs():
+#        tcPr = cell.tcPr # get tcPr element, in which we can define style of borders
+#        tcBorders = OxmlElement('w:tcBorders')
+#        top = OxmlElement('w:top')
+#        top.set(qn('w:val'), 'nil')
+#        
+#        left = OxmlElement('w:left')
+#        left.set(qn('w:val'), 'nil')
+#        
+#        bottom = OxmlElement('w:bottom')
+#        bottom.set(qn('w:color'), 'blue')
+#
+#        right = OxmlElement('w:right')
+#        right.set(qn('w:color'), 'blue')
+#        
+#        left = OxmlElement('w:right')
+#        left.set(qn('w:color'), 'blue')
+#        
+#        top = OxmlElement('w:right')
+#        top.set(qn('w:color'), 'blue')
+#
+#        tcBorders.append(top)
+#        tcBorders.append(left)
+#        tcBorders.append(bottom)
+#        tcBorders.append(right)
+#        tcPr.append(tcBorders)
 #    
 #    '''Marge de la page'''
 #    sections = document.sections

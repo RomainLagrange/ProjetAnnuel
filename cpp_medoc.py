@@ -5,13 +5,11 @@ Created on Fri Feb  1 18:17:55 2019
 @author: Marion
 """
 
-import pandas as pd
 import docx
-from docx.api import Document
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.shared import Cm
 from docx.enum.style import WD_STYLE_TYPE
-from docx.shared import Inches, Pt
+from docx.shared import Pt
 from docx.oxml.ns import nsdecls
 from docx.oxml import parse_xml
 #from docx.shared import RGBColor
