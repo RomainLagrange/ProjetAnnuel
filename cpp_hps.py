@@ -233,7 +233,37 @@ def page2_cpp_hps(document):
                     fontdebut = run.font
                     fontdebut.name = 'Arial Narrow'
                     fontdebut.size = docx.shared.Pt(10)
-      
+    
+    paragraph = document.add_paragraph("Partie à compléter par le demandeur :", style="gras_tableau")
+    paragraph=document.add_paragraph()
+    sentence = paragraph.add_run("RECHERCHE MENTIONNEE AU 1° de l'article L.1121-1 □             RECHERCHE MENTIONNEE AU 2° DE L'ARTICLE L.1121-1□\nDEMANDE D'AUTORISATION A L'ANSM :")
+    fontdebut = sentence.font
+    fontdebut.name = 'Arial Narrow'
+    fontdebut.size = docx.shared.Pt(10) 
+    sentence = paragraph.add_run("     oui        non\n")
+    fontdebut = sentence.font
+    fontdebut.name = 'Arial Narrow'
+    fontdebut.bold=True
+    fontdebut.size = docx.shared.Pt(10)
+    sentence = paragraph.add_run("DEMANDE D'AVIS AU CPP :     ")
+    fontdebut = sentence.font
+    fontdebut.name = 'Arial Narrow'
+    fontdebut.size = docx.shared.Pt(10) 
+    sentence = paragraph.add_run("     oui        non\n")
+    fontdebut = sentence.font
+    fontdebut.name = 'Arial Narrow'
+    fontdebut.bold=True
+    fontdebut.size = docx.shared.Pt(10)
+    
+    paragraph = document.add_paragraph("A. IDENTIFICATION DE LA RECHERCHE", style="gras_tableau")
+    paragraph=document.add_paragraph()
+    sentence = paragraph.add_run("Titre complet de la recherche :\n \nNuméro d'enregistrement de la recherche (délivré par l'ANSM) : \n")
+    fontdebut = sentence.font
+    fontdebut.name = 'Arial Narrow'
+    fontdebut.size = docx.shared.Pt(10) 
+    
+    
+    
  #   modifyBorder(table)
 
 
