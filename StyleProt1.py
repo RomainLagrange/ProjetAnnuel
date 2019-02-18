@@ -8,7 +8,33 @@ import docx
 from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_UNDERLINE, WD_LINE_SPACING, WD_COLOR_INDEX
 from docx.enum.style import WD_STYLE_TYPE
 from docx.shared import Cm, Pt, RGBColor, Inches
+from docx.oxml.ns import nsdecls
+from docx.oxml import parse_xml
 
+def Titre2(num, texte, doc):
+    document=doc
+    p=document.add_heading()
+    p.paragraph_format.left_indent = Inches(0.98) #indentation en pouce, ici 1,5cm
+    run1=p.add_run()
+    run1.text=num+'	    '
+    run1.style='ListeTitre3'
+    run2=p.add_run()
+    run2.text=texte+'\n'
+    run2.style='Titre3'
+
+def TexteGris(texte,doc):
+    document=doc
+    shading_elm = parse_xml(r'<w:shd {} w:fill="D9D9D9"/>'.format(nsdecls('w')))
+    table = document.add_table(rows = 1, cols = 1)
+    row = table.rows[0].cells
+    para_text =texte
+    cell = row[0]
+    pt = cell.paragraphs[0]
+    t = pt.text = ''
+    p = pt.add_run(para_text)
+    cell._tc.get_or_add_tcPr().append(shading_elm)
+    p.style='BackgroundGrey'
+    pt.alignment=WD_ALIGN_PARAGRAPH.CENTER
 
 def Style():
     'Défintion des styles du protocole de catégorie 1'

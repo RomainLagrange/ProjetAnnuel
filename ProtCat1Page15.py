@@ -67,12 +67,12 @@ def Page15():
     # Ecriture du 5.3  
     document.add_paragraph('5.3	Faisabilité et modalités de recrutement\n', style='Titre2') 
    
-    
-    tableTEST = document.add_table(rows = 1, cols = 1)
-    tableTEST.style = "Table Grid"
-    row = tableTEST.rows[0]
-    cell = row.cells[0]
-    cell.text = "text"
+#    
+#    tableTEST = document.add_table(rows = 1, cols = 1)
+#    tableTEST.style = "Table Grid"
+#    row = tableTEST.rows[0]
+#    cell = row.cells[0]
+#    cell.text = "text"
 
     
     
