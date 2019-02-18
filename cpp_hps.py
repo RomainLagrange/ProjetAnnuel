@@ -204,8 +204,36 @@ def page2_cpp_hps(document):
                     fontdebut.name = 'Arial Narrow'
                     fontdebut.size = docx.shared.Pt(10)
                     fontdebut.color.rgb = RGBColor(0x0,0x70,0xC0)
-                    
     
+    style=styles.add_style('gras_tableau', WD_STYLE_TYPE.PARAGRAPH)
+    paragraph_format = style.paragraph_format
+    paragraph_format.space_before
+    paragraph_format.space_after
+    fontdebut = style.font
+    fontdebut.bold = True
+    fontdebut.name = 'Arial Narrow'
+    fontdebut.size = docx.shared.Pt(10) 
+    
+    paragraph = document.add_paragraph("Partie réservée au Comité de protection des personnes (CPP)", style="gras_tableau")
+               
+    table = document.add_table(rows=2, cols=3, style='Table Grid')
+    table.cell(0,0).text=("Date d'enregistrement de la\ndemande considérée complète :")
+    table.cell(0,1).text=("Date de réception des informations\ncomplémentaires / amendées :")
+    table.cell(0,2).text=("Avis du CPP :")
+    a=table.cell(1,0)
+    b=table.cell(1,2)
+    a.merge(b)
+    table.cell(1,0).text=("Date du début de procédure :")
+    for row in table.rows:
+        for cell in row.cells:
+            paragraphs = cell.paragraphs
+            for paragraph in paragraphs:
+                paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.LEFT
+                for run in paragraph.runs:
+                    fontdebut = run.font
+                    fontdebut.name = 'Arial Narrow'
+                    fontdebut.size = docx.shared.Pt(10)
+      
  #   modifyBorder(table)
 
 
