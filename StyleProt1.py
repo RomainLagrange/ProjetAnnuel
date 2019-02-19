@@ -11,8 +11,15 @@ from docx.shared import Cm, Pt, RGBColor, Inches
 from docx.oxml.ns import nsdecls
 from docx.oxml import parse_xml
 
-def Titre3(num, texte, doc):
-    document=doc
+
+def Titre1(texte, document):
+    paragraph=document.add_paragraph(texte+'\n', style='Titre1') #titre
+    paragraph.alignment = WD_ALIGN_PARAGRAPH.CENTER #centrer
+    
+def Titre2(texte,document):
+    document.add_paragraph(texte+'\n', style='Titre2')
+
+def Titre3(num, texte, document):
     p=document.add_heading()
     p.paragraph_format.left_indent = Inches(0.98) #indentation en pouce, ici 1,5cm
     run1=p.add_run()
@@ -22,8 +29,7 @@ def Titre3(num, texte, doc):
     run2.text=texte+'\n'
     run2.style='Titre3'
 
-def TexteGris(texte,doc):
-    document=doc
+def TexteGris(texte,document):
     shading_elm = parse_xml(r'<w:shd {} w:fill="D9D9D9"/>'.format(nsdecls('w')))
     table = document.add_table(rows = 1, cols = 1)
     row = table.rows[0].cells
@@ -36,13 +42,12 @@ def TexteGris(texte,doc):
     p.style='BackgroundGrey'
     pt.alignment=WD_ALIGN_PARAGRAPH.CENTER
 
-def Style(doc):
+def Style(document):
     'Défintion des styles du protocole de catégorie 1'
     
 # TROUVER COMMENT PARTAGER LES STYLES A TOUTES LES PAGES SONT COPIER TOUT
 # LE CODE    
     
-    document=doc
     styles=document.styles
 
 #   definition du style Titre1 --> AJOUTER LA BORDURE EN BAS
@@ -55,12 +60,7 @@ def Style(doc):
     fontTitre1.bold= True #en gras
     fontTitre1.color.rgb = RGBColor(0x0,0x70,0xC0) #couleur bleu, en base 16
     
-    #ecriture du premier titre 
-    paragraph=document.add_paragraph('6	DEROULEMENT DE LA RECHERCHE\n', style='Titre1') #titre
-    paragraph.alignment = WD_ALIGN_PARAGRAPH.CENTER #centrer
-                
 
-    
     #Definition du Titre2, correspond par exemple au 1.1 ou 1.2
     styleTitre2 = styles.add_style('Titre2', WD_STYLE_TYPE.PARAGRAPH)
     styleTitre2.base_style = styles['Heading2']
