@@ -6,7 +6,8 @@ Created on Thu Jan 31 13:32:03 2019
 """
 
 import docx
-from StyleProt1 import Style
+import StyleProt1
+from StyleProt1 import Style, Titre3, TexteGris
 from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_UNDERLINE, WD_LINE_SPACING, WD_COLOR_INDEX
 from docx.enum.style import WD_STYLE_TYPE
 from docx.shared import Cm, Pt, RGBColor, Inches
@@ -16,10 +17,7 @@ from docx.shared import Cm, Pt, RGBColor, Inches
 def Page11():
     'Creation de la page 11 du protcole de catégorie 1'
     document = docx.Document()
-    styles = document.styles
 
-    from docx.oxml.ns import nsdecls
-    from docx.oxml import parse_xml
 
 #   Marge de la page
     sections = document.sections
@@ -28,87 +26,31 @@ def Page11():
         section.bottom_margin = Cm(2)
         section.left_margin = Cm(2)
         section.right_margin = Cm(2)
- 
-    shading_elm = parse_xml(r'<w:shd {} w:fill="D9D9D9"/>'.format(nsdecls('w'))) #CREER LE FOND GRIS
+        
+    StyleProt1.Style(document)
 
-    
-#   definition du style Titre1 --> AJOUTER LA BORDURE EN BAS
-    styleTitre1 = styles.add_style('Titre1', WD_STYLE_TYPE.PARAGRAPH, WD_ALIGN_PARAGRAPH.CENTER)
-    styleTitre1.base_style = styles['Heading1']
-    fontTitre1 = styleTitre1.font
-    fontTitre1.name = 'Times New Roman' #police
-    fontTitre1.size = docx.shared.Pt(12) #taille
-    fontTitre1.all_caps = True #toujours en majuscule
-    fontTitre1.bold= True #en gras
-    fontTitre1.color.rgb = RGBColor(0x0,0x70,0xC0) #couleur bleu, en base 16
+ 
+  
     #ecriture du premier titre 
     paragraph=document.add_paragraph('1	JUSTICATION SCIENTIFIQUE ET DESCRIPTION GENERALE\n', style='Titre1') #titre
     paragraph.alignment = WD_ALIGN_PARAGRAPH.CENTER #centrer
-                
 
-    
-    #definition du style pour le texte indicatif -->  ESPACEMENT LIGNES 
-    styleIndic = styles.add_style('TexteItalic', WD_STYLE_TYPE.PARAGRAPH)
-    styleIndic.base_style = styles['Normal']
-    fontIndic = styleIndic.font
-    fontIndic.name = 'Times New Roman'   
-    fontIndic.size = docx.shared.Pt(11)
-    fontIndic.italic= True
-    
+
     #Texte indicatif en italique 
     paragraph1 = document.add_paragraph ('Présentation du problème et justification étayée par les connaissances actuelles avec leurs références à la littérature scientifique et aux données pertinentes.\
     Indiquer en quoi l’objectif est nouveau et utile, pour le progrès des connaissances médicales et/ou de la prise en charge des malades. Les retombées attendues et perspectives peuvent également être développées dans ce chapitre.\n\
     C’est dans ce paragraphe que vous devez justifier la pertinence de votre étude.', style ='TexteItalic') 
     paragraph1.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
 
-
-    #Definition du Titre2, correspond par exemple au 1.1 ou 1.2
-    styleTitre2 = styles.add_style('Titre2', WD_STYLE_TYPE.PARAGRAPH)
-    styleTitre2.base_style = styles['Heading2']
-    fontTitre2 = styleTitre2.font
-    fontTitre2.name = 'Times New Roman'
-    fontTitre2.size = docx.shared.Pt(14)
-    fontTitre2.bold= True
-    fontTitre2.color.rgb = RGBColor(0x0,0x0,0x0)
-    styleTitre2.paragraph_format.left_indent = Inches(0.59)
     
    # Ecriture du 1.1  
     document.add_paragraph('1.1	Etat actuel des connaissances\n', style='Titre2')  
-
-        
-    #Definition du Titre3; correspond aux 1.1.1 ou 1.1.2...
-    styleTitre3 = styles.add_style('Titre3', WD_STYLE_TYPE.CHARACTER)
-  #  styleTitre3 = styles.add_style('Titre3', WD_STYLE_TYPE.CHARACTER)
-    styleTitre3.base_style = styles['Heading3']
-    fontTitre3 = styleTitre3.font
-    fontTitre3.name = 'Times New Roman'
-    fontTitre3.size = docx.shared.Pt(12)
-    fontTitre3.bold= False
-    fontTitre3.underline= True
-#    styleTitre3.paragraph_format.left_indent = Inches(0.98) #indentation en pouce, ici 2,5cm
-    fontTitre3.color.rgb = RGBColor(0x0,0x0,0x0)
-    
-    
-   #Définition du ListeTitre3, correspond au nom du titre après le 1.1.1 ou 1.2.1    
-    styleTitreListe3 = styles.add_style('ListeTitre3', WD_STYLE_TYPE.CHARACTER)
-    styleTitreListe3.base_style = styles['Heading3']
-    fontTitreListe3 = styleTitreListe3.font
-    fontTitreListe3.name = 'Times New Roman'
-    fontTitreListe3.size = docx.shared.Pt(12)
-    fontTitreListe3.bold= True
-    fontTitreListe3.underline= False
-    fontTitreListe3.color.rgb = RGBColor(0x0,0x0,0x0)    
+  
     
     
     #Ecriture du titre1.1.1
-    p=document.add_heading()
-    p.paragraph_format.left_indent = Inches(0.98) #indentation en pouce, ici 1,5cm
-    run1=p.add_run()
-    run1.text='1.1.1     '
-    run1.style='ListeTitre3'
-    run2=p.add_run()
-    run2.text='Sur la pathologie\n'
-    run2.style='Titre3'
+    StyleProt1.Titre3('1.1.1','Sur la pathologie',document)
+
     
     #Texte indicatif en italique TEST    #UTILISER, style ='TexteItalic'
     paragraph2 = document.add_paragraph() 
@@ -117,15 +59,19 @@ def Page11():
     sentence.font.italic=True
     sentence.font.size = docx.shared.Pt(11)
     
+    
+    
     #ecriture du titre1.1.2
-    p=document.add_heading()
-    p.paragraph_format.left_indent = Inches(0.98) #indentation en pouce, ici 1,5cm
-    run1=p.add_run()
-    run1.text='1.1.2     '
-    run1.style='ListeTitre3'
-    run2=p.add_run()
-    run2.text='Sur les traitements, stratégies et procédures de référence et à l’étude\n'
-    run2.style='Titre3'
+    StyleProt1.Titre3('1.1.2','Sur les traitements, stratégies et procédures de référence et à l’étude',document)
+#
+#    p=document.add_heading()
+#    p.paragraph_format.left_indent = Inches(0.98) #indentation en pouce, ici 1,5cm
+#    run1=p.add_run()
+#    run1.text='1.1.2     '
+#    run1.style='ListeTitre3'
+#    run2=p.add_run()
+#    run2.text='Sur les traitements, stratégies et procédures de référence et à l’étude\n'
+#    run2.style='Titre3'
     
 
     #Texte indicatif en italique
@@ -169,28 +115,9 @@ def Page11():
     document.add_paragraph('1.3 Justification des choix méthodologiques\n', style='Titre2') 
 
     
-    #Definition style texte surligné en gris   --> SUPPRIMER ESPACE EN BAS
-    styles = document.styles
-    styleBackgroundGrey = styles.add_style('BackgroundGrey', WD_STYLE_TYPE.CHARACTER)
-    styleBackgroundGrey.base_style = styles['No Spacing']
-    fontBackgroundGrey = styleBackgroundGrey.font
-    fontBackgroundGrey.name = 'Times New Roman'
-    fontBackgroundGrey.size = docx.shared.Pt(11)
-    fontBackgroundGrey.bold = True
-    fontBackgroundGrey.small_caps = True
-#    fontBackgroundGrey.highlight_color = WD_COLOR_INDEX.GRAY_25
-    
-    #Texte sur fond gris   
-    table = document.add_table(rows = 1, cols = 1)
-    row = table.rows[0].cells
-    para_text = 'prendre contact avec la plateforme de methodologie \n pour aide a la redaction du paragraphe 2.3'
-    cell = row[0]
-    pt = cell.paragraphs[0]
-    t = pt.text = ''
-    p = pt.add_run(para_text)
-    cell._tc.get_or_add_tcPr().append(shading_elm)
-    p.style='BackgroundGrey'
-    pt.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    #Texte sur fond gris  
+    TexteGris('prendre contact avec la plateforme de methodologie \n pour aide a la redaction du paragraphe 2.3', document)
+
 
     
     #Texte indicatif en italique
@@ -208,14 +135,9 @@ def Page11():
 
     
     #Ecriture du titre1.4.1
-    p=document.add_heading()
-    p.paragraph_format.left_indent = Inches(0.98) #indentation en pouce, ici 1,5cm
-    run1=p.add_run()
-    run1.text='1.4.1     '
-    run1.style='ListeTitre3'
-    run2=p.add_run()
-    run2.text='Bénéfices\n'
-    run2.style='Titre3'
+    StyleProt1.Titre3('1.4.1','Bénéfices',document)
+
+
 #     #Texte indicatif en italique
     paragraph8 = document.add_paragraph('Expliquer quel(s) est (sont) le(s) \
     bénéfice(s) individuel(s) et collectif(s), le(s) risque(s) prévisible(s) et\
@@ -226,14 +148,9 @@ def Page11():
 
    
     #Ecriture du titre1.4.2
-    p=document.add_heading()
-    p.paragraph_format.left_indent = Inches(0.98) #indentation en pouce, ici 1,5cm
-    run1=p.add_run()
-    run1.text='1.4.2     '
-    run1.style='ListeTitre3'
-    run2=p.add_run()
-    run2.text='Risques\n'
-    run2.style='Titre3'
+    StyleProt1.Titre3('1.4.2','Risques',document)
+
+
 #     #Texte indicatif en italique
     paragraph9 = document.add_paragraph('Décrire les risques prévisibles liés \
     au traitement et aux procédures d’investigation de la recherche (incluant \
