@@ -8,13 +8,28 @@ Created on Fri Feb  1 15:43:54 2019
 #ce document va construire le protocole de categorie 1
 
 #import gestion_tableau
-import Partie1,Partie2,Partie3,Partie4,Partie5,Partie6
+import Partie1,Partie2,Partie3,Partie4,Partie5,Partie6,Partie7,Partie8,Partie9,Partie10,Partie11,Partie12,Partie13,Partie14,Partie15,Partie16,Partie17,Partie18,Partie19,Partie20
+
 from Partie1 import Partie1
 from Partie2 import Partie2
 from Partie3 import Partie3
 from Partie4 import Partie4
 from Partie5 import Partie5
 from Partie6 import Partie6
+from Partie7 import Partie7
+from Partie8 import Partie8
+from Partie9 import Partie9
+from Partie10 import Partie10
+from Partie11 import Partie11
+from Partie12 import Partie12
+from Partie13 import Partie13
+from Partie14 import Partie14
+from Partie15 import Partie15
+from Partie16 import Partie16
+from Partie17 import Partie17
+from Partie18 import Partie18
+from Partie19 import Partie19
+from Partie20 import Partie20
 import page_garde
 import extraction
 import docx
@@ -46,26 +61,25 @@ def construit_doc():
     page_garde.liste_abreviation(document,extract)
     #resume du proto version XX
     #abstract
-    #grand I justification
-    Partie1.Partie1(document)
-    #grand 2 objectifs de la recherche
-    #grand 3 criteres de jusgement
-    #♥grand 4 conception de la recherche
-    #♦grand 5 critere d'eligibilite
-    #grand 6 deroulement de la recherche
-    #♠grand 7 traitement strategies procedures de la recheche
-    #•grand 8 traitement et procedures associees
-    #◘grand 9 evaluationde la securite
-    #○grand 10 surveillance de la recherche
-    #grand 11 aspect statistuqe
-    #grand 12 droit d'acces aux donnees et documents source
-    #grand 13 controle et assurance de la qualite
-    #grand 14 considerations ethiques et reglementaires
-    #grand 15 conservation des documents et des donnees relatifs a la recherche
-    #grand 16 rapport final
-    #grand 17 regles relatives a la publication
-    #grand 18 faisaabilite de l'etude
-    #grand 19 biblio
-    #grand 20 liste des annexes
+    Partie1(document)
+    Partie2(document)
+    Partie3(document)
+    Partie4(document)
+    Partie5(document)
+    Partie6(document)
+    Partie7(document)
+    Partie8(document)
+    Partie9(document)
+    Partie10(document)
+    Partie11(document)
+    Partie12(document)
+    Partie13(document)
+    Partie14(document)
+    Partie15(document)
+    Partie16(document)
+    Partie17(document)
+    Partie18(document)
+    Partie19(document)
+    Partie20(document)
     #grand 21 annexes (pas mal de trucs a faire)
-    document.save("essai.docx")
+    document.save("ProtocolCat1.docx")

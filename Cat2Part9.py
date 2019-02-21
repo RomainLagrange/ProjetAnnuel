@@ -9,7 +9,7 @@ Created on Thu Feb 21 16:47:06 2019
 import docx
 import StyleProt1
 from StyleProt1 import Style,Titre1, Titre2, Titre3, TexteGris, TexteGrisJustif
-from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_UNDERLINE, WD_LINE_SPACING, WD_COLOR_INDEX
+from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_UNDERLINE, WD_LINE_SPACING, WD_COLOR_INDEX, WD_BREAK
 from docx.enum.style import WD_STYLE_TYPE
 from docx.shared import Cm, Pt, RGBColor, Inches
 
@@ -20,9 +20,9 @@ from docx.shared import Cm, Pt, RGBColor, Inches
 #    TexteGris(texte,document)
 #    TexteGrisJustif(texte,document)
 
-def Partie9():
+def Partie9(document):
     'Creation de la partie 9 du protcole de catégorie 2'
-    document = docx.Document()
+  #  document = docx.Document()
 
 
 #   Marge de la page
@@ -36,7 +36,7 @@ def Partie9():
 #---------------------------DEFINITIONS DES STYLES
  
 
-    Style(document)
+  #  Style(document)
 
    
 #---------------------------------------------------------------ECRITURE
@@ -55,4 +55,10 @@ def Partie9():
     # Ecriture du 9.2  
     Titre2('9.2	Méthodes statistiques employées',document)
     
-    document.save("Cat2Partie9.docx")
+        #FIN DU DOC 
+    paragraph = document.add_paragraph()
+    run = paragraph.add_run()
+    run.add_break(WD_BREAK.PAGE)
+
+    
+  #  document.save("Cat2Partie9.docx")

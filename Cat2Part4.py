@@ -8,7 +8,7 @@ Created on Thu Feb 21 16:26:36 2019
 import docx
 import StyleProt1
 from StyleProt1 import Style, TexteGris, Titre1, Titre2,Titre3, TexteGrisJustif
-from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_UNDERLINE, WD_LINE_SPACING, WD_COLOR_INDEX
+from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_UNDERLINE, WD_LINE_SPACING, WD_COLOR_INDEX, WD_BREAK
 from docx.enum.style import WD_STYLE_TYPE
 from docx.shared import Cm, Pt, RGBColor, Inches
 
@@ -19,9 +19,9 @@ from docx.shared import Cm, Pt, RGBColor, Inches
 #    TexteGris(texte,document)
 #    TexteGrisJustif(texte,document)
 
-def Partie4():
+def Partie4(document):
     'Creation de la partie 4 du protocole de catégorie 2'
-    document = docx.Document()
+  #  document = docx.Document()
 
     from docx.oxml.ns import nsdecls
     from docx.oxml import parse_xml
@@ -34,7 +34,7 @@ def Partie4():
         section.left_margin = Cm(2)
         section.right_margin = Cm(2)
  
-    Style(document)
+ #   Style(document)
 
     Titre1('4	CRITERES D’ELIGIBILITE',document)
     
@@ -47,4 +47,10 @@ def Partie4():
       # Ecriture du 4.3  
     Titre2('4.3	Faisabilité et modalités de recrutement',document)
     
-    document.save("Cat2Partie4.docx")   
+#        #FIN DU DOC 
+    paragraph = document.add_paragraph()
+    run = paragraph.add_run()
+    run.add_break(WD_BREAK.PAGE)
+
+    
+#    document.save("Cat2Partie4.docx")   

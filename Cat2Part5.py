@@ -7,7 +7,7 @@ Created on Thu Feb 21 16:28:06 2019
 import docx
 import StyleProt1
 from StyleProt1 import Style,Titre1, Titre2, Titre3, TexteGris, TexteGrisJustif
-from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_UNDERLINE, WD_LINE_SPACING, WD_COLOR_INDEX
+from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_UNDERLINE, WD_LINE_SPACING, WD_COLOR_INDEX, WD_BREAK
 from docx.enum.style import WD_STYLE_TYPE
 from docx.shared import Cm, Pt, RGBColor, Inches
 
@@ -18,9 +18,9 @@ from docx.shared import Cm, Pt, RGBColor, Inches
 #    TexteGris(texte,document)
 #    TexteGrisJustif(texte,document)
 
-def Partie5():
+def Partie5(document):
     'Creation de la partie 5 du protcole de catégorie 2'
-    document = docx.Document()
+   # document = docx.Document()
 
 
 #   Marge de la page
@@ -34,7 +34,7 @@ def Partie5():
 #---------------------------DEFINITIONS DES STYLES
  
 
-    Style(document)
+#    Style(document)
 
 
 #    
@@ -88,7 +88,7 @@ def Partie5():
 
 
     #Ecriture du titre5.7.2
-    Titre3('5.7.2	Visite (Vx, ou Sx, ou Jx, ou Mx…)',document)
+    Titre3('5.7.2','Visite (Vx, ou Sx, ou Jx, ou Mx…)',document)
 
 
     #Ecriture du titre 5.8
@@ -105,7 +105,7 @@ def Partie5():
     Titre3('5.9.1','Arrêt de participation définitif ou temporaire d’un patient dans l’étude',document)
     
     #Ecriture du titre5.9.2
-    Titre3('5.9.2	Modalités de remplacement des patients exclus, le cas échéant',document)
+    Titre3('5.9.2','Modalités de remplacement des patients exclus, le cas échéant',document)
     
     #Ecriture du titre5.9.3
     Titre3('5.9.3','Modalités et calendrier de recueil pour ces données',document)
@@ -136,5 +136,10 @@ def Partie5():
      #Ecriture du titre 5.12
     Titre2('5.12	Arrêt d’une partie ou de la totalité de la recherche',document)
     
+#        #FIN DU DOC 
+    paragraph = document.add_paragraph()
+    run = paragraph.add_run()
+    run.add_break(WD_BREAK.PAGE)
+
     
-    document.save("Cat2Partie5.docx")   
+  #  document.save("Cat2Partie5.docx")   

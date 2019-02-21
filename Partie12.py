@@ -9,7 +9,7 @@ Created on Thu Feb 21 15:11:16 2019
 import docx
 import StyleProt1
 from StyleProt1 import Style,Titre1, Titre2, Titre3, TexteGris, TexteGrisJustif
-from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_UNDERLINE, WD_LINE_SPACING, WD_COLOR_INDEX
+from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_UNDERLINE, WD_LINE_SPACING, WD_COLOR_INDEX, WD_BREAK
 from docx.enum.style import WD_STYLE_TYPE
 from docx.shared import Cm, Pt, RGBColor, Inches
 
@@ -20,9 +20,9 @@ from docx.shared import Cm, Pt, RGBColor, Inches
 #    TexteGris(texte,document) --> écrire en minuscule !!!
 #    TexteGrisJustif(texte,document)
 
-def Partie12():
+def Partie12(document):
     'Creation de la partie 12 du protcole de catégorie 1'
-    document = docx.Document()
+  #  document = docx.Document()
 
 
 #   Marge de la page
@@ -36,7 +36,7 @@ def Partie12():
 #---------------------------DEFINITIONS DES STYLES
  
 
-    Style(document)
+  #  Style(document)
 
 
 #    
@@ -56,7 +56,13 @@ def Partie12():
     #Ecriture du 12.3  
     Titre2('12.3	Confidentialité des données',document)
     
-    document.save("Partie12.docx")
+        #FIN DU DOC 
+    paragraph = document.add_paragraph()
+    run = paragraph.add_run()
+    run.add_break(WD_BREAK.PAGE)
+    #document.save("Partie7.docx") 
+    
+ #   document.save("Partie12.docx")
     
     
     

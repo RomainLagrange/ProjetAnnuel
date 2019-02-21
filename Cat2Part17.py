@@ -8,7 +8,7 @@ Created on Thu Feb 21 17:03:12 2019
 import docx
 import StyleProt1
 from StyleProt1 import Style,Titre1, Titre2, Titre3, TexteGris, TexteGrisJustif
-from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_UNDERLINE, WD_LINE_SPACING, WD_COLOR_INDEX
+from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_UNDERLINE, WD_LINE_SPACING, WD_COLOR_INDEX, WD_BREAK
 from docx.enum.style import WD_STYLE_TYPE
 from docx.shared import Cm, Pt, RGBColor, Inches
 
@@ -19,9 +19,9 @@ from docx.shared import Cm, Pt, RGBColor, Inches
 #    TexteGris(texte,document)
 #    TexteGrisJustif(texte,document)
 
-def Partie17():
+def Partie17(document):
     'Creation de la partie 17 du protcole de catégorie 2'
-    document = docx.Document()
+#    document = docx.Document()
 
 
 #   Marge de la page
@@ -35,7 +35,7 @@ def Partie17():
 #---------------------------DEFINITIONS DES STYLES
  
 
-    Style(document)
+ #   Style(document)
 
    
 #---------------------------------------------------------------ECRITURE
@@ -44,5 +44,10 @@ def Partie17():
     #ecriture du premier titre 
     Titre1('17	BIBLIOGRAPHIE',document)
 
-    document.save("Cat2Part17.docx")
+     #FIN DU DOC 
+    paragraph = document.add_paragraph()
+    run = paragraph.add_run()
+    run.add_break(WD_BREAK.PAGE)
+
+  #  document.save("Cat2Part17.docx")
     

@@ -17,7 +17,7 @@ def extraction():
     for para in doc.paragraphs:
           fullText.append(para.text)    
     f1.close()
-    print(fullText)
+  #  print(fullText)
     infos={}
     for i in range(len(fullText)):
         if re.search(r"Titre complet de la recherche",fullText[i]):

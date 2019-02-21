@@ -8,7 +8,8 @@ Created on Thu Feb 21 16:19:49 2019
 import docx
 import StyleProt1
 from StyleProt1 import Style, Titre1,Titre2, Titre3, TexteGris, TexteGrisJustif
-from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_UNDERLINE, WD_LINE_SPACING, WD_COLOR_INDEX
+from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_UNDERLINE, WD_LINE_SPACING, WD_COLOR_INDEX, WD_BREAK
+
 from docx.enum.style import WD_STYLE_TYPE
 from docx.shared import Cm, Pt, RGBColor, Inches
 
@@ -44,7 +45,7 @@ def Partie1(document):
 
     
     # Ecriture du 1.1  
-   Titre2('1.1	Etat actuel des connaissances',document)
+    Titre2('1.1	Etat actuel des connaissances',document)
   
     
     
@@ -94,6 +95,10 @@ def Partie1(document):
     Titre2('1.6	Justification du faible niveau d’intervention',document)
 
 
+    #FIN DU DOC 
+    paragraph = document.add_paragraph()
+    run = paragraph.add_run()
+    run.add_break(WD_BREAK.PAGE)
+     
 
-
-    document.save("Cat2Partie1.docx")   
+   # document.save("Cat2Partie1.docx")   

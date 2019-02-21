@@ -21,7 +21,7 @@ def PageGarde(document):
         
     
     '''Logos de l'en-tete'''
-    header = page_garde.header()
+    header = page_garde.header
     header.is_linked_to_previous = False
     p = header.paragraphs[0]
     r = p.add_run() 
@@ -337,6 +337,10 @@ def liste_abreviation(document,extract):
       '''Then format the sentence'''
       sentence.font.name = 'Times New Roman'
       sentence.font.size = docx.shared.Pt(11)
-          
-    
+     
+     #FIN DU DOC 
+      paragraph = document.add_paragraph()
+      run = paragraph.add_run()
+      run.add_break(WD_BREAK.PAGE)
+     
       

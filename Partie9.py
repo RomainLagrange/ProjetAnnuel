@@ -8,7 +8,7 @@ Created on Thu Feb 21 14:54:04 2019
 import docx
 import StyleProt1
 from StyleProt1 import Style,Titre1, Titre2, Titre3, TexteGris, TexteGrisJustif
-from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_UNDERLINE, WD_LINE_SPACING, WD_COLOR_INDEX
+from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_UNDERLINE, WD_LINE_SPACING, WD_COLOR_INDEX, WD_BREAK
 from docx.enum.style import WD_STYLE_TYPE
 from docx.shared import Cm, Pt, RGBColor, Inches
 
@@ -19,9 +19,9 @@ from docx.shared import Cm, Pt, RGBColor, Inches
 #    TexteGris(texte,document) --> écrire en minuscule !!!
 #    TexteGrisJustif(texte,document)
 
-def Partie9():
+def Partie9(document):
     'Creation de la partie 9 du protcole de catégorie 1'
-    document = docx.Document()
+  #  document = docx.Document()
 
 
 #   Marge de la page
@@ -35,7 +35,7 @@ def Partie9():
 #---------------------------DEFINITIONS DES STYLES
  
 
-    Style(document)
+#    Style(document)
 
 
 #    
@@ -71,15 +71,20 @@ def Partie9():
     Titre3('9.3.4','Tableau récapitulatif du circuit de déclaration par type d’événement',document)
     
     #Ecriture du 9.4
-    Titre2('9.4','	Déclaration par le promoteur des effets indésirables graves inattendus, des faits nouveaux et autres évènements',document)
+    Titre2('9.4 Déclaration par le promoteur des effets indésirables graves inattendus, des faits nouveaux et autres évènements',document)
     
     #Ecriture du 9.5
-    Titre2('9.5','	Essai chez un volontaire sain',document)
+    Titre2('9.5	Essai chez un volontaire sain',document)
     
     #Ecriture du 9.6
-    Titre2('9.6','Rapport annuel de sécurité',document)
+    Titre2('9.6 Rapport annuel de sécurité',document)
     
-    document.save("Partie9.docx")
+        #FIN DU DOC 
+    paragraph = document.add_paragraph()
+    run = paragraph.add_run()
+    run.add_break(WD_BREAK.PAGE)
+    #document.save("Partie7.docx") 
+  #  document.save("Partie9.docx")
     
     
     
