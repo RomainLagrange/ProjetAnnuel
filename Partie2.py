@@ -7,15 +7,17 @@ Created on Sat Feb 16 13:34:49 2019
 
 import docx
 import StyleProt1
-from StyleProt1 import Style,Titre1,Titre2, Titre3,TexteGris
+from StyleProt1 import Style,Titre1,Titre2, Titre3,TexteGris, TexteGrisJustif
 from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_UNDERLINE, WD_LINE_SPACING, WD_COLOR_INDEX
 from docx.enum.style import WD_STYLE_TYPE
 from docx.shared import Cm, Pt, RGBColor, Inches
 
 #MEMO POUR ECRIRE LES TITRES :
-#    StyleProt1.Titre1('num + texte du protocole',document)
-#    StyleProt1.Titre2('num + texte du protocole',document)
-#    StyleProt1.Titre3('numero','texte',document)
+#    Titre1('num + texte du protocole',document)
+#    Titre2('num + texte du protocole',document)
+#    Titre3('numero','texte',document)
+#    TexteGris(texte,document)
+#    TexteGrisJustif(texte,document)
 
 def Partie2():
     'Creation de la partie 2 du protcole de catégorie 1'
@@ -31,19 +33,19 @@ def Partie2():
         section.left_margin = Cm(2)
         section.right_margin = Cm(2)
  
-    StyleProt1.Style(document)
+    Style(document)
 
-    StyleProt1.Titre1('2	OBJECTIFS DE LA RECHERCHE',document)
+    Titre1('2	OBJECTIFS DE LA RECHERCHE',document)
     
     #Texte sur fond gris   
     TexteGris('prendre contact avec la plateforme de methodologie \n pour aide a la redaction de ce chapitre', document)
 
     
    # Ecriture du 2.1  
-    StyleProt1.Titre2('2.1	Objectif principal',document)
+    Titre2('2.1	Objectif principal',document)
     
     # Ecriture du 2.2  
-    StyleProt1.Titre2('2.1	Objectifs secondaires',document)
+    Titre2('2.1	Objectifs secondaires',document)
     
     document.save("Partie2.docx")   
 

@@ -7,16 +7,17 @@ Created on Thu Jan 31 13:32:03 2019
 
 import docx
 import StyleProt1
-from StyleProt1 import Style, Titre1,Titre2, Titre3, TexteGris
+from StyleProt1 import Style, Titre1,Titre2, Titre3, TexteGris, TexteGrisJustif
 from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_UNDERLINE, WD_LINE_SPACING, WD_COLOR_INDEX
 from docx.enum.style import WD_STYLE_TYPE
 from docx.shared import Cm, Pt, RGBColor, Inches
 
-#revoir titre1 et texte encardé gris
 #MEMO POUR ECRIRE LES TITRES :
-#    StyleProt1.Titre1('num + texte du protocole',document)
-#    StyleProt1.Titre2('num + texte du protocole',document)
-#    StyleProt1.Titre3('numero','texte',document)
+#    Titre1('num + texte du protocole',document)
+#    Titre2('num + texte du protocole',document)
+#    Titre3('numero','texte',document)
+#    TexteGris(texte,document)
+#    TexteGrisJustif(texte,document)
     
 
 def Partie1(document):
@@ -32,10 +33,10 @@ def Partie1(document):
 #        section.left_margin = Cm(2)
 #        section.right_margin = Cm(2)
         
-    StyleProt1.Style(document)
+    Style(document)
 
  
-    StyleProt1.Titre1('1	JUSTICATION SCIENTIFIQUE ET DESCRIPTION GENERALE',document)
+    Titre1('1	JUSTICATION SCIENTIFIQUE ET DESCRIPTION GENERALE',document)
     #ecriture du premier titre 
 #    paragraph=document.add_paragraph('1	JUSTICATION SCIENTIFIQUE ET DESCRIPTION GENERALE\n', style='Titre1') #titre
 #    paragraph.alignment = WD_ALIGN_PARAGRAPH.CENTER #centrer
@@ -49,12 +50,12 @@ def Partie1(document):
 
     
     # Ecriture du 1.1  
-    StyleProt1.Titre2('1.1	Etat actuel des connaissances',document)
+   Titre2('1.1	Etat actuel des connaissances',document)
   
     
     
     #Ecriture du titre1.1.1
-    StyleProt1.Titre3('1.1.1','Sur la pathologie',document)
+    Titre3('1.1.1','Sur la pathologie',document)
 
     
     #Texte indicatif en italique TEST    #UTILISER, style ='TexteItalic'
@@ -67,7 +68,7 @@ def Partie1(document):
     
     
     #ecriture du titre1.1.2
-    StyleProt1.Titre3('1.1.2','Sur les traitements, stratégies et procédures de référence et à l’étude',document)
+    Titre3('1.1.2','Sur les traitements, stratégies et procédures de référence et à l’étude',document)
 #
 #    p=document.add_heading()
 #    p.paragraph_format.left_indent = Inches(0.98) #indentation en pouce, ici 1,5cm
@@ -105,7 +106,7 @@ def Partie1(document):
                                         
                                         
     #ecriture du titre1.2
-    StyleProt1.Titre2('1.2	Hypothèse de la recherche et résultats attendus',document)
+    Titre2('1.2	Hypothèse de la recherche et résultats attendus',document)
 
     #Texte indicatif en italique
     paragraph5 = document.add_paragraph ('Définir précisément l’hypothèse, \
@@ -117,7 +118,7 @@ def Partie1(document):
 
 
     #Ecriture du titre1.3
-    StyleProt1.Titre2('1.3 Justification des choix méthodologiques',document)
+    Titre2('1.3 Justification des choix méthodologiques',document)
 
     
     #Texte sur fond gris  
@@ -136,12 +137,12 @@ def Partie1(document):
 
    
      #Ecriture du titre1.4
-    StyleProt1.Titre2('1.4 Rapport bénéfices / risques prévisibles',document)
+    Titre2('1.4 Rapport bénéfices / risques prévisibles',document)
      
 
     
     #Ecriture du titre1.4.1
-    StyleProt1.Titre3('1.4.1','Bénéfices',document)
+    Titre3('1.4.1','Bénéfices',document)
 
 
     #Texte indicatif en italique
@@ -154,7 +155,7 @@ def Partie1(document):
 
    
     #Ecriture du titre1.4.2
-    StyleProt1.Titre3('1.4.2','Risques',document)
+    Titre3('1.4.2','Risques',document)
 
 
 #    #Texte indicatif en italique
@@ -166,7 +167,7 @@ def Partie1(document):
 #    
     
      #Ecriture du titre1.5
-    StyleProt1.Titre2('1.5 Retombées attendues',document)
+    Titre2('1.5 Retombées attendues',document)
 
      
      #Texte indicatif en italique

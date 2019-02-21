@@ -7,15 +7,17 @@ Created on Sat Feb 16 13:42:50 2019
 
 import docx
 import StyleProt1
-from StyleProt1 import Style, Titre1, Titre2,Titre3, TexteGris
+from StyleProt1 import Style, Titre1, Titre2,Titre3, TexteGris, TexteGrisJustif
 from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_UNDERLINE, WD_LINE_SPACING, WD_COLOR_INDEX
 from docx.enum.style import WD_STYLE_TYPE
 from docx.shared import Cm, Pt, RGBColor, Inches
 
 #MEMO POUR ECRIRE LES TITRES :
-#    StyleProt1.Titre1('num + texte du protocole',document)
-#    StyleProt1.Titre2('num + texte du protocole',document)
-#    StyleProt1.Titre3('numero','texte',document)
+#    Titre1('num + texte du protocole',document)
+#    Titre2('num + texte du protocole',document)
+#    Titre3('numero','texte',document)
+#    TexteGris(texte,document)
+#    TexteGrisJustif(texte,document)
 
 def Partie3():
     'Creation de la partie 3 du protcole de catégorie 1'
@@ -33,16 +35,16 @@ def Partie3():
  
 
     
-    StyleProt1.Style(document)
+    Style(document)
 
-    StyleProt1.Titre1('3	CRITERES DE JUGEMENT',document)
+    Titre1('3	CRITERES DE JUGEMENT',document)
 
     
    # Ecriture du 3.1 
-    StyleProt1.Titre2('3.1	Critère d’évaluation principal',document)
+    Titre2('3.1	Critère d’évaluation principal',document)
     
     # Ecriture du 3.2  
-    StyleProt1.Titre2('3.2	Critères d’évaluation secondaires',document)
+    Titre2('3.2	Critères d’évaluation secondaires',document)
 
     
     

@@ -41,6 +41,22 @@ def TexteGris(texte,document):
     cell._tc.get_or_add_tcPr().append(shading_elm)
     p.style='BackgroundGrey'
     pt.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    
+def TexteGrisJustif(texte,document):
+    shading_elm = parse_xml(r'<w:shd {} w:fill="D9D9D9"/>'.format(nsdecls('w')))
+    table = document.add_table(rows = 1, cols = 1)
+    row = table.rows[0].cells
+    para_text =texte
+    cell = row[0]
+    pt = cell.paragraphs[0]
+    t = pt.text = ''
+    p = pt.add_run(para_text)
+  #  pt.add_run('\n')
+    cell._tc.get_or_add_tcPr().append(shading_elm)
+    p.style='BackgroundGreyJustif'
+    paragraph=document.add_paragraph(' ')
+
+   # pt.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
 
 def Style(document):
     'Défintion des styles du protocole de catégorie 1'
@@ -96,7 +112,7 @@ def Style(document):
     fontTitreListe3.underline= False
     fontTitreListe3.color.rgb = RGBColor(0x0,0x0,0x0)  
     
-    #Definition style texte surligné en gris   --> SUPPRIMER ESPACE EN BAS
+    #Definition style texte surligné en gris centré   --> SUPPRIMER ESPACE EN BAS
     styles = document.styles
     styleBackgroundGrey = styles.add_style('BackgroundGrey', WD_STYLE_TYPE.CHARACTER)
     styleBackgroundGrey.base_style = styles['No Spacing']
@@ -106,7 +122,17 @@ def Style(document):
     fontBackgroundGrey.bold = True
     fontBackgroundGrey.small_caps = True
     
-        #definition du style pour le texte indicatif -->  ESPACEMENT LIGNES 
+    #Definition style texte surligné en gris justifié   --> SUPPRIMER ESPACE EN BAS
+    styles = document.styles
+    styleBackgroundGrey = styles.add_style('BackgroundGreyJustif', WD_STYLE_TYPE.CHARACTER)
+    styleBackgroundGrey.base_style = styles['No Spacing']
+    fontBackgroundGrey = styleBackgroundGrey.font
+    fontBackgroundGrey.name = 'Times New Roman'
+    fontBackgroundGrey.size = docx.shared.Pt(11)
+    fontBackgroundGrey.italic = True
+    fontBackgroundGrey.bold = True
+    
+    #definition du style pour le texte indicatif -->  ESPACEMENT LIGNES 
     styleIndic = styles.add_style('TexteItalic', WD_STYLE_TYPE.PARAGRAPH)
     styleIndic.base_style = styles['Normal']
     fontIndic = styleIndic.font
