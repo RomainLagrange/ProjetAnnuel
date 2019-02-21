@@ -58,6 +58,7 @@ def Style(document):
     fontTitre1.size = docx.shared.Pt(12) #taille
     fontTitre1.all_caps = True #toujours en majuscule
     fontTitre1.bold= True #en gras
+    fontTitre1.underline= True #souligné
     fontTitre1.color.rgb = RGBColor(0x0,0x70,0xC0) #couleur bleu, en base 16
     
 

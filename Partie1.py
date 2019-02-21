@@ -19,18 +19,18 @@ from docx.shared import Cm, Pt, RGBColor, Inches
 #    StyleProt1.Titre3('numero','texte',document)
     
 
-def Partie1():
+def Partie1(document):
     'Creation de la partie 1 du protcole de catégorie 1'
-    document = docx.Document()
+   # document = docx.Document()
 
 
 #   Marge de la page
-    sections = document.sections
-    for section in sections:
-        section.top_margin = Cm(2)
-        section.bottom_margin = Cm(2)
-        section.left_margin = Cm(2)
-        section.right_margin = Cm(2)
+#    sections = document.sections
+#    for section in sections:
+#        section.top_margin = Cm(2)
+#        section.bottom_margin = Cm(2)
+#        section.left_margin = Cm(2)
+#        section.right_margin = Cm(2)
         
     StyleProt1.Style(document)
 
@@ -177,5 +177,5 @@ def Partie1():
 
 
 
-    document.save("Partie1.docx")   
+   # document.save("Partie1.docx")   
     

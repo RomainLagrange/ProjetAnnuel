@@ -21,7 +21,7 @@ def PageGarde(document):
         
     
     '''Logos de l'en-tete'''
-    header = page_garde.header
+    header = page_garde.header()
     header.is_linked_to_previous = False
     p = header.paragraphs[0]
     r = p.add_run() 

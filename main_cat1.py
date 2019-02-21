@@ -8,6 +8,13 @@ Created on Fri Feb  1 15:43:54 2019
 #ce document va construire le protocole de categorie 1
 
 #import gestion_tableau
+import Partie1,Partie2,Partie3,Partie4,Partie5,Partie6
+from Partie1 import Partie1
+from Partie2 import Partie2
+from Partie3 import Partie3
+from Partie4 import Partie4
+from Partie5 import Partie5
+from Partie6 import Partie6
 import page_garde
 import extraction
 import docx
@@ -40,6 +47,7 @@ def construit_doc():
     #resume du proto version XX
     #abstract
     #grand I justification
+    Partie1.Partie1(document)
     #grand 2 objectifs de la recherche
     #grand 3 criteres de jusgement
     #♥grand 4 conception de la recherche
