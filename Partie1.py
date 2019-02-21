@@ -178,5 +178,5 @@ def Partie1(document):
 
 
 
-   # document.save("Partie1.docx")   
+    document.save("Partie1.docx")   
     
