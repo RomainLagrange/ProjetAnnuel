@@ -22,6 +22,7 @@ def main_ansm_dm():
     partie_une_ansm_dm(document)
     partie_B_C(document)
     partie_D(document)
+    partie_E_F(document)
     document.save("soumission-ansm-dm.docx")
 
 def partie_une_ansm_dm(document):
@@ -627,6 +628,131 @@ def partie_D(document):
                     else:
                         fontdebut.size = docx.shared.Pt(10)
                     n=n+1
+    
+    #parties E et F
+def partie_E_F(document):
+    
+    '''Partie E'''
+    document.add_page_break()
+    
+    paragraph=document.add_paragraph("E. Informations sur le dispositif utilisé comme placebo\n", style='debut_page')
+    table = document.add_table(rows=2, cols=2, style='Table Grid')
+    table.cell(0,0).text=("Description / Composition ")
+    table.cell(1,0).text=("Mode d'utilisation / Indication ")
+    for row in table.rows:
+        for cell in row.cells:
+            paragraphs = cell.paragraphs
+            for paragraph in paragraphs:
+                for run in paragraph.runs:
+                    fontdebut = run.font
+                    fontdebut.name = 'Arial'
+                    fontdebut.size = docx.shared.Pt(10)
+    
+    paragraph=document.add_paragraph()
+    paragraph=document.add_paragraph()
+    
+    table = document.add_table(rows=6, cols=2, style='Table Grid')
+    table.cell(0,0).text=("Fabricant  du placebo ")
+    table.cell(0,1).text=("(à compléter quel que soit le statut du promoteur)")
+    table.cell(1,0).text=("Nom")
+    table.cell(2,0).text=("Adresse")
+    table.cell(3,0).text=("Numéro de téléphone")
+    table.cell(4,0).text=("Numéro de télécopie")
+    table.cell(5,0).text=("Courriel")
+    n=0
+    for row in table.rows:
+        for cell in row.cells:
+            paragraphs = cell.paragraphs
+            for paragraph in paragraphs:
+                for run in paragraph.runs:
+                    fontdebut = run.font
+                    fontdebut.name = 'Arial'
+                    if n==0 or n==1:
+                        fontdebut.size = docx.shared.Pt(11)
+                        if n==0:
+                            fontdebut.bold=True
+                    else:
+                        fontdebut.size = docx.shared.Pt(10)
+                    n=n+1
+    a=table.cell(0,0)
+    b=table.cell(0,1)
+    a.merge(b)
+    
+    '''Partie F'''
+    paragraph=document.add_paragraph("\n\nF. Données générales sur la recherche\nF1. Domaine concerné par la recherche\n", style='debut_page')
+    paragraph=document.add_paragraph()
+    sentence=paragraph.add_run("1)	Domaine médical ")
+    fontdebut = sentence.font
+    fontdebut.name = 'Arial'
+    fontdebut.size = docx.shared.Pt(10)
+    fontdebut.bold=True
+    sentence=paragraph.add_run("(cocher 1 seule case)\n")
+    fontdebut = sentence.font
+    fontdebut.name = 'Arial'
+    fontdebut.size = docx.shared.Pt(10)
+    fontdebut.italic=True
+    sentence=paragraph.add_run("Médecine    □  				Chirurgie   □  				Imagerie / diagnostic   □\n")
+    fontdebut = sentence.font
+    fontdebut.name = 'Arial'
+    fontdebut.size = docx.shared.Pt(10)
+    sentence=paragraph.add_run("\n2)	Domaine thérapeutique principal  ")
+    fontdebut = sentence.font
+    fontdebut.name = 'Arial'
+    fontdebut.size = docx.shared.Pt(10)
+    fontdebut.bold=True
+    sentence=paragraph.add_run("(cocher 1 seule case)\n")
+    fontdebut = sentence.font
+    fontdebut.name = 'Arial'
+    fontdebut.size = docx.shared.Pt(10)
+    fontdebut.italic=True
+    
+    table = document.add_table(rows=1, cols=3, style='Table Grid')
+    table.cell(0,0).text=("Anesthésie/ Réanimation	□\n"
+                          "Cancérologie                  	□\n"
+                          "Cardiologie/vasculaire    	□\n"
+                          "Dermatologie                  	□\n"
+                          "Endocrinologie/Diabétologie	□\n")
+    table.cell(0,1).text=("Gastro-entérologie          	□\n"
+                          "Gynécologie                   	□\n"
+                          "Neurologie                      	□\n"
+                          "Ophtalmologie                	□\n"
+                          "Orthopédie                      	□\n")
+    table.cell(0,2).text=("ORL                                	□\n"
+                          "Pneumologie                  	□\n"
+                          "Urologie/Néphrologie      	□\n"
+                          "Autre (à préciser) :")
+    for row in table.rows:
+        for cell in row.cells:
+            paragraphs = cell.paragraphs
+            for paragraph in paragraphs:
+                for run in paragraph.runs:
+                    fontdebut = run.font
+                    fontdebut.name = 'Arial'
+                    fontdebut.size = docx.shared.Pt(10)
+
+    '''Partie F2'''
+    paragraph=document.add_paragraph()
+    sentence=paragraph.add_run("F2. S’agit-il d’une recherche de première utilisation chez l’homme dans la ")
+    fontdebut = sentence.font
+    fontdebut.name = 'Arial'
+    fontdebut.size = docx.shared.Pt(11)
+    fontdebut.bold=True
+    sentence=paragraph.add_run("                 □ oui    □ non\n")
+    fontdebut = sentence.font
+    fontdebut.name = 'Arial'
+    fontdebut.size = docx.shared.Pt(10)
+    fontdebut.italic=True
+    sentence=paragraph.add_run("destination de l’essai ?\n\nF3. Procédures prévues pour les seuls besoins de la recherche\n\n")
+    fontdebut = sentence.font
+    fontdebut.name = 'Arial'
+    fontdebut.size = docx.shared.Pt(11)
+    fontdebut.bold=True
+    sentence=paragraph.add_run("1)	Prélèvements biologiques pour les seuls besoins de la recherche (c’est à dire prélèvements qui n’auraient pas été réalisés si le sujet ne se prêtait pas à cette recherche)\n")
+    fontdebut = sentence.font
+    fontdebut.name = 'Arial'
+    fontdebut.size = docx.shared.Pt(10)
+    fontdebut.bold=True
+    
     
     
     
