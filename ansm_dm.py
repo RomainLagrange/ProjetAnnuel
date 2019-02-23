@@ -25,6 +25,7 @@ def main_ansm_dm():
     partie_E_F(document)
     partieF5_suite(document)
     a_partir_F8(document)
+    partie_F10(document)
     document.save("soumission-ansm-dm.docx")
 
 def partie_une_ansm_dm(document):
@@ -1323,7 +1324,7 @@ def a_partir_F8(document):
     
     '''Partie F9'''
     paragraph=document.add_paragraph("\nF9. Décision rendue par d’autres autorités compétentes dans l’UE\n", style='debut_page')
-    table = document.add_table(rows=5, cols=5, style='Table Grid')
+    table = document.add_table(rows=9, cols=5, style='Table Grid')
     a=table.cell(0,0)
     b=table.cell(0,3)
     a.merge(b)
@@ -1342,9 +1343,17 @@ def a_partir_F8(document):
     d=table.cell(3,4)
     c.merge(d)
     table.cell(3,0).text=("Dans l’affirmative, préciser uniquement pour chaque EM où l’AC a déjà rendu une décision finale, si les documents suivants soumis dans le dossier de demande d’AEC sont identiques à ceux sur lesquels a reposé la décision rendue par cette AC")
-    e=table.cell(4,0)
-    f=table.cell(4,4)
-    e.merge(f)
+    table.cell(4,0).text=("Etat Membre")
+    table.cell(4,1).text=("Décision finale de l’AC")
+    table.cell(4,2).text=("Même Protocole")
+    table.cell(4,3).text=("Même Brochure pour l’investigateur (BI)")
+    table.cell(4,4).text=("Même Dossier Technique (DT)")
+    for i in range (5,8):
+        for j in range(1,5):
+            if j==1:
+                table.cell(i,j).text=("□ autorisation □ refus")
+            else:
+                table.cell(i,j).text=("□ oui □ non")
     n=0
     for row in table.rows:
         for cell in row.cells:
@@ -1357,6 +1366,145 @@ def a_partir_F8(document):
                     fontdebut.name = 'Arial'
                     fontdebut.size = docx.shared.Pt(10)
                     n=n+1
+    document.add_page_break()
+    
+    #partie F10
+    
+def partie_F10(document):
+    
+    paragraph=document.add_paragraph("F10. Personnes se prêtant à la recherche\n", style='debut_page')
+    table = document.add_table(rows=27, cols=8, style='Table Grid')
+    for i in range (0,27):
+        if i==1 or i==12 or i==15:
+            a=table.cell(i,0)
+            b=table.cell(i,7)
+            a.merge(b)
+        else:
+            a=table.cell(i,0)
+            b=table.cell(i,5)
+            a.merge(b)
+    table.cell(0,6).text=("oui")
+    table.cell(0,7).text=("non")
+    table.cell(1,0).text=("Tranche d'âge étudiée")
+    table.cell(2,0).text=("Moins de 18 ans")
+    table.cell(10,0).text=("De 18 à 65 ans……………………………………………………………………………………")
+    table.cell(11,0).text=("Plus de 65 ans……………………………………………………………………………………")
+    table.cell(12,0).text=("Sexe")
+    table.cell(15,0).text=("Population")
+    table.cell(18,0).text=("En particulier : ")
+    for i in range (2,27):
+        if i<3 or 3<i<12 or 12<i<15 or 15<i<18 or 18<i<24 or 24<i<26:
+            table.cell(i,6).text=("□")
+            table.cell(i,7).text=("□")
+    a=table.cell(3,0)
+    b=table.cell(9,5)
+    a.merge(b)
+    c=table.cell(13,0)
+    d=table.cell(14,5)
+    c.merge(d)
+    e=table.cell(16,0)
+    f=table.cell(17,5)
+    e.merge(f)
+    g=table.cell(19,0)
+    h=table.cell(26,5)
+    g.merge(h)
+    table.cell(3,0).text=("Si oui, préciser :\n"
+                          "In Utero	...............................................................................................................................\n"
+                          "Nouveau-nés prématurés (jusqu’à l’âge gestationnel ≤ 37 semaines)…………………\n"
+                          "Nouveau-nés (0-27 jours)……………………………………………………………………..\n"
+                          "Nourrissons (28 jours - 23 mois)………………………………………………………………\n"
+                          "Enfants (2-11 ans)………………………………………………………………………………\n"
+                          "Adolescents (12-17 ans)…………………………………………………………………………")
+    table.cell(13,0).text=("Femmes……………………………………………………………………………………………\n"
+                           "Hommes…………………………………………………………………………………………..")
+    table.cell(16,0).text=("Sujets sains………………………………………………………………………………………..\n"
+                           "Sujets malades...………………………………………………………………………………….")
+    table.cell(19,0).text=("- femmes en âge de procréer…………………………………………………………………..\n"
+                           "- femmes enceintes……………………………………………………………………………...\n"
+                           "- femmes allaitantes……………………………………………………………………………..\n"
+                           "- personnes en situation d’urgence…………………………………………………………….\n"
+                           "- personnes incapables de donner personnellement leur consentement………………..\n"
+                           "\nSi oui, préciser : \n"
+                           "- autres……………………………………………………………………………………………..\n"
+                           "Si oui, préciser :\n")
+    n=0
+    for row in table.rows:
+        for cell in row.cells:
+            paragraphs = cell.paragraphs
+            for paragraph in paragraphs:
+                if n==9 or n==15 or n==69 or n==77 or n==85 or n==95 or n==109 or n==119 or n==133 or n==141 or n==201:
+                    paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.LEFT
+                else:
+                    paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                for run in paragraph.runs:
+                    fontdebut = run.font
+                    fontdebut.name = 'Arial'
+                    fontdebut.size = docx.shared.Pt(10)
+                    if n==9 or n==15 or n==77 or n==85 or n==95 or n==119 or n==141:
+                        fontdebut.bold=True
+                    n=n+1
+    k=table.cell(2,0)
+    a.merge(k)
+    l=table.cell(10,0)
+    m=table.cell(11,0)
+    a.merge(l)
+    a.merge(m)
+    n=table.cell(18,0)
+    n.merge(g)
+    
+    paragraph=document.add_paragraph()
+    paragraph=document.add_paragraph()
+    
+    table = document.add_table(rows=4, cols=4, style='Table Grid')
+    a=table.cell(0,0)
+    b=table.cell(0,3)
+    a.merge(b)
+    c=table.cell(1,0)
+    d=table.cell(3,2)
+    c.merge(d)
+    table.cell(0,0).text=("Nombre prévu de personnes à inclure :")
+    table.cell(1,0).text=("-	en France……………………………………………………………………………………\n"
+                          "-	dans la Communauté européenne………………………………………………………\n"
+                          "-	pour l’ensemble de la recherche…………………………………………………………")
+    table.cell(1,3).text=("     ")
+    table.cell(2,3).text=("     ")
+    table.cell(3,3).text=("     ")
+    n=0
+    for row in table.rows:
+        for cell in row.cells:
+            paragraphs = cell.paragraphs
+            for paragraph in paragraphs:
+                if n==7 or n==11 or n==15:
+                    paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                else:
+                    paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.LEFT
+                for run in paragraph.runs:
+                    fontdebut = run.font
+                    fontdebut.name = 'Arial'
+                    fontdebut.size = docx.shared.Pt(10)
+                    if n==0:
+                        fontdebut.bold=True
+                    n=n+1
+    document.add_page_break()
+    
+    paragraph=document.add_paragraph()
+    sentence=("F10. Traitements ou soins ou examens, procédures, prévus pour les personnes se prêtant à la recherche à la fin de leur participation à l’essai\n\n")
+    fontdebut = sentence.font
+    fontdebut.name = 'Arial'
+    fontdebut.size = docx.shared.Pt(11)
+    fontdebut.bold=True
+    sentence=("Est-ce qu’il diffère du traitement habituel de la pathologie étudiée ?				□ oui   □ non\n\nSi oui, à préciser et justifier : \n")
+    fontdebut = sentence.font
+    fontdebut.name = 'Arial'
+    fontdebut.size = docx.shared.Pt(10)
+    table = document.add_table(rows=1, cols=1, style='Table Grid')
+    table.cell(0,0).text=("\n\n\n")
+    
+    paragraph=document.add_paragraph()
+    paragraph=document.add_paragraph()
+    
+    '''Partie G'''
+    paragraph=document.add_paragraph("F10. Personnes se prêtant à la recherche\n", style='debut_page')
     
     
     
