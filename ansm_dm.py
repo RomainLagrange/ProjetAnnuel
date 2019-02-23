@@ -496,6 +496,138 @@ def partie_D(document):
     fontdebut.italic=True
     
     table = document.add_table(rows=5, cols=4, style='Table Grid')
+    c=table.cell(0,0)
+    d=table.cell(1,0)
+    c.merge(d)
+    table.cell(0,0).text=("Nom du dispositif")
+    e=table.cell(0,1)
+    f=table.cell(1,1)
+    e.merge(f)
+    table.cell(0,1).text=("sans marquage CE")
+    a=table.cell(0,2)
+    b=table.cell(0,3)
+    a.merge(b)
+    table.cell(0,2).text=("disposant d'un marquage CE")
+    table.cell(1,2).text=("Utilisation conforme au marquage CE")
+    table.cell(1,3).text=("Utilisation dans une autre destination que celle du marquage CE")
+    table.cell(2,1).text=("□")
+    table.cell(2,2).text=("□")
+    table.cell(2,3).text=("□")
+    table.cell(3,1).text=("□")
+    table.cell(3,2).text=("□")
+    table.cell(3,3).text=("□")
+    table.cell(4,1).text=("□")
+    table.cell(4,2).text=("□")
+    table.cell(4,3).text=("□")
+    for row in table.rows:
+        for cell in row.cells:
+            paragraphs = cell.paragraphs
+            for paragraph in paragraphs:
+                paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER 
+                for run in paragraph.runs:
+                    fontdebut = run.font
+                    fontdebut.name = 'Arial'
+                    fontdebut.size = docx.shared.Pt(11)
+    
+    paragraph=document.add_paragraph("\nD4. Dossier technique du dispositif faisant l'objet de la recherche\n", style='debut_page')
+    table = document.add_table(rows=9, cols=3, style='Table Grid')
+    table.cell(0,1).text=("oui")
+    table.cell(0,2).text=("non")
+    table.cell(1,0).text=("Dossier technique complet ")
+    table.cell(2,0).text=("Dossier technique simplifié")
+    a=table.cell(3,0)
+    b=table.cell(3,1)
+    a.merge(b)
+    c=table.cell(3,2)
+    a.merge(c)
+    table.cell(3,0).text=("En cas de dossier technique simplifié, cocher la ou les cases ci-dessous :")
+    table.cell(4,0).text=("1. Dispositif marqué CE utilisé dans la destination du marquage")
+    table.cell(5,0).text=("2. DM de classe I ou IIa (à l'exception des classes IIa invasifs à long terme) marqué CE hors indication") 
+    e=table.cell(7,0)
+    d=table.cell(6,0)
+    e.merge(d)
+    f=table.cell(8,0)
+    e.merge(f)
+    table.cell(6,0).text=("3. Dispositif ayant fait l'objet d'une précédente demande d’autorisation de recherche auprès de l'ANSM\n"
+                          "Dans l’affirmative, préciser si le dispositif était utilisé dans la précédente demande :\n"
+                          "- dans la même destination et dans les mêmes conditions \n"
+                          "(Mentionner le N° IDRCB) :\n"
+                          "- dans une autre destination \n"
+                          "(Mentionner le N° IDRCB) :")
+    table.cell(1,1).text=("□")
+    table.cell(1,2).text=("□")
+    table.cell(2,1).text=("□")
+    table.cell(2,2).text=("□")
+    table.cell(4,1).text=("□")
+    table.cell(4,2).text=("□")
+    table.cell(5,1).text=("□")
+    table.cell(5,2).text=("□")
+    table.cell(6,1).text=("□")
+    table.cell(6,2).text=("□")
+    table.cell(7,1).text=("□")
+    table.cell(7,2).text=("□")
+    table.cell(8,1).text=("□")
+    table.cell(8,2).text=("□")
+    n=0
+    for row in table.rows:
+        for cell in row.cells:
+            paragraphs = cell.paragraphs
+            for paragraph in paragraphs:
+                if n==2 or n==5 or n==10 or n==11 or n==14 or n==23:
+                   paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.LEFT
+                else:
+                    paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                for run in paragraph.runs:
+                    fontdebut = run.font
+                    fontdebut.name = 'Arial'
+                    fontdebut.size = docx.shared.Pt(10)
+                    if n==2 or n==5:
+                        fontdebut.bold=True
+                    n=n+1
+    
+    paragraph=document.add_paragraph("\nD5. Informations supplémentaires sur le dispositif à étudier ou comparateur\n", style='debut_page')
+    table = document.add_table(rows=6, cols=3, style='Table Grid')
+    table.cell(0,1).text=("oui")
+    table.cell(0,2).text=("non")
+    table.cell(1,0).text=("Est-ce que le dispositif sur lequel porte la recherche appartient à un tiers ?")
+    table.cell(1,1).text=("□")
+    table.cell(1,2).text=("□")
+    a=table.cell(2,0)
+    b=table.cell(2,1)
+    a.merge(b)
+    c=table.cell(2,2)
+    a.merge(c)
+    table.cell(2,0).text=("si oui, joindre l'autorisation délivrée par ce dernier au promoteur pour communiquer les données relatives au dispositif concerné")
+    table.cell(3,0).text=("Est-ce que la brochure pour l'investigateur appartient à un tiers ?")
+    table.cell(3,1).text=("□")
+    table.cell(3,2).text=("□")
+    table.cell(4,0).text=("Est-ce que le dossier technique appartient à un tiers ?")
+    table.cell(4,1).text=("□")
+    table.cell(4,2).text=("□")
+    d=table.cell(5,0)
+    e=table.cell(5,1)
+    d.merge(e)
+    f=table.cell(5,2)
+    d.merge(f)
+    table.cell(5,0).text=("si oui dans l’un ou les deux cas précédents, joindre l'autorisation du tiers délivrée au promoteur pour l'utiliser cette brochure pour l’investigateur et/ou le dossier technique")
+    n=0
+    for row in table.rows:
+        for cell in row.cells:
+            paragraphs = cell.paragraphs
+            for paragraph in paragraphs:
+                if n==2 or n==7 or n==8 or n==11 or n==16:
+                   paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.LEFT
+                else:
+                   paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                for run in paragraph.runs:
+                    fontdebut = run.font
+                    fontdebut.name = 'Arial'
+                    if n==0 or n==1:
+                        fontdebut.size = docx.shared.Pt(11)
+                    else:
+                        fontdebut.size = docx.shared.Pt(10)
+                    n=n+1
+    
     
     
     
