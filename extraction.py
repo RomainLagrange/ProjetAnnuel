@@ -57,7 +57,7 @@ def extraction():
 def extract():
     
     #dabord on extrait tout qu'on ajoute dans une liste
-    f1 = open('Trame-simplifiée-cat-1(test).docx', 'rb') #ouvre le premier fichier
+    f1 = open('Trame-simplifiée-cat-1.docx', 'rb') #ouvre le premier fichier
     doc = Document(f1)
     fullText=[]
     for para in doc.paragraphs:
@@ -218,13 +218,13 @@ def extract():
     courte=courte.replace("\xa0","")
     longue=longue.replace("\xa0","")
     #on ajoute ' ' pour eviter l'erreur avec les regex en cas de non remplissage par l'investigateur
-    courte+=" "
-    longue+=" "
+    courte+="\n"
+    longue+="\n"
     #on retire l'aide au remplissage dans courte
-    courte=re.search(r"(?<=Bref rappel \(données de la littérature scientifique, pathologie, domaine d’étude\)).*",courte).group()
+    courte=re.search(r"(?<=Bref rappel \(données de la littérature scientifique, pathologie, domaine d’étude\)\n).*",courte).group()
     infos['justification_etude_courte']=courte
     infos['justification_etude_longue']=longue
-    
+  
     #benefices de l'étude
     benefice=re.search(r"(?<=notamment les bénéfices escomptés pour les personnes qui se prêtent à la recherche\.).*(?=Risques:)",texte1).group()
     infos['benefices']=benefice
@@ -255,15 +255,15 @@ def extract():
         longue=value
     courte=courte.replace("\xa0","")
     longue=longue.replace("\xa0","")
-    #on ajoute ' ' pour eviter l'erreur avec les regex en cas de non remplissage par l'investigateur
-    courte+=" "
-    longue+=" "
+    #on ajoute '\n' pour eviter l'erreur avec les regex en cas de non remplissage par l'investigateur
+    courte+="\n"
+    longue+="\n"
+
     #on retire l'aide au remplissage 
     courte=re.search(r"(?<=Description des retombées attendues par cette recherche\n).*",courte).group()
     longue=re.search(r"(?<=d’augmentation de l’arsenal thérapeutique,…\)\.\n).*",longue).group()
     infos['retombee_attenduees_courte']=courte
     infos['retombee_attenduees_longue']=longue
-    
     #objectif principal
     principal=re.search(r"(?<=Objectif Principal:).*(?=Objectif secondaires:)",texte1).group()
     infos['objectif_principal']=principal
@@ -295,8 +295,8 @@ def extract():
     courte=courte.replace("\xa0","")
     longue=longue.replace("\xa0","")
     #on ajoute ' ' pour eviter l'erreur avec les regex en cas de non remplissage par l'investigateur
-    courte+=" "
-    longue+=" "
+    courte+="\n"
+    longue+="\n"
     #on retire l'aide au remplissage 
     courte=re.search(r"(?<=Un seul critère correspondant à l’objectif principal \n).*",courte).group()
     longue=re.search(r"(?<=Il permettra également le calcul de l’effectif de l’étude\. \n).*",longue).group()
@@ -326,8 +326,8 @@ def extract():
     courte=courte.replace("\xa0","")
     longue=longue.replace("\xa0","")
     #on ajoute ' ' pour eviter l'erreur avec les regex en cas de non remplissage par l'investigateur
-    courte+=" "
-    longue+=" "
+    courte+="\n"
+    longue+="\n"
     #on retire l'aide au remplissage 
     courte=re.search(r"(?<=Liste de tous les critères de jugement secondaires\n).*",courte).group()
     longue=re.search(r"(?<=répondant aux objectifs secondaires\.\n).*",longue).group()
@@ -357,8 +357,8 @@ def extract():
     courte=courte.replace("\xa0","")
     longue=longue.replace("\xa0","")
     #on ajoute ' ' pour eviter l'erreur avec les regex en cas de non remplissage par l'investigateur
-    courte+=" "
-    longue+=" "
+    courte+="\n"
+    longue+="\n"
     #on retire l'aide au remplissage 
     courte=re.search(r"(?<=à la partie correspondante dans le corps du protocole § 6\.1\)\n).*",courte).group()
     infos['critere_inclusion_courte']=courte
@@ -387,8 +387,8 @@ def extract():
     courte=courte.replace("\xa0","")
     longue=longue.replace("\xa0","")
     #on ajoute ' ' pour eviter l'erreur avec les regex en cas de non remplissage par l'investigateur
-    courte+=" "
-    longue+=" "
+    courte+="\n"
+    longue+="\n"
     #on retire l'aide au remplissage 
     courte=re.search(r"(?<=à la partie correspondante dans le corps du protocole § 6\.2\)\n).*",courte).group()
     infos['critere_non_inclusion_courte']=courte
@@ -425,8 +425,8 @@ def extract():
     courte=courte.replace("\xa0","")
     longue=longue.replace("\xa0","")
     #on ajoute ' ' pour eviter l'erreur avec les regex en cas de non remplissage par l'investigateur
-    courte+=" "
-    longue+=" "
+    courte+="\n"
+    longue+="\n"
     #on retire l'aide au remplissage 
     courte=re.search(r"(?<=traitements/stratégies/procédures\n).*",courte).group()
     longue=re.search(r"(?<=la durée du traitement et de la voie d’administration\.\n).*",longue).group()
@@ -464,13 +464,14 @@ def extract():
     #description produit
     x=re.search(r"(?<=Description du produit/médicament expérimental:).*(?=Informations sur le placebo)",texte).group()
     #puis tous les éléments du produit
-    y=re.search(r"(?<=Nom du produit :).*(?=Nom de code)",x).group()
+    print(x)
+    y=re.search(r"(?<=Nom du produit:).*(?=Nom de code)",x).group()
     infos['produit_nom']=y
     y=re.search(r"(?<=Nom de code:).*(?=Voie d’administration)",x).group()
     infos['produit_nom_code']=y
-    y=re.search(r"(?<=Voie d’administration:).*(?=Dosageconcentration)",x).group()
+    y=re.search(r"(?<=Voie d’administration:).*(?=Dosage concentration)",x).group()
     infos['produit_voie_administration']=y
-    y=re.search(r"(?<=Dosageconcentration :).*(?=Dosage unité de concentration)",x).group()
+    y=re.search(r"(?<=Dosage concentration :).*(?=Dosage unité de concentration)",x).group()
     infos['produit_dosage_concentration']=y
     y=re.search(r"(?<=Dosage unité de concentration:).*",x).group()
     infos['produit_dosage_unite_concentration']=y 
@@ -508,8 +509,8 @@ def extract():
     courte=courte.replace("\xa0","")
     longue=longue.replace("\xa0","")
     #on ajoute ' ' pour eviter l'erreur avec les regex en cas de non remplissage par l'investigateur
-    courte+=" "
-    longue+=" "
+    courte+="\n"
+    longue+="\n"
     #on retire l'aide au remplissage 
     courte=re.search(r"(?<=Nombre de personnes à inclure:).*",courte).group()
     infos['taille_etude_courte']=courte
@@ -558,8 +559,8 @@ def extract():
     courte=courte.replace("\xa0","")
     longue=longue.replace("\xa0","")
     #on ajoute ' ' pour eviter l'erreur avec les regex en cas de non remplissage par l'investigateur
-    courte+=" "
-    longue+=" "
+    courte+="\n"
+    longue+="\n"
     #on retire l'aide au remplissage 
     courte=re.search(r"(?<=Bref rappel des méthodes statistiques\n).*",courte).group()
     longue=re.search(r"(?<=données manquantes, inutilisées ou non valides\.\n).*",longue).group()
