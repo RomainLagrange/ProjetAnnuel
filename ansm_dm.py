@@ -26,6 +26,7 @@ def main_ansm_dm():
     partieF5_suite(document)
     a_partir_F8(document)
     partie_F10(document)
+    parties_H_I(document)
     document.save("soumission-ansm-dm.docx")
 
 def partie_une_ansm_dm(document):
@@ -1727,6 +1728,190 @@ def partie_F10(document):
                     fontdebut.size = docx.shared.Pt(10)
                     n=n+1
     
+    paragraph=document.add_paragraph()
+    sentence=paragraph.add_run("2)	Modalités de déclaration des données de vigilance (entre promoteur et ANSM\n")
+    fontdebut = sentence.font
+    fontdebut.name = 'Arial'
+    fontdebut.size = docx.shared.Pt(10)
+    fontdebut.bold=True
+    table = document.add_table(rows=3, cols=4, style='Table Grid')
+    a=table.cell(0,0)
+    b=table.cell(0,3)
+    a.merge(b)
+    a=table.cell(1,0)
+    b=table.cell(1,2)
+    a.merge(b)
+    a=table.cell(2,0)
+    b=table.cell(2,2)
+    a.merge(b)
+    table.cell(0,0).text=("Les modalités de déclaration des données de vigilance sont-elles conformes :")
+    table.cell(1,0).text=("- à la réglementation nationale ?")
+    table.cell(2,0).text=("- à la phase pilote européenne ? (cf guide MEDDEV 2.7.3)")
+    table.cell(1,3).text=("□ oui   □ non")
+    table.cell(2,3).text=("□ oui   □ non")
+    
+#parties H et I
+def parties_H_I(document):
+    
+    paragraph=document.add_paragraph()
+    sentence=paragraph.add_run("\n\nH. Information sur le Comité de Protection des Personnes (CPP) / l’Autorité compétente\n\nH.1. Informations sur le CPP concerné ")
+    fontdebut = sentence.font
+    fontdebut.name = 'Arial'
+    fontdebut.size = docx.shared.Pt(11)
+    fontdebut.bold=True
+    sentence=paragraph.add_run("(A compléter si la demande est adressée à l’ANSM) :\n")
+    fontdebut = sentence.font
+    fontdebut.name = 'Arial'
+    fontdebut.size = docx.shared.Pt(11)
+    
+    table = document.add_table(rows=5, cols=4, style='Table Grid')
+    for i in range (0,3):
+        a=table.cell(i,1)
+        b=table.cell(i,3)
+        a.merge(b)
+    table.cell(0,0).text=("Nom du CPP")
+    table.cell(1,0).text=("Adresse du CPP")
+    table.cell(2,0).text=("Date de soumission")
+    table.cell(3,0).text=("Avis du CPP")
+    table.cell(4,0).text=("Si avis donné, préciser")
+    table.cell(2,1).text=("     /     /     ")
+    table.cell(3,1).text=("A demander	    □")
+    table.cell(3,2).text=("En cours         □")
+    table.cell(3,3).text=("Donné            □")
+    table.cell(4,1).text=("Date de l’avis   	     /     /     ")
+    table.cell(4,2).text=("Avis favorable   □")
+    table.cell(4,3).text=("Avis défavorable □")
+    n=0
+    for row in table.rows:
+        for cell in row.cells:
+            paragraphs = cell.paragraphs
+            for paragraph in paragraphs:
+                paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                for run in paragraph.runs:
+                    fontdebut = run.font
+                    fontdebut.name = 'Arial'
+                    fontdebut.size = docx.shared.Pt(10)
+                    if n==0:
+                        fontdebut.bold=True
+                    n=n+1
     
     
+    paragraph=document.add_paragraph()
+    sentence=paragraph.add_run("\nSi un avis défavorable a été rendu, indiquer :")
+    fontdebut = sentence.font
+    fontdebut.name = 'Arial'
+    fontdebut.size = docx.shared.Pt(10)
+    table = document.add_table(rows=4, cols=2, style='Table Grid')
+    table.cell(0,0).text=("Les raisons")
+    table.cell(1,0).text=("(une copie du courrier doit être jointe au dossier)")
+    table.cell(2,0).text=("un second examen a-t-il été demandé à un autre CPP ?")
+    table.cell(2,1).text=("□ oui   □ non")
+    table.cell(3,0).text=("si oui, date prévue de dépôt")
+    table.cell(3,1).text=("     /     /     ")
+    n=0
+    for row in table.rows:
+        for cell in row.cells:
+            paragraphs = cell.paragraphs
+            for paragraph in paragraphs:
+                paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                for run in paragraph.runs:
+                    fontdebut = run.font
+                    fontdebut.name = 'Arial'
+                    fontdebut.size = docx.shared.Pt(10)
+                    if n==1:
+                        fontdebut.italic=True
+                    n=n+1
+    a=table.cell(0,0)
+    b=table.cell(1,0)
+    a.merge(b)
+    a=table.cell(0,1)
+    b=table.cell(1,1)
+    a.merge(b)
+    
+    '''Partie H2'''
+    paragraph=document.add_paragraph()
+    sentence=paragraph.add_run("\n\nH.2. Informations sur l’Autorité compétente concernée ")
+    fontdebut = sentence.font
+    fontdebut.name = 'Arial'
+    fontdebut.size = docx.shared.Pt(11)
+    fontdebut.bold=True
+    sentence=paragraph.add_run("(A compléter si la demande est adressée à un CPP :\n")
+    fontdebut = sentence.font
+    fontdebut.name = 'Arial'
+    fontdebut.size = docx.shared.Pt(11)
+    
+    table = document.add_table(rows=3, cols=4, style='Table Grid')
+    table.cell(0,0).text=("Date de soumission")
+    table.cell(1,0).text=("Décision de l'ANSM")
+    table.cell(2,0).text=("Si avis donné, préciser")
+    table.cell(0,1).text=("     /     /     ")
+    table.cell(1,1).text=("A demander	    □")
+    table.cell(1,2).text=("En cours         □")
+    table.cell(1,3).text=("Donné            □")
+    table.cell(2,1).text=("Date de l’avis   	     /     /     ")
+    table.cell(2,2).text=("Avis favorable   □")
+    table.cell(2,3).text=("Avis défavorable □")
+    for row in table.rows:
+        for cell in row.cells:
+            paragraphs = cell.paragraphs
+            for paragraph in paragraphs:
+                paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                for run in paragraph.runs:
+                    fontdebut = run.font
+                    fontdebut.name = 'Arial'
+                    fontdebut.size = docx.shared.Pt(10)
+
+    paragraph=document.add_paragraph()
+    sentence=paragraph.add_run("\nSi une décision de refus a été rendue, indiquer les raisons : \n ")
+    fontdebut = sentence.font
+    fontdebut.name = 'Arial'
+    fontdebut.size = docx.shared.Pt(10)
+    sentence=paragraph.add_run("(une copie du courrier doit être jointe au dossier) ")
+    fontdebut = sentence.font
+    fontdebut.name = 'Arial'
+    fontdebut.size = docx.shared.Pt(10)
+    fontdebut.italic=True
+    table = document.add_table(rows=1, cols=1, style='Table Grid')
+    table.cell(0,0).text=(" \n\n\n")
+    
+    
+    '''Partie I'''
+    paragraph=document.add_paragraph("\n\n I. Engagement du demandeur\n", style='debut_page')
+    table = document.add_table(rows=4, cols=2, style='Table Grid')
+    a=table.cell(0,0)
+    b=table.cell(0,1)
+    a.merge(b)
+    table.cell(0,0).text=("Par la présente, j’atteste / j’atteste au nom du promoteur (rayer la mention inutile) ce qui suit :\n"
+                          "-	les informations fournies ci-dessus à l’appui de la demande sont exactes ;\n"
+                          "-	la recherche sera réalisée conformément au protocole et à la réglementation nationale ;\n"
+                          "-	il est raisonnable d’entreprendre la recherche proposée ;\n"
+                          "-	je déclarerai la date effective du commencement de la recherche à l'ANSM et au CPP concerné dès qu’elle sera connue.\n")
+    table.cell(1,0).text=("Demandeur auprès de l'ANSM")
+    table.cell(1,1).text=("Demandeur auprès du CPP")
+    table.cell(2,0).text=("(comme indiqué à la section C.1) :	□")
+    table.cell(2,1).text=("(comme indiqué à la section C.2) :	□")
+    table.cell(3,0).text=("\nDate :      /     /     \n\nNom :      \n")
+    table.cell(3,1).text=("Signature :      ")
+    n=0
+    for row in table.rows:
+        for cell in row.cells:
+            paragraphs = cell.paragraphs
+            for paragraph in paragraphs:
+                if n==3 or n==4 or n==5 or n==2:
+                    paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                else:
+                    paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.LEFT
+                for run in paragraph.runs:
+                    fontdebut = run.font
+                    fontdebut.name = 'Arial'
+                    fontdebut.size = docx.shared.Pt(10)
+                    if n==2 or n==3:
+                        fontdebut.bold=True
+                    n=n+1
+    a=table.cell(1,0)
+    b=table.cell(2,0)
+    a.merge(b)
+    a=table.cell(1,1)
+    b=table.cell(2,1)
+    a.merge(b)
     
