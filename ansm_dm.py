@@ -90,7 +90,7 @@ def partie_une_ansm_dm(document):
                     fontdebut.size = docx.shared.Pt(10)
     
     paragraph=document.add_paragraph()
-    sentence=paragraph.add_run("Partie à compléter par le demandeur :\n")
+    sentence=paragraph.add_run("\nPartie à compléter par le demandeur :\n")
     fontdebut = sentence.font
     fontdebut.name = 'Arial'
     fontdebut.italic=True
@@ -155,9 +155,9 @@ def partie_une_ansm_dm(document):
 def partie_B_C(document):
     
     paragraph=document.add_paragraph("\n\nB. Identification du promoteur responsable de la recherche \n", style='debut_page')
-    table = document.add_table(rows=7, cols=2, style='Table Grid')
+    table = document.add_table(rows=7, cols=3, style='Table Grid')
     a=table.cell(0,0)
-    b=table.cell(0,1)
+    b=table.cell(0,2)
     a.merge(b)
     table.cell(0,0).text=("B1. Promoteur")
     table.cell(1,0).text=("Nom de l'organisme")
@@ -167,6 +167,10 @@ def partie_B_C(document):
     table.cell(5,0).text=("Numéro de télécopie")
     table.cell(6,0).text=("Courriel")
     n=0
+    for i in range (1,7):
+        c=table.cell(i, 1)
+        d=table.cell(i,2)
+        c.merge(d)
     for row in table.rows:
         for cell in row.cells:
             paragraphs = cell.paragraphs
@@ -183,9 +187,9 @@ def partie_B_C(document):
     #separe les deux tableaux
     paragraph=document.add_paragraph()
     
-    table = document.add_table(rows=7, cols=2, style='Table Grid')
+    table = document.add_table(rows=7, cols=3, style='Table Grid')
     a=table.cell(0,0)
-    b=table.cell(0,1)
+    b=table.cell(0,2)
     a.merge(b)
     table.cell(0,0).text=("B2. Représentant légal  du promoteur dans la Communauté européenne pour la recherche (si différent du promoteur)")
     table.cell(1,0).text=("Nom de l'organisme")
@@ -195,6 +199,10 @@ def partie_B_C(document):
     table.cell(5,0).text=("Numéro de télécopie")
     table.cell(6,0).text=("Courriel")
     n=0
+    for i in range (1,7):
+        c=table.cell(i, 1)
+        d=table.cell(i,2)
+        c.merge(d)
     for row in table.rows:
         for cell in row.cells:
             paragraphs = cell.paragraphs
@@ -212,7 +220,7 @@ def partie_B_C(document):
     paragraph=document.add_paragraph()
     
     table = document.add_table(rows=1, cols=1, style='Table Grid')
-    table.cell(0,0).text=("B3. Statut du promoteur \nCommercial	□	Non commercial	□")
+    table.cell(0,0).text=("B3. Statut du promoteur \nCommercial	□            	Non commercial	□")
     for row in table.rows:
         for cell in row.cells:
             paragraphs = cell.paragraphs
@@ -235,7 +243,7 @@ def partie_B_C(document):
     fontdebut.name = 'Arial'
     fontdebut.size = docx.shared.Pt(11)
     
-    table = document.add_table(rows=8, cols=2, style='Table Grid')
+    table = document.add_table(rows=2, cols=2, style='Table Grid')
     a=table.cell(1,0)
     b=table.cell(1,1)
     a.merge(b)
@@ -245,12 +253,6 @@ def partie_B_C(document):
                           "\nReprésentant légal du promoteur …………………………………………………………………□\n"
                           "\nPersonne ou organisme délégué par le promoteur pour soumettre la demande…………….□\n"
                           "\nDans ce cas, compléter ci-après :")
-    table.cell(2,0).text=("Nom de l'organisme")
-    table.cell(3,0).text=("Nom de la personne à contacter")
-    table.cell(4,0).text=("Adresse")
-    table.cell(5,0).text=("Numéro de téléphone")
-    table.cell(6,0).text=("Numéro de télécopie")
-    table.cell(7,0).text=("Courriel")
     n=0
     for row in table.rows:
         for cell in row.cells:
@@ -264,7 +266,29 @@ def partie_B_C(document):
                         fontdebut.size = docx.shared.Pt(11)
                     else:
                         fontdebut.size = docx.shared.Pt(10)
-
+                    n=n+1
+                    
+    table = document.add_table(rows=6, cols=3, style='Table Grid')
+    table.cell(0,0).text=("Nom de l'organisme")
+    table.cell(1,0).text=("Nom de la personne à contacter")
+    table.cell(2,0).text=("Adresse")
+    table.cell(3,0).text=("Numéro de téléphone")
+    table.cell(4,0).text=("Numéro de télécopie")
+    table.cell(5,0).text=("Courriel")
+    for i in range (0,6):
+        c=table.cell(i, 1)
+        d=table.cell(i,2)
+        c.merge(d)   
+    for row in table.rows:
+        for cell in row.cells:
+            paragraphs = cell.paragraphs
+            for paragraph in paragraphs:
+                for run in paragraph.runs:
+                    fontdebut = run.font
+                    fontdebut.name = 'Arial'
+                    fontdebut.size = docx.shared.Pt(10)
+       
+        
 #partie D
 def partie_D(document):
     
@@ -293,7 +317,7 @@ def partie_D(document):
     
     paragraph=document.add_paragraph("\nD1. Statut du DM / DM-DIV\n", style='debut_page')
     paragraph=document.add_paragraph()
-    sentence=paragraph.add_run("Le dispositif est-il marqué CE ?			□ oui   □ non\n\n")
+    sentence=paragraph.add_run("Le dispositif est-il marqué CE ?	                                       		□ oui   □ non\n\n")
     fontdebut = sentence.font
     fontdebut.name = 'Arial'
     fontdebut.size = docx.shared.Pt(10)
@@ -331,6 +355,8 @@ def partie_D(document):
                     fontdebut.name = 'Arial'
                     fontdebut.size = docx.shared.Pt(10)
                     n=n+1
+    
+    '''Partie D2'''
     
     paragraph=document.add_paragraph("\nD2. Identification du dispositif à étudier \n", style='debut_page')
     paragraph=document.add_paragraph()
@@ -412,52 +438,43 @@ def partie_D(document):
     
     paragraph=document.add_paragraph()
     
-    table = document.add_table(rows=5, cols=3, style='Table Grid')
+    table = document.add_table(rows=5, cols=8, style='Table Grid')
+    for i in range (0,5):
+        a=table.cell(i,0)
+        b=table.cell(i,5)
+        a.merge(b)
     table.cell(0,0).text=("Le dispositif sur lequel porte la recherche contient-il une des substances suivantes :")
-    table.cell(0,1).text=("oui")
-    table.cell(0,2).text=("non")
+    table.cell(0,6).text=("oui")
+    table.cell(0,7).text=("non")
     table.cell(1,0).text=("-	Substance qui, si elle est utilisée séparément, est susceptible d'être considérée comme un médicament ? ")    
     table.cell(2,0).text=("-	Produits d’origine biologique (DMOA) ou dans la fabrication duquel interviennent de tels produits ?")
     table.cell(3,0).text=("-	OGM ?")
     table.cell(4,0).text=("-	Radioélément ?")
-    table.cell(1,1).text=("□")
-    table.cell(1,2).text=("□")
-    table.cell(2,1).text=("□")
-    table.cell(2,2).text=("□")
-    table.cell(3,1).text=("□")
-    table.cell(3,2).text=("□")
-    table.cell(4,1).text=("□")
-    table.cell(4,2).text=("□")
+    for i in range (1,5):
+        table.cell(i,6).text=("□")
+        table.cell(i,7).text=("□")
     n=0
     for row in table.rows:
         for cell in row.cells:
             paragraphs = cell.paragraphs
             for paragraph in paragraphs:
-                if n!=0 or n!=3 or n!=6 or n!=9 or n!=12:
-                   paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER 
+                if n==5 or n==13 or n==21 or n==29 or n==37:
+                   paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.LEFT
+                else:
+                   paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
                 for run in paragraph.runs:
                     fontdebut = run.font
                     fontdebut.name = 'Arial'
                     if n==0:
                         fontdebut.bold=True
                         fontdebut.size = docx.shared.Pt(11)
-                    elif n==1 or n==2:
+                    elif n==6 or n==7:
                         fontdebut.size = docx.shared.Pt(11)
-                    elif n==3 or n==6 or n==9 or n==12:
-                        fontdebut.size = docx.shared.Pt(10)
                     else:
-                        fontdebut.size = docx.shared.Pt(10.5)
+                        fontdebut.size = docx.shared.Pt(10)
                     n=n+1
-    a=table.cell(0,0)
-    b=table.cell(1,0)
-    a.merge(b)
-    c=table.cell(2,0)
-    a.merge(c)
-    d=table.cell(3,0)
-    a.merge(d)
-    e=table.cell(4,0)
-    a.merge(e)
-    
+
+    '''Partie D3'''
     paragraph=document.add_paragraph("\nD3. Cas particulier : utilisation de dispositifs à étudier commercialisés et ayant la même dénomination commune, dans le cadre d’un essai dont le protocole n’impose pas l’utilisation d’un dispositif en particulier", style='debut_page')
     paragraph=document.add_paragraph()
     sentence=paragraph.add_run("\nEst-ce que ce cas particulier est applicable à l’essai concerné ?			□ oui   □ non\n")
@@ -470,21 +487,25 @@ def partie_D(document):
     fontdebut.size = docx.shared.Pt(10)
     fontdebut.italic=True
     
-    table = document.add_table(rows=3, cols=3, style='Table Grid')
-    table.cell(0,1).text=("oui")
-    table.cell(0,2).text=("non")
+    table = document.add_table(rows=3, cols=8, style='Table Grid')
+    for i in range (0,3):
+        a=table.cell(i,0)
+        b=table.cell(i,5)
+        a.merge(b)
+    table.cell(0,6).text=("oui")
+    table.cell(0,7).text=("non")
     table.cell(1,0).text=("DM")
-    table.cell(1,1).text=("□")
-    table.cell(1,2).text=("□")
+    table.cell(1,6).text=("□")
+    table.cell(1,7).text=("□")
     table.cell(2,0).text=("DMDIV")
-    table.cell(2,1).text=("□")
-    table.cell(2,2).text=("□")
+    table.cell(2,6).text=("□")
+    table.cell(2,7).text=("□")
     n=0
     for row in table.rows:
         for cell in row.cells:
             paragraphs = cell.paragraphs
             for paragraph in paragraphs:
-                if n==0 or n==1 or n==3 or n==4 or n==6 or n==7:
+                if n==0 or n==1 or n==8 or n==9 or n==16 or n==17:
                    paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER 
                 for run in paragraph.runs:
                     fontdebut = run.font
@@ -515,15 +536,10 @@ def partie_D(document):
     table.cell(0,2).text=("disposant d'un marquage CE")
     table.cell(1,2).text=("Utilisation conforme au marquage CE")
     table.cell(1,3).text=("Utilisation dans une autre destination que celle du marquage CE")
-    table.cell(2,1).text=("□")
-    table.cell(2,2).text=("□")
-    table.cell(2,3).text=("□")
-    table.cell(3,1).text=("□")
-    table.cell(3,2).text=("□")
-    table.cell(3,3).text=("□")
-    table.cell(4,1).text=("□")
-    table.cell(4,2).text=("□")
-    table.cell(4,3).text=("□")
+    for i in range (2,5):
+        table.cell(i,1).text=("□")
+        table.cell(i,2).text=("□")
+        table.cell(i,3).text=("□")
     for row in table.rows:
         for cell in row.cells:
             paragraphs = cell.paragraphs
@@ -534,51 +550,45 @@ def partie_D(document):
                     fontdebut.name = 'Arial'
                     fontdebut.size = docx.shared.Pt(11)
     
+    '''Partie D4'''
     paragraph=document.add_paragraph("\nD4. Dossier technique du dispositif faisant l'objet de la recherche\n", style='debut_page')
-    table = document.add_table(rows=9, cols=3, style='Table Grid')
-    table.cell(0,1).text=("oui")
-    table.cell(0,2).text=("non")
+    table = document.add_table(rows=10, cols=8, style='Table Grid')
+    for i in range (0,10):
+        a=table.cell(i,0)
+        b=table.cell(i,5)
+        a.merge(b)
+    table.cell(0,6).text=("oui")
+    table.cell(0,7).text=("non")
     table.cell(1,0).text=("Dossier technique complet ")
     table.cell(2,0).text=("Dossier technique simplifié")
     a=table.cell(3,0)
-    b=table.cell(3,1)
+    b=table.cell(3,7)
     a.merge(b)
-    c=table.cell(3,2)
-    a.merge(c)
-    table.cell(3,0).text=("En cas de dossier technique simplifié, cocher la ou les cases ci-dessous :")
     table.cell(4,0).text=("1. Dispositif marqué CE utilisé dans la destination du marquage")
     table.cell(5,0).text=("2. DM de classe I ou IIa (à l'exception des classes IIa invasifs à long terme) marqué CE hors indication") 
-    e=table.cell(7,0)
-    d=table.cell(6,0)
+    f=table.cell(7,0)
+    g=table.cell(7,7)
+    g.merge(f)
+    e=table.cell(8,0)
+    d=table.cell(9,0)
     e.merge(d)
-    f=table.cell(8,0)
-    e.merge(f)
-    table.cell(6,0).text=("3. Dispositif ayant fait l'objet d'une précédente demande d’autorisation de recherche auprès de l'ANSM\n"
-                          "Dans l’affirmative, préciser si le dispositif était utilisé dans la précédente demande :\n"
-                          "- dans la même destination et dans les mêmes conditions \n"
+    table.cell(6,0).text=("3. Dispositif ayant fait l'objet d'une précédente demande d’autorisation de recherche auprès de l'ANSM\n")
+    table.cell(8,0).text=("- dans la même destination et dans les mêmes conditions "
                           "(Mentionner le N° IDRCB) :\n"
-                          "- dans une autre destination \n"
+                          "- dans une autre destination "
                           "(Mentionner le N° IDRCB) :")
-    table.cell(1,1).text=("□")
-    table.cell(1,2).text=("□")
-    table.cell(2,1).text=("□")
-    table.cell(2,2).text=("□")
-    table.cell(4,1).text=("□")
-    table.cell(4,2).text=("□")
-    table.cell(5,1).text=("□")
-    table.cell(5,2).text=("□")
-    table.cell(6,1).text=("□")
-    table.cell(6,2).text=("□")
-    table.cell(7,1).text=("□")
-    table.cell(7,2).text=("□")
-    table.cell(8,1).text=("□")
-    table.cell(8,2).text=("□")
+    for i in range (1,10):
+        if not(i==3) or not(i==7):
+            table.cell(i,6).text=("□")
+            table.cell(i,7).text=("□")
+    table.cell(3,0).text=("En cas de dossier technique simplifié, cocher la ou les cases ci-dessous :")
+    table.cell(7,0).text=("Dans l’affirmative, préciser si le dispositif était utilisé dans la précédente demande :")
     n=0
     for row in table.rows:
         for cell in row.cells:
             paragraphs = cell.paragraphs
             for paragraph in paragraphs:
-                if n==2 or n==5 or n==10 or n==11 or n==14 or n==23:
+                if n==7 or n==15 or n==25 or n==31 or n==39 or n==47 or n==57 or n==63 or n==71:
                    paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.LEFT
                 else:
                     paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
@@ -591,36 +601,36 @@ def partie_D(document):
                     n=n+1
     
     paragraph=document.add_paragraph("\nD5. Informations supplémentaires sur le dispositif à étudier ou comparateur\n", style='debut_page')
-    table = document.add_table(rows=6, cols=3, style='Table Grid')
-    table.cell(0,1).text=("oui")
-    table.cell(0,2).text=("non")
+    table = document.add_table(rows=6, cols=8, style='Table Grid')
+    for i in range(0,5):
+        a=table.cell(i,0)
+        b=table.cell(i,5)
+        a.merge(b)
+    table.cell(0,6).text=("oui")
+    table.cell(0,7).text=("non")
     table.cell(1,0).text=("Est-ce que le dispositif sur lequel porte la recherche appartient à un tiers ?")
-    table.cell(1,1).text=("□")
-    table.cell(1,2).text=("□")
+    table.cell(1,6).text=("□")
+    table.cell(1,7).text=("□")
     a=table.cell(2,0)
-    b=table.cell(2,1)
+    b=table.cell(2,7)
     a.merge(b)
-    c=table.cell(2,2)
-    a.merge(c)
     table.cell(2,0).text=("si oui, joindre l'autorisation délivrée par ce dernier au promoteur pour communiquer les données relatives au dispositif concerné")
     table.cell(3,0).text=("Est-ce que la brochure pour l'investigateur appartient à un tiers ?")
-    table.cell(3,1).text=("□")
-    table.cell(3,2).text=("□")
+    table.cell(3,6).text=("□")
+    table.cell(3,7).text=("□")
     table.cell(4,0).text=("Est-ce que le dossier technique appartient à un tiers ?")
-    table.cell(4,1).text=("□")
-    table.cell(4,2).text=("□")
+    table.cell(4,6).text=("□")
+    table.cell(4,7).text=("□")
     d=table.cell(5,0)
-    e=table.cell(5,1)
+    e=table.cell(5,7)
     d.merge(e)
-    f=table.cell(5,2)
-    d.merge(f)
     table.cell(5,0).text=("si oui dans l’un ou les deux cas précédents, joindre l'autorisation du tiers délivrée au promoteur pour l'utiliser cette brochure pour l’investigateur et/ou le dossier technique")
     n=0
     for row in table.rows:
         for cell in row.cells:
             paragraphs = cell.paragraphs
             for paragraph in paragraphs:
-                if n==2 or n==7 or n==8 or n==11 or n==16:
+                if n==7 or n==17 or n==23 or n==31 or n==41:
                    paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.LEFT
                 else:
                    paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
@@ -736,7 +746,7 @@ def partie_E_F(document):
 
     '''Partie F2'''
     paragraph=document.add_paragraph()
-    sentence=paragraph.add_run("F2. S’agit-il d’une recherche de première utilisation chez l’homme dans la ")
+    sentence=paragraph.add_run("\nF2. S’agit-il d’une recherche de première utilisation chez l’homme dans la ")
     fontdebut = sentence.font
     fontdebut.name = 'Arial'
     fontdebut.size = docx.shared.Pt(11)
@@ -865,14 +875,9 @@ def partie_E_F(document):
     table.cell(1,3).text=("non")
     table.cell(1,4).text=("oui")
     table.cell(1,5).text=("non")
-    table.cell(2,2).text=("□")
-    table.cell(2,3).text=("□")
-    table.cell(2,4).text=("□")
-    table.cell(2,5).text=("□")
-    table.cell(3,2).text=("□")
-    table.cell(3,3).text=("□")
-    table.cell(3,4).text=("□")
-    table.cell(3,5).text=("□")
+    for i in range(2,4):
+        for j in range(2,6):
+            table.cell(i,j).text=("□")
     for row in table.rows:
         for cell in row.cells:
             paragraphs = cell.paragraphs
@@ -945,21 +950,25 @@ def partie_E_F(document):
     fontdebut.size = docx.shared.Pt(10)
     fontdebut.italic=True
     
-    table = document.add_table(rows=3, cols=3, style='Table Grid')
-    table.cell(0,1).text=("oui")
-    table.cell(0,2).text=("non")
+    table = document.add_table(rows=3, cols=8, style='Table Grid')
+    for i in range(0,3):
+        a=table.cell(i,0)
+        b=table.cell(i,5)
+        a.merge(b)
+    table.cell(0,6).text=("oui")
+    table.cell(0,7).text=("non")
     table.cell(1,0).text=("DM")
-    table.cell(1,1).text=("□")
-    table.cell(1,2).text=("□")
+    table.cell(1,6).text=("□")
+    table.cell(1,7).text=("□")
     table.cell(2,0).text=("DMDIV")
-    table.cell(2,1).text=("□")
-    table.cell(2,2).text=("□")
+    table.cell(2,6).text=("□")
+    table.cell(2,7).text=("□")
     n=0
     for row in table.rows:
         for cell in row.cells:
             paragraphs = cell.paragraphs
             for paragraph in paragraphs:
-                if n==0 or n==1 or n==3 or n==4 or n==6 or n==7:
+                if n==0 or n==1 or n==8 or n==9 or n==16 or n==17:
                    paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER 
                 for run in paragraph.runs:
                     fontdebut = run.font
