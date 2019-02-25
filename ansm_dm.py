@@ -1488,12 +1488,12 @@ def partie_F10(document):
     document.add_page_break()
     
     paragraph=document.add_paragraph()
-    sentence=("F10. Traitements ou soins ou examens, procédures, prévus pour les personnes se prêtant à la recherche à la fin de leur participation à l’essai\n\n")
+    sentence= paragraph.add_run("F10. Traitements ou soins ou examens, procédures, prévus pour les personnes se prêtant à la recherche à la fin de leur participation à l’essai\n\n")
     fontdebut = sentence.font
     fontdebut.name = 'Arial'
     fontdebut.size = docx.shared.Pt(11)
     fontdebut.bold=True
-    sentence=("Est-ce qu’il diffère du traitement habituel de la pathologie étudiée ?				□ oui   □ non\n\nSi oui, à préciser et justifier : \n")
+    sentence=paragraph.add_run("Est-ce qu’il diffère du traitement habituel de la pathologie étudiée ?				□ oui   □ non\n\nSi oui, à préciser et justifier : \n")
     fontdebut = sentence.font
     fontdebut.name = 'Arial'
     fontdebut.size = docx.shared.Pt(10)
@@ -1504,7 +1504,229 @@ def partie_F10(document):
     paragraph=document.add_paragraph()
     
     '''Partie G'''
-    paragraph=document.add_paragraph("F10. Personnes se prêtant à la recherche\n", style='debut_page')
+    paragraph=document.add_paragraph("G. Lieux de recherche envisagés en France\n\nG1. Investigateur coordonnateur \n", style='debut_page')
+    
+    table = document.add_table(rows=9, cols=2, style='Table Grid')
+    table.cell(0,0).text=("Nom / Prénoms")
+    table.cell(1,0).text=("Qualification, Spécialité ")
+    table.cell(2,0).text=("Adresse professionnelle")
+    table.cell(3,0).text=("Nom de l’établissement")
+    table.cell(4,0).text=("Service ")
+    table.cell(5,0).text=("Adresse")
+    table.cell(6,0).text=("Numéro de téléphone ")
+    table.cell(7,0).text=("Numéro de télécopie ")
+    table.cell(8,0).text=("Courriel")
+    n=0
+    for row in table.rows:
+        for cell in row.cells:
+            paragraphs = cell.paragraphs
+            for paragraph in paragraphs:
+                for run in paragraph.runs:
+                    fontdebut = run.font
+                    fontdebut.name = 'Arial'
+                    fontdebut.size = docx.shared.Pt(10)
+                    if n==0:
+                        fontdebut.bold=True
+                        fontdebut.size = docx.shared.Pt(11)
+                    n=n+1
+    
+    paragraph=document.add_paragraph()
+    sentence=paragraph.add_run("\n\nG2. Autres investigateurs : ")
+    fontdebut = sentence.font
+    fontdebut.name = 'Arial'
+    fontdebut.size = docx.shared.Pt(11)
+    fontdebut.bold=True
+    sentence=paragraph.add_run("(à compléter pour chaque investigateur)"
+                               "\n(En cas d’essai multicentrique avec un grand nombre de lieux de recherche, il est possible de, fournir une liste contenant les informations de la rubrique pour chaque investigateur en annexe de ce document)  \n")
+    fontdebut = sentence.font
+    fontdebut.name = 'Arial'
+    fontdebut.size = docx.shared.Pt(10)
+    fontdebut.italic=True
+    
+    table = document.add_table(rows=9, cols=2, style='Table Grid')
+    table.cell(0,0).text=("Nom / Prénoms")
+    table.cell(1,0).text=("Qualification, Spécialité ")
+    table.cell(2,0).text=("Adresse professionnelle")
+    table.cell(3,0).text=("Nom de l’établissement")
+    table.cell(4,0).text=("Service ")
+    table.cell(5,0).text=("Adresse")
+    table.cell(6,0).text=("Numéro de téléphone ")
+    table.cell(7,0).text=("Numéro de télécopie ")
+    table.cell(8,0).text=("Courriel")
+    n=0
+    for row in table.rows:
+        for cell in row.cells:
+            paragraphs = cell.paragraphs
+            for paragraph in paragraphs:
+                for run in paragraph.runs:
+                    fontdebut = run.font
+                    fontdebut.name = 'Arial'
+                    fontdebut.size = docx.shared.Pt(10)
+                    if n==0:
+                        fontdebut.bold=True
+                        fontdebut.size = docx.shared.Pt(11)
+                    n=n+1
+    
+    document.add_page_break()
+    
+    '''Partie G3'''
+    paragraph=document.add_paragraph()
+    sentence=paragraph.add_run("G3. Plateau technique utilisé au cours de l'essai\n")
+    fontdebut = sentence.font
+    fontdebut.name = 'Arial'
+    fontdebut.size = docx.shared.Pt(11)
+    fontdebut.bold=True
+    sentence=paragraph.add_run("Y-a-t-il un laboratoire ou autre plateau technique où sont effectuées de façon centralisée les                 □ oui   □ non\n"
+                               "mesures ou évaluations des paramètres ou critères principaux étudiés dans l’essai ?\n\n"
+                               "Si oui, compléter pour chaque organisme ")
+    fontdebut = sentence.font
+    fontdebut.name = 'Arial'
+    fontdebut.size = docx.shared.Pt(10)
+    sentence=paragraph.add_run("(répéter la section si nécessaire)")
+    fontdebut.name = 'Arial'
+    fontdebut.size = docx.shared.Pt(10)
+    fontdebut.italic=True
+    
+    table = document.add_table(rows=7, cols=2, style='Table Grid')
+    table.cell(0,0).text=("Organisme")
+    table.cell(1,0).text=("Nom de la personne à contacter")
+    table.cell(2,0).text=("Adresse")
+    table.cell(3,0).text=("Numéro de téléphone")
+    table.cell(4,0).text=("Numéro de télécopie")
+    table.cell(5,0).text=("Courriel")
+    table.cell(6,0).text=("Tâches confiées")
+    n=0
+    for row in table.rows:
+        for cell in row.cells:
+            paragraphs = cell.paragraphs
+            for paragraph in paragraphs:
+                for run in paragraph.runs:
+                    fontdebut = run.font
+                    fontdebut.name = 'Arial'
+                    fontdebut.size = docx.shared.Pt(10)
+                    if n==0:
+                        fontdebut.bold=True
+                    n=n+1
+    
+    '''Partie G4'''
+    paragraph=document.add_paragraph()
+    
+    paragraph=document.add_paragraph()
+    sentence=paragraph.add_run("G4. Personne physique ou morale à qui le promoteur a confié certaines tâches et fonctions afférentes à l’essai\n")
+    fontdebut = sentence.font
+    fontdebut.name = 'Arial'
+    fontdebut.size = docx.shared.Pt(11)
+    fontdebut.bold=True
+    sentence=paragraph.add_run("Le promoteur a-t-il confié en partie ou en totalité des  tâches et des fonctions lui incombant au                □ oui   □ non\n"
+                               "titre de l’essai à un tiers \n\n"
+                               "Si oui, compléter pour chaque organisme ")
+    fontdebut = sentence.font
+    fontdebut.name = 'Arial'
+    fontdebut.size = docx.shared.Pt(10)
+    sentence=paragraph.add_run("(répéter la section si nécessaire)")
+    fontdebut.name = 'Arial'
+    fontdebut.size = docx.shared.Pt(10)
+    fontdebut.italic=True
+    
+    table = document.add_table(rows=6, cols=2, style='Table Grid')
+    table.cell(0,0).text=("Organisme")
+    table.cell(1,0).text=("Nom de la personne à contacter")
+    table.cell(2,0).text=("Adresse")
+    table.cell(3,0).text=("Numéro de téléphone")
+    table.cell(4,0).text=("Numéro de télécopie")
+    table.cell(5,0).text=("Courriel")
+    n=0
+    for row in table.rows:
+        for cell in row.cells:
+            paragraphs = cell.paragraphs
+            for paragraph in paragraphs:
+                for run in paragraph.runs:
+                    fontdebut = run.font
+                    fontdebut.name = 'Arial'
+                    fontdebut.size = docx.shared.Pt(10)
+                    if n==0:
+                        fontdebut.bold=True
+                    n=n+1
+    table = document.add_table(rows=8, cols=8, style='Table Grid')
+    for i in range (0,8):
+        a=table.cell(i,0)
+        b=table.cell(i,5)
+        a.merge(b)
+    table.cell(0,0).text=("Tâches / fonctions confiées")
+    table.cell(0,6).text=("oui")
+    table.cell(0,7).text=("non")
+    table.cell(1,0).text=("Ensemble des tâches du promoteur……………………………………………………")
+    table.cell(2,0).text=("Monitoring…………………………………………………………………………………")
+    table.cell(3,0).text=("Réglementaire (ex : préparation des dossiers soumis à l'ANSM et/ou au CPP)…..")
+    table.cell(4,0).text=("Gestion/collecte des données…………………………………………………………...")
+    table.cell(5,0).text=("Déclaration de vigilance (EIG, faits nouveaux, mesures urgentes de sécurité)……")
+    table.cell(6,0).text=("Autres fonctions confiées……………………………………………………………….")
+    table.cell(7,0).text=("Si oui, veuillez préciser : ")
+    for i in range (1,7):
+        table.cell(i,6).text=("□")
+        table.cell(i,7).text=("□")
+    n=0
+    for row in table.rows:
+        for cell in row.cells:
+            paragraphs = cell.paragraphs
+            for paragraph in paragraphs:
+                if n==5 or n==13 or n==21 or n==29 or n==37 or n==45 or n==53 or n==61:
+                    paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.LEFT
+                else:
+                    paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                for run in paragraph.runs:
+                    fontdebut = run.font
+                    fontdebut.name = 'Arial'
+                    fontdebut.size = docx.shared.Pt(10)
+                    if n==0:
+                        fontdebut.bold=True
+                    n=n+1
+    a=table.cell(0,0)
+    b=table.cell(7,5)
+    a.merge(b)
+    
+    
+    document.add_page_break()
+    
+    '''Partie G5'''
+    paragraph=document.add_paragraph()
+    sentence=paragraph.add_run("G5. Informations relatives à la vigilance\n")
+    fontdebut = sentence.font
+    fontdebut.name = 'Arial'
+    fontdebut.size = docx.shared.Pt(11)
+    fontdebut.bold=True
+    sentence=paragraph.add_run("1)	Localisation des informations de référence sur la sécurité (IRS) pour la qualification du caractère attendu/inattendu des effets indésirables graves")
+    fontdebut = sentence.font
+    fontdebut.name = 'Arial'
+    fontdebut.size = docx.shared.Pt(10)
+    fontdebut.bold=True
+    table = document.add_table(rows=4, cols=4, style='Table Grid')
+    table.cell(0,0).text=("Dispositif concerné")
+    a=table.cell(0,1)
+    b=table.cell(0,3)
+    a.merge(b)
+    table.cell(0,1).text=("Localisation des IRS dans le protocole, la brochure pour l’investigateur (BI) ou la notice ")
+    for i in range (1,4):
+        table.cell(i,1).text=("□ Protocole")
+    for i in range (1,4):
+        table.cell(i,2).text=("□ BI")
+    for i in range (1,4):
+        table.cell(i,3).text=("□ Notice")
+    n=0
+    for row in table.rows:
+        for cell in row.cells:
+            paragraphs = cell.paragraphs
+            for paragraph in paragraphs:
+                if n==0 or n==3:
+                    paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                else:
+                    paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.LEFT
+                for run in paragraph.runs:
+                    fontdebut = run.font
+                    fontdebut.name = 'Arial'
+                    fontdebut.size = docx.shared.Pt(10)
+                    n=n+1
+    
     
     
     
