@@ -256,7 +256,7 @@ def page2_cpp_hps(document):
     fontdebut.bold=True
     fontdebut.size = docx.shared.Pt(10)
     
-    paragraph = document.add_paragraph("A. IDENTIFICATION DE LA RECHERCHE", style="gras_tableau")
+    paragraph = document.add_paragraph("\nA. IDENTIFICATION DE LA RECHERCHE", style="gras_tableau")
     paragraph=document.add_paragraph()
     sentence = paragraph.add_run("Titre complet de la recherche :\n \nNuméro d'enregistrement de la recherche (délivré par l'ANSM) : \n")
     fontdebut = sentence.font
@@ -299,7 +299,7 @@ def page2_cpp_hps(document):
     fontdebut.size = docx.shared.Pt(10)
     
     
-    paragraph = document.add_paragraph("B. IDENTIFICATION DU PROMOTEUR RESPONSABLE DE LA DEMANDE\n    B1. Promoteur",style="gras_tableau")
+    paragraph = document.add_paragraph("\nB. IDENTIFICATION DU PROMOTEUR RESPONSABLE DE LA DEMANDE\n    B1. Promoteur",style="gras_tableau")
     table = document.add_table(rows=5, cols=2, style='Table Grid')
     a=table.cell(0,0)
     b=table.cell(0,1)
@@ -377,7 +377,7 @@ def page2_cpp_hps(document):
                     fontdebut.name = 'Arial Narrow'
                     fontdebut.size = docx.shared.Pt(10)
     
-    paragraph = document.add_paragraph("DESCRIPTION DU PRODUIT EXPERIMENTAL",style="gras_tableau")
+    paragraph = document.add_paragraph("\nDESCRIPTION DU PRODUIT EXPERIMENTAL",style="gras_tableau")
     table = document.add_table(rows=5, cols=1, style='Table Grid')
     table.cell(0,0).text=("Nom du produit, le cas échéant :")
     table.cell(1,0).text=("Nom de code, le cas échéant :")
@@ -405,7 +405,7 @@ def page2_cpp_hps(document):
                     fontdebut.name = 'Arial Narrow'
                     fontdebut.size = docx.shared.Pt(10)
                     
-    paragraph = document.add_paragraph("E. INFORMATIONS SUR LE PLACEBO (le cas échéant) (répéter la section nécessaire)",style="gras_tableau")
+    paragraph = document.add_paragraph("\nE. INFORMATIONS SUR LE PLACEBO (le cas échéant) (répéter la section nécessaire)",style="gras_tableau")
     table = document.add_table(rows=6, cols=1, style='Table Grid')
     table.cell(0,0).text=("Cette section se rapport au placebo n° :")
     table.cell(1,0).text=("Un placebo est_il utilisé ?       oui       non")
@@ -426,7 +426,7 @@ def page2_cpp_hps(document):
                     fontdebut.size = docx.shared.Pt(10)
       
     
-    paragraph = document.add_paragraph("FABRICANT DU PLACEBO",style="gras_tableau")
+    paragraph = document.add_paragraph("\nFABRICANT DU PLACEBO",style="gras_tableau")
     table = document.add_table(rows=1, cols=1, style='Table Grid')
     table.cell(0,0).text=("Fabricant\n-Nom de l'établissement :\n-Adresse :")
     for row in table.rows:
@@ -439,7 +439,7 @@ def page2_cpp_hps(document):
                     fontdebut.name = 'Arial Narrow'
                     fontdebut.size = docx.shared.Pt(10)
                     
-    paragraph = document.add_paragraph("G. INFORMATIONS GENERALES SUR LA RECHERCHE",style="gras_tableau")
+    paragraph = document.add_paragraph("\nG. INFORMATIONS GENERALES SUR LA RECHERCHE",style="gras_tableau")
     table = document.add_table(rows=5, cols=1, style='Table Grid')
     table.cell(0,0).text=("Condition médicale ou pathologique étudiée\n"
                           "Préciser la condition médicale :\n"
@@ -467,7 +467,7 @@ def page2_cpp_hps(document):
                     fontdebut.name = 'Arial Narrow'
                     fontdebut.size = docx.shared.Pt(10)
                     
-    paragraph = document.add_paragraph("I. INVESTIGATEURS ET LIEUX DE RECHERCHE\n       I.1. Investigateur coordonnateur",style="gras_tableau")
+    paragraph = document.add_paragraph("\nI. INVESTIGATEURS ET LIEUX DE RECHERCHE\n       I.1. Investigateur coordonnateur",style="gras_tableau")
     table = document.add_table(rows=5, cols=2, style='Table Grid')
     a=table.cell(0,1)
     b=table.cell(1,1)
@@ -540,7 +540,7 @@ def page2_cpp_hps(document):
                     fontdebut.name = 'Arial Narrow'
                     fontdebut.size = docx.shared.Pt(10)
                     
-    paragraph = document.add_paragraph("K. SIGNATURE DU DEMANDEUR EN FRANCE\n",style="gras_tableau")
+    paragraph = document.add_paragraph("\nK. SIGNATURE DU DEMANDEUR EN FRANCE\n",style="gras_tableau")
     paragraph= document.add_paragraph()
     sentence = paragraph.add_run("Par la présent, j'atteste/j'atteste au nom du promoteur (rayer la mention inutile) ce qui suit\n")
     fontdebut = sentence.font

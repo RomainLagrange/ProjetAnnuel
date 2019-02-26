@@ -96,7 +96,7 @@ def cpp_dm(document):
     sentence3.font.name = 'Arial Narrow'
     sentence3.bold = True
     sentence3.font.size = docx.shared.Pt(12)
-    sentence4 = paragraph.add_run("in vitro\n")
+    sentence4 = paragraph.add_run(" in vitro\n")
     sentence4.font.name = 'Arial Narrow'
     sentence4.bold = True
     sentence4.italic = True
