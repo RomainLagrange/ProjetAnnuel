@@ -21,7 +21,7 @@ def main_ansm_hps():
     document = docx.Document()
     parties_ABC(document)
     partie_D_a_G(document)
-    
+    partie_H_fin(document)
     document.save("soumission-ansm-hps.docx")
     
 def parties_ABC(document):
@@ -381,13 +381,235 @@ def partie_D_a_G(document):
     b=table.cell(6,0)
     a.merge(b)
     
+    paragraph=document.add_paragraph("\n Méthodologie de l’essai", style='debut_page')
+    table = document.add_table(rows=8, cols=4, style='Table Grid')
+    table.cell(0,0).text=("Tirage au sort :\nLa recherche comporte-t-elle une comparaison de  groupes?")
+    table.cell(0,3).text=("   oui           non\n   oui           non")
+    for i in range (0,8):
+        if i==0 or i==4:
+            a=table.cell(i,0)
+            b=table.cell(i,2)
+            a.merge(b)
+        else:
+            a=table.cell(i,0)
+            b=table.cell(i,3)
+            a.merge(b)
+    table.cell(1,0).text=("Autre méthodologie")
+    table.cell(2,0).text=("Préciser le(s) comparateur(s) utilisé(s) :\n")
+    table.cell(3,0).text=("- (d’) autre(s) produits(s)\n- placebo \n- autre \n\n            • Si oui, préciser :")
+    table.cell(4,0).text=("La recherche  est-elle multicentrique ?\nLa recherche  est-elle prévue pour être menée dans plusieurs Etat membres ?\nCette recherche implique-t-elle des pays tiers ?")
+    table.cell(4,3).text=("   oui           non\n   oui           non\n   oui           non")
+    table.cell(5,0).text=("Durée maximale de participation pour un sujet selon le protocole : \n")
+    table.cell(6,0).text=("Définition de la fin de la recherche et justification, si celle-ci ne correspond pas à la date de la dernière visite de la dernière personne participant à la recherche :\n\nEstimation initiale de la durée de la recherche   :\n             • en France :      						 ans  mois\n             • dans tous les pays concernés par la recherche :  	 	 ans  mois")
+    n=0
+    for row in table.rows:
+        for cell in row.cells:
+            paragraphs = cell.paragraphs
+            for paragraph in paragraphs:
+                if n==3 or n==19:
+                    paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                for run in paragraph.runs:
+                    fontdebut = run.font
+                    fontdebut.name = 'Arial'
+                    fontdebut.size = docx.shared.Pt(9)
+                    if n==3 or n==11 or n==19 or n==23:
+                        fontdebut.bold=True
+                    n=n+1
+    a=table.cell(2,0)
+    b=table.cell(3,0)
+    a.merge(b)
+    a=table.cell(5,0)
+    b=table.cell(6,0)
+    a.merge(b)
+    
+def partie_H_fin(document):
+    
+    '''Partie H'''
+    paragraph=document.add_paragraph("\nH. PERSONNES PARTICIPANT A LA RECHERCHE BIOMEDICALE", style='debut_page')
+    table = document.add_table(rows=3, cols=8, style='Table Grid')
+    for i in range (0,2):
+        for j in range (0,8):
+            if j%2==0:
+                a=table.cell(i,j)
+                b=table.cell(i,j+1)
+                a.merge(b)
+    a=table.cell(2,1)
+    b=table.cell(2,7)
+    a.merge(b)
+    table.cell(0,0).text=("Tranche d’âge étudiée")
+    table.cell(0,2).text=("< 18 ans")
+    table.cell(0,4).text=("18-65 ans")
+    table.cell(0,6).text=("> 65 ans")
+    table.cell(1,1).text=("Nouveaux-nés prématurés\n(jusqu’à l’âge gestationnel \n≤ 37 semaines)\nNouveau-nés (0-27 jours) \nNourrissons (28 jours - 23 mois)\nEnfants (2-11 ans)\nAdolescents (12-17 ans)")
+    table.cell(2,0).text=("Sexe")
+    table.cell(2,1).text=("              Femmes                Hommes")
+    n=0
+    for row in table.rows:
+        for cell in row.cells:
+            paragraphs = cell.paragraphs
+            for paragraph in paragraphs:
+                for run in paragraph.runs:
+                    fontdebut = run.font
+                    fontdebut.name = 'Arial'
+                    if n==0 or n==2 or n==4 or n==6:
+                        fontdebut.bold=True
+                        fontdebut.size = docx.shared.Pt(9)
+                    elif n==8:
+                        fontdebut.size = docx.shared.Pt(8)
+                    n=n+1
+    
+    paragraph=document.add_paragraph("\nPersonnes participant à la recherche", style='debut_page')
+    table = document.add_table(rows=1, cols=2, style='Table Grid')
+    table.cell(0,0).text=("Volontaires sains\nMalades\nFemmes enceintes\nFemmes allaitantes\nPersonnes en situation  d’urgence\nPersonnes incapables de donner personnellement  leur consentement\n dont majeurs sous tutelle")
+    table.cell(0,1).text=("oui           non\noui           non\noui           non\noui           non\noui           non\noui           non\noui           non")
+    n=0
+    for row in table.rows:
+        for cell in row.cells:
+            paragraphs = cell.paragraphs
+            for paragraph in paragraphs:
+                if n==1:
+                    paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                for run in paragraph.runs:
+                    fontdebut = run.font
+                    fontdebut.name = 'Arial'
+                    fontdebut.size = docx.shared.Pt(9)
+                    if n==1:
+                        fontdebut.bold=True
+                    n=n+1
+    
+    paragraph=document.add_paragraph("\nNombre prévu de personnes à inclure :", style='debut_page')
+    table = document.add_table(rows=1, cols=1, style='Table Grid')
+    table.cell(0,0).text=("• en France :\n"
+                          "En cas d’essai mené dans plusieurs pays :\n"
+                          "         • dans l’Union européenne : \n"
+                          "         • pour l’ensemble des pays participant à la recherche: ")
+    for row in table.rows:
+        for cell in row.cells:
+            paragraphs = cell.paragraphs
+            for paragraph in paragraphs:
+                for run in paragraph.runs:
+                    fontdebut = run.font
+                    fontdebut.name = 'Arial'
+                    fontdebut.size = docx.shared.Pt(9)
+        
+    '''Partie I'''
+    paragraph=document.add_paragraph("\nI. INVESTIGATEURS ET LIEUX DE RECHERCHE\n"
+                                     "          I.1. Investigateur coordonnateur ", style='debut_page')
+    table = document.add_table(rows=2, cols=2, style='Table Grid')
+    a=table.cell(0,1)
+    b=table.cell(1,1)
+    a.merge(b)
+    table.cell(0,0).text=("Nom :		\nPrénoms : \nQualification, spécialité :  \nCourriel : ")
+    table.cell(0,1).text=("Adresse :")
+    for row in table.rows:
+        for cell in row.cells:
+            paragraphs = cell.paragraphs
+            for paragraph in paragraphs:
+                for run in paragraph.runs:
+                    fontdebut = run.font
+                    fontdebut.name = 'Arial'
+                    fontdebut.size = docx.shared.Pt(9)
+    
+    paragraph=document.add_paragraph("\n        I.2. Autres investigateurs ", style='debut_page')
+    table = document.add_table(rows=2, cols=2, style='Table Grid')
+    a=table.cell(0,1)
+    b=table.cell(1,1)
+    a.merge(b)
+    table.cell(0,0).text=("Nom :		\nPrénoms : \nQualification, spécialité :  \nCourriel : ")
+    table.cell(0,1).text=("Adresse :")
+    for row in table.rows:
+        for cell in row.cells:
+            paragraphs = cell.paragraphs
+            for paragraph in paragraphs:
+                for run in paragraph.runs:
+                    fontdebut = run.font
+                    fontdebut.name = 'Arial'
+                    fontdebut.size = docx.shared.Pt(9)
+   
+    paragraph=document.add_paragraph("\n        I.3 Lieu de recherche ( le cas échéant, si la recherche doit se dérouler dans un lieu nécessitant une 	     autorisation mentionnée à l’article L. 1121-13 du code de la santé publique) :", style='debut_page')
+    table = document.add_table(rows=1, cols=1, style='Table Grid')
+    table.cell(0,0).text=("Intitulé du lieu: \nN° d’autorisation: \ndélivré le: \ndate de limite de validité:")
+    for row in table.rows:
+        for cell in row.cells:
+            paragraphs = cell.paragraphs
+            for paragraph in paragraphs:
+                for run in paragraph.runs:
+                    fontdebut = run.font
+                    fontdebut.name = 'Arial'
+                    fontdebut.size = docx.shared.Pt(9)
+                    
+    '''Partie J'''
+    paragraph=document.add_paragraph("\nJ. INFORMATION SUR LE COMITE DE PROTECTION DES PERSONNES (CPP)", style='debut_page')
+    table = document.add_table(rows=6, cols=4, style='Table Grid')
+    a=table.cell(0,0)
+    b=table.cell(0,3)
+    a.merge(b)
+    table.cell(0,0).text=("Nom et adresse : ")
+    table.cell(1,0).text=("Avis :")
+    table.cell(1,1).text=("à demander")
+    table.cell(1,2).text=("en cours\nDate de soumission :")
+    table.cell(1,3).text=("donné")
+    a=table.cell(2,1)
+    b=table.cell(2,3)
+    a.merge(b)
+    table.cell(2,0).text=("Si donné, préciser :")
+    a=table.cell(3,2)
+    b=table.cell(3,3)
+    a.merge(b)
+    a=table.cell(4,2)
+    b=table.cell(4,3)
+    a.merge(b)
+    a=table.cell(3,0)
+    b=table.cell(4,0)
+    a.merge(b)
+    a=table.cell(3,1)
+    b=table.cell(4,1)
+    a.merge(b)
+    table.cell(3,0).text=("Date de l’avis:")
+    table.cell(3,1).text=("Avis favorable\n         Oui        non")
+    table.cell(3,2).text=("Avis défavorable ")
+    table.cell(4,2).text=("un second examen a-t-il été demandé à un autre CPP ? :")
+    table.cell(5,1).text=("Si oui lequel ?")
+    n=0
+    for row in table.rows:
+        for cell in row.cells:
+            paragraphs = cell.paragraphs
+            for paragraph in paragraphs:
+                for run in paragraph.runs:
+                    fontdebut = run.font
+                    fontdebut.name = 'Arial'
+                    fontdebut.size = docx.shared.Pt(9)
+                    if not(n==0 or n==13):
+                        fontdebut.bold=True
+                    n=n+1
+    a=table.cell(3,2)
+    b=table.cell(4,2)
+    a.merge(b)
     
     
-    
-    
-    
-    
-    
-    
-    
-    
+    '''Partie K'''
+    paragraph=document.add_paragraph("\nK. SIGNATURE DU DEMANDEUR EN FRANCE", style='debut_page')
+    table = document.add_table(rows=3, cols=2, style='Table Grid')
+    table.cell(0,0).text=("Par la présente, j’atteste / j’atteste au nom du promoteur (rayer la mention inutile) ce qui suit :\n")
+    table.cell(1,0).text=(" - les informations fournies ci-dessus à l’appui de la demande sont exactes ;\n"
+                          "- la recherche sera réalisée conformément au protocole, à la réglementation nationale et aux principes de bonnes pratiques cliniques ;\n"
+                          "- il est raisonnable d’entreprendre la recherche proposée ; \n"
+                          "- je soumettrai un résumé du rapport final de la recherche à l’ANSM et au Comité de protection des personnes concerné au plus tard 1 an après la fin de l’essai dans tous les pays ;\n"
+                          "- je déclarerai la date effective du commencement de l’essai à l’ANSM et au Comité de protection des personnes concerné dès qu’elle sera connue.")
+    table.cell(2,0).text=("DEMANDEUR auprès de l’ANSM\n(comme indiqué à la section C1) :\n\nDate : \n\nSignature : \n\nNom :")
+    table.cell(2,1).text=("DEMANDEUR auprès du CPP\n(comme indiqué à la section C2) :\n\nDate : \n\nSignature : \n\nNom :")
+    n=0
+    for row in table.rows:
+        for cell in row.cells:
+            paragraphs = cell.paragraphs
+            for paragraph in paragraphs:
+                for run in paragraph.runs:
+                    fontdebut = run.font
+                    fontdebut.name = 'Arial'
+                    fontdebut.size = docx.shared.Pt(9)
+                    if n==0:
+                        fontdebut.bold=True
+                    n=n+1
+    a=table.cell(0,0)
+    b=table.cell(1,1)
+    a.merge(b)
