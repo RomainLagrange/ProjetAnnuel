@@ -43,7 +43,7 @@ def construit_doc():
     
     
     document = docx.Document()
-    extract=extraction.extraction()
+    extract=extraction.extract1()
     '''Marge des page'''
     sections = document.sections
     for section in sections:
