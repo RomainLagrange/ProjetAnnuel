@@ -95,4 +95,4 @@ def construit_doc():
 #    Cat2Part16(document)
 #    Cat2Part17(document)
 #    Cat2Part18(document)
-    document.save("ProtocolCat2.docx")
+    document.save("ProtocoleCat2.docx")

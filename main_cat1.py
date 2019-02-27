@@ -82,4 +82,4 @@ def construit_doc():
     Partie19(document)
     Partie20(document)
     #grand 21 annexes (pas mal de trucs a faire)
-    document.save("ProtocolCat1.docx")
+    document.save("ProtocoleCat1.docx")
