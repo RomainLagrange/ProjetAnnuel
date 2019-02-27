@@ -26,12 +26,12 @@ def Partie2(document):
 
 
 #   Marge de la page
-    sections = document.sections
-    for section in sections:
-        section.top_margin = Cm(2)
-        section.bottom_margin = Cm(2)
-        section.left_margin = Cm(2)
-        section.right_margin = Cm(2)
+#    sections = document.sections
+#    for section in sections:
+#        section.top_margin = Cm(2)
+#        section.bottom_margin = Cm(2)
+#        section.left_margin = Cm(2)
+#        section.right_margin = Cm(2)
  
   #  Style(document)
 

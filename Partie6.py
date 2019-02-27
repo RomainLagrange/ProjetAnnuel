@@ -19,23 +19,27 @@ from docx.shared import Cm, Pt, RGBColor, Inches
 #    TexteGris(texte,document)
 #    TexteGrisJustif(texte,document)
 
+#REVOIR STYLE CHARACTER OU PRAGRAPHE POUR PARAGRAPHE 
+
+
 def Partie6(document):
+#def Partie6():
     'Creation de la partie 6 du protcole de catégorie 1'
-   # document = docx.Document()
+  #  document = docx.Document()
 
 
 #   Marge de la page
-    sections = document.sections
-    for section in sections:
-        section.top_margin = Cm(2)
-        section.bottom_margin = Cm(2)
-        section.left_margin = Cm(2)
-        section.right_margin = Cm(2)
+#    sections = document.sections
+#    for section in sections:
+#        section.top_margin = Cm(2)
+#        section.bottom_margin = Cm(2)
+#        section.left_margin = Cm(2)
+#        section.right_margin = Cm(2)
 
 #---------------------------DEFINITIONS DES STYLES
  
 
-   # Style(document)
+    #Style(document)
 
 
 #    
@@ -53,11 +57,55 @@ def Partie6(document):
     Titre2('6.2	Tableau récapitulatif du suivi d’un participant à la recherche',document)
     
     #AJOUTER TABLEAU
+#    
+#    p=document.add_paragraph('(*) V-X : unité de temps à adapter en fonction de la recherche : A (année), M (mois), S (semaine), J (jour), H (heure)', style='Normal')
+#    p.font.italic=True
+#    
+#    p=document.add_paragraph('Examen clinique : détail de ce que comporte l’examen clinique ', style='Normal')
+#    
+#    p=document.add_paragraph()
+#    
+#    p=document.add_paragraph()
     
     # Ecriture du 6.3  
     Titre2('6.3	Visites de pré-inclusion / inclusion = Visite V0',document)
     
-    
+#    p=document.add_paragraph()
+#    run1=p.add_run()
+#    run1.text='Lors de la visite de '
+#    run1.style='Paragraphe'
+#    run2=p.add_run()
+#    run2.text='pré-inclusion (voir selon l’étude si visite d’inclusion),'
+#    run2.style='Paragraphe'
+#    run2.font.italic=True
+#    run3=p.add_run()
+#    run3.text='le médecin investigateur informe le patient de la possibilité de participer à cet essai clinique et répond à toutes ses questions concernant l\'objectif, la nature des contraintes, les risques prévisibles et les bénéfices attendus de la recherche. Il précise également les droits du patient dans le cadre d’une recherche et vérifie les critères d’éligibilité. '
+#    run3.style='Paragraphe'
+#    
+#    
+#    document.add_paragraph('Un exemplaire de la note d’information et du formulaire de consentement est alors remis au participant par le médecin investigateur.', style='Paragraphe')
+#    
+#    
+#    p=document.add_paragraph()
+#    run1=p.add_run('Après cette séance d’information, le participant dispose d’un délai de réflexion. Le médecin investigateur est responsable de l’obtention du consentement éclairé écrit du participant.\n Si le participant donne son accord de participation, ce dernier et l’investigateur inscrivent leurs noms et prénoms en clair, datent et signent le formulaire de consentement. Celui-ci ')
+#    run1.style='Paragraphe'
+#    run2=p.add_run('doit être signé avant la réalisation de tout examen ')
+#    run2.style='Paragraphe'
+#    run2.font.bold= True
+#    run2.font.underline= True
+#    run3=p.add_run('clinique ou biologique ou para-clinique nécessité par la recherche. ')
+#    run3.style='Paragraphe'
+#    
+#    p=document.add_paragraph()
+#    run1=p.add_run('L’exemplaire ')
+#    run1.style='Paragraphe'
+#    run2=p.add_run('original ')
+#    run2.style='Paragraphe'
+#    run2.font.underline= True
+#    document.add_paragraph('sera conservé dans le classeur de l’investigateur. Un exemplaire (un autre original ou une copie) sera remis au patient. ', style = 'Paragraphe')
+#    document.add_paragraph('L’investigateur précisera dans le dossier médical du patient sa participation à la recherche, les modalités du recueil du consentement ainsi que celle de l’information. ', style = 'Paragraphe')
+#    
+    #A FINIR 
     
     #Ecriture du titre6.3.1
     Titre3('6.3.1','Recueil du consentement',document)
@@ -150,4 +198,4 @@ def Partie6(document):
     run = paragraph.add_run()
     run.add_break(WD_BREAK.PAGE)
   
-  #  document.save("Partie6.docx")   
+   # document.save("Partie6.docx")   

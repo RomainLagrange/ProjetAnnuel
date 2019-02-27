@@ -12,6 +12,7 @@ from docx.oxml.ns import nsdecls
 from docx.oxml import parse_xml
 
 
+
 def Titre1(texte, document):
     paragraph=document.add_paragraph(texte+'\n', style='Titre1') #titre
     paragraph.alignment = WD_ALIGN_PARAGRAPH.CENTER #centrer
@@ -66,6 +67,13 @@ def Style(document):
     
     styles=document.styles
 
+    #   definition du style Paragraphe, modification du style Normal 
+    stylePara = styles.add_style('Paragraphe', WD_STYLE_TYPE.CHARACTER)
+    stylePara.base_style = styles['Normal']
+    fontPara = stylePara.font
+    fontPara.name = 'Times New Roman' #police
+    fontPara.size = docx.shared.Pt(12) #taille
+
 #   definition du style Titre1 --> AJOUTER LA BORDURE EN BAS
     styleTitre1 = styles.add_style('Titre1', WD_STYLE_TYPE.PARAGRAPH, WD_ALIGN_PARAGRAPH.CENTER)
     styleTitre1.base_style = styles['Heading1']
@@ -113,7 +121,7 @@ def Style(document):
     fontTitreListe3.color.rgb = RGBColor(0x0,0x0,0x0)  
     
     #Definition style texte surligné en gris centré   --> SUPPRIMER ESPACE EN BAS
-    styles = document.styles
+#    styles = document.styles
     styleBackgroundGrey = styles.add_style('BackgroundGrey', WD_STYLE_TYPE.CHARACTER)
     styleBackgroundGrey.base_style = styles['No Spacing']
     fontBackgroundGrey = styleBackgroundGrey.font
@@ -123,7 +131,7 @@ def Style(document):
     fontBackgroundGrey.small_caps = True
     
     #Definition style texte surligné en gris justifié   --> SUPPRIMER ESPACE EN BAS
-    styles = document.styles
+  #  styles = document.styles
     styleBackgroundGrey = styles.add_style('BackgroundGreyJustif', WD_STYLE_TYPE.CHARACTER)
     styleBackgroundGrey.base_style = styles['No Spacing']
     fontBackgroundGrey = styleBackgroundGrey.font

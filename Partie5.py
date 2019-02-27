@@ -21,8 +21,9 @@ from docx.shared import Cm, Pt, RGBColor, Inches
 
 
 def Partie5(document):
+#def Partie5():
     'Creation de la partie 5 du protcole de catégorie 1'
-   # document = docx.Document()
+ #   document = docx.Document()
 
 
 #   Marge de la page
@@ -42,8 +43,13 @@ def Partie5(document):
    # Ecriture du 5.1  
     Titre2('5.1	Critères d’inclusion',document)
     
+    document.add_paragraph('Tous les patients inclus dans cette recherche devront vérifier tous les critères d’inclusion listés ci-dessous :', style='Paragraphe')
+    
+    
     # Ecriture du 5.2  
     Titre2('5.2	Critères de non inclusion',document)
+    
+    document.add_paragraph('Tous les patients inclus dans cette recherche ne devront avoir aucun des critères de non inclusion listés ci-dessous :', style='Paragraphe')
     
     # Ecriture du 5.3  
     Titre2('5.3	Faisabilité et modalités de recrutement',document)
@@ -56,6 +62,6 @@ def Partie5(document):
 
     
     
-   # document.save("Partie5.docx")   
+  #  document.save("Partie5.docx")   
 
 
