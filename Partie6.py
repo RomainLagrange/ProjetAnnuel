@@ -19,27 +19,26 @@ from docx.shared import Cm, Pt, RGBColor, Inches
 #    TexteGris(texte,document)
 #    TexteGrisJustif(texte,document)
 
-#REVOIR STYLE CHARACTER OU PRAGRAPHE POUR PARAGRAPHE 
 
 
-def Partie6(document):
-#def Partie6():
+#def Partie6(document):
+def Partie6():
     'Creation de la partie 6 du protcole de catégorie 1'
-   # document = docx.Document()
+    document = docx.Document()
 
 
 #   Marge de la page
-#    sections = document.sections
-#    for section in sections:
-#        section.top_margin = Cm(2)
-#        section.bottom_margin = Cm(2)
-#        section.left_margin = Cm(2)
-#        section.right_margin = Cm(2)
+    sections = document.sections
+    for section in sections:
+        section.top_margin = Cm(2)
+        section.bottom_margin = Cm(2)
+        section.left_margin = Cm(2)
+        section.right_margin = Cm(2)
 
 #---------------------------DEFINITIONS DES STYLES
  
 
-  #  Style(document)
+    Style(document)
 
 
 #    
@@ -58,8 +57,18 @@ def Partie6(document):
     
     #AJOUTER TABLEAU
 #    
-#    p=document.add_paragraph('(*) V-X : unité de temps à adapter en fonction de la recherche : A (année), M (mois), S (semaine), J (jour), H (heure)', style='Normal')
-#    p.font.italic=True
+
+    
+    p=document.add_paragraph()
+    run1=p.add_run('1')
+    run1.style='Paragraphe'
+    run1.font.italic= True
+    run1.font.superscript= True
+    run2=p.add_run('(*) V-X : unité de temps à adapter en fonction de la recherche : A (année), M (mois), S (semaine), J (jour), H (heure)')
+    run2.style='Paragraphe'
+    run2.font.italic= True
+
+
 #    
 #    p=document.add_paragraph('Examen clinique : détail de ce que comporte l’examen clinique ', style='Normal')
 #    
@@ -173,18 +182,43 @@ def Partie6(document):
     run1.style='Paragraphe'
 
     p=document.add_paragraph()
-    run1=p.add_run('Si l’étude est en ouvert : communique immédiatement à l’investigateur en clair le résultat de la randomisation/l’inclusion, en particulier le groupe de traitement /stratégie/procédure alloué(e) au participant/cluster et le numéro de la boîte de traitement.')
+    p.style='List Bullet'
+    run1=p.add_run('Si l’étude est en ouvert : ')
+    run1.style='Paragraph'
+    run1.font.italic=True
+    run2=p.add_run('communique immédiatement à l’investigateur en clair le résultat de la randomisation l’inclusion, en particulier le groupe de traitement ')
+    run2.style='Paragraph'
+    run3=p.add_run('/stratégie/procédure ')
+    run3.style='Paragraph'
+    run3.font.italic=True
+    run4=p.add_run('alloué(e) au participant/cluster et le numéro de la boîte de traitement. ')
+    run4.style='Paragraph'    
+    
+    p=document.add_paragraph()
+    p.style='List Paragraph'
+    run1=p.add_run('OU')
+    run1.style='Paragraph'
+    run1.font.italic=True    
+    run1.font.bold=True    
+   
+    p=document.add_paragraph()
+    p.style='List Bullet'
+    run1=p.add_run('Si l’étude est en double aveugle : ')
+    run1.style='Paragraph'
+    run1.font.italic=True
+    run2=p.add_run('communique immédiatement à l’investigateur le numéro unique de randomisation/d’inclusion, correspondant à une boîte de traitement ')
+    run2.style='Paragraph'
+    run3=p.add_run('/stratégie/procédure ')
+    run3.style='Paragraph'
+    run3.font.italic=True
+    run4=p.add_run('alloué(e) au participant/cluster.')
+    run4.style='Paragraph'    
+    
+    #FINIR 
+    p=document.add_paragraph()
+    run1=p.add_run('Les numéros de randomisation sont établis selon des listes établies à l’avance par le méthodologiste de la recherche (voir paragraphe 5.2).')
     run1.style='Paragraphe'
 
-    #FINIR 
-#    p=document.add_paragraph()
-#    run1=p.add_run()
-#    run1.style='Paragraphe'
-#
-#    p=document.add_paragraph()
-#    run1=p.add_run()
-#    run1.style='Paragraphe'
-#    document.add_paragraph('',style='Paragraphe')
 
 
     #Ecriture du titre 6.5
@@ -201,9 +235,9 @@ def Partie6(document):
     #Ecriture du titre 6.6
     Titre2('6.6	Visite de fin de la recherche',document)
     
-#    p=document.add_paragraph()
-#    run1=p.add_run()
-#    run1.style='Paragraphe'
+    p=document.add_paragraph('En cas de sortie prématurée, l’investigateur doit en documenter les raisons de façon aussi complète que possible dans le dossier médical et réaliser une visite de fin d’étude. Il complètera la page de sortie prématurée du CRF. \n En cas de sujet perdu de vue, l’investigateur mettra tout en œuvre pour reprendre contact avec la personne et connaître les raisons.')
+    run1=p.add_run()
+    run1.style='Paragraphe'
     
     #Ecriture du titre 6.7
     Titre2('6.7	Règles d’arrêt de la participation d’une personne à la recherche',document)
@@ -214,25 +248,50 @@ def Partie6(document):
     #Ecriture du titre6.7.1
     Titre3('6.7.1','Arrêt de participation définitif ou temporaire d’un patient dans l’étude)',document)
 
-#    p=document.add_paragraph()
-#    run1=p.add_run()
-#    run1.style='Paragraphe'
-#    
-#    p=document.add_paragraph()
-#    run1=p.add_run()
-#    run1.style='Paragraphe'
-#
-#    p=document.add_paragraph()
-#    run1=p.add_run()
-#    run1.style='Paragraphe'
-#
-#    p=document.add_paragraph()
-#    run1=p.add_run()
-#    run1.style='Paragraphe'
-#
-#    p=document.add_paragraph()
-#    run1=p.add_run()
-#    run1.style='Paragraphe'
+    p=document.add_paragraph('En fonction de l’état de santé du patient, l’investigateur devra faire son possible pour que les patients continuent à participer à l’étude et / ou à recevoir leur traitement. Cependant, il pourra interrompre temporairement ou définitivement la participation d’une personne à la recherche ou d’une partie ou de la totalité de la recherche. Les éléments suivants peuvent justifier l’arrêt définitif ou temporaire de la participation d’une personne à la recherche ou d’une partie ou de la totalité de la recherche.')
+    run1=p.add_run()
+    run1.style='Paragraphe'
+    
+    p=document.add_paragraph()
+    run1=p.add_run('Voir si applicable :')
+    run1.style='Paragraphe'
+    run1.font.italic=True
+
+    p=document.add_paragraph()
+    p.style='List Bullet'
+    run1=p.add_run('Evénement(s) indésirable(s) qu’il(s) soi(en)t lié(s) à une procédure du protocole ou au produit à l’étude,')
+    run1.style='Paragraph'
+
+    p=document.add_paragraph()
+    p.style='List Bullet'
+    run1=p.add_run('Déviation au protocole (apparition d’un critère de non-inclusion du protocole, prise d’un traitement non autorisé),')
+    run1.style='Paragraphe'
+
+    p=document.add_paragraph()
+    p.style='List Bullet'
+    run1=p.add_run('Survenue d’une modification rendant impossible les investigations à effectuer ou la prise du traitement ou modifiant la réponse au traitement à l’étude,')
+    run1.style='Paragraphe'
+
+
+    p=document.add_paragraph()
+    p.style='List Bullet'
+    run1=p.add_run('Retrait du consentement : les patients peuvent retirer leur consentement et demander à sortir de l’étude à n’importe quel moment et ce, quelle qu’en soit la raison,')
+    run1.style='Paragraphe'
+    
+
+    p=document.add_paragraph()
+    p.style='List Bullet'
+    run1=p.add_run('Toute raison qui servirait au mieux les intérêts du sujet (par exemple en cas d’événements indésirables graves nécessitant une prise en charge incompatible avec le protocole).')
+    run1.style='Paragraphe'
+
+
+    p=document.add_paragraph()
+    run1=p.add_run('La date et la raison de la sortie d’essai ou de l’arrêt du traitement devront être notées dans le dossier médical du patient et le cahier d’observation. La visite de fin d’étude devra être réalisée dans la mesure du possible.')
+    run1.style='Paragraphe'
+
+    p=document.add_paragraph()
+    run1=p.add_run('Dans tous les cas, et dans la mesure du possible, l’investigateur devra compléter la visite de fin d’étude du CRF.')
+    run1.style='Paragraphe'
 
 
     #Ecriture du titre6.7.2
@@ -242,16 +301,16 @@ def Partie6(document):
     #Ecriture du titre6.7.3
     Titre3('6.7.3','Modalités et calendrier de recueil pour ces données',document)
 
-#    p=document.add_paragraph()
-#    run1=p.add_run()
-#    run1.style='Paragraphe'
+    p=document.add_paragraph()
+    run1=p.add_run('Les données disponibles des patients sortis d’étude pour raison médicale seront recueillies pour l’analyse. Les données des patients ayant retiré leur consentement seront analysées uniquement si les patients ont donné leur accord. Si le patient n’a pas donné son accord, toutes les données de l’étude le concernant seront supprimées.')
+    run1.style='Paragraphe'
     
     #Ecriture du titre6.7.4
     Titre3('6.7.4','Modalités de suivi de ces personnes',document)
 
-#    p=document.add_paragraph()
-#    run1=p.add_run()
-#    run1.style='Paragraphe'
+    p=document.add_paragraph()
+    run1=p.add_run('La sortie d\'étude d\'un participant ne changera en rien sa prise en charge habituelle par rapport à sa maladie. Il ne bénéficiera cependant pas des évaluations cliniques prévues selon le protocole.')
+    run1.style='Paragraphe'
 
     #Ecriture du titre 6.8
     Titre2('6.8	Contraintes liées à la recherche et indemnisation éventuelle des participants',document)
@@ -278,21 +337,21 @@ def Partie6(document):
     #Ecriture du titre 6.10
     Titre2('6.10	Arrêt d’une partie ou de la totalité de la recherche',document)
     
-#    p=document.add_paragraph()
-#    run1=p.add_run()
-#    run1.style='Paragraphe'
-#    
-#    p=document.add_paragraph()
-#    run1=p.add_run()
-#    run1.style='Paragraphe'
-#
-#    p=document.add_paragraph()
-#    run1=p.add_run()
-#    run1.style='Paragraphe'
+    p=document.add_paragraph()
+    run1=p.add_run('Le CHU de Poitiers se réserve le droit d\'interrompre l’étude, à tout moment, s\'il s\'avère que les objectifs d’inclusion ne sont pas atteints.')
+    run1.style='Paragraphe'
+    
+    p=document.add_paragraph()
+    run1=p.add_run('L’étude peut être interrompue prématurément en cas de survenue d’événements indésirables inattendus, graves nécessitant une revue du profil d\'innocuité du produit. De même, des événements imprévus ou de nouvelles informations relatives au produit, au vu desquels les objectifs de l\'étude ou du programme clinique ne seront vraisemblablement pas atteints, peuvent amener le promoteur à interrompre prématurément l’étude.')
+    run1.style='Paragraphe'
+
+    p=document.add_paragraph()
+    run1=p.add_run('En cas d’arrêt prématuré de l’étude, l’information sera transmise par le promoteur dans un délai de 15 jours à l’ANSM et au CPP.')
+    run1.style='Paragraphe'
 
     #FIN DU DOC 
     paragraph = document.add_paragraph()
     run = paragraph.add_run()
     run.add_break(WD_BREAK.PAGE)
   
-  #  document.save("Partie6.docx")   
+    document.save("Partie6.docx")   
