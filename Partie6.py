@@ -19,26 +19,27 @@ from docx.shared import Cm, Pt, RGBColor, Inches
 #    TexteGris(texte,document)
 #    TexteGrisJustif(texte,document)
 
+#AJOUTER JUSTIFY, IMAGES, ESPACEMENT LIGNES, TABLEAU
 
 
-#def Partie6(document):
-def Partie6():
-    'Creation de la partie 6 du protcole de catégorie 1'
+def Partie6(document):
+#def Partie6():
+    'Creation de la partie 6 du protocole de catégorie 1'
     document = docx.Document()
 
 
 #   Marge de la page
-    sections = document.sections
-    for section in sections:
-        section.top_margin = Cm(2)
-        section.bottom_margin = Cm(2)
-        section.left_margin = Cm(2)
-        section.right_margin = Cm(2)
+#    sections = document.sections
+#    for section in sections:
+#        section.top_margin = Cm(2)
+#        section.bottom_margin = Cm(2)
+#        section.left_margin = Cm(2)
+#        section.right_margin = Cm(2)
 
 #---------------------------DEFINITIONS DES STYLES
  
 
-    Style(document)
+#    Style(document)
 
 
 #    
@@ -56,26 +57,45 @@ def Partie6():
     Titre2('6.2	Tableau récapitulatif du suivi d’un participant à la recherche',document)
     
     #AJOUTER TABLEAU
-#    
-
-    
+   
     p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    run1=p.add_run('(*) ')
+    run1.style='Paragraphe'
+    run1.font.italic= True
+    run1.font.superscript= True
+    run2=p.add_run('V-X : unité de temps à adapter en fonction de la recherche : A (année), M (mois), S (semaine), J (jour), H (heure)')
+    run2.style='Paragraphe'
+    run2.font.italic= True
+
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     run1=p.add_run('1')
     run1.style='Paragraphe'
     run1.font.italic= True
     run1.font.superscript= True
-    run2=p.add_run('(*) V-X : unité de temps à adapter en fonction de la recherche : A (année), M (mois), S (semaine), J (jour), H (heure)')
+    run2=p.add_run('Examen clinique : détail de ce que comporte l’examen clinique ')
     run2.style='Paragraphe'
     run2.font.italic= True
 
+    p=document.add_paragraph()
+    run1=p.add_run('2')
+    run1.style='Paragraphe'
+    run1.font.italic= True
+    run1.font.superscript= True
+    run2=p.add_run('Bilan biologique : liste des examens biologiques')
+    run2.style='Paragraphe'
+    run2.font.italic= True
 
-#    
-#    p=document.add_paragraph('Examen clinique : détail de ce que comporte l’examen clinique ', style='Normal')
-#    
-#    p=document.add_paragraph()
-#    
-#    p=document.add_paragraph()
-    
+    p=document.add_paragraph()
+    run1=p.add_run('3')
+    run1.style='Paragraphe'
+    run1.font.italic= True
+    run1.font.superscript= True
+    run2=p.add_run('Examens para-cliniques : liste des examens para-cliniques')
+    run2.style='Paragraphe'
+    run2.font.italic= True
+
     # Ecriture du 6.3  
     Titre2('6.3	Visites de pré-inclusion / inclusion = Visite V0',document)
     
@@ -121,11 +141,9 @@ def Partie6():
     run1.style='Paragraphe'
     run2=p.add_run('original ')
     run2.style='Paragraphe'
-    run2.font.underline= True
-    
-    p=document.add_paragraph()
-    run1=p.add_run('sera conservé dans le classeur de l’investigateur. Un exemplaire (un autre original ou une copie) sera remis au patient. ')
-    run1.style='Paragraphe'
+    run2.font.underline= True    
+    run3=p.add_run('sera conservé dans le classeur de l’investigateur. Un exemplaire (un autre original ou une copie) sera remis au patient. ')
+    run3.style='Paragraphe'
     
     p=document.add_paragraph()
     run1=p.add_run('L’investigateur précisera dans le dossier médical du patient sa participation à la recherche, les modalités du recueil du consentement ainsi que celle de l’information. ')
@@ -159,11 +177,11 @@ def Partie6():
     #Ecriture du titre6.3.2
     Titre3('6.3.2','Déroulement de la visite',document)
 
-    document.add_paragraph()
+    p=document.add_paragraph()
     run1=p.add_run('La visite de pré-inclusion/inclusion est assurée par le médecin investigateur. La visite de pré-inclusion a lieu entre X jours/semaines/mois et au plus tard X jours/semaines/mois avant la visite d’inclusion.')
     run1.style='Paragraphe'
     
-    document.add_paragraph()
+    p=document.add_paragraph()
     run1=p.add_run('Avant tout examen lié à la recherche, l’investigateur recueille le consentement libre, éclairé et écrit du participant (ou de son représentant légal le cas échéant).')
     run1.style='Paragraphe'
     
@@ -178,41 +196,47 @@ def Partie6():
     Titre3('6.4.2','Randomisation du patient',document)
 
     p=document.add_paragraph()
-    run1=p.add_run('Lorsqu’un investigateur souhaite effectuer la randomisation/l’inclusion après avoir vérifié l’éligibilité du participant/cluster, il se connecte sur le site Internet de l’e-CRF https://www.chu-poitiers.hugo-online.fr/. L’investigateur complète la page « randomisation » après avoir préalablement confirmé tous les critères d’éligibilité du participant/cluster sur le site. Après validation du contenu, la randomisation/ l’inclusion est effectuée et l’e-CRF :')
+    run1=p.add_run('Lorsqu’un investigateur souhaite effectuer la randomisation/l’inclusion après avoir vérifié l’éligibilité du participant/cluster, il se connecte sur le site Internet de l’e-CRF ')
     run1.style='Paragraphe'
+    run2=p.add_run('https://www.chu-poitiers.hugo-online.fr/')
+    run2.style='Paragraphe'
+    run2.font.underline=True
+    run3=p.add_run('. L’investigateur complète la page « randomisation » après avoir préalablement confirmé tous les critères d’éligibilité du participant/cluster sur le site. Après validation du contenu, la randomisation/ l’inclusion est effectuée et l’e-CRF :')
+    run3.style='Paragraphe'
 
     p=document.add_paragraph()
     p.style='List Bullet'
     run1=p.add_run('Si l’étude est en ouvert : ')
-    run1.style='Paragraph'
+    run1.style='Paragraphe'
     run1.font.italic=True
     run2=p.add_run('communique immédiatement à l’investigateur en clair le résultat de la randomisation l’inclusion, en particulier le groupe de traitement ')
-    run2.style='Paragraph'
+    run2.style='Paragraphe'
     run3=p.add_run('/stratégie/procédure ')
-    run3.style='Paragraph'
+    run3.style='Paragraphe'
     run3.font.italic=True
     run4=p.add_run('alloué(e) au participant/cluster et le numéro de la boîte de traitement. ')
-    run4.style='Paragraph'    
+    run4.style='Paragraphe'    
     
     p=document.add_paragraph()
     p.style='List Paragraph'
     run1=p.add_run('OU')
-    run1.style='Paragraph'
+    run1.style='Paragraphe'
     run1.font.italic=True    
     run1.font.bold=True    
+    run1.font.underline=True    
    
     p=document.add_paragraph()
     p.style='List Bullet'
     run1=p.add_run('Si l’étude est en double aveugle : ')
-    run1.style='Paragraph'
+    run1.style='Paragraphe'
     run1.font.italic=True
     run2=p.add_run('communique immédiatement à l’investigateur le numéro unique de randomisation/d’inclusion, correspondant à une boîte de traitement ')
-    run2.style='Paragraph'
+    run2.style='Paragraphe'
     run3=p.add_run('/stratégie/procédure ')
-    run3.style='Paragraph'
+    run3.style='Paragraphe'
     run3.font.italic=True
     run4=p.add_run('alloué(e) au participant/cluster.')
-    run4.style='Paragraph'    
+    run4.style='Paragraphe'    
     
     #FINIR 
     p=document.add_paragraph()
@@ -235,7 +259,7 @@ def Partie6():
     #Ecriture du titre 6.6
     Titre2('6.6	Visite de fin de la recherche',document)
     
-    p=document.add_paragraph('En cas de sortie prématurée, l’investigateur doit en documenter les raisons de façon aussi complète que possible dans le dossier médical et réaliser une visite de fin d’étude. Il complètera la page de sortie prématurée du CRF. \n En cas de sujet perdu de vue, l’investigateur mettra tout en œuvre pour reprendre contact avec la personne et connaître les raisons.')
+    p=document.add_paragraph('En cas de sortie prématurée, l’investigateur doit en documenter les raisons de façon aussi complète que possible dans le dossier médical et réaliser une visite de fin d’étude. Il complètera la page de sortie prématurée du CRF. \nEn cas de sujet perdu de vue, l’investigateur mettra tout en œuvre pour reprendre contact avec la personne et connaître les raisons.')
     run1=p.add_run()
     run1.style='Paragraphe'
     
@@ -260,7 +284,7 @@ def Partie6():
     p=document.add_paragraph()
     p.style='List Bullet'
     run1=p.add_run('Evénement(s) indésirable(s) qu’il(s) soi(en)t lié(s) à une procédure du protocole ou au produit à l’étude,')
-    run1.style='Paragraph'
+    run1.style='Paragraphe'
 
     p=document.add_paragraph()
     p.style='List Bullet'
@@ -318,6 +342,10 @@ def Partie6():
     #Ecriture du titre 6.9
     Titre2('6.9	Collection d’échantillons biologiques',document)
     
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    run1=p.add_run('SI APPLICABLE')
+    run1.font.italic=True
     
     TexteGris('prendre contact avec la promotion interne \n pour aide a la redaction de ce chapitre', document)
 
@@ -354,4 +382,4 @@ def Partie6():
     run = paragraph.add_run()
     run.add_break(WD_BREAK.PAGE)
   
-    document.save("Partie6.docx")   
+ #   document.save("Partie6.docx")   
