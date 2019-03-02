@@ -252,85 +252,86 @@ def liste_abreviation(document,extract):
       ansm=amm=arc=bpc=cis=cnil=cpp=crf=e_crf=evi=evig=eig=eigi=ide=mr=rcp=susar=tec=False #pour savoir si on les a deja trouvés une fois
       '''Parcours tout l'extract pour voir si on trouve le mot quelque part dans le texte'''
       for para in extract.values():
+          if para !="" and para !=" " and isinstance(para, str):
           #ANSM
-          if (re.search(r"ANSM",para) and ansm==False): #si on trouve le mot (re.search renvoi True s'il trouve le mot) pour la première fois
-              texte+='ANSM\t\t\tAgence Nationale de Sécurité du Médicaments et des produits de santé\n' #alors on ajoute la ligne a texte
-              ansm=True #on a trouve ANSM une fois pas besoin de l'ajouter a nouveau les fois suivantes
+              if (re.search(r"ANSM",para) and ansm==False): #si on trouve le mot (re.search renvoi True s'il trouve le mot) pour la première fois
+                  texte+='ANSM\t\t\tAgence Nationale de Sécurité du Médicaments et des produits de santé\n' #alors on ajoute la ligne a texte
+                  ansm=True #on a trouve ANSM une fois pas besoin de l'ajouter a nouveau les fois suivantes
           #AMM
-          if re.search(r"AMM",para) and amm==False:
-              texte+='AMM\t\t\tAutorisation de Mise sur le Marché\n'
-              amm=True
+              if re.search(r"AMM",para) and amm==False:
+                 texte+='AMM\t\t\tAutorisation de Mise sur le Marché\n'
+                 amm=True
           
           #ARC
-          if re.search(r"ARC",para) and arc==False: 
-              texte+='ARC\t\t\tAttaché de Recherche Clinique\n'
-              arc=True
+              if re.search(r"ARC",para) and arc==False: 
+                  texte+='ARC\t\t\tAttaché de Recherche Clinique\n'
+                  arc=True
           #BPC
-          if re.search(r"BPC",para) and bpc==False:
-              texte+='BPC\t\t\tBonnes Pratiques Cliniques\n'
-              bpc=True
+              if re.search(r"BPC",para) and bpc==False:
+                  texte+='BPC\t\t\tBonnes Pratiques Cliniques\n'
+                  bpc=True
           
           #CIS
-          if re.search(r"CIS",para) and cis==False: 
-              texte+='CIS\t\t\tComité Indépendant de Surveillance\n'
-              cis=True
+              if re.search(r"CIS",para) and cis==False: 
+                  texte+='CIS\t\t\tComité Indépendant de Surveillance\n'
+                  cis=True
           #CNIL
-          if re.search(r"CNIL",para) and cnil==False:
-              texte+='CNIL\t\t\tCommission Nationale de l’Informatique et des Libertés\n'
-              cnil=True
+              if re.search(r"CNIL",para) and cnil==False:
+                  texte+='CNIL\t\t\tCommission Nationale de l’Informatique et des Libertés\n'
+                  cnil=True
           #CPP
-          if re.search(r"CPP",para) and cpp==False: 
-              texte+='CPP\t\t\tComité de Protection des Personnes\n' 
-              cpp=True
+              if re.search(r"CPP",para) and cpp==False: 
+                  texte+='CPP\t\t\tComité de Protection des Personnes\n' 
+                  cpp=True
           #CRF
-          if re.search(r"CRF",para) and crf==False: 
-              texte+='CRF\t\t\tCase Report Form (cahier d’observation)\n' 
-              crf=True
+              if re.search(r"CRF",para) and crf==False: 
+                  texte+='CRF\t\t\tCase Report Form (cahier d’observation)\n' 
+                  crf=True
           #e-CRF
-          if re.search(r"e-CRF",para) and e_crf==False: 
-              texte+='e-CRF\t\t\tCahier d’observation électronique\n'
-              e_crf=True
+              if re.search(r"e-CRF",para) and e_crf==False: 
+                  texte+='e-CRF\t\t\tCahier d’observation électronique\n'
+                  e_crf=True
           
           #EvI
-          if re.search(r"EvI",para) and evi==False: 
-              texte+='EvI\t\t\tEvènement Indésirable\n'
-              evi=True
+              if re.search(r"EvI",para) and evi==False: 
+                  texte+='EvI\t\t\tEvènement Indésirable\n'
+                  evi=True
           #EvIG
-          if re.search(r"EvIG",para) and evig==False: 
-              texte+='EvIG\t\t\tEvènement Indésirable Grave\n'
-              evig=True
+              if re.search(r"EvIG",para) and evig==False: 
+                  texte+='EvIG\t\t\tEvènement Indésirable Grave\n'
+                  evig=True
          #EIG
-          if re.search(r"EIG",para) and eig==False: 
-              texte+='EIG\t\t\tEffet Indésirable Grave\n'
-              eig=True
+              if re.search(r"EIG",para) and eig==False: 
+                  texte+='EIG\t\t\tEffet Indésirable Grave\n'
+                  eig=True
           #EIGI
-          if re.search(r"EIGI",para) and eigi==False: 
-              texte+='EIGI\t\t\tEffet Indésirable Grave Inattendu\n'
-              eigi=True
+              if re.search(r"EIGI",para) and eigi==False: 
+                  texte+='EIGI\t\t\tEffet Indésirable Grave Inattendu\n'
+                  eigi=True
           
           #IDE
-          if re.search(r"IDE",para) and ide==False: 
-              texte+='IDE\t\t\tInfirmier (ère) Diplômé(e) d\'Etat\n'
-              ide=True
+              if re.search(r"IDE",para) and ide==False: 
+                  texte+='IDE\t\t\tInfirmier (ère) Diplômé(e) d\'Etat\n'
+                  ide=True
           
           #MR
-          if re.search(r"MR",para) and mr==False: 
-              texte+='MR\t\t\tMéthodologie de Référence\n'
-              mr=True
+              if re.search(r"MR",para) and mr==False: 
+                  texte+='MR\t\t\tMéthodologie de Référence\n'
+                  mr=True
           
           #RCP
-          if re.search(r"RCP",para) and rcp==False: 
-              texte+='RCP\t\t\tRésumé des Caractéristiques d\'un Produit\n'
-              rcp=True
+              if re.search(r"RCP",para) and rcp==False: 
+                  texte+='RCP\t\t\tRésumé des Caractéristiques d\'un Produit\n'
+                  rcp=True
           #SUSAR
-          if re.search(r"SUSAR",para) and susar==False: 
-              texte+='SUSAR\t\t\tSssuspected Unexpected Serious Adverse Reaction\n'
-              susar=True
+              if re.search(r"SUSAR",para) and susar==False: 
+                  texte+='SUSAR\t\t\tSssuspected Unexpected Serious Adverse Reaction\n'
+                  susar=True
           
           #TEC
-          if re.search(r"TEC",para) and tec==False: 
-              texte+='TEC\t\t\tTechnicien d\'Etude Clinique\n'
-              tec=True
+              if re.search(r"TEC",para) and tec==False: 
+                  texte+='TEC\t\t\tTechnicien d\'Etude Clinique\n'
+                  tec=True
                     
       paragraph2 = document.add_paragraph()
       sentence = paragraph2.add_run(texte)
