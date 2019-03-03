@@ -405,10 +405,447 @@ def partie_D(document):
     b=table.cell(1,5)
     a.merge(b)
     
+    paragraph=document.add_paragraph()
+    
+    table = document.add_table(rows=2, cols=6, style='Table Grid')
+    table.cell(0,0).text=("D.2.3	L’utilisation du produit a-t-elle déjà été autorisée dans le cadre d'une recherche biomédicale précédente conduite par le promoteur dans la Communauté européenne ? ")
+    table.cell(1,0).text=("D.2.3.1	Si oui, préciser dans quel(s) État(s) membre(s) et par quelle autorité :      ")
+    table.cell(0,5).text=("\n□ oui  □ non")
+    n=0
+    for row in table.rows:
+        for cell in row.cells:
+            paragraphs = cell.paragraphs
+            for paragraph in paragraphs:
+                if n==1:
+                    paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                for run in paragraph.runs:
+                    fontdebut = run.font
+                    fontdebut.name = 'Arial Narrow'
+                    fontdebut.size = docx.shared.Pt(10)
+                    if n==0:
+                        fontdebut.bold = True
+                    n=n+1
+    a=table.cell(0,0)
+    b=table.cell(1,4)
+    a.merge(b)
+    a=table.cell(0,5)
+    b=table.cell(1,5)
+    a.merge(b)
+    
+    paragraph=document.add_paragraph()
+    
+    table = document.add_table(rows=2, cols=6, style='Table Grid')
+    table.cell(0,0).text=("D.2.4	Le produit est-il désigné, dans l’indication étudiée dans la recherche, comme un médicament orphelin dans la Communauté européenne ?")
+    table.cell(1,0).text=("D.2.4.1	Si oui, indiquer le numéro de désignation du médicament orphelin  :      ")
+    table.cell(0,5).text=("□ oui  □ non")
+    n=0
+    for row in table.rows:
+        for cell in row.cells:
+            paragraphs = cell.paragraphs
+            for paragraph in paragraphs:
+                if n==1:
+                    paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                for run in paragraph.runs:
+                    fontdebut = run.font
+                    fontdebut.name = 'Arial Narrow'
+                    fontdebut.size = docx.shared.Pt(10)
+                    if n==0:
+                        fontdebut.bold = True
+                    n=n+1
+    a=table.cell(0,0)
+    b=table.cell(1,4)
+    a.merge(b)
+    a=table.cell(0,5)
+    b=table.cell(1,5)
+    a.merge(b)
+    
+    paragraph=document.add_paragraph()
+    
+    table = document.add_table(rows=2, cols=6, style='Table Grid')
+    table.cell(0,0).text=("D.2.5	Un avis scientifique a-t-il été rendu sur le produit dans le cadre de cette recherche ?")
+    table.cell(1,0).text=("D.2.5.1	Si oui en D.2.5, veuillez préciser qui a rendu l'avis et en joindre une copie à votre dossier :\n"
+                          "D.2.5.1.1    Avis du CHMP  ? \n"
+                          "D.2.5.1.2	Avis d'une autorité compétente d'un Etat membre ?")
+    table.cell(0,5).text=("□ oui  □ non")
+    table.cell(1,5).text=("\n□ oui  □ non\n□ oui  □ non")
+    n=0
+    for row in table.rows:
+        for cell in row.cells:
+            paragraphs = cell.paragraphs
+            for paragraph in paragraphs:
+                if n==1 or n==3:
+                    paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                for run in paragraph.runs:
+                    fontdebut = run.font
+                    fontdebut.name = 'Arial Narrow'
+                    fontdebut.size = docx.shared.Pt(10)
+                    if n==0:
+                        fontdebut.bold = True
+                    n=n+1
+    a=table.cell(0,0)
+    b=table.cell(1,4)
+    a.merge(b)
+    a=table.cell(0,5)
+    b=table.cell(1,5)
+    a.merge(b)
+    
+    paragraph=document.add_paragraph()
+    
+    table = document.add_table(rows=4, cols=6, style='Table Grid')
+    table.cell(0,0).text=("D.3	DESCRIPTION DU PRODUIT SUR LEQUEL PORTE LA RECHERCHE")
+    table.cell(1,0).text=("D.3.1	Nom du produit, le cas échéant  :      \n"
+                          "D.3.2	Nom de code, le cas échéant  :    \n"  
+                          "D.3.3	Code ATC , si enregistré officiellement :     ")
+    table.cell(2,0).text=("D.3.4	Type de produit :")
+    table.cell(3,0).text=("Le produit est-il :\n"
+                          "D.3.4.1	Une préparation de thérapie cellulaire\n"
+                          "D.3.4.2	Un tissu\n"
+                          "D.3.4.3	Un organe ou un tissu composite\n"
+                          "D.3.4.4	Un produit sanguin labile\n"
+                          "D.3.4.5	Autre\n"
+                          "D.3.4.5.1	Si autre, préciser :      ")
+    table.cell(2,5).text=("\n\n□ oui  □ non\n□ oui  □ non\n□ oui  □ non\n□ oui  □ non\n□ oui  □ non")
+    n=0
+    for row in table.rows:
+        for cell in row.cells:
+            paragraphs = cell.paragraphs
+            for paragraph in paragraphs:
+                if n==3:
+                    paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                for run in paragraph.runs:
+                    fontdebut = run.font
+                    fontdebut.name = 'Arial Narrow'
+                    fontdebut.size = docx.shared.Pt(10)
+                    if n==0 or n==1 or n==2:
+                        fontdebut.bold = True
+                    n=n+1
+    a=table.cell(0,0)
+    b=table.cell(0,5)
+    a.merge(b)
+    a=table.cell(1,0)
+    b=table.cell(1,5)
+    a.merge(b)
+    a=table.cell(2,0)
+    b=table.cell(3,4)
+    a.merge(b)
+    a=table.cell(2,5)
+    b=table.cell(3,5)
+    a.merge(b)
+    
+    '''Partie D4'''
+    
+    paragraph=document.add_paragraph()
+    
+    table = document.add_table(rows=8, cols=6, style='Table Grid')
+    table.cell(0,0).text=("D.4	PRÉPARATION DE THÉRAPIE CELLULAIRE")
+    table.cell(1,0).text=("D.4.1     Origine des cellules")
+    table.cell(2,0).text=("D.4.1.1   Autologue\n"
+                          "D.4.1.2   Allogénique\n"
+                          "D.4.1.3	 Xénogénique\n"
+                    	  "D.4.1.3.1 Si oui, préciser les espèces d’origine :      ")
+    table.cell(2,5).text=("\n□ oui  □ non\n□ oui  □ non\n□ oui  □ non")
+    table.cell(3,0).text=("D.4.2     Type de cellules")
+    table.cell(4,0).text=("D.4.2.1   Cellules souches\n"
+                          "D.4.2.2	 Cellules différenciées	\n"
+                          "D.4.2.2.1 Préciser le type de cellules (exemple : kératinocytes, fibroblastes, chondrocytes…) :  \n"    
+                          "D.4.2.3	 Les cellules sont-elles associées à une matrice ou un support	\n"
+                          "D.4.2.3.1 Si oui, préciser :     \n"
+                          "D.4.2.4	 Autre	\n"
+                          "D.4.2.4.1 Si oui, préciser :      ")
+    table.cell(4,5).text=("\n□ oui  □ non\n□ oui  □ non\n\n□ oui  □ non\n\n□ oui  □ non\n")
+    table.cell(5,0).text=("D.4.3	 Forme pharmaceutique :      \n"
+                          "D.4.4	 Durée maximale du traitement pour une personne prévue par le protocole :      \n"
+                          "D.4.5	 Dose maximale permise (préciser : dose journalière ou dose cumulée ; unités et voie d'administration) :      \n"
+                          "D.4.6	 Voie d’administration :   \n"   
+                          "D.4.7	 Nom de chaque substance active :      ")
+    table.cell(6,0).text=("D.4.8	 Dosage (préciser tous les dosages utilisés)")
+    table.cell(7,0).text=("D.4.8.1	 Unité de concentration :   \n"   
+                          "D.4.8.2	 Type de concentration (« nombre exact », « intervalle », « plus que » ou « jusqu’à ») :      \n"
+                          "D.4.8.3	 Concentration (nombre) :      ")
+    n=0
+    for row in table.rows:
+        for cell in row.cells:
+            paragraphs = cell.paragraphs
+            for paragraph in paragraphs:
+                if n==3 or n==6:
+                    paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                for run in paragraph.runs:
+                    fontdebut = run.font
+                    fontdebut.name = 'Arial Narrow'
+                    fontdebut.size = docx.shared.Pt(10)
+                    if n==0 or n==1 or n==4 or n==7 or n==8:
+                        fontdebut.bold = True
+                    n=n+1
+    a=table.cell(0,0)
+    b=table.cell(0,5)
+    a.merge(b)
+    a=table.cell(1,0)
+    b=table.cell(2,4)
+    a.merge(b)
+    a=table.cell(1,5)
+    b=table.cell(2,5)
+    a.merge(b)
+    a=table.cell(3,4)
+    b=table.cell(4,4)
+    a.merge(b)
+    a=table.cell(3,5)
+    b=table.cell(4,5)
+    a.merge(b)
+    a=table.cell(5,0)
+    b=table.cell(5,5)
+    a.merge(b)
+    a=table.cell(6,0)
+    b=table.cell(7,5)
+    a.merge(b)
+    
+    document.add_page_break()
+    
+    '''Partie D5'''
+    paragraph=document.add_paragraph()
+    paragraph=document.add_paragraph()
+    
+    table = document.add_table(rows=5, cols=6, style='Table Grid')
+    table.cell(0,0).text=("D.5	TISSU OU ORGANE")
+    table.cell(1,0).text=("D.5.1     Origine du tissu, du tissu composite ou de l’organe")
+    table.cell(2,0).text=("D.5.1.1   Autologue\n"
+                          "D.5.1.2   Allogénique\n"
+                          "D.5.1.3	 Xénogénique	\n"
+                          "D.5.1.3.1 Préciser les espèces d’origine :      ")
+    table.cell(3,0).text=("D.5.2	 Type de tissu ou d’organe")
+    table.cell(4,0).text=("D.5.2.1	 Tissu	\n"
+                          "D.5.2.1.1 Préciser le type de tissu (cornée, peau, os, …) :     \n" 
+                          "D.5.2.2	 Tissu composite	\n"
+                          "D.5.2.2.1 Préciser :      \n"
+                          "D.5.2.3	 Organe	\n"
+                          "D.5.2.3.1 Préciser :      ")
+    table.cell(2,5).text=("\n□ oui  □ non\n□ oui  □ non\n□ oui  □ non\n")
+    table.cell(4,5).text=("\n□ oui  □ non\n\n□ oui  □ non\n\n□ oui  □ non\n")
+    n=0
+    for row in table.rows:
+        for cell in row.cells:
+            paragraphs = cell.paragraphs
+            for paragraph in paragraphs:
+                if n==4 or n==7:
+                    paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                for run in paragraph.runs:
+                    fontdebut = run.font
+                    fontdebut.name = 'Arial Narrow'
+                    fontdebut.size = docx.shared.Pt(10)
+                    if n==0 or n==1 or n==4:
+                        fontdebut.bold = True
+                    n=n+1
+    a=table.cell(0,0)
+    b=table.cell(0,5)
+    a.merge(b)
+    a=table.cell(1,0)
+    b=table.cell(2,4)
+    a.merge(b)
+    a=table.cell(1,5)
+    b=table.cell(2,5)
+    a.merge(b)
+    a=table.cell(3,0)
+    b=table.cell(4,4)
+    a.merge(b)
+    a=table.cell(3,5)
+    b=table.cell(4,5)
+    a.merge(b)
+    
+    '''Partie D6'''
+    
+    paragraph=document.add_paragraph()
+    
+    table = document.add_table(rows=11, cols=6, style='Table Grid')
+    table.cell(0,0).text=("D.6	PRODUIT SANGUIN LABILE ")
+    table.cell(1,0).text=("D.6.1     Origine du produit sanguin labile")
+    table.cell(2,0).text=("D.6.1.1   Autologue\n"
+                          "D.6.1.2	 Homologue")
+    table.cell(2,5).text=("\n□ oui  □ non\n□ oui  □ non")
+    table.cell(3,0).text=("D.6.2	 Type de produit sanguin labile")
+    table.cell(4,0).text=("D.6.2.1	 Concentrés de Plaquettes	\n"
+                          "D.6.2.1.1 Préciser issus de sang total ou issus d’aphérèse :      \n"
+                          "D.6.2.2	 Plasma	\n"
+                          "D.6.2.2.1 Préciser issu de sang total ou issu d’aphérèse :      \n"
+                          "D.6.2.3	 Concentrés de Globules rouges	\n"
+                          "D.6.2.3.1 Préciser issus de sang total ou issus d’aphérèse :    \n"  
+                          "D.6.2.4	 Sang total	\n"
+                          "D.6.2.5	 Autre	\n"
+                          "D.6.2.5.1 Si autre, préciser :      ")
+    table.cell(4,5).text=("\n□ oui  □ non\n\n□ oui  □ non\n\n□ oui  □ non\n\n□ oui  □ non\n□ oui  □ non")
+    table.cell(5,0).text=("D.6.3	 Le produit sanguin labile est-il soumis à un procédé d’inactivation")
+    table.cell(5,5).text=("□ oui  □ non")
+    table.cell(6,0).text=("D.6.3.1	 Si oui, préciser :      ")
+    table.cell(7,0).text=("D.6.4	 Durée maximale du traitement pour une personne prévue par le protocole :      \n"
+                          "D.6.5	 Dose maximale permise (préciser : dose journalière ou dose cumulée ; unités) :    \n"  
+                          "D.6.6	 Dosage (préciser tous les dosages utilisés) :")
+    table.cell(8,0).text=("D.6.6.1	 Unité de concentration :      \n"
+                          "D.6.6.2	 Type de concentration (« nombre exact », « intervalle », « plus que » ou « jusqu’à ») :      \n"
+                          "D.6.6.3	 Concentration (nombre) :      \n")
+    table.cell(9,0).text=("D.6.7	 Nom du(des) dispositif(s) médical(aux) associé(s) au produit sanguin labile :      ")
+    
+    table.cell(10,0).text=("D.6.7.1	 Ce(s) dispositif(s) médical(aux) dispose(nt) d’un marquage CE\n"
+                           "D.6.7.2	 Si oui, est-il (sont-ils) utilisé(s) dans la (les) même(s) indication(s) que celle(s) du (de leurs) marquage(s) CE ?")
+    table.cell(10,5).text=("\n□ oui  □ non\n□ oui  □ non")
+    n=0
+    for row in table.rows:
+        for cell in row.cells:
+            paragraphs = cell.paragraphs
+            for paragraph in paragraphs:
+                if n==3 or n==6 or n==8 or n==14:
+                    paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                for run in paragraph.runs:
+                    fontdebut = run.font
+                    fontdebut.name = 'Arial Narrow'
+                    fontdebut.size = docx.shared.Pt(10)
+                    if n==0 or n==1 or n==4 or n==7 or n==10 or n==12:
+                        fontdebut.bold = True
+                    n=n+1
+    a=table.cell(0,0)
+    b=table.cell(0,5)
+    a.merge(b)
+    a=table.cell(1,0)
+    b=table.cell(2,4)
+    a.merge(b)
+    a=table.cell(1,5)
+    b=table.cell(2,5)
+    a.merge(b)
+    a=table.cell(3,4)
+    b=table.cell(4,4)
+    a.merge(b)
+    a=table.cell(3,5)
+    b=table.cell(4,5)
+    a.merge(b)
+    a=table.cell(5,0)
+    b=table.cell(6,4)
+    a.merge(b)
+    a=table.cell(5,5)
+    b=table.cell(6,5)
+    a.merge(b)
+    a=table.cell(7,0)
+    b=table.cell(8,4)
+    a.merge(b)
+    a=table.cell(9,0)
+    b=table.cell(10,4)
+    a.merge(b)
+    a=table.cell(9,4)
+    b=table.cell(10,4)
+    a.merge(b)
+    
+    '''Partie D7'''
+    paragraph=document.add_paragraph()
+    
+    table = document.add_table(rows=3, cols=6, style='Table Grid')
+    table.cell(0,0).text=("D.7  DONNEES RELATIVES AU PLACEBO (répéter la section autant de fois que nécessaire, le cas échéant)")
+    table.cell(1,0).text=("D.7.1	 Un placebo est-il utilisé ?\n"
+                          "D.7.2	 Cette section concerne le placebo numéro : (     )\n"
+                          "D.7.3	 Forme pharmaceutique :      \n"
+                          "D.7.4	 Voie d’administration :      \n"
+                          "D.7.5	 De quel produit est-ce le placebo ? Préciser le numéro du produit, tel qu'indiqué en D.1 : (     )")
+    table.cell(2,0).text=("D.7.5.1	 Composition, hormis la ou les substances actives :      \n"
+                          "D.7.5.2	 Est-elle identique à celle du produit étudié ?	\n"
+                          "D.7.5.2.1 Si non, préciser les principaux composants :      \n")
+    table.cell(1,5).text=("□ oui  □ non\n")
+    table.cell(2,5).text=("\n\n\n\n\n□ oui  □ non")
+    n=0
+    for row in table.rows:
+        for cell in row.cells:
+            paragraphs = cell.paragraphs
+            for paragraph in paragraphs:
+                if n==2 or n==3:
+                    paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                for run in paragraph.runs:
+                    fontdebut = run.font
+                    fontdebut.name = 'Arial Narrow'
+                    fontdebut.size = docx.shared.Pt(10)
+                    if n==0 or n==1 or n==4:
+                        fontdebut.bold = True
+                    n=n+1
+    a=table.cell(0,0)
+    b=table.cell(0,5)
+    a.merge(b)
+    a=table.cell(1,0)
+    b=table.cell(2,4)
+    a.merge(b)
+    a=table.cell(1,5)
+    b=table.cell(2,5)
+    a.merge(b)
+    
+    '''Partie D8'''
+    
+    paragraph=document.add_paragraph()
+    paragraph=document.add_paragraph()
+    
+    table = document.add_table(rows=3, cols=1, style='Table Grid')
+    table.cell(0,0).text=("D.8	DONNEES SUR LES ETABLISSEMENTS DE PRELEVEMENT, PREPARATION, CONSERVATION, LIBERATION, ADMINISTRATION ")
+    table.cell(1,0).text=("D.8.1	 PRODUIT SANGUIN LABILE :\n"
+                          "D.8.1.1	 Établissement où le produit est libéré :")
+    table.cell(2,0).text=("D.8.1.1.1 Nom de l’établissement, code de l’établissement, le cas échéant :      \n"
+                          "D.8.1.1.2 Adresse :     \n" 
+                          "D.8.1.1.3 Indiquer le numéro d’autorisation, ou la date d’agrément : \n"     
+                          "D.8.1.1.4 Si pas d’autorisation, préciser les motifs :       ")
+    n=0
+    for row in table.rows:
+        for cell in row.cells:
+            paragraphs = cell.paragraphs
+            for paragraph in paragraphs:
+                for run in paragraph.runs:
+                    fontdebut = run.font
+                    fontdebut.name = 'Arial Narrow'
+                    fontdebut.size = docx.shared.Pt(10)
+                    if n==0 or n==1:
+                        fontdebut.bold = True
+                    n=n+1
+    a=table.cell(1,0)
+    b=table.cell(2,0)
+    a.merge(b)
+
+    paragraph=document.add_paragraph()
+    
+    table = document.add_table(rows=11, cols=6, style='Table Grid')
+    table.cell(0,0).text=("D.8.2  PRÉPARATIONS DE THÉRAPIE CELLULAIRE, TISSUS, ORGANES :")
+    table.cell(1,0).text=("D.8.2.1	 Sites de prélèvement")
+    table.cell(2,0).text=("D.8.2.1.1 Nom de l’établissement, code de l’établissement, le cas échéant :      \n"
+                          "D.8.2.1.2 Adresse :      ")
+    table.cell(3,0).text=("D.8.2.2	 Sites de préparation, conservation, libération")
+    table.cell(4,0).text=("D.8.2.2.1 Nom de l’établissement, code de l’établissement, le cas échéant :  \n"    
+                          "D.8.2.2.2 Adresse :    \n"  
+                          "D.8.2.2.3 Indiquer le numéro d’autorisation, ou la date d’agrément  :      \n"
+                          "D.8.2.2.4 Si pas d’autorisation, préciser les motifs :       \n"
+                          "D.8.2.2.5 Pour les préparations de thérapie cellulaire : le local où est réalisée la préparation du produit a-t-il déjà fait l’objet d’une inspection par l’Afssaps lors d’une autre recherche biomédicale ?")
+    table.cell(4,5).text=("\n\n\n\n\n\n\n\n\n□ oui  □ non")
+    table.cell(5,0).text=("D.8.2.3	 Liste des sous-traitants")
+    table.cell(6,0).text=("D.8.2.3.1 Étape réalisée :   \n"  
+                          "D.8.2.3.2 Nom :     \n"
+                          "D.8.2.3.3 Adresse :      ")
+    table.cell(7,0).text=("D.8.2.4	 Sites d’administration")
+    table.cell(8,0).text=("D.8.2.4.1 Nom de l’établissement, code de l’établissement, le cas échéant :  \n"    
+                          "D.8.2.4.2 Adresse :      ")
+    table.cell(9,0).text=("D.8.2.5	 Établissement importateur, le cas échéant ")
+    table.cell(10,0).text=("D.8.2.5.1 Nom de l’établissement :      \n"
+                           "D.8.2.5.2 Adresse :      ")
+    n=0
+    for row in table.rows:
+        for cell in row.cells:
+            paragraphs = cell.paragraphs
+            for paragraph in paragraphs:
+                if n==5:
+                    paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                for run in paragraph.runs:
+                    fontdebut = run.font
+                    fontdebut.name = 'Arial Narrow'
+                    fontdebut.size = docx.shared.Pt(10)
+                    if n==0 or n==1 or n==3 or n==6 or n==8 or n==10:
+                        fontdebut.bold = True
+                    n=n+1
+    a=table.cell(0,0)
+    b=table.cell(10,4)
+    a.merge(b)
+    a=table.cell(0,5)
+    b=table.cell(10,5)
+    a.merge(b)
     
     
-    
-    
+
+
     
     
     
