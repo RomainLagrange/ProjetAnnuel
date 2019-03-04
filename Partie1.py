@@ -87,8 +87,10 @@ def Partie1(document):
     #Ecriture du titre1.4.2
     Titre3('1.4.2','Risques',document)
 
-    document.add_paragraph('L’investigateur doit constamment surveiller, évaluer et documenter les risques et doit s’assurer qu’ils pourront être gérés de manière satisfaisante.', style='Paragraphe')
- 
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    run1=p.add_run('L’investigateur doit constamment surveiller, évaluer et documenter les risques et doit s’assurer qu’ils pourront être gérés de manière satisfaisante.')
+    run1.style='Paragraphe'
     
      #Ecriture du titre1.5
     Titre2('1.5 Retombées attendues',document)

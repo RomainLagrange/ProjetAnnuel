@@ -11,6 +11,7 @@ from StyleProt1 import Style,Titre1, Titre2, Titre3, TexteGris, TexteGrisJustif
 from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_UNDERLINE, WD_LINE_SPACING, WD_COLOR_INDEX, WD_BREAK
 from docx.enum.style import WD_STYLE_TYPE
 from docx.shared import Cm, Pt, RGBColor, Inches
+from docx.enum.section import WD_ORIENT
 
 #MEMO POUR ECRIRE LES TITRES :
 #    Titre1('num + texte du protocole',document)
@@ -19,27 +20,32 @@ from docx.shared import Cm, Pt, RGBColor, Inches
 #    TexteGris(texte,document)
 #    TexteGrisJustif(texte,document)
 
-#AJOUTER JUSTIFY, IMAGES, ESPACEMENT LIGNES, TABLEAU
+#AJOUTER IMAGES, ESPACEMENT LIGNES, PAYSAGE 
 
 
-def Partie6(document):
-#def Partie6():
+#def Partie6(document):
+def Partie6():
     'Creation de la partie 6 du protocole de catégorie 1'
     document = docx.Document()
 
 
 #   Marge de la page
-#    sections = document.sections
-#    for section in sections:
-#        section.top_margin = Cm(2)
-#        section.bottom_margin = Cm(2)
-#        section.left_margin = Cm(2)
-#        section.right_margin = Cm(2)
+    sections = document.sections
+    for section in sections:
+        section.top_margin = Cm(2)
+        section.bottom_margin = Cm(2)
+        section.left_margin = Cm(2)
+        section.right_margin = Cm(2)
+
+
+#    section = document.sections[-1]
+  #  sections.orientation = WD_ORIENT.LANDSCAPE
 
 #---------------------------DEFINITIONS DES STYLES
  
 
-#    Style(document)
+    Style(document)
+
 
 
 #    
@@ -57,7 +63,66 @@ def Partie6(document):
     Titre2('6.2	Tableau récapitulatif du suivi d’un participant à la recherche',document)
     
     #AJOUTER TABLEAU
-   
+
+    table = document.add_table(rows = 8, cols = 8)
+    table.style = 'Table Grid' #Normal
+    row = table.rows[0]
+    row.cells[0].text= ('Nom de la visite')
+    row.cells[1].text = ('Pré-inclusion V-X*')
+    row.cells[2].text = ('Inclusion V0')
+    row.cells[3].text = ('Visite V1')
+    row.cells[4].text = ('Visite V2')
+    row.cells[5].text = ('Visite V0')
+    row.cells[6].text = ('Fin de traitement')
+    row.cells[7].text = ('Fin d’étude')
+    row = table.rows[1]
+    row.cells[0].text = ('Consentement éclairé')
+    row.cells[1].text = ('✓')
+    row = table.rows[2]
+    newtable=row.cells[0].add_table(rows = 1, cols = 2)
+    texte=newtable.rows[0]
+    texte.cells[0].text = ('Examen clinique')
+    texte.cells[1].text = ('1')
+    texte.cells[1].superscript= True
+    row.cells[1].text = ('✓')
+    row.cells[2].text = ('✓')
+    row.cells[3].text = ('✓')
+    row.cells[4].text = ('✓')
+    row = table.rows[3]
+    newtable=row.cells[0].add_table(rows = 1, cols = 2)
+    texte=newtable.rows[0]
+    texte.cells[0].text = ('Bilan biologique')
+    texte.cells[1].text = ('2')
+    texte.cells[1].superscript= True
+    row.cells[1].text = ('✓')
+    row.cells[2].text = ('✓')
+    row.cells[3].text = ('✓')
+    row.cells[4].text = ('✓')
+    row = table.rows[4]
+    row.cells[0].text = ('Dosage des ß HCG')
+    row.cells[1].text = ('✓')
+    row = table.rows[5]
+    newtable=row.cells[0].add_table(rows = 1, cols = 2)
+    texte=newtable.rows[0]
+    texte.cells[0].text = ('Examens para cliniques')
+    texte.cells[1].text = ('3')
+    texte.cells[1].superscript= True
+    row.cells[2].text = ('✓')
+    row = table.rows[6]
+    row.cells[0].text = ('.....')
+    row = table.rows[7]
+    row.cells[0].text = ('Recherche des EI')
+    row.cells[2].text = ('✓')
+    row.cells[3].text = ('✓')
+    row.cells[4].text = ('✓')
+    row.cells[5].text = ('✓')
+    row.cells[6].text = ('✓')
+    row.cells[7].text = ('✓')
+    
+    
+    
+    
+    
     p=document.add_paragraph()
     p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     run1=p.add_run('(*) ')
@@ -79,6 +144,7 @@ def Partie6(document):
     run2.font.italic= True
 
     p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     run1=p.add_run('2')
     run1.style='Paragraphe'
     run1.font.italic= True
@@ -88,6 +154,7 @@ def Partie6(document):
     run2.font.italic= True
 
     p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY    
     run1=p.add_run('3')
     run1.style='Paragraphe'
     run1.font.italic= True
@@ -109,6 +176,7 @@ def Partie6(document):
     TexteGris('prendre contact avec la promotion interne \n pour aide a la redaction de ce chapitre', document)
     
     p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     run1=p.add_run()
     run1.text='Lors de la visite de '
     run1.style='Paragraphe'
@@ -121,12 +189,14 @@ def Partie6(document):
     run3.style='Paragraphe'
     
     
-    p=document.add_paragraph()
+    p=document.add_paragraph()    
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     run1=p.add_run()
     run1.text=('Un exemplaire de la note d’information et du formulaire de consentement est alors remis au participant par le médecin investigateur.')
     run1.style='Paragraphe'
     
     p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     run1=p.add_run('Après cette séance d’information, le participant dispose d’un délai de réflexion. Le médecin investigateur est responsable de l’obtention du consentement éclairé écrit du participant.\n Si le participant donne son accord de participation, ce dernier et l’investigateur inscrivent leurs noms et prénoms en clair, datent et signent le formulaire de consentement. Celui-ci ')
     run1.style='Paragraphe'
     run2=p.add_run('doit être signé avant la réalisation de tout examen ')
@@ -137,6 +207,7 @@ def Partie6(document):
     run3.style='Paragraphe'
     
     p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     run1=p.add_run('L’exemplaire ')
     run1.style='Paragraphe'
     run2=p.add_run('original ')
@@ -146,11 +217,13 @@ def Partie6(document):
     run3.style='Paragraphe'
     
     p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     run1=p.add_run('L’investigateur précisera dans le dossier médical du patient sa participation à la recherche, les modalités du recueil du consentement ainsi que celle de l’information. ')
     run1.style='Paragraphe'
     
     
     p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     run1=p.add_run('Décrire le processus de numérotation du patient, par exemple : \n')
     run1.style='Paragraphe'
     run1.font.italic=True
@@ -160,17 +233,20 @@ def Partie6(document):
         #IMAGE NUMERO PATIENT
 
     p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     run1=p.add_run('Procédure d’urgence si applicable')
     run1.style='Paragraphe'
     run1.font.italic=True
     run1.font.underline=True
 
     p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     run1=p.add_run('Dans le cas d’une situation d’urgence et conformément à l’article L.1122-1-2, le consentement sera sollicité auprès de « proches » et seulement rétrospectivement auprès du patient dès une récupération suffisante lui permettant de donner son consentement libre et éclairé. ')
     run1.style='Paragraphe'
     
     
     p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     run1=p.add_run('Dans le cas où les « proches » ne peuvent pas être présents au moment de l’inclusion, une procédure d’urgence sera mise en place dans le cas d’une urgence vitale immédiate. Dans ce cas un médecin indépendant de l’étude, non déclaré comme médecin investigateur, peut donner son consentement d’urgence. L\'intéressé, ou le cas échéant, les membres de la famille ou la personne de confiance sont informés dès que possible et leur consentement leur est demandé pour la poursuite de cette recherche.')
     run1.style='Paragraphe'
     
@@ -178,10 +254,12 @@ def Partie6(document):
     Titre3('6.3.2','Déroulement de la visite',document)
 
     p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     run1=p.add_run('La visite de pré-inclusion/inclusion est assurée par le médecin investigateur. La visite de pré-inclusion a lieu entre X jours/semaines/mois et au plus tard X jours/semaines/mois avant la visite d’inclusion.')
     run1.style='Paragraphe'
     
     p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     run1=p.add_run('Avant tout examen lié à la recherche, l’investigateur recueille le consentement libre, éclairé et écrit du participant (ou de son représentant légal le cas échéant).')
     run1.style='Paragraphe'
     
@@ -196,6 +274,7 @@ def Partie6(document):
     Titre3('6.4.2','Randomisation du patient',document)
 
     p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     run1=p.add_run('Lorsqu’un investigateur souhaite effectuer la randomisation/l’inclusion après avoir vérifié l’éligibilité du participant/cluster, il se connecte sur le site Internet de l’e-CRF ')
     run1.style='Paragraphe'
     run2=p.add_run('https://www.chu-poitiers.hugo-online.fr/')
@@ -205,6 +284,7 @@ def Partie6(document):
     run3.style='Paragraphe'
 
     p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     p.style='List Bullet'
     run1=p.add_run('Si l’étude est en ouvert : ')
     run1.style='Paragraphe'
@@ -218,6 +298,7 @@ def Partie6(document):
     run4.style='Paragraphe'    
     
     p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     p.style='List Paragraph'
     run1=p.add_run('OU')
     run1.style='Paragraphe'
@@ -226,6 +307,7 @@ def Partie6(document):
     run1.font.underline=True    
    
     p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     p.style='List Bullet'
     run1=p.add_run('Si l’étude est en double aveugle : ')
     run1.style='Paragraphe'
@@ -240,6 +322,7 @@ def Partie6(document):
     
     #FINIR 
     p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     run1=p.add_run('Les numéros de randomisation sont établis selon des listes établies à l’avance par le méthodologiste de la recherche (voir paragraphe 5.2).')
     run1.style='Paragraphe'
 
@@ -260,6 +343,7 @@ def Partie6(document):
     Titre2('6.6	Visite de fin de la recherche',document)
     
     p=document.add_paragraph('En cas de sortie prématurée, l’investigateur doit en documenter les raisons de façon aussi complète que possible dans le dossier médical et réaliser une visite de fin d’étude. Il complètera la page de sortie prématurée du CRF. \nEn cas de sujet perdu de vue, l’investigateur mettra tout en œuvre pour reprendre contact avec la personne et connaître les raisons.')
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     run1=p.add_run()
     run1.style='Paragraphe'
     
@@ -273,47 +357,56 @@ def Partie6(document):
     Titre3('6.7.1','Arrêt de participation définitif ou temporaire d’un patient dans l’étude)',document)
 
     p=document.add_paragraph('En fonction de l’état de santé du patient, l’investigateur devra faire son possible pour que les patients continuent à participer à l’étude et / ou à recevoir leur traitement. Cependant, il pourra interrompre temporairement ou définitivement la participation d’une personne à la recherche ou d’une partie ou de la totalité de la recherche. Les éléments suivants peuvent justifier l’arrêt définitif ou temporaire de la participation d’une personne à la recherche ou d’une partie ou de la totalité de la recherche.')
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     run1=p.add_run()
     run1.style='Paragraphe'
     
     p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     run1=p.add_run('Voir si applicable :')
     run1.style='Paragraphe'
     run1.font.italic=True
 
     p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     p.style='List Bullet'
     run1=p.add_run('Evénement(s) indésirable(s) qu’il(s) soi(en)t lié(s) à une procédure du protocole ou au produit à l’étude,')
     run1.style='Paragraphe'
 
     p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     p.style='List Bullet'
     run1=p.add_run('Déviation au protocole (apparition d’un critère de non-inclusion du protocole, prise d’un traitement non autorisé),')
     run1.style='Paragraphe'
 
     p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     p.style='List Bullet'
     run1=p.add_run('Survenue d’une modification rendant impossible les investigations à effectuer ou la prise du traitement ou modifiant la réponse au traitement à l’étude,')
     run1.style='Paragraphe'
 
 
     p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     p.style='List Bullet'
     run1=p.add_run('Retrait du consentement : les patients peuvent retirer leur consentement et demander à sortir de l’étude à n’importe quel moment et ce, quelle qu’en soit la raison,')
     run1.style='Paragraphe'
     
 
     p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     p.style='List Bullet'
     run1=p.add_run('Toute raison qui servirait au mieux les intérêts du sujet (par exemple en cas d’événements indésirables graves nécessitant une prise en charge incompatible avec le protocole).')
     run1.style='Paragraphe'
 
 
     p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     run1=p.add_run('La date et la raison de la sortie d’essai ou de l’arrêt du traitement devront être notées dans le dossier médical du patient et le cahier d’observation. La visite de fin d’étude devra être réalisée dans la mesure du possible.')
     run1.style='Paragraphe'
 
     p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     run1=p.add_run('Dans tous les cas, et dans la mesure du possible, l’investigateur devra compléter la visite de fin d’étude du CRF.')
     run1.style='Paragraphe'
 
@@ -326,6 +419,7 @@ def Partie6(document):
     Titre3('6.7.3','Modalités et calendrier de recueil pour ces données',document)
 
     p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     run1=p.add_run('Les données disponibles des patients sortis d’étude pour raison médicale seront recueillies pour l’analyse. Les données des patients ayant retiré leur consentement seront analysées uniquement si les patients ont donné leur accord. Si le patient n’a pas donné son accord, toutes les données de l’étude le concernant seront supprimées.')
     run1.style='Paragraphe'
     
@@ -333,6 +427,7 @@ def Partie6(document):
     Titre3('6.7.4','Modalités de suivi de ces personnes',document)
 
     p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     run1=p.add_run('La sortie d\'étude d\'un participant ne changera en rien sa prise en charge habituelle par rapport à sa maladie. Il ne bénéficiera cependant pas des évaluations cliniques prévues selon le protocole.')
     run1.style='Paragraphe'
 
@@ -366,14 +461,17 @@ def Partie6(document):
     Titre2('6.10	Arrêt d’une partie ou de la totalité de la recherche',document)
     
     p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     run1=p.add_run('Le CHU de Poitiers se réserve le droit d\'interrompre l’étude, à tout moment, s\'il s\'avère que les objectifs d’inclusion ne sont pas atteints.')
     run1.style='Paragraphe'
     
     p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     run1=p.add_run('L’étude peut être interrompue prématurément en cas de survenue d’événements indésirables inattendus, graves nécessitant une revue du profil d\'innocuité du produit. De même, des événements imprévus ou de nouvelles informations relatives au produit, au vu desquels les objectifs de l\'étude ou du programme clinique ne seront vraisemblablement pas atteints, peuvent amener le promoteur à interrompre prématurément l’étude.')
     run1.style='Paragraphe'
 
     p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     run1=p.add_run('En cas d’arrêt prématuré de l’étude, l’information sera transmise par le promoteur dans un délai de 15 jours à l’ANSM et au CPP.')
     run1.style='Paragraphe'
 
@@ -382,4 +480,4 @@ def Partie6(document):
     run = paragraph.add_run()
     run.add_break(WD_BREAK.PAGE)
   
- #   document.save("Partie6.docx")   
+    document.save("Partie6.docx")   
