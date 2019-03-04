@@ -621,14 +621,14 @@ def partie_D(document):
                           "D.5.2.2.1 Préciser :      \n"
                           "D.5.2.3	Organe	\n"
                           "D.5.2.3.1 Préciser :      ")
-    table.cell(2,5).text=("\n□ oui  □ non\n□ oui  □ non\n□ oui  □ non\n")
-    table.cell(4,5).text=("\n□ oui  □ non\n\n□ oui  □ non\n\n□ oui  □ non\n")
+    table.cell(1,5).text=("\n□ oui  □ non\n□ oui  □ non\n□ oui  □ non\n")
+    table.cell(3,5).text=("\n□ oui  □ non\n\n□ oui  □ non\n\n□ oui  □ non\n")
     n=0
     for row in table.rows:
         for cell in row.cells:
             paragraphs = cell.paragraphs
             for paragraph in paragraphs:
-                if n==5 or n==7:
+                if n==2 or n==5:
                     paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
                 for run in paragraph.runs:
                     fontdebut = run.font
@@ -846,10 +846,12 @@ def partie_D(document):
     b=table.cell(10,5)
     a.merge(b)
     
+    
+    
+def partie_E(document):
+
     document.add_page_break()
     
-def Partie_E(document):
-
     paragraph=document.add_paragraph()
     sentence=paragraph.add_run("\nE. INFORMATIONS GENERALES RELATIVES A LA RECHERCHE BIOMEDICALE")
     fontdebut = sentence.font
@@ -981,7 +983,7 @@ def Partie_E(document):
                         fontdebut.bold = True
                     n=n+1
     a=table.cell(0,0)
-    b=table.cell(0,3)
+    b=table.cell(0,2)
     a.merge(b)
     a=table.cell(1,0)
     b=table.cell(1,1)
@@ -1016,7 +1018,7 @@ def Partie_E(document):
                         fontdebut.bold = True
                     n=n+1
     a=table.cell(0,0)
-    b=table.cell(0,3)
+    b=table.cell(0,2)
     a.merge(b)
     a=table.cell(1,0)
     b=table.cell(1,1)
@@ -1111,7 +1113,7 @@ def partie_F_G(document):
     
     '''Partie F'''
     paragraph=document.add_paragraph("\nF. PERSONNES PARTICIPANT A LA RECHERCHE\n", style='debut_page')
-    table = document.add_table(rows=1, cols=6, style='Table Grid')
+    table = document.add_table(rows=2, cols=6, style='Table Grid')
     table.cell(0,0).text=("F.1	TRANCHE D'ÂGE ÉTUDIÉE")
     table.cell(1,0).text=("F.1.1	Moins de 18 ans\n"
                           "Si oui, préciser :\n"
@@ -1149,15 +1151,13 @@ def partie_F_G(document):
     paragraph=document.add_paragraph()
     table = document.add_table(rows=2, cols=1, style='Table Grid')
     table.cell(0,0).text=("F.2	SEXE")
-    table.cell(0,5).text=("F.2.1    Femmes    □\n"
+    table.cell(1,0).text=("F.2.1    Femmes    □\n"
                           "F.2.2	Hommes    □")
     n=0
     for row in table.rows:
         for cell in row.cells:
             paragraphs = cell.paragraphs
             for paragraph in paragraphs:
-                if n==1:
-                    paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
                 for run in paragraph.runs:
                     fontdebut = run.font
                     fontdebut.name = 'Arial'
@@ -1168,7 +1168,7 @@ def partie_F_G(document):
 
     '''Partie F3'''
     paragraph=document.add_paragraph("\nF. PERSONNES PARTICIPANT A LA RECHERCHE\n", style='debut_page')
-    table = document.add_table(rows=1, cols=6, style='Table Grid')
+    table = document.add_table(rows=2, cols=6, style='Table Grid')
     table.cell(0,0).text=("F.3	GROUPE DE PERSONNES PARTICIPANT A LA RECHERCHE")
     table.cell(1,0).text=("F.3.1        Volontaires sains\n"
                           "F.3.2        Volontaires malades\n"
@@ -1208,7 +1208,7 @@ def partie_F_G(document):
     paragraph=document.add_paragraph()
     table = document.add_table(rows=2, cols=1, style='Table Grid')
     table.cell(0,0).text=("F.4	NOMBRE PREVU DE PERSONNES A INCLURE")
-    table.cell(0,5).text=("F.4.1	En France\n"
+    table.cell(1,0).text=("F.4.1	En France\n"
                           "F.4.2	En cas de recherche  menée dans plusieurs pays :\n"
                           "F.4.2.1	Dans la Communauté européenne\n"
                           "F.4.2.2	Pour l’ensemble de la recherche")
@@ -1217,8 +1217,6 @@ def partie_F_G(document):
         for cell in row.cells:
             paragraphs = cell.paragraphs
             for paragraph in paragraphs:
-                if n==1:
-                    paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
                 for run in paragraph.runs:
                     fontdebut = run.font
                     fontdebut.name = 'Arial'
@@ -1253,7 +1251,7 @@ def partie_F_G(document):
     paragraph=document.add_paragraph()
     table = document.add_table(rows=2, cols=1, style='Table Grid')
     table.cell(0,0).text=("G.1	INVESTIGATEUR COORDONNATEUR (si recherche multicentrique) et investigateur principal (si recherche monocentrique) ")
-    table.cell(0,5).text=("G.1.1	Nom :      \n"
+    table.cell(1,0).text=("G.1.1	Nom :      \n"
                           "G.1.3	Prénom :      \n"
                           "G.1.4	Qualification, spécialité :      \n"
                           "G.1.5	Adresse professionnelle :      ")
@@ -1274,7 +1272,7 @@ def partie_F_G(document):
     paragraph=document.add_paragraph()
     table = document.add_table(rows=2, cols=1, style='Table Grid')
     table.cell(0,0).text=("G.2	INVESTIGATEURS PRINCIPAUX (si recherche multicentrique ; répéter cette section autant de fois que nécessaire) ")
-    table.cell(0,5).text=("G.2.1	Nom :      \n"
+    table.cell(1,0).text=("G.2.1	Nom :      \n"
                           "G.2.3	Prénom :     \n" 
                           "G.2.4	Qualification, spécialité :      \n"
                           "G.2.5	Adresse professionnelle :      ")
@@ -1295,7 +1293,7 @@ def partie_F_G(document):
     paragraph=document.add_paragraph()
     table = document.add_table(rows=2, cols=1, style='Table Grid')
     table.cell(0,0).text=("G.3	PLATEAU TECHNIQUE UTILISE AU COURS DE LA RECHERCHE\nLaboratoire ou autre plateau technique où sont effectuées de façon centralisée les mesures ou évaluations des paramètres ou critères principaux étudiés dans la recherche (à compléter pour chaque organisme, répéter la section si nécessaire)")
-    table.cell(0,5).text=("G.3.1	Organisme :      \n"
+    table.cell(1,0).text=("G.3.1	Organisme :      \n"
                           "G.3.2	Nom de la personne à contacter :      \n"
                           "G.3.3	Adresse :      \n"
                           "G.3.4	Numéro de téléphone :      \n"
@@ -1315,7 +1313,7 @@ def partie_F_G(document):
     
     '''Partie G4'''
     paragraph=document.add_paragraph("\nF. PERSONNES PARTICIPANT A LA RECHERCHE\n", style='debut_page')
-    table = document.add_table(rows=1, cols=6, style='Table Grid')
+    table = document.add_table(rows=2, cols=6, style='Table Grid')
     table.cell(0,0).text=("G.4	PRESTATAIRE A QUI LE PROMOTEUR A CONFIE CERTAINES OBLIGATIONS ET FONCTIONS AFFERENTES A LA RECHERCHE (à compléter pour chaque organisme, répéter la section si nécessaire)")
     table.cell(1,0).text=("G.4.1	    Le promoteur a-t-il confié en partie ou en totalité des obligations et des fonctions majeures lui incombant au titre de la recherche à un autre organisme ou à un tiers ?\n"
                           "Préciser pour chaque organisme :\n"
