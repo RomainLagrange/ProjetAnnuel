@@ -7,11 +7,12 @@ Created on Mon Feb 18 11:51:47 2019
 
 import docx
 import StyleProt1
-from StyleProt1 import Style,Titre1, Titre2, Titre3, TexteGris, TexteGrisJustif
+from StyleProt1 import Style,Titre1, Titre2, Titre3, TexteGris, TexteGrisJustif, change_orientation, Titre2Paysage
 from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_UNDERLINE, WD_LINE_SPACING, WD_COLOR_INDEX, WD_BREAK
 from docx.enum.style import WD_STYLE_TYPE
 from docx.shared import Cm, Pt, RGBColor, Inches
 from docx.enum.section import WD_ORIENT
+from docx.enum.table import WD_TABLE_ALIGNMENT,WD_ROW_HEIGHT, WD_ALIGN_VERTICAL
 
 #MEMO POUR ECRIRE LES TITRES :
 #    Titre1('num + texte du protocole',document)
@@ -30,12 +31,21 @@ def Partie6():
 
 
 #   Marge de la page
+    
     sections = document.sections
+#    section.orientation = WD_ORIENT.PORTRAIT
+#    section.top_margin = Cm(2)
+#    section.bottom_margin = Cm(2)
+#    section.left_margin = Cm(2)
+#    section.right_margin = Cm(2)
+
+#    print(len(sections))
     for section in sections:
         section.top_margin = Cm(2)
         section.bottom_margin = Cm(2)
         section.left_margin = Cm(2)
         section.right_margin = Cm(2)
+        
 
 
 #    section = document.sections[-1]
@@ -59,70 +69,190 @@ def Partie6():
    # Ecriture du 6.1  
     Titre2('6.1	Calendrier de la recherche',document)
     
-    # Ecriture du 6.2  
-    Titre2('6.2	Tableau récapitulatif du suivi d’un participant à la recherche',document)
+    #format paysage
+    change_orientation(document)
     
-    #AJOUTER TABLEAU
 
-    table = document.add_table(rows = 8, cols = 8)
+
+    
+    # Ecriture du 6.2  
+    Titre2Paysage('6.2	Tableau récapitulatif du suivi d’un participant à la recherche',document)
+ #   Titre2(texte,document)
+
+    #TABLEAU
+    table = document.add_table(rows = 10, cols = 8)
     table.style = 'Table Grid' #Normal
-    row = table.rows[0]
-    row.cells[0].text= ('Nom de la visite')
-    row.cells[1].text = ('Pré-inclusion V-X*')
-    row.cells[2].text = ('Inclusion V0')
-    row.cells[3].text = ('Visite V1')
-    row.cells[4].text = ('Visite V2')
-    row.cells[5].text = ('Visite V0')
-    row.cells[6].text = ('Fin de traitement')
-    row.cells[7].text = ('Fin d’étude')
+    table.alignment = WD_TABLE_ALIGNMENT.CENTER 
+    for cell in table.columns[0].cells: #largeur des colonnes
+        cell.width = Cm(4.57)
+        cell.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
+    for cell in table.columns[1].cells:
+        cell.width = Cm(2.51)
+        cell.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
+    for cell in table.columns[2].cells:
+        cell.width = Cm(1.91)
+        cell.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
+    for cell in table.columns[3].cells:
+        cell.width = Cm(2)
+        cell.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
+    for cell in table.columns[4].cells:
+        cell.width = Cm(2.5)
+        cell.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
+    for cell in table.columns[5].cells:
+        cell.width = Cm(2.5)
+        cell.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
+    for cell in table.columns[6].cells:
+        cell.width = Cm(2.5)
+        cell.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
+    for cell in table.columns[7].cells:
+        cell.width = Cm(2.5)
+        cell.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
+    row = table.rows[0] #lignes 1
+    row.height = Pt(28) # hauteur
+    p=row.cells[0].add_paragraph('Nom de la visite')
+    p.style.font.name='Times New Roman'
+    p.alignment=WD_ALIGN_PARAGRAPH.LEFT
+    p=row.cells[1].add_paragraph('Pré-inclusion\nV-X*')
+    p.style.font.name='Times New Roman'
+    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    p=row.cells[2].add_paragraph('Inclusion\nV0')
+    p.style.font.name='Times New Roman'
+    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    p=row.cells[3].add_paragraph('Visite\nV1')
+    p.style.font.name='Times New Roman'
+    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    p=row.cells[4].add_paragraph('Visite\nV2')
+    p.style.font.name='Times New Roman'
+    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    p=row.cells[5].add_paragraph('Visite\nV0')
+    p.style.font.name='Times New Roman'
+    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    p=row.cells[6].add_paragraph('Fin de\ntraitement')
+    p.style.font.name='Times New Roman'
+    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    p=row.cells[7].add_paragraph('Fin d’étude')
+    p.style.font.name='Times New Roman'
+    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
     row = table.rows[1]
-    row.cells[0].text = ('Consentement éclairé')
-    row.cells[1].text = ('✓')
+    row.height_rule = WD_ROW_HEIGHT.EXACTLY
+    row.height = Pt(28)
+    p=row.cells[0].add_paragraph('Consentement éclairé')
+    p.style.font.name='Times New Roman'
+    p.alignment=WD_ALIGN_PARAGRAPH.LEFT
+    p=row.cells[1].add_paragraph('✓')
+    p.style.font.name='Times New Roman'
+    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
     row = table.rows[2]
-    newtable=row.cells[0].add_table(rows = 1, cols = 2)
-    texte=newtable.rows[0]
-    texte.cells[0].text = ('Examen clinique')
-    texte.cells[1].text = ('1')
-    texte.cells[1].superscript= True
-    row.cells[1].text = ('✓')
-    row.cells[2].text = ('✓')
-    row.cells[3].text = ('✓')
-    row.cells[4].text = ('✓')
+    row.height_rule = WD_ROW_HEIGHT.EXACTLY
+    row.height = Pt(28)
+#    newtable=row.cells[0].add_table(rows = 1, cols = 2)
+#    texte=newtable.rows[0]
+    p=row.cells[0].add_paragraph('Examen clinique')
+    p.style.font.name='Times New Roman'
+    p.alignment=WD_ALIGN_PARAGRAPH.LEFT
+#    p=texte.cells[1].add_paragraph('1')
+#    p.style.font.name='Times New Roman'
+#    p.alignment=WD_ALIGN_PARAGRAPH.LEFT
+#    texte.cells[1].superscript= True
+    p=row.cells[1].add_paragraph('✓')
+    p.style.font.name='Times New Roman'
+    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    p=row.cells[2].add_paragraph('✓')
+    p.style.font.name='Times New Roman'
+    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    p=row.cells[3].add_paragraph('✓')
+    p.style.font.name='Times New Roman'
+    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    p=row.cells[4].add_paragraph('✓')
+    p.style.font.name='Times New Roman'
+    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
     row = table.rows[3]
-    newtable=row.cells[0].add_table(rows = 1, cols = 2)
-    texte=newtable.rows[0]
-    texte.cells[0].text = ('Bilan biologique')
-    texte.cells[1].text = ('2')
-    texte.cells[1].superscript= True
-    row.cells[1].text = ('✓')
-    row.cells[2].text = ('✓')
-    row.cells[3].text = ('✓')
-    row.cells[4].text = ('✓')
+    row.height_rule = WD_ROW_HEIGHT.EXACTLY
+    row.height = Pt(28)
+#    newtable=row.cells[0].add_table(rows = 1, cols = 2)
+#    texte=newtable.rows[0]
+    p=row.cells[0].add_paragraph('Bilan biologique')
+    p.style.font.name='Times New Roman'
+    p.alignment=WD_ALIGN_PARAGRAPH.LEFT
+#    p=texte.cells[1].add_paragraph('2')
+#    p.style.font.name='Times New Roman'
+#    texte.cells[1].superscript= True
+    p=row.cells[1].add_paragraph('✓')
+    p.style.font.name='Times New Roman'
+    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    p=row.cells[2].add_paragraph('✓')
+    p.style.font.name='Times New Roman'
+    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    p=row.cells[3].add_paragraph('✓')
+    p.style.font.name='Times New Roman'
+    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    p=row.cells[4].add_paragraph('✓')
+    p.style.font.name='Times New Roman'
+    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
     row = table.rows[4]
-    row.cells[0].text = ('Dosage des ß HCG')
-    row.cells[1].text = ('✓')
+    row.height_rule = WD_ROW_HEIGHT.EXACTLY
+    row.height = Pt(28)
+    p=row.cells[0].add_paragraph('Dosage des ß HCG')
+    p.style.font.name='Times New Roman'
+    p.alignment=WD_ALIGN_PARAGRAPH.LEFT
+    p=row.cells[1].add_paragraph('✓')
+    p.style.font.name='Times New Roman'
+    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
     row = table.rows[5]
-    newtable=row.cells[0].add_table(rows = 1, cols = 2)
-    texte=newtable.rows[0]
-    texte.cells[0].text = ('Examens para cliniques')
-    texte.cells[1].text = ('3')
-    texte.cells[1].superscript= True
-    row.cells[2].text = ('✓')
+    row.height_rule = WD_ROW_HEIGHT.EXACTLY
+    row.height = Pt(28)
+#    newtable=row.cells[0].add_table(rows = 1, cols = 2)
+#    texte=newtable.rows[0]
+    p=row.cells[0].add_paragraph('Examens para cliniques')
+    p.style.font.name='Times New Roman'
+    p.alignment=WD_ALIGN_PARAGRAPH.LEFT
+#    p=texte.cells[1].add_paragraph('3')
+#    p.style.font.name='Times New Roman'
+#    texte.cells[1].superscript= True
+    p=row.cells[2].add_paragraph('✓')
+    p.style.font.name='Times New Roman'
+    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
     row = table.rows[6]
-    row.cells[0].text = ('.....')
+    row.height_rule = WD_ROW_HEIGHT.EXACTLY
+    row.height = Pt(28)
+    p=row.cells[0].add_paragraph('.....')
+    p.alignment=WD_ALIGN_PARAGRAPH.LEFT
     row = table.rows[7]
-    row.cells[0].text = ('Recherche des EI')
-    row.cells[2].text = ('✓')
-    row.cells[3].text = ('✓')
-    row.cells[4].text = ('✓')
-    row.cells[5].text = ('✓')
-    row.cells[6].text = ('✓')
-    row.cells[7].text = ('✓')
+    row.height_rule = WD_ROW_HEIGHT.EXACTLY
+    row.height = Pt(28)
+    p=row.cells[0].add_paragraph('Recherche des EI')
+    p.style.font.name='Times New Roman'
+    p.alignment=WD_ALIGN_PARAGRAPH.LEFT
+    p=row.cells[2].add_paragraph('✓')
+    p.style.font.name='Times New Roman'
+    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    p=row.cells[3].add_paragraph('✓')
+    p.style.font.name='Times New Roman'
+    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    p=row.cells[4].add_paragraph('✓')
+    p.style.font.name='Times New Roman'
+    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    p=row.cells[5].add_paragraph('✓')
+    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    p=row.cells[6].add_paragraph('✓')
+    p.style.font.name='Times New Roman'
+    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    p=row.cells[7].add_paragraph('✓')
+    p.style.font.name='Times New Roman'
+    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    row = table.rows[8]
+    row.height_rule = WD_ROW_HEIGHT.EXACTLY
+    row.height = Pt(28)
+    row = table.rows[9]
+    row.height_rule = WD_ROW_HEIGHT.EXACTLY
+    row.height = Pt(28)
     
-    
-    
-    
-    
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    run1=p.add_run(' ')
+    run1.style='Paragraphe'
+    run1.font.italic= True
+
     p=document.add_paragraph()
     p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     run1=p.add_run('(*) ')
@@ -163,6 +293,16 @@ def Partie6():
     run2.style='Paragraphe'
     run2.font.italic= True
 
+    paragraph = document.add_paragraph()
+    run = paragraph.add_run()
+    run.add_break(WD_BREAK.PAGE)
+    
+    
+    #format portrait
+    change_orientation(document)
+
+
+    
     # Ecriture du 6.3  
     Titre2('6.3	Visites de pré-inclusion / inclusion = Visite V0',document)
     

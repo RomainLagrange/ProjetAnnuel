@@ -10,6 +10,8 @@ from docx.enum.style import WD_STYLE_TYPE
 from docx.shared import Cm, Pt, RGBColor, Inches
 from docx.oxml.ns import nsdecls
 from docx.oxml import parse_xml
+from docx.enum.section import WD_ORIENT, WD_SECTION
+
 
 
 
@@ -58,6 +60,9 @@ def TexteGrisJustif(texte,document):
     paragraph=document.add_paragraph(' ')
 
    # pt.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+   
+def Titre2Paysage(texte,document):
+    document.add_paragraph(texte+'\n', style='paysage')
 
 def Style(document):
     'Défintion des styles du protocole de catégorie 1'
@@ -147,5 +152,27 @@ def Style(document):
     fontIndic.name = 'Times New Roman'   
     fontIndic.size = docx.shared.Pt(11)
     fontIndic.italic= True
+    
+    
+    #style specifique protocle 1 partie 6.2 pour indentation
+    stylepaysage = styles.add_style('paysage', WD_STYLE_TYPE.PARAGRAPH)
+    stylepaysage.base_style = styles['Heading2']
+    fontpaysage = stylepaysage.font
+    fontpaysage.name = 'Times New Roman'
+    fontpaysage.size = docx.shared.Pt(14)
+    fontpaysage.bold= True
+    fontpaysage.color.rgb = RGBColor(0x0,0x0,0x0)
+    stylepaysage.paragraph_format.left_indent = Cm(1.25)
+    
+    
+
+def change_orientation(document):
+    current_section = document.sections[-1]
+    new_width, new_height = current_section.page_height, current_section.page_width
+    new_section = document.add_section(WD_SECTION.NEW_PAGE)
+    new_section.orientation = WD_ORIENT.LANDSCAPE
+    new_section.page_width = new_width
+    new_section.page_height = new_height
+    return new_section
     
 
