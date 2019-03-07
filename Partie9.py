@@ -52,6 +52,114 @@ def Partie9(document):
     #Ecriture du 9.1  
     Titre2('9.1	Définitions',document)
     
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    run1=p.add_run('Evénement indésirable ')
+    run1.style='Paragraphe'
+    run1.font.bold= True
+    run2=p.add_run('(article R1123-46 du code de la santé publique)\nToute manifestation nocive survenant chez une personne qui se prête à une recherche impliquant la personne humaine, que cette manifestation soit liée ou non à la recherche ou au produit sur lequel porte cette recherche.')
+    run2.style='Paragraphe'
+    
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    run1=p.add_run('Effet indésirable ')
+    run1.style='Paragraphe'
+    run1.font.bold= True
+    run2=p.add_run('(article R1123-46 du code de la santé publique)\nEvénement indésirable survenant chez une personne qui se prête à une recherche impliquant la personne humaine, lorsque cet événement est lié à la recherche ou au produit sur lequel porte cette recherche.')
+    run2.style='Paragraphe'
+    
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    run1=p.add_run('Evénement ou effet indésirable grave ')
+    run1.style='Paragraphe'
+    run1.font.bold= True
+    run2=p.add_run('(article R1123-46 du code de la santé publique et guide ICH E2B)\nTout événement ou effet indésirable qui :')
+    run2.style='Paragraphe'
+    
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+    p.style='List Bullet 2'
+    run1=p.add_run('entraîne la mort,')
+    run1.style='Paragraphe'
+    
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+    p.style='List Bullet 2'
+    run1=p.add_run('met en danger la vie de la personne qui se prête à la recherche,')
+    run1.style='Paragraphe'
+    
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+    p.style='List Bullet 2'
+    run1=p.add_run('nécessite une hospitalisation ou la prolongation de l\'hospitalisation,')
+    run1.style='Paragraphe'
+    
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+    p.style='List Bullet 2'
+    run1=p.add_run('provoque une incapacité ou un handicap important ou durable,')
+    run1.style='Paragraphe'
+    
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+    p.style='List Bullet 2'
+    run1=p.add_run('se traduit par une anomalie ou une malformation congénitale,')
+    run1.style='Paragraphe'
+    
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+    p.style='List Bullet 2'
+    run1=p.add_run('ou tout événement considéré comme médicalement grave,')
+    run1.style='Paragraphe'
+    
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    run1=p.add_run('et s\'agissant du médicament, quelle que soit la dose administrée.')
+    run1.style='Paragraphe'
+    
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    run1=p.add_run('L’expression « mise en jeu du pronostic vital » est réservée à une menace vitale immédiate, au moment de l’événement indésirable.')
+    run1.style='Paragraphe'
+    
+    
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    run1=p.add_run('Effet indésirable inattendu ')
+    run1.style='Paragraphe'
+    run1.font.bold= True
+    run2=p.add_run('(article R1123-46 du code de la santé publique)')
+    run2.style='Paragraphe'
+    
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+    p.style='List Bullet 2'
+    run1=p.add_run('Pour les recherches portant sur un médicament, effet indésirable inattendu : tout effet indésirable du produit dont la nature, la sévérité, la fréquence ou l\'évolution ne concorde pas avec les informations de référence sur la sécurité mentionnées dans le résumé des caractéristiques du produit ou dans la brochure pour l’investigateur lorsque le produit n’est pas autorisé.')
+    run1.style='Paragraphe'
+    
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+    p.style='List Bullet 2'
+    run1=p.add_run('Pour les recherches portant sur un dispositif médical ou sur un dispositif médical de diagnostic in vitro, effet indésirable inattendu : tout effet du dispositif dont la nature, la sévérité ou l’évolution ne concordent pas avec les informations de référence figurant respectivement dans la notice d’instruction ou dans la notice d’utilisation du dispositif lorsque celui-ci fait l’objet d’un marquage CE, et dans le protocole ou la brochure pour l’investigateur lorsqu’il ne fait pas l’objet d’un tel marquage.')
+    run1.style='Paragraphe'
+    
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+    p.style='List Bullet 2'
+    run1=p.add_run('Pour les autres recherches impliquant la personne humaine, effet indésirable inattendu : tout effet indésirable dont la nature, la sévérité ou l’évolution ne concorde pas avec les informations relatives aux produits, actes pratiqués et méthodes utilisées au cours de la recherche')
+    run1.style='Paragraphe'
+    
+
+ 
     #Ecriture du 9.2  
     Titre2('9.2	Description des événements indésirables graves attendus',document)
     

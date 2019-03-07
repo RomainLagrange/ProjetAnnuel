@@ -18,21 +18,27 @@ from docx.enum.section import WD_ORIENT, WD_SECTION
 def Titre1(texte, document):
     paragraph=document.add_paragraph(texte+'\n', style='Titre1') #titre
     paragraph.alignment = WD_ALIGN_PARAGRAPH.CENTER #centrer
+    paragraph.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
     
 def Titre2(texte,document):
-    document.add_paragraph(texte+'\n', style='Titre2')
+    p=document.add_paragraph(texte+'\n', style='Titre2')
+    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
 
 def Titre3(num, texte, document):
+    styles=document.styles
     p=document.add_heading()
     p.paragraph_format.left_indent = Inches(0.98) #indentation en pouce, ici 1,5cm
+    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
     run1=p.add_run()
     run1.text=num+'	    '
     run1.style='ListeTitre3'
     run2=p.add_run()
     run2.text=texte+'\n'
     run2.style='Titre3'
+    p.next_paragraph_style = styles['Normal']
 
 def TexteGris(texte,document):
+    styles=document.styles
     shading_elm = parse_xml(r'<w:shd {} w:fill="D9D9D9"/>'.format(nsdecls('w')))
     table = document.add_table(rows = 1, cols = 1)
     row = table.rows[0].cells
@@ -44,6 +50,7 @@ def TexteGris(texte,document):
     cell._tc.get_or_add_tcPr().append(shading_elm)
     p.style='BackgroundGrey'
     pt.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    p.next_paragraph_style = styles['Normal']
     
 def TexteGrisJustif(texte,document):
     shading_elm = parse_xml(r'<w:shd {} w:fill="D9D9D9"/>'.format(nsdecls('w')))
@@ -89,7 +96,7 @@ def Style(document):
     fontTitre1.bold= True #en gras
     fontTitre1.underline= True #souligné
     fontTitre1.color.rgb = RGBColor(0x0,0x70,0xC0) #couleur bleu, en base 16
-    
+    styles['Titre1'].next_paragraph_style = styles['Normal']
 
     #Definition du Titre2, correspond par exemple au 1.1 ou 1.2
     styleTitre2 = styles.add_style('Titre2', WD_STYLE_TYPE.PARAGRAPH)
@@ -100,6 +107,7 @@ def Style(document):
     fontTitre2.bold= True
     fontTitre2.color.rgb = RGBColor(0x0,0x0,0x0)
     styleTitre2.paragraph_format.left_indent = Inches(0.59)
+    styles['Titre2'].next_paragraph_style = styles['Normal']
     
     
      #Definition du Titre3; correspond aux 1.1.1 ou 1.1.2...
@@ -125,6 +133,7 @@ def Style(document):
     fontTitreListe3.underline= False
     fontTitreListe3.color.rgb = RGBColor(0x0,0x0,0x0)  
     
+    
     #Definition style texte surligné en gris centré   --> SUPPRIMER ESPACE EN BAS
 #    styles = document.styles
     styleBackgroundGrey = styles.add_style('BackgroundGrey', WD_STYLE_TYPE.CHARACTER)
@@ -135,6 +144,7 @@ def Style(document):
     fontBackgroundGrey.bold = True
     fontBackgroundGrey.small_caps = True
     
+    
     #Definition style texte surligné en gris justifié   --> SUPPRIMER ESPACE EN BAS
   #  styles = document.styles
     styleBackgroundGrey = styles.add_style('BackgroundGreyJustif', WD_STYLE_TYPE.CHARACTER)
@@ -144,6 +154,8 @@ def Style(document):
     fontBackgroundGrey.size = docx.shared.Pt(11)
     fontBackgroundGrey.italic = True
     fontBackgroundGrey.bold = True
+    
+    
     
     #definition du style pour le texte indicatif -->  ESPACEMENT LIGNES 
     styleIndic = styles.add_style('TexteItalic', WD_STYLE_TYPE.PARAGRAPH)
@@ -163,6 +175,7 @@ def Style(document):
     fontpaysage.bold= True
     fontpaysage.color.rgb = RGBColor(0x0,0x0,0x0)
     stylepaysage.paragraph_format.left_indent = Cm(1.25)
+    styles['paysage'].next_paragraph_style = styles['Normal']
     
     
 

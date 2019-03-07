@@ -49,6 +49,11 @@ def Partie7(document):
    # Ecriture du 7.1  
     Titre2('7.1	Traitement / stratégie / procédure expérimental(e)',document)
     
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    run1=p.add_run('Médicament expérimental : médicament expérimenté ou utilisé comme référence, y compris en tant que placebo, lors d’un essai clinique (article 2 du règlement européen).')
+    run1.style='Paragraphe'
+    
     #Ecriture des trois textes gris justifiés
     TexteGrisJustif('Pour un traitement de type médicament',document)
     TexteGrisJustif('Pour un placebo',document)
@@ -75,6 +80,17 @@ def Partie7(document):
     Titre3('7.3.3','Conditionnement des produits',document)
     #Ecriture du 7.3.4
     Titre3('7.3.4','Etiquetage des produits',document)
+    
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    run1=p.add_run('Chaque patient se verra remettre ')
+    run1.style='Paragraphe'
+    run2=p.add_run('XXXX boîtes, flacons ')
+    run2.style='Paragraphe'
+    run2.font.italic= True
+    run3=p.add_run('pour la totalité de la durée du traitement.')
+    run3.style='Paragraphe'
+    
     #Ecriture du 7.3.5
     Titre3('7.3.5','Expédition et gestion des produits',document)
     #Ecriture du 7.3.6
@@ -92,18 +108,78 @@ def Partie7(document):
 
     #Ecriture du 7.4.1
     Titre3('7.4.1','Organisation de l’insu',document)
+    
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    run1=p.add_run('La pharmacie est destinataire de la liste de randomisation.')
+    run1.style='Paragraphe'
+    
     #Ecriture du 7.4.2
     Titre3('7.4.2','Levée de l’insu',document)
+    
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    run1=p.add_run('En situation d’urgence médicale nécessitant une levée d’aveugle, la procédure DRC-VIGI-003 du promoteur sera suivie. ')
+    run1.style='Paragraphe'
    
     # Ecriture du 7.5
     Titre2('7.5	Réductions et ajustements de dose',document)
     
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    run1=p.add_run('Les retards et modifications de dose seront effectués selon les recommandations suivantes. L’évaluation des toxicités se fera selon la classification CTCAE (Common Terminology Criteria for Adverse Events) du NCI (National Cancer Institute).')
+    run1.style='Paragraphe'
+    
     #Ecriture du 7.5.1
     Titre3('7.5.1','Réductions/ajustements de doses',document)
+    
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    run1=p.add_run('Les tableaux suivants résument les modifications de dose du médicament 1, médicament 2,… pour gérer d’éventuelles toxicités.')
+    run1.style='Paragraphe'
+    
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    run1=p.add_run('Tableau 1 : diminutions de dose pour ')
+    run1.style='Paragraphe'
+    run2=p.add_run('médicament 1')
+    run2.style='Paragraphe'
+    run2.font.italic= True
+    
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    run1=p.add_run('Tableau 2 : diminutions de dose pour ')
+    run1.style='Paragraphe'
+    run2=p.add_run('médicament 2')
+    run2.style='Paragraphe'
+    run2.font.italic= True
+    
+    
     #Ecriture du 7.5.2
     Titre3('7.5.2','Réductions de dose pour les toxicités hématologiques',document)
+    
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    run1=p.add_run('Les tableaux suivants décrivent les recommandations de réduction de dose pour ')
+    run1.style='Paragraphe'
+    run2=p.add_run('médicament 1 / médicament… ')
+    run2.style='Paragraphe'
+    run2.font.italic= True
+    run3=p.add_run('en cas de thrombopénie, neutropénie et anémie.')
+    run3.style='Paragraphe'
+
     #Ecriture du 7.5.3
     Titre3('7.5.3','Réductions de dose pour les toxicités non hématologiques',document)
+    
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    run1=p.add_run('Les lignes directrices d’ajustement de dose pour ')
+    run1.style='Paragraphe'
+    run2=p.add_run('médicament 1 / médicament 2… ')
+    run2.style='Paragraphe'
+    run2.font.italic= True
+    run3=p.add_run('en cas de toxicités non hématologiques sont résumées comme suit :')
+    run3.style='Paragraphe'
     
     
         #FIN DU DOC 

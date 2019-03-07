@@ -52,6 +52,11 @@ def Partie8(document):
     #Ecriture du titre 8.1.1
     Titre3('8.1.1','Médicaments auxiliaires',document)
     
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    run1=p.add_run('Médicament auxiliaire: médicament utilisé pour les besoins d\'un essai clinique conformément au protocole, mais non comme médicament expérimental (article 2 du règlement européen).')
+    run1.style='Paragraphe'
+    
     #Ecriture du titre 8.1.2
     Titre3('8.1.2','Autres traitements / procédures',document)
     
