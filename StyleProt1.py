@@ -78,6 +78,8 @@ def Style(document):
 # LE CODE    
     
     styles=document.styles
+    
+
 
     #   definition du style Paragraphe, modification du style Normal 
     stylePara = styles.add_style('Paragraphe', WD_STYLE_TYPE.CHARACTER)

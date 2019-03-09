@@ -19,9 +19,10 @@ from docx.shared import Cm, Pt, RGBColor, Inches
 #    TexteGris(texte,document)
 #    TexteGrisJustif(texte,document)
 
-def Partie7(document):
+#def Partie7(document):
+def Partie7():
     'Creation de la partie 7 du protcole de catégorie 1'
- #   document = docx.Document()
+    document = docx.Document()
 
 
 #   Marge de la page
@@ -35,7 +36,7 @@ def Partie7(document):
 #---------------------------DEFINITIONS DES STYLES
  
 
-#    Style(document)
+    Style(document)
 
 
 #    
@@ -146,6 +147,61 @@ def Partie7(document):
     run2.style='Paragraphe'
     run2.font.italic= True
     
+    table = document.add_table(3, 6)
+    table.style = 'Table Grid'
+    a = table.cell(0, 0)
+    b = table.cell(1, 0)
+    A = a.merge(b)
+    B=table.cell(0, 1).merge(table.cell(0, 5))
+    shading_elm_1 = parse_xml(r'<w:shd {} w:fill="D9D9D9"/>'.format(nsdecls('w')))
+    table.rows[0].cells[0]._tc.get_or_add_tcPr().append(shading_elm_1)
+    shading_elm_2 = parse_xml(r'<w:shd {} w:fill="D9D9D9"/>'.format(nsdecls('w')))
+    table.rows[0].cells[1]._tc.get_or_add_tcPr().append(shading_elm_2)
+    shading_elm_3 = parse_xml(r'<w:shd {} w:fill="D9D9D9"/>'.format(nsdecls('w')))
+    table.rows[1].cells[1]._tc.get_or_add_tcPr().append(shading_elm_3)
+    shading_elm_4 = parse_xml(r'<w:shd {} w:fill="D9D9D9"/>'.format(nsdecls('w')))
+    table.rows[1].cells[2]._tc.get_or_add_tcPr().append(shading_elm_4)
+    shading_elm_5 = parse_xml(r'<w:shd {} w:fill="D9D9D9"/>'.format(nsdecls('w')))
+    table.rows[1].cells[3]._tc.get_or_add_tcPr().append(shading_elm_5)
+    shading_elm_6 = parse_xml(r'<w:shd {} w:fill="D9D9D9"/>'.format(nsdecls('w')))
+    table.rows[1].cells[4]._tc.get_or_add_tcPr().append(shading_elm_6)
+    shading_elm_7 = parse_xml(r'<w:shd {} w:fill="D9D9D9"/>'.format(nsdecls('w')))
+    table.rows[1].cells[5]._tc.get_or_add_tcPr().append(shading_elm_7)
+    row = table.rows[0] 
+    T=row.cells[0].add_paragraph('Dose initiale')
+    T.style.font.name='Times New Roman'
+    T.style.font.bold=True
+    T=row.cells[1].add_paragraph('Réductions de dose du Médicament 1')
+    T.style.font.name='Times New Roman'
+    T.style.font.bold=True
+    row = table.rows[1] 
+    T=row.cells[1].add_paragraph('Dose -1')
+    T.style.font.name='Times New Roman'
+    T=row.cells[2].add_paragraph('Dose -2')
+    T.style.font.name='Times New Roman'
+    T=row.cells[3].add_paragraph('Dose -3')
+    T.style.font.name='Times New Roman'
+    T=row.cells[4].add_paragraph('Dose -4')
+    T.style.font.name='Times New Roman'
+    T=row.cells[5].add_paragraph('Dose -5')
+    T.style.font.name='Times New Roman'
+    row = table.rows[2] 
+    T=row.cells[5].add_paragraph('discontinue')
+    T.style.font.name='Times New Roman'
+    
+#    Nombre_text = 'Nombre del Documento: '
+#table = document.add_table(rows=1, cols=1, style='Table Grid')
+#row = table.rows[0]
+#Nombre_text_formatted = row.cells[0].paragraphs[0].add_run(Nombre_text)
+#Nombre_text_formatted.font.name = 'Arial'
+#Nombre_text_formatted.font.size = Pt(8)
+#Nombre_text_formatted.bold = True
+#other_text = 'Plantilla de recoleccion de evidencias de la GSO "RedHat Enterprise Linux 5"'
+#other_text_formatted = row.cells[0].paragraphs[0].add_run(other_text)
+#other_text_formatted.font.name = 'Helvetica'
+#other_text_formatted.font.size = Pt(8)
+    
+    
     p=document.add_paragraph()
     p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     run1=p.add_run('Tableau 2 : diminutions de dose pour ')
@@ -186,6 +242,7 @@ def Partie7(document):
     paragraph = document.add_paragraph()
     run = paragraph.add_run()
     run.add_break(WD_BREAK.PAGE)
-    #document.save("Partie7.docx")   
+    
+    document.save("Partie7.docx")   
     
     
