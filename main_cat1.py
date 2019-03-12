@@ -53,7 +53,7 @@ def construit_doc():
         section.right_margin = Cm(2)
     
     
-    page_garde.PageGarde(document)
+    page_garde.PageGarde(document,extract)
     #historique des mises a jour
     page_garde.PageSignature(document)
     #principaux correspondants

@@ -6,13 +6,24 @@ Created on Thu Dec  6 16:44:16 2018
 @author: romain
 """
 import docx
+import extraction
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 #from docx.enum.section import WD_SECTION
 from docx.enum.text import WD_BREAK
 import re
+from docx.shared import Cm
 
+#document = docx.Document()
+#extract=extraction.extract1()
+#'''Marge des page'''
+#sections = document.sections
+#for section in sections:
+#    section.top_margin = Cm(2)
+#    section.bottom_margin = Cm(2)
+#    section.left_margin = Cm(2)
+#    section.right_margin = Cm(2)
 
-def PageGarde(document):
+def PageGarde(document,extract):
     
  #   document = docx.Document()
     
@@ -32,7 +43,7 @@ def PageGarde(document):
     
     '''Titre de la recherche'''
     paragraph = document.add_paragraph()
-    sentence = paragraph.add_run('  \n\nTitre de la recherche')
+    sentence = paragraph.add_run('  \n\n'+extract['titre_complet'])
     paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
     sentence.font.name = 'Times New Roman'
     sentence.bold = True
@@ -41,7 +52,7 @@ def PageGarde(document):
     '''Acronyme'''
     paragraph2 = document.add_paragraph()
     paragraph2.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    sentence = paragraph2.add_run('ACRONYME')
+    sentence = paragraph2.add_run(extract['titre_abrege'])
     '''Then format the sentence'''
     sentence.font.name = 'Times New Roman'
     sentence.bold = True
@@ -50,11 +61,28 @@ def PageGarde(document):
     '''Version protocole'''
     paragraph2 = document.add_paragraph()
     paragraph2.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    sentence = paragraph2.add_run('Protocole version n° X en date du XX/XX/201X\n\n')
+    sentence = paragraph2.add_run(extract['code_protocole'])
     '''Then format the sentence'''
     sentence.font.name = 'Times New Roman'
     sentence.font.size = docx.shared.Pt(14) 
     sentence.bold = False
+    
+    '''Protcole cat 1'''
+    paragraph = document.add_paragraph()
+    sentence = paragraph.add_run('PROTOCOLE DE RECHERCHE INTERVETIONNELLE IMPLIQUANT LA PERSONNE HUMAINE (catégorie 1)')
+    paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    sentence.font.name = 'Times New Roman'
+    sentence.bold = True
+    sentence.font.size = docx.shared.Pt(14) 
+    
+    '''N° EudraCT : '''
+    paragraph2 = document.add_paragraph()
+    paragraph2.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    sentence = paragraph2.add_run('N° EudraCT : '+extract['num_eudract']+'\n')
+    '''Then format the sentence'''
+    sentence.font.name = 'Times New Roman'
+    sentence.font.size = docx.shared.Pt(12) 
+    sentence.bold = True
     
     '''Promoteur'''
     paragraph = document.add_paragraph()
@@ -64,7 +92,7 @@ def PageGarde(document):
     run1.font.size = docx.shared.Pt(11) 
     run1.bold = True
     run1.underline = True
-    run2 = paragraph.add_run('Centre Hospitalier Universitaire de Poitiers - 2 rue de la Milétrie\n86021 POITIERS cedex\nTél : 05 49 44 33 89 / Fax : 05 49 44 30 58\n')
+    run2 = paragraph.add_run(extract['promoteur_nom_organisme']+'\n'+extract['promoteur_adresse']+'\nTél : '+extract['promoteur_num_telephone']+' / Fax : '+extract['promoteur_num_telecopie']+'\n')
     run2.font.name = 'Times New Roman'
     run2.font.size = docx.shared.Pt(11) 
     
@@ -76,7 +104,7 @@ def PageGarde(document):
     run1.font.size = docx.shared.Pt(11) 
     run1.bold = True
     run1.underline = True
-    run2 = paragraph.add_run('Nom Investigateur\nService de : indiquer le nom du service\nCentre Hospitalier Universitaire de Poitiers - 2 rue de la Milétrie – CS 90577\n86021 Poitiers cedex\nTél : 05 49 44 xx xx / Fax : 05 49 44 xx xx\nE-mail : xxxxxxxx@chu-poitiers.fr')
+    run2 = paragraph.add_run(extract['investigateur_coordinateur_nom']+'\nService de : '+extract['investigateur_coordinateur_service']+'\n'+extract['investigateur_coordinateur_adresse_professionnelle']+'\nTél : '+extract['investigateur_coordinateur_telephone']+' / Fax : '+extract['investigateur_coordinateur_telecopie']+'\nE-mail : '+extract['investigateur_coordinateur_courriel'])
     run2.font.name = 'Times New Roman'
     run2.font.size = docx.shared.Pt(11) 
     
@@ -113,7 +141,7 @@ def PageGarde(document):
 
     
    
-  #  document.save("page_garde.docx")                   #sauvegarde
+    #document.save("page_garde.docx")                   #sauvegarde
    
 def PageSignature(document):
     
