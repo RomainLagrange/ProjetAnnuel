@@ -1171,7 +1171,6 @@ def partie_F_G(document):
                     n=n+1
 
     '''Partie F3'''
-    paragraph=document.add_paragraph("\nF. PERSONNES PARTICIPANT A LA RECHERCHE\n", style='debut_page')
     table = document.add_table(rows=2, cols=6, style='Table Grid')
     table.cell(0,0).text=("F.3	GROUPE DE PERSONNES PARTICIPANT A LA RECHERCHE")
     table.cell(1,0).text=("F.3.1         Volontaires sains\n"
