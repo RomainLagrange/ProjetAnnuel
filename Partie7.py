@@ -11,6 +11,8 @@ from StyleProt1 import Style,Titre1, Titre2, Titre3, TexteGris, TexteGrisJustif
 from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_UNDERLINE, WD_LINE_SPACING, WD_COLOR_INDEX, WD_BREAK
 from docx.enum.style import WD_STYLE_TYPE
 from docx.shared import Cm, Pt, RGBColor, Inches
+from docx.oxml.ns import nsdecls
+from docx.oxml import parse_xml
 
 #MEMO POUR ECRIRE LES TITRES :
 #    Titre1('num + texte du protocole',document)
@@ -167,16 +169,58 @@ def Partie7():
     table.rows[1].cells[4]._tc.get_or_add_tcPr().append(shading_elm_6)
     shading_elm_7 = parse_xml(r'<w:shd {} w:fill="D9D9D9"/>'.format(nsdecls('w')))
     table.rows[1].cells[5]._tc.get_or_add_tcPr().append(shading_elm_7)
-    row = table.rows[0] 
-    T=row.cells[0].add_paragraph('Dose initiale')
-    T.style.font.name='Times New Roman'
-    T.style.font.bold=True
-    T=row.cells[1].add_paragraph('Réductions de dose du Médicament 1')
-    T.style.font.name='Times New Roman'
-    T.style.font.bold=True
-    row = table.rows[1] 
-    T=row.cells[1].add_paragraph('Dose -1')
-    T.style.font.name='Times New Roman'
+    
+#    row = table.rows[0].cells
+#    para_text =texte
+#    cell = row[0]
+#    pt = cell.paragraphs[0]
+#    t = pt.text = ''
+#    p = pt.add_run(para_text)
+#    
+#    
+#    row = table.rows[0] 
+#    texte='Dose initiale'
+#    text_formatted = row.cells[0].paragraphs[0].add_run(texte)
+#    text_formatted.font.name = 'Times New Roman'
+#    text_formatted.bold = True
+    
+    row = table.rows[0].cells
+    para_text  = 'Dose initiale'
+    cell = row[0]
+    pt = cell.paragraphs[0]
+    t = pt.text = ''
+    p = pt.add_run(para_text)
+    p.font.name = 'Times New Roman'
+    p.bold = True
+    
+    
+    
+    
+#    T=row.cells[0].add_paragraph('Dose initiale')
+#    T.style.font.name='Times New Roman'
+   # T.style.font.bold=True
+    row = table.rows[0]
+    texte='Réductions de dose du Médicament 1'
+    text_formatted = row.cells[1].paragraphs[0].add_run(texte)
+    text_formatted.font.name = 'Times New Roman'
+    text_formatted.bold = True
+#    T=row.cells[1].add_paragraph('Réductions de dose du Médicament 1')
+#    T.style.font.name='Times New Roman'
+#    T.style.font.bold=True
+    
+    
+  #  row = table.rows[1] 
+#    T=row.cells[1].add_paragraph('Dose -1')
+#    T.style.font.name='Times New Roman'
+    row = table.rows[1].cells
+    para_text  = 'Dose -1'
+    cell = row[1]
+    pt =  cell.paragraphs[0]
+    t = pt.text = ''
+    p = pt.add_run(para_text)
+    p.font.name = 'Times New Roman'
+    
+    row=table.rows[1] 
     T=row.cells[2].add_paragraph('Dose -2')
     T.style.font.name='Times New Roman'
     T=row.cells[3].add_paragraph('Dose -3')
