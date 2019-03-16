@@ -21,10 +21,10 @@ from docx.oxml import parse_xml
 #    TexteGris(texte,document)
 #    TexteGrisJustif(texte,document)
 
-#def Partie7(document):
-def Partie7():
+def Partie7(document):
+#def Partie7():
     'Creation de la partie 7 du protcole de catégorie 1'
-    document = docx.Document()
+ #   document = docx.Document()
 
 
 #   Marge de la page
@@ -38,7 +38,7 @@ def Partie7():
 #---------------------------DEFINITIONS DES STYLES
  
 
-    Style(document)
+   # Style(document)
 
 
 #    
@@ -170,19 +170,6 @@ def Partie7():
     shading_elm_7 = parse_xml(r'<w:shd {} w:fill="D9D9D9"/>'.format(nsdecls('w')))
     table.rows[1].cells[5]._tc.get_or_add_tcPr().append(shading_elm_7)
     
-#    row = table.rows[0].cells
-#    para_text =texte
-#    cell = row[0]
-#    pt = cell.paragraphs[0]
-#    t = pt.text = ''
-#    p = pt.add_run(para_text)
-#    
-#    
-#    row = table.rows[0] 
-#    texte='Dose initiale'
-#    text_formatted = row.cells[0].paragraphs[0].add_run(texte)
-#    text_formatted.font.name = 'Times New Roman'
-#    text_formatted.bold = True
     
     row = table.rows[0].cells
     para_text  = 'Dose initiale'
@@ -192,26 +179,13 @@ def Partie7():
     p = pt.add_run(para_text)
     p.font.name = 'Times New Roman'
     p.bold = True
-    
-    
-    
-    
-#    T=row.cells[0].add_paragraph('Dose initiale')
-#    T.style.font.name='Times New Roman'
-   # T.style.font.bold=True
+
     row = table.rows[0]
     texte='Réductions de dose du Médicament 1'
     text_formatted = row.cells[1].paragraphs[0].add_run(texte)
     text_formatted.font.name = 'Times New Roman'
     text_formatted.bold = True
-#    T=row.cells[1].add_paragraph('Réductions de dose du Médicament 1')
-#    T.style.font.name='Times New Roman'
-#    T.style.font.bold=True
-    
-    
-  #  row = table.rows[1] 
-#    T=row.cells[1].add_paragraph('Dose -1')
-#    T.style.font.name='Times New Roman'
+
     row = table.rows[1].cells
     para_text  = 'Dose -1'
     cell = row[1]
@@ -220,31 +194,119 @@ def Partie7():
     p = pt.add_run(para_text)
     p.font.name = 'Times New Roman'
     
-    row=table.rows[1] 
-    T=row.cells[2].add_paragraph('Dose -2')
-    T.style.font.name='Times New Roman'
-    T=row.cells[3].add_paragraph('Dose -3')
-    T.style.font.name='Times New Roman'
-    T=row.cells[4].add_paragraph('Dose -4')
-    T.style.font.name='Times New Roman'
-    T=row.cells[5].add_paragraph('Dose -5')
-    T.style.font.name='Times New Roman'
-    row = table.rows[2] 
-    T=row.cells[5].add_paragraph('discontinue')
-    T.style.font.name='Times New Roman'
+    para_text  = 'Dose -2'
+    cell = row[2]
+    pt =  cell.paragraphs[0]
+    t = pt.text = ''
+    p = pt.add_run(para_text)
+    p.font.name = 'Times New Roman'
+
+    para_text  = 'Dose -3'
+    cell = row[3]
+    pt =  cell.paragraphs[0]
+    t = pt.text = ''
+    p = pt.add_run(para_text)
+    p.font.name = 'Times New Roman'
     
-#    Nombre_text = 'Nombre del Documento: '
-#table = document.add_table(rows=1, cols=1, style='Table Grid')
-#row = table.rows[0]
-#Nombre_text_formatted = row.cells[0].paragraphs[0].add_run(Nombre_text)
-#Nombre_text_formatted.font.name = 'Arial'
-#Nombre_text_formatted.font.size = Pt(8)
-#Nombre_text_formatted.bold = True
-#other_text = 'Plantilla de recoleccion de evidencias de la GSO "RedHat Enterprise Linux 5"'
-#other_text_formatted = row.cells[0].paragraphs[0].add_run(other_text)
-#other_text_formatted.font.name = 'Helvetica'
-#other_text_formatted.font.size = Pt(8)
     
+
+    para_text  = 'Dose -4'
+    cell = row[4]
+    pt =  cell.paragraphs[0]
+    t = pt.text = ''
+    p = pt.add_run(para_text)
+    p.font.name = 'Times New Roman'
+    
+
+    para_text  = 'Dose -5'
+    cell = row[5]
+    pt =  cell.paragraphs[0]
+    t = pt.text = ''
+    p = pt.add_run(para_text)
+    p.font.name = 'Times New Roman'
+
+    row = table.rows[2].cells
+    para_text  = 'discontinue'
+    cell = row[5]
+    pt =  cell.paragraphs[0]
+    t = pt.text = ''
+    p = pt.add_run(para_text)
+    p.font.name = 'Times New Roman'
+    
+    p=document.add_paragraph('')
+
+    table = document.add_table(3, 6)
+    table.style = 'Table Grid'
+    a = table.cell(0, 0)
+    b = table.cell(1, 0)
+    A = a.merge(b)
+    B=table.cell(0, 1).merge(table.cell(0, 5))
+    shading_elm_1 = parse_xml(r'<w:shd {} w:fill="D9D9D9"/>'.format(nsdecls('w')))
+    table.rows[0].cells[0]._tc.get_or_add_tcPr().append(shading_elm_1)
+    shading_elm_2 = parse_xml(r'<w:shd {} w:fill="D9D9D9"/>'.format(nsdecls('w')))
+    table.rows[0].cells[1]._tc.get_or_add_tcPr().append(shading_elm_2)
+    for y in range(1,6):
+        shading_elm = parse_xml(r'<w:shd {} w:fill="D9D9D9"/>'.format(nsdecls('w')))
+        table.rows[1].cells[y]._tc.get_or_add_tcPr().append(shading_elm)
+
+    row = table.rows[0].cells
+    para_text  = 'Dose initiale'
+    cell = row[0]
+    pt = cell.paragraphs[0]
+    t = pt.text = ''
+    p = pt.add_run(para_text)
+    p.font.name = 'Times New Roman'
+    p.bold = True
+
+    row = table.rows[0]
+    texte='Réductions de dose du Médicament 1'
+    text_formatted = row.cells[1].paragraphs[0].add_run(texte)
+    text_formatted.font.name = 'Times New Roman'
+    text_formatted.bold = True
+
+    row = table.rows[1].cells
+    para_text  = 'Dose -1'
+    cell = row[1]
+    pt =  cell.paragraphs[0]
+    t = pt.text = ''
+    p = pt.add_run(para_text)
+    p.font.name = 'Times New Roman'
+    
+    para_text  = 'Dose -2'
+    cell = row[2]
+    pt =  cell.paragraphs[0]
+    t = pt.text = ''
+    p = pt.add_run(para_text)
+    p.font.name = 'Times New Roman'
+
+    para_text  = 'Dose -3'
+    cell = row[3]
+    pt =  cell.paragraphs[0]
+    t = pt.text = ''
+    p = pt.add_run(para_text)
+    p.font.name = 'Times New Roman'  
+
+    para_text  = 'Dose -4'
+    cell = row[4]
+    pt =  cell.paragraphs[0]
+    t = pt.text = ''
+    p = pt.add_run(para_text)
+    p.font.name = 'Times New Roman'    
+
+    para_text  = 'Dose -5'
+    cell = row[5]
+    pt =  cell.paragraphs[0]
+    t = pt.text = ''
+    p = pt.add_run(para_text)
+    p.font.name = 'Times New Roman'
+
+    row = table.rows[2].cells
+    para_text  = 'discontinue'
+    cell = row[5]
+    pt =  cell.paragraphs[0]
+    t = pt.text = ''
+    p = pt.add_run(para_text)
+    p.font.name = 'Times New Roman'
     
     p=document.add_paragraph()
     p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
@@ -253,6 +315,8 @@ def Partie7():
     run2=p.add_run('médicament 2')
     run2.style='Paragraphe'
     run2.font.italic= True
+    
+    p=document.add_paragraph('')
     
     
     #Ecriture du 7.5.2
@@ -267,6 +331,60 @@ def Partie7():
     run2.font.italic= True
     run3=p.add_run('en cas de thrombopénie, neutropénie et anémie.')
     run3.style='Paragraphe'
+    
+    table = document.add_table(7, 3)
+    table.style = 'Table Grid'
+    a = table.cell(0, 1)
+    b = table.cell(0, 2)
+    A = a.merge(b)
+    shading_elm_1 = parse_xml(r'<w:shd {} w:fill="D9D9D9"/>'.format(nsdecls('w')))
+    table.rows[0].cells[0]._tc.get_or_add_tcPr().append(shading_elm_1)
+    shading_elm_2 = parse_xml(r'<w:shd {} w:fill="D9D9D9"/>'.format(nsdecls('w')))
+    table.rows[0].cells[1]._tc.get_or_add_tcPr().append(shading_elm_2)
+    for i in range(1,7):
+        for y in range(0,3):
+            shading_elm = parse_xml(r'<w:shd {} w:fill="D9D9D9"/>'.format(nsdecls('w')))
+            table.rows[i].cells[y]._tc.get_or_add_tcPr().append(shading_elm)
+    
+    row = table.rows[0]
+    text_formatted = row.cells[1].paragraphs[0].add_run('Actions recommandées')
+    text_formatted.font.name = 'Times New Roman'
+    text_formatted.bold = True
+    
+    row = table.rows[1]
+    text_formatted = row.cells[0].paragraphs[0].add_run('Taux plaquettes')
+    text_formatted.font.name = 'Times New Roman'
+    text_formatted.bold = True
+    text_formatted = row.cells[1].paragraphs[0].add_run('Médicament 1')
+    text_formatted.font.name = 'Times New Roman'
+    text_formatted.bold = True
+    text_formatted = row.cells[2].paragraphs[0].add_run('Médicament 2')
+    text_formatted.font.name = 'Times New Roman'
+    text_formatted.bold = True
+    
+        
+    row = table.rows[3]
+    text_formatted = row.cells[0].paragraphs[0].add_run('Taux PNN')
+    text_formatted.font.name = 'Times New Roman'
+    text_formatted.bold = True
+    text_formatted = row.cells[1].paragraphs[0].add_run('Médicament 1')
+    text_formatted.font.name = 'Times New Roman'
+    text_formatted.bold = True
+    text_formatted = row.cells[2].paragraphs[0].add_run('Médicament 2')
+    text_formatted.font.name = 'Times New Roman'
+    text_formatted.bold = True
+    
+    row = table.rows[5]
+    text_formatted = row.cells[0].paragraphs[0].add_run('Taux hémoglobine')
+    text_formatted.font.name = 'Times New Roman'
+    text_formatted.bold = True
+    text_formatted = row.cells[1].paragraphs[0].add_run('Médicament 1')
+    text_formatted.font.name = 'Times New Roman'
+    text_formatted.bold = True
+    text_formatted = row.cells[2].paragraphs[0].add_run('Médicament 2')
+    text_formatted.font.name = 'Times New Roman'
+    text_formatted.bold = True
+
 
     #Ecriture du 7.5.3
     Titre3('7.5.3','Réductions de dose pour les toxicités non hématologiques',document)
@@ -281,12 +399,69 @@ def Partie7():
     run3=p.add_run('en cas de toxicités non hématologiques sont résumées comme suit :')
     run3.style='Paragraphe'
     
+    table = document.add_table(8, 3)
+    table.style = 'Table Grid'
+    a = table.cell(0, 1)
+    b = table.cell(0, 2)
+    A = a.merge(b)
+    shading_elm_1 = parse_xml(r'<w:shd {} w:fill="D9D9D9"/>'.format(nsdecls('w')))
+    table.rows[0].cells[0]._tc.get_or_add_tcPr().append(shading_elm_1)
+    shading_elm_2 = parse_xml(r'<w:shd {} w:fill="D9D9D9"/>'.format(nsdecls('w')))
+    table.rows[0].cells[1]._tc.get_or_add_tcPr().append(shading_elm_2)
+    for i in range(1,8):
+        for y in range(0,3):
+            shading_elm = parse_xml(r'<w:shd {} w:fill="D9D9D9"/>'.format(nsdecls('w')))
+            table.rows[i].cells[y]._tc.get_or_add_tcPr().append(shading_elm)
     
+    row = table.rows[0]
+    text_formatted = row.cells[0].paragraphs[0].add_run('Symptômes')
+    text_formatted.font.name = 'Times New Roman'
+    text_formatted.bold = True
+    text_formatted = row.cells[1].paragraphs[0].add_run('Actions recommandées')
+    text_formatted.font.name = 'Times New Roman'
+    text_formatted.bold = True
+    
+    row = table.rows[1]
+    text_formatted = row.cells[1].paragraphs[0].add_run('Médicament 1')
+    text_formatted.font.name = 'Times New Roman'
+    text_formatted.bold = True
+    text_formatted = row.cells[2].paragraphs[0].add_run('Médicament 2')
+    text_formatted.font.name = 'Times New Roman'
+    text_formatted.bold = True
+    
+        
+    row = table.rows[2]
+    text_formatted = row.cells[0].paragraphs[0].add_run('Symptôme 1')
+    text_formatted.font.name = 'Times New Roman'
+    text_formatted.bold = True
+    
+    row = table.rows[3]
+    text_formatted = row.cells[0].paragraphs[0].add_run('Grade 2-3')
+    text_formatted.font.name = 'Times New Roman'
+    
+    row = table.rows[4]
+    text_formatted = row.cells[0].paragraphs[0].add_run('Grade 4')
+    text_formatted.font.name = 'Times New Roman'
+    
+    row = table.rows[5]
+    text_formatted = row.cells[0].paragraphs[0].add_run('Symptôme 2')
+    text_formatted.font.name = 'Times New Roman'
+    text_formatted.bold = True
+
+    row = table.rows[6]
+    text_formatted = row.cells[0].paragraphs[0].add_run('Grade 3')
+    text_formatted.font.name = 'Times New Roman'
+    
+    row = table.rows[7]
+    text_formatted = row.cells[0].paragraphs[0].add_run('Grade 4')
+    text_formatted.font.name = 'Times New Roman'
+
+
         #FIN DU DOC 
     paragraph = document.add_paragraph()
     run = paragraph.add_run()
     run.add_break(WD_BREAK.PAGE)
     
-    document.save("Partie7.docx")   
+ #   document.save("Partie7.docx")   
     
     

@@ -44,8 +44,7 @@ def Partie8(document):
     
     #ecriture du premier titre 
     Titre1('8	TRAITEMENTS ET PROCEDURES ASSOCIE(E)S ',document)
-    
-    
+
    # Ecriture du 8.1  
     Titre2('8.1	Traitements / procédures associé(e)s autorisés',document)
     
