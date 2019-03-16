@@ -27,7 +27,7 @@ from docx.enum.table import WD_TABLE_ALIGNMENT,WD_ROW_HEIGHT, WD_ALIGN_VERTICAL
 def Partie6(document):
 #def Partie6():
     'Creation de la partie 6 du protocole de catégorie 1'
-    document = docx.Document()
+  #  document = docx.Document()
 
 
 #   Marge de la page
@@ -374,10 +374,10 @@ def Partie6(document):
     
         #IMAGE NUMERO PATIENT
     
-    p=document.add_paragraph()
-    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
-    run=p.add_run()
-    picture=run.add_picture('num_patient.png')
+#    p=document.add_paragraph()
+#    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+#    run=p.add_run()
+#    picture=run.add_picture('num_patient.png')
     
 
     p=document.add_paragraph()
