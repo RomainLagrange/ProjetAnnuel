@@ -58,7 +58,7 @@ def Partie9():
     Titre2('9.1	Définitions',document)
     
     p=document.add_paragraph()
-    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+  #  p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     run1=p.add_run('Evénement indésirable ')
     run1.style='Paragraphe'
     run1.font.bold= True
@@ -66,7 +66,7 @@ def Partie9():
     run2.style='Paragraphe'
     
     p=document.add_paragraph()
-    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    #p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     run1=p.add_run('Effet indésirable ')
     run1.style='Paragraphe'
     run1.font.bold= True
@@ -74,7 +74,7 @@ def Partie9():
     run2.style='Paragraphe'
     
     p=document.add_paragraph()
-    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    #p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     run1=p.add_run('Evénement ou effet indésirable grave ')
     run1.style='Paragraphe'
     run1.font.bold= True
@@ -186,7 +186,7 @@ def Partie9():
     run1.style='Paragraphe'
     
     p=document.add_paragraph()
-    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+ #   p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     run1=p.add_run('Imputabilité : ')
     run1.style='Paragraphe'
     run1.font.bold= True
@@ -229,7 +229,7 @@ def Partie9():
     run1.style='Paragraphe'
 
     p=document.add_paragraph()
-    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+ #   p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     run1=p.add_run('Intensité : ')
     run1.style='Paragraphe'
     run1.font.bold= True
