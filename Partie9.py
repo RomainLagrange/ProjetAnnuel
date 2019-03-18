@@ -12,6 +12,8 @@ from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_UNDERLINE, WD_LINE_SPACING, WD
 from docx.enum.style import WD_STYLE_TYPE
 from docx.shared import Cm, Pt, RGBColor, Inches
 from docx.enum.table import WD_TABLE_ALIGNMENT,WD_ROW_HEIGHT, WD_ALIGN_VERTICAL
+from docx.oxml.ns import nsdecls
+from docx.oxml import parse_xml
 
 
 #MEMO POUR ECRIRE LES TITRES :
@@ -21,24 +23,24 @@ from docx.enum.table import WD_TABLE_ALIGNMENT,WD_ROW_HEIGHT, WD_ALIGN_VERTICAL
 #    TexteGris(texte,document) --> écrire en minuscule !!!
 #    TexteGrisJustif(texte,document)
 
-def Partie9(document):
-#def Partie9():
+#def Partie9(document):
+def Partie9():
     'Creation de la partie 9 du protcole de catégorie 1'
-  #  document = docx.Document()
+    document = docx.Document()
 
 
 #   Marge de la page
-#    sections = document.sections
-#    for section in sections:
-#        section.top_margin = Cm(2)
-#        section.bottom_margin = Cm(2)
-#        section.left_margin = Cm(2)
-#        section.right_margin = Cm(2)
+    sections = document.sections
+    for section in sections:
+        section.top_margin = Cm(2)
+        section.bottom_margin = Cm(2)
+        section.left_margin = Cm(2)
+        section.right_margin = Cm(2)
 
 #---------------------------DEFINITIONS DES STYLES
  
 
-  #  Style(document)
+    Style(document)
 
 
 #    
@@ -505,7 +507,6 @@ def Partie9(document):
     Titre3('9.3.3','Déclaration des grossesses',document)
     
     p=document.add_paragraph()
-    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     run1=p.add_run('Toute grossesse devra être déclarée immédiatement au promoteur.\nL’investigateur informe l’unité de Vigilance des Essais Cliniques du promoteur et envoie par fax le formulaire d’EvIG sur lequel doit être noté la date prévisible d’accouchement, les coordonnées de l’obstétricien et de la maternité prévue pour l’accouchement si la grossesse se poursuit. \nL’investigateur doit suivre la patiente jusqu’au terme de la grossesse ou de son interruption (interruption volontaire de grossesse (IVG), interruption médicale de grossesse (IMG), fausse couche, etc...) et en notifier l’issue au promoteur. S’il s’agit d’une exposition paternelle, l’investigateur doit obtenir l’accord de la parturiente pour recueillir les informations sur la grossesse.\nSi l’issue de la grossesse entre dans le cadre de la définition des événements indésirables graves (avortement spontané avec hospitalisation, mort fœtale, anomalie congénitale, ...) l’investigateur doit suivre la procédure de déclaration des EvIG.')
     run1.style='Paragraphe'
     
@@ -526,7 +527,7 @@ def Partie9(document):
     cell = row[0]
     pt = cell.paragraphs[0]
     t = pt.text = ''
-    p = pt.add_run('Type d\'enevement')
+    p = pt.add_run('Type d\'evenement')
     p.alignment=WD_ALIGN_PARAGRAPH.CENTER
     p.font.name = 'Times New Roman'
     p.bold = True
@@ -535,7 +536,7 @@ def Partie9(document):
     cell = row[1]
     pt = cell.paragraphs[0]
     t = pt.text = ''
-    p = pt.add_run('MODALITES DE NOTIFICATION')
+    p = pt.add_run('modalites de notification')
     p.alignment=WD_ALIGN_PARAGRAPH.CENTER
     p.font.name = 'Times New Roman'
     p.bold = True
@@ -544,7 +545,7 @@ def Partie9(document):
     cell = row[2]
     pt = cell.paragraphs[0]
     t = pt.text = ''
-    p = pt.add_run('DELAI DE NOTIFICATION AU PROMOTEUR')
+    p = pt.add_run('delai de notification au promoteur')
     p.alignment=WD_ALIGN_PARAGRAPH.CENTER
     p.font.name = 'Times New Roman'
     p.bold = True
@@ -556,7 +557,7 @@ def Partie9(document):
     pt =  cell.paragraphs[0]
     t = pt.text = ''
     p = pt.add_run('Evénement indésirable ')
-    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    pt.alignment=WD_ALIGN_PARAGRAPH.CENTER
     p.font.name = 'Times New Roman'
     p = pt.add_run('non grave')
     p.font.name = 'Times New Roman'
@@ -566,14 +567,14 @@ def Partie9(document):
     pt =  cell.paragraphs[0]
     t = pt.text = ''
     p = pt.add_run('Dans le cahier d’observation')
-    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    pt.alignment=WD_ALIGN_PARAGRAPH.CENTER
     p.font.name = 'Times New Roman'
 
     cell = row[2]
     pt =  cell.paragraphs[0]
     t = pt.text = ''
     p = pt.add_run('Pas de notification immédiate')
-    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    pt.alignment=WD_ALIGN_PARAGRAPH.CENTER
     p.font.name = 'Times New Roman'  
     
     row = table.rows[2].cells
@@ -582,7 +583,7 @@ def Partie9(document):
     pt =  cell.paragraphs[0]
     t = pt.text = ''
     p = pt.add_run('Evénement indésirable ')
-    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    pt.alignment=WD_ALIGN_PARAGRAPH.CENTER
     p.font.name = 'Times New Roman'
     p = pt.add_run('grave')
     p.font.name = 'Times New Roman'
@@ -601,13 +602,13 @@ def Partie9(document):
     t = pt.text = ''
     p = pt.add_run('Formulaire de déclaration initiale d’EvIG + follow up si nécessaire + recueil dans le cahier d’observation')
     p.font.name = 'Times New Roman'
-    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    pt.alignment=WD_ALIGN_PARAGRAPH.CENTER
 
     cell = row[2]
     pt =  cell.paragraphs[0]
     t = pt.text = ''
     p = pt.add_run('Déclaration sans délai au promoteur')
-    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    pt.alignment=WD_ALIGN_PARAGRAPH.CENTER
     p.font.name = 'Times New Roman'
     p.font.bold= True
     
@@ -617,21 +618,21 @@ def Partie9(document):
     pt =  cell.paragraphs[0]
     t = pt.text = ''
     p = pt.add_run('Fait nouveau')
-    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    pt.alignment=WD_ALIGN_PARAGRAPH.CENTER
     p.font.name = 'Times New Roman'
      
     cell = row[1]
     pt =  cell.paragraphs[0]
     t = pt.text = ''
     p = pt.add_run('Rapport écrit')
-    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    pt.alignment=WD_ALIGN_PARAGRAPH.CENTER
     p.font.name = 'Times New Roman'
 
     cell = row[2]
     pt =  cell.paragraphs[0]
     t = pt.text = ''
     p = pt.add_run('Déclaration sans délai au promoteur')
-    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    pt.alignment=WD_ALIGN_PARAGRAPH.CENTER
     p.font.name = 'Times New Roman'
     p.font.bold= True
     
@@ -641,21 +642,21 @@ def Partie9(document):
     pt =  cell.paragraphs[0]
     t = pt.text = ''
     p = pt.add_run('Grossesse')
-    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    pt.alignment=WD_ALIGN_PARAGRAPH.CENTER
     p.font.name = 'Times New Roman'
      
     cell = row[1]
     pt =  cell.paragraphs[0]
     t = pt.text = ''
     p = pt.add_run('Formulaire de déclaration d’EvIG')
-    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    pt.alignment=WD_ALIGN_PARAGRAPH.CENTER
     p.font.name = 'Times New Roman'
 
     cell = row[2]
     pt =  cell.paragraphs[0]
     t = pt.text = ''
     p = pt.add_run('Dès confirmation de la grossesse')
-    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    pt.alignment=WD_ALIGN_PARAGRAPH.CENTER
     p.font.name = 'Times New Roman'  
 
     
@@ -708,8 +709,15 @@ def Partie9(document):
     
     table = document.add_table(9, 4)
     table.style = 'Table Grid'
-    for cell in table.columns.cells: 
+    for cell in table.columns[0].cells: 
         cell.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
+    for cell in table.columns[1].cells: 
+        cell.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
+    for cell in table.columns[2].cells: 
+        cell.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
+    for cell in table.columns[3].cells: 
+        cell.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
+
 
     row = table.rows[0].cells
     
@@ -930,20 +938,139 @@ def Partie9(document):
     p.font.name = 'Times New Roman'
     
     document.add_paragraph(' ')
+           
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    run1=p.add_run('Le promoteur déclare sans délai les faits nouveaux survenus au cours de la recherche :')
+    run1.style='Paragraphe'
+    
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+    p.style='List Bullet 2'
+    run1=p.add_run('à l’ANSM,')
+    run1.style='Paragraphe'
+    
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+    p.style='List Bullet 2'
+    run1=p.add_run('au Comité de Protection des Personnes,')
+    run1.style='Paragraphe'
+    
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+    p.style='List Bullet 2'
+    run1=p.add_run('au directeur général de l’Agence Régionale de Santé (si applicable : voir 9.5).')
+    run1.style='Paragraphe'
+    
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    run1=p.add_run('Le promoteur et l’investigateur prennent les mesures urgentes appropriées. Le promoteur en informe l’autorité compétente et le comité de protection des personnes.')
+    run1.style='Paragraphe'
     
     
     #Ecriture du 9.5
     Titre2('9.5	Essai chez un volontaire sain',document)
     
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    run1=p.add_run('Articles R1123-46 et R1123-62 du code de la santé publique, Circulaire DGS/PP1/2016/61 du 1er mars 2016.')
+    run1.style='Paragraphe'
+    run1.font.italic= True
+    
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    run1=p.add_run('Pour les essais portant sur les volontaires sains, en cas de première administration ou utilisation d’un produit de santé expérimental, tout effet indésirable grave sera considéré comme un fait nouveau. Il devra être déclaré sans délai à l’ANSM, au CPP et au Directeur général de l’ARS. ')
+    run1.style='Paragraphe'
+    
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    run1=p.add_run('Le promoteur :')
+    run1.style='Paragraphe'
+    
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+    p.style='List Bullet 2'
+    run1=p.add_run('suspend l’administration ou l’utilisation du produit expérimental chez les personnes participant à la recherche dans l’attente de l’adoption de mesures définitives et jusqu’à la démonstration de l’absence de danger ; les personnes participant à la recherche devront systématiquement être informées et leur consentement obtenu avant toute nouvelle administration du produit à l’étude.')
+    run1.style='Paragraphe'
+    
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+    p.style='List Bullet 2'
+    run1=p.add_run('prend les mesures de sécurité appropriées,')
+    run1.style='Paragraphe'
+    
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+    p.style='List Bullet 2'
+    run1=p.add_run('-	informe sans délai l’autorité compétente et le comité de protection des personnes ')
+    run1.style='Paragraphe'
+    
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    run1=p.add_run('Pour les recherches sur le médicament ou sur les préparations de thérapie cellulaire, et portant sur des volontaires sains, le promoteur déclare sans délai à l\'ANSM tous les événements ou effets indésirables graves (article R1123-54 du code de la santé publique).')
+    run1.style='Paragraphe'
+    
     #Ecriture du 9.6
     Titre2('9.6 Rapport annuel de sécurité',document)
+    
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    run1=p.add_run('Article R1123-61 du code de la santé publique.')
+    run1.style='Paragraphe'
+    run1.font.italic= True
+    
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    run1 = p.add_run ('A la date anniversaire de ')
+    run1.style='Paragraphe'
+    run2=p.add_run('l’autorisation de la recherche (pour les études portant sur un médicament)/la première inclusion (pour tous les autres types de recherche), ')
+    run2.style='Paragraphe'
+    run2.font.italic= True
+    run3 = p.add_run ('le promoteur rédige un rapport de sécurité comprenant :')
+    run3.style='Paragraphe'
+    
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+    p.style='List Bullet 2'
+    run1=p.add_run('la liste des effets indésirables graves susceptibles d’être liés au(x) traitement(s) expérimental(aux) de la recherche incluant les effets graves attendus et inattendus, survenus dans l’essai concerné pendant la période couverte par le rapport,')
+    run1.style='Paragraphe'
+    
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+    p.style='List Bullet 2'
+    run1=p.add_run('une analyse concise et critique de la sécurité des participants se prêtant à la recherche.')
+    run1.style='Paragraphe'
+    
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+    p.style='List Bullet 2'
+    run1=p.add_run('les tableaux de synthèse de tous les effets indésirables graves survenus dans l’essai concerné depuis le début de la recherche')
+    run1.style='Paragraphe'
+    
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    run1 = p.add_run ('Ce rapport est envoyé à l’ANSM et au CPP dans les 60 jours suivant la date anniversaire de ')
+    run1.style='Paragraphe'
+    run2=p.add_run('l’autorisation de la recherche/la première inclusion.')
+    run2.style='Paragraphe'
+    run2.font.italic= True
+
     
         #FIN DU DOC 
     paragraph = document.add_paragraph()
     run = paragraph.add_run()
     run.add_break(WD_BREAK.PAGE)
   
- #   document.save("Partie9.docx")
+    document.save("Partie9.docx")
     
     
     
