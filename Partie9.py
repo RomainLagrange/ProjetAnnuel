@@ -11,6 +11,8 @@ from StyleProt1 import Style,Titre1, Titre2, Titre3, TexteGris, TexteGrisJustif
 from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_UNDERLINE, WD_LINE_SPACING, WD_COLOR_INDEX, WD_BREAK
 from docx.enum.style import WD_STYLE_TYPE
 from docx.shared import Cm, Pt, RGBColor, Inches
+from docx.enum.table import WD_TABLE_ALIGNMENT,WD_ROW_HEIGHT, WD_ALIGN_VERTICAL
+
 
 #MEMO POUR ECRIRE LES TITRES :
 #    Titre1('num + texte du protocole',document)
@@ -22,7 +24,7 @@ from docx.shared import Cm, Pt, RGBColor, Inches
 def Partie9(document):
 #def Partie9():
     'Creation de la partie 9 du protcole de catégorie 1'
-#    document = docx.Document()
+  #  document = docx.Document()
 
 
 #   Marge de la page
@@ -36,7 +38,7 @@ def Partie9(document):
 #---------------------------DEFINITIONS DES STYLES
  
 
- #   Style(document)
+  #  Style(document)
 
 
 #    
@@ -654,13 +656,281 @@ def Partie9(document):
     t = pt.text = ''
     p = pt.add_run('Dès confirmation de la grossesse')
     p.alignment=WD_ALIGN_PARAGRAPH.CENTER
-    p.font.name = 'Times New Roman'
-
-    
+    p.font.name = 'Times New Roman'  
 
     
     #Ecriture du 9.4
     Titre2('9.4 Déclaration par le promoteur des effets indésirables graves inattendus, des faits nouveaux et autres évènements',document)
+    
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+    run1=p.add_run('Le promoteur évalue, indépendamment de l’investigateur, le lien de causalité entre l’événement indésirable grave, les traitements expérimentaux ')
+    run1.style='Paragraphe'
+    run2=p.add_run('(A adapter en fonction de l’étude : médicament, dispositif médical/procédure de mise en place du DM…), ')
+    run2.style='Paragraphe'
+    run2.font.italic = True
+    run2.font.color.rgb = RGBColor(0x0,0xB0,0xF0) 
+    run3=p.add_run('les traitements associés et la recherche.\nTous les événements indésirables graves pour lesquels l’investigateur ou le promoteur estime qu’une relation de causalité peut être raisonnablement envisagée sont considérés comme des suspicions d’effets indésirables graves.')
+    run3.style='Paragraphe'
+    
+
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+    run1=p.add_run('Le promoteur évalue si l’effet indésirable grave est attendu ou inattendu en se basant sur la liste des évènements indésirables graves attendus décrits dans le paragraphe 9.2 du protocole et sur le document de référence tel que défini dans le protocole.')
+    run1.style='Paragraphe'
+    
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+    run1=p.add_run('Le promoteur déclare selon les délais en vigueur les informations de sécurité aux autorités compétentes et au CPP selon les exigences réglementaires spécifique à chaque type d’essai.')
+    run1.style='Paragraphe'
+
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+    run1=p.add_run('S’agissant d’une étude portant sur un médicament, le promoteur enregistre dans la base de données EudraVigilance tous les effets indésirables graves inattendus.')
+    run1.style='Paragraphe'
+
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+    run1=p.add_run('Dans le cas d’une recherche en insu, le promoteur déclare les EIGI à l’ANSM après avoir levé l’insu.')
+    run1.style='Paragraphe'
+
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    run1=p.add_run('Tableau récapitulatif  des déclarations par type d’étude')
+    run1.style='Paragraphe'
+    run1.font.bold = True
+    run1.font.underline = True    
+    
+    table = document.add_table(9, 4)
+    table.style = 'Table Grid'
+    for cell in table.columns.cells: 
+        cell.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
+
+    row = table.rows[0].cells
+    
+    cell = row[0]
+    pt = cell.paragraphs[0]
+    p = pt.add_run('Type d’étude et type d’EvI')
+    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    p.font.name = 'Times New Roman'
+    p.bold = True
+
+    cell = row[1]
+    pt = cell.paragraphs[0]
+ #   t = pt.text = ''
+    p = pt.add_run('Déclaration aux autorités compétentes concernées')
+    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    p.font.name = 'Times New Roman'
+    p.bold = True
+
+    cell = row[2]
+    pt = cell.paragraphs[0]
+    p = pt.add_run('Délai de déclaration initiale')
+    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    p.font.name = 'Times New Roman'
+    p.bold = True
+    
+    cell = row[3]
+    pt = cell.paragraphs[0]
+    p = pt.add_run('Délai du follow up')
+    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    p.font.name = 'Times New Roman'
+    p.bold = True
+    
+    row = table.rows[1].cells
+    
+    cell = row[0]
+    pt = cell.paragraphs[0]
+    p = pt.add_run('Médicament : SUSAR')
+    p.font.name = 'Times New Roman'
+
+    cell = row[1]
+    pt = cell.paragraphs[0]
+ #   t = pt.text = ''
+    p = pt.add_run('EMA, ANSM')
+    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    p.font.name = 'Times New Roman'
+
+    cell = row[2]
+    pt = cell.paragraphs[0]
+    p = pt.add_run('- décès ou mise en jeu du pronostic vital : sans délai\n- autre critère : max 15 j')
+    p.font.name = 'Times New Roman'
+    
+    cell = row[3]
+    pt = cell.paragraphs[0]
+    p = pt.add_run('Max 8j')
+    p.font.name = 'Times New Roman'
+    
+    row = table.rows[2].cells
+    
+    cell = row[0]
+    pt = cell.paragraphs[0]
+    p = pt.add_run('DM : SUSAR et EvIG lié au geste de mise en œuvre ')
+    p.font.name = 'Times New Roman'
+
+    cell = row[1]
+    pt = cell.paragraphs[0]
+ #   t = pt.text = ''
+    p = pt.add_run('ANSM')
+    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    p.font.name = 'Times New Roman'
+
+    cell = row[2]
+    pt = cell.paragraphs[0]
+    p = pt.add_run('- décès ou mise en jeu du pronostic vital : sans délai\n\n- autre critère : max 15 j')
+    p.font.name = 'Times New Roman'
+    
+    cell = row[3]
+    pt = cell.paragraphs[0]
+    p = pt.add_run('- Max 8 j\n\n-Max 15 j')
+    p.font.name = 'Times New Roman'
+    
+    row = table.rows[3].cells
+    
+    cell = row[0]
+    pt = cell.paragraphs[0]
+    p = pt.add_run('HPS : SUSAR')
+    p.font.name = 'Times New Roman'
+
+    cell = row[1]
+    pt = cell.paragraphs[0]
+ #   t = pt.text = ''
+    p = pt.add_run('ANSM')
+    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    p.font.name = 'Times New Roman'
+
+    cell = row[2]
+    pt = cell.paragraphs[0]
+    p = pt.add_run('- décès ou mise en jeu du pronostic vital : sans délai\n\n- autre critère : max 15 j')
+    p.font.name = 'Times New Roman'
+    
+    cell = row[3]
+    pt = cell.paragraphs[0]
+    p = pt.add_run('Max 8j')
+    p.font.name = 'Times New Roman'
+
+    row = table.rows[4].cells
+    
+    cell = row[0]
+    pt = cell.paragraphs[0]
+    p = pt.add_run('Cosméto/Tatouage : effet indésirable grave')
+    p.font.name = 'Times New Roman'
+
+    cell = row[1]
+    pt = cell.paragraphs[0]
+ #   t = pt.text = ''
+    p = pt.add_run('ANSM')
+    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    p.font.name = 'Times New Roman'
+
+    cell = row[2]
+    pt = cell.paragraphs[0]
+    p = pt.add_run('Max 7 j')
+    p.font.name = 'Times New Roman'
+    
+    cell = row[3]
+    pt = cell.paragraphs[0]
+    p = pt.add_run('Sans délai')
+    p.font.name = 'Times New Roman'
+
+    row = table.rows[5].cells
+    
+    cell = row[0]
+    pt = cell.paragraphs[0]
+    p = pt.add_run('Cosméto/Tatouage : effet indésirable ayant nécessité un traitement médical et effet\nindésirable paraissant revêtir un caractère de gravité justifiant une déclaration')
+    p.font.name = 'Times New Roman'
+
+    cell = row[1]
+    pt = cell.paragraphs[0]
+ #   t = pt.text = ''
+    p = pt.add_run('ANSM')
+    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    p.font.name = 'Times New Roman'
+
+    cell = row[2]
+    pt = cell.paragraphs[0]
+    p = pt.add_run('Max 15j')
+    p.font.name = 'Times New Roman'
+    
+    cell = row[3]
+    pt = cell.paragraphs[0]
+    p = pt.add_run('Sans délai')
+    p.font.name = 'Times New Roman'
+    
+    row = table.rows[6].cells
+    
+    cell = row[0]
+    pt = cell.paragraphs[0]
+    p = pt.add_run('Cosméto/Tatouage : autres effets indésirables')
+    p.font.name = 'Times New Roman'
+
+    cell = row[1]
+    pt = cell.paragraphs[0]
+ #   t = pt.text = ''
+    p = pt.add_run('ANSM')
+    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    p.font.name = 'Times New Roman'
+
+    cell = row[2]
+    pt = cell.paragraphs[0]
+    p = pt.add_run('A la fin de l’essai si durée < 3 mois ou trimestriellement')
+    p.font.name = 'Times New Roman'
+    
+    row = table.rows[7].cells
+    
+    cell = row[0]
+    pt = cell.paragraphs[0]
+    p = pt.add_run('Organes/Tissus : effet indésirable grave et incident grave')
+    p.font.name = 'Times New Roman'
+
+    cell = row[1]
+    pt = cell.paragraphs[0]
+ #   t = pt.text = ''
+    p = pt.add_run('ANSM')
+    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    p.font.name = 'Times New Roman'
+
+    cell = row[2]
+    pt = cell.paragraphs[0]
+    p = pt.add_run('immédiatement')
+    p.font.name = 'Times New Roman'
+    
+    cell = row[3]
+    pt = cell.paragraphs[0]
+    p = pt.add_run('imméditement')
+    p.font.name = 'Times New Roman'
+
+    row = table.rows[8].cells
+    
+    cell = row[0]
+    pt = cell.paragraphs[0]
+    p = pt.add_run('PSL : effet indésirable et incident grave')
+    p.font.name = 'Times New Roman'
+
+    cell = row[1]
+    pt = cell.paragraphs[0]
+ #   t = pt.text = ''
+    p = pt.add_run('ANSM')
+    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    p.font.name = 'Times New Roman'
+
+    cell = row[2]
+    pt = cell.paragraphs[0]
+    p = pt.add_run('immédiatement')
+    p.font.name = 'Times New Roman'
+    
+    cell = row[3]
+    pt = cell.paragraphs[0]
+    p = pt.add_run('imméditement')
+    p.font.name = 'Times New Roman'
+    
+    document.add_paragraph(' ')
+    
     
     #Ecriture du 9.5
     Titre2('9.5	Essai chez un volontaire sain',document)
@@ -673,7 +943,7 @@ def Partie9(document):
     run = paragraph.add_run()
     run.add_break(WD_BREAK.PAGE)
   
-#    document.save("Partie9.docx")
+ #   document.save("Partie9.docx")
     
     
     
