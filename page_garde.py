@@ -13,15 +13,16 @@ from docx.enum.text import WD_BREAK
 import re
 from docx.shared import Cm
 
-#document = docx.Document()
-#extract=extraction.extract1()
-#'''Marge des page'''
-#sections = document.sections
-#for section in sections:
-#    section.top_margin = Cm(2)
-#    section.bottom_margin = Cm(2)
-#    section.left_margin = Cm(2)
-#    section.right_margin = Cm(2)
+
+extract=extraction.extract1()
+document = docx.Document()
+'''Marge des page'''
+sections = document.sections
+for section in sections:
+    section.top_margin = Cm(2)
+    section.bottom_margin = Cm(2)
+    section.left_margin = Cm(2)
+    section.right_margin = Cm(2)
 
 def PageGarde(document,extract):
     
@@ -143,21 +144,22 @@ def PageGarde(document,extract):
    
     #document.save("page_garde.docx")                   #sauvegarde
    
-def PageSignature(document):
+def PageSignature(document,extract):
     
-  #  document = docx.Document()
- 
+    #document = docx.Document()
+
     '''Logos de l'en-tete'''
     
     page_sign = document.add_section()
     header2 = page_sign.header
     header2.is_linked_to_previous = False
     p = header2.paragraphs[0]
+    p.alignment = 2
     r = p.add_run() 
-    r.add_text("\t\tACRONYME")
+    r.add_text('\t\t'+extract['titre_abrege'])
     p2 = header2.add_paragraph()
     r2 = p2.add_run() 
-    r2.add_picture('imageGauche.png')
+    r2.add_picture('imageGauche3.png')
     
 #    p.style = document.styles["Header"]
         
@@ -252,18 +254,18 @@ def PageSignature(document):
     footer = page_sign.footer
     footer.is_linked_to_previous = False
     p = footer.paragraphs[0]
-    r = p.add_run('Version n°X du XX/XX/201X\tCONFIDENTIEL\tPage 3 sur 14')
+    r = p.add_run(extract['code_protocole']+'\tCONFIDENTIEL')
     r.font.name = 'Times New Roman'
     r.font.size = docx.shared.Pt(11)
     
     
-#    '''Fin de page'''
-#    paragraph = document.add_paragraph()
-#    run = paragraph.add_run()
-#    run.add_break(WD_BREAK.PAGE)
+    '''Fin de page'''
+    paragraph = document.add_paragraph()
+    run = paragraph.add_run()
+    run.add_break(WD_BREAK.PAGE)
 
     
-  #  document.save("page_signature.docx")                   #sauvegarde
+    #document.save("page_signature.docx")                   #sauvegarde
 
 def liste_abreviation(document,extract):
    
@@ -372,4 +374,73 @@ def liste_abreviation(document,extract):
       run = paragraph.add_run()
       run.add_break(WD_BREAK.PAGE)
      
-      
+def resume_protocole(document,extract):
+
+     '''Titre'''
+     paragraph2 = document.add_paragraph()
+     paragraph2.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
+     sentence = paragraph2.add_run('RESUME DU PROTOCOLE VERSION XX')
+     '''Then format the sentence'''
+     sentence.font.name = 'Times New Roman'
+     sentence.bold = True
+     sentence.font.size = docx.shared.Pt(16)
+     
+     table = document.add_table(rows=16, cols=2, style='Table Grid')
+     table.autofit = False
+     for cell in table.columns[0].cells:
+         cell.width =Cm(4)
+     for cell in table.columns[1].cells:
+         cell.width =Cm(14.5)
+   
+     table.cell(0,0).text = 'Titre'       
+     table.cell(0,1).text = extract['titre_complet']+'\n'+extract['titre_abrege']
+     table.cell(1,0).text = 'Promoteur'
+     table.cell(1,1).text = extract['promoteur_nom_organisme']+'\n'+extract['promoteur_adresse']+'\nTél : '+extract['promoteur_num_telephone']+' / Fax : '+extract['promoteur_num_telecopie']
+     table.cell(2,0).text = 'Investigateur Coordonnateur'
+     table.cell(2,1).text = extract['investigateur_coordinateur_nom']+' '+extract['investigateur_coordinateur_prenom']+'\n'+extract['investigateur_coordinateur_nom_etablissement']+' Service: '+extract['investigateur_coordinateur_service']+'\n'+extract['investigateur_coordinateur_adresse']+'\nTél : '+extract['investigateur_coordinateur_telephone']+' / Fax : '+extract['investigateur_coordinateur_telecopie']+'\n'+extract['investigateur_coordinateur_courriel']
+     table.cell(3,0).text = 'Justification / contexte'
+     table.cell(3,1).text = extract['justification_etude_courte']
+     table.cell(4,0).text = 'Objectif Principal'
+     table.cell(4,1).text = extract['objectif_principal']
+     table.cell(5,0).text = 'Objectifs Secondaires'
+     table.cell(5,1).text = extract['objectif_secondaire']
+     table.cell(6,0).text = 'Critère de Jugement Principal'
+     table.cell(6,1).text = extract['critere_jugement_principal_courte']
+     table.cell(7,0).text = 'Critères de Jugement Secondaires'
+     table.cell(7,1).text = extract['critere_jugement_secondaire_courte']
+     table.cell(8,0).text = 'Schéma de la recherche'
+     table.cell(9,0).text = 'Critères d\'Inclusion'
+     table.cell(9,1).text = extract['critere_inclusion_courte']
+     table.cell(10,0).text = 'Critères de Non Inclusion des Sujets'
+     table.cell(10,1).text = extract['critere_non_inclusion_courte']
+     table.cell(11,0).text = 'Traitements / Stratégies / Procédures'
+     table.cell(11,1).text = extract['traitement_strategie_courte']
+     table.cell(12,0).text = 'Taille d\'étude'
+     table.cell(12,1).text = extract['taille_etude_courte']
+     table.cell(13,0).text = 'Durée de la Recherche '
+     table.cell(13,1).text = 'Durée de la période d\’inclusion : '+extract['duree_inclusion']+'\nDurée de la participation pour chaque participant : '+extract['duree_participation']+'\nDurée totale de l’étude : '+extract['duree_totale_etude']
+     table.cell(14,0).text = 'Analyse statistique des données'
+     table.cell(14,1).text = extract['analyse_statistique_courte']
+     table.cell(15,0).text = 'Retombées attendues '
+     table.cell(15,1).text = extract['retombee_attenduees_courte']
+    
+    
+     for row in table.rows:
+         for cell in row.cells:
+             paragraphs = cell.paragraphs
+             for paragraph in paragraphs:
+                 for run in paragraph.runs:
+                     font = run.font
+                     font.size= docx.shared.Pt(11)
+                     font.name = 'Times New Roman'
+     
+def test():
+    PageGarde(document,extract)
+    PageSignature(document,extract)
+    liste_abreviation(document,extract)
+    resume_protocole(document,extract)
+ 
+    
+    
+                    
+    document.save("test_cat1.docx") 

@@ -318,7 +318,7 @@ def extract1():
     #on retire l'aide au remplissage 
     courte=re.search(r"(?<=à la partie correspondante dans le corps du protocole § 6\.1\)\n).*",courte).group()
     infos['critere_inclusion_courte']=courte
-    infos['critere_inclusion_secondaire_longue']=longue
+    infos['critere_inclusion_longue']=longue
     
     #critères de non inclusion
     table = doc.tables[5]  
@@ -348,7 +348,7 @@ def extract1():
     #on retire l'aide au remplissage 
     courte=re.search(r"(?<=à la partie correspondante dans le corps du protocole § 6\.2\)\n).*",courte).group()
     infos['critere_non_inclusion_courte']=courte
-    infos['critere_non_inclusion_secondaire_longue']=longue
+    infos['critere_non_inclusion_longue']=longue
     
     #justification inclusion
     justif=re.search(r"(?<=Justifications de l’inclusion de personnes visées:).*(?=Modalités de recrutements)",texte1).group()
@@ -832,7 +832,7 @@ def extract2():
     #on retire l'aide au remplissage 
     courte=re.search(r"(?<=à la partie correspondante dans le corps du protocole § 4\.1\)\n).*",courte).group()
     infos['critere_inclusion_courte']=courte
-    infos['critere_inclusion_secondaire_longue']=longue
+    infos['critere_inclusion_longue']=longue
     
     #critères de non inclusion
     table = doc.tables[5]  
@@ -862,7 +862,7 @@ def extract2():
     #on retire l'aide au remplissage 
     courte=re.search(r"(?<=à la partie correspondante dans le corps du protocole § 4\.2\)\n).*",courte).group()
     infos['critere_non_inclusion_courte']=courte
-    infos['critere_non_inclusion_secondaire_longue']=longue
+    infos['critere_non_inclusion_longue']=longue
     
     #justification inclusion
     justif=re.search(r"(?<=Justifications de l’inclusion de personnes visées:).*(?=Modalités de recrutements)",texte1).group()

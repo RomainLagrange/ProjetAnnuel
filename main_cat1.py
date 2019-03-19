@@ -55,7 +55,7 @@ def construit_doc():
     
     page_garde.PageGarde(document,extract)
     #historique des mises a jour
-    page_garde.PageSignature(document)
+    page_garde.PageSignature(document,extract)
     #principaux correspondants
     #sommaire
     page_garde.liste_abreviation(document,extract)
