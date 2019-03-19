@@ -562,6 +562,14 @@ def extract1():
     #CPP
     x=re.search(r"(?<=Modalités de constitution ou non d’un comité de surveillance indépendant:).*",texte1).group()
     infos['comite_surveillance_independant']=x
+    
+    #on formate pour enlever les potentiels blancs avant la valeur
+    for k, v in infos.items():
+        if type(v) is str:
+            infos[k] = v.lstrip(" ")
+        else:
+            for i in range(len(v)):
+                infos[k][i] = v[i].lstrip(" ")
             
     return infos
     
@@ -985,6 +993,14 @@ def extract2():
     infos['comite_surveillance_independant']=x
     
             
+    for k, v in infos.items():
+        if type(v) is str:
+            infos[k] = v.lstrip(" ")
+        else:
+            for i in range(len(v)):
+                infos[k][i] = v[i].lstrip(" ")
+            
+    
     return infos
     
 def extract3():   
@@ -1292,6 +1308,14 @@ def extract3():
     longue=re.search(r"(?<=compris le calendrier des analyses intermédiaires prévues\.\n).*",longue).group()
     infos['analyse_statistique_courte']=courte
     infos['analyse_statistique_longue']=longue
+    
+    for k, v in infos.items():
+        if type(v) is str:
+            infos[k] = v.lstrip(" ")
+        else:
+            for i in range(len(v)):
+                infos[k][i] = v[i].lstrip(" ")
+            
     
     return infos
     

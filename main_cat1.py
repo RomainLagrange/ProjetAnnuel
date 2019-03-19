@@ -54,12 +54,12 @@ def construit_doc():
     
     
     page_garde.PageGarde(document,extract)
-    #historique des mises a jour
+    page_garde.Page_version(document,extract)
     page_garde.PageSignature(document,extract)
-    #principaux correspondants
+    page_garde.PageCorespondant(document,extract)
     #sommaire
     page_garde.liste_abreviation(document,extract)
-    #resume du proto version XX
+    page_garde.resume_protocole(document,extract)
     #abstract
     Partie1(document)
     Partie2(document)
