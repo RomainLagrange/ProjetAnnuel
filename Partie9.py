@@ -23,7 +23,11 @@ from docx.oxml import parse_xml
 #    TexteGris(texte,document) --> écrire en minuscule !!!
 #    TexteGrisJustif(texte,document)
 
+#tester dans le main
 def Partie9(document):
+
+#tester seul
+
 #def Partie9():
     'Creation de la partie 9 du protcole de catégorie 1'
   #  document = docx.Document()
