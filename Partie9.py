@@ -23,24 +23,24 @@ from docx.oxml import parse_xml
 #    TexteGris(texte,document) --> écrire en minuscule !!!
 #    TexteGrisJustif(texte,document)
 
-#def Partie9(document):
-def Partie9():
+def Partie9(document):
+#def Partie9():
     'Creation de la partie 9 du protcole de catégorie 1'
-    document = docx.Document()
+  #  document = docx.Document()
 
 
 #   Marge de la page
-    sections = document.sections
-    for section in sections:
-        section.top_margin = Cm(2)
-        section.bottom_margin = Cm(2)
-        section.left_margin = Cm(2)
-        section.right_margin = Cm(2)
+#    sections = document.sections
+#    for section in sections:
+#        section.top_margin = Cm(2)
+#        section.bottom_margin = Cm(2)
+#        section.left_margin = Cm(2)
+#        section.right_margin = Cm(2)
 
 #---------------------------DEFINITIONS DES STYLES
  
 
-    Style(document)
+#    Style(document)
 
 
 #    
@@ -1070,7 +1070,7 @@ def Partie9():
     run = paragraph.add_run()
     run.add_break(WD_BREAK.PAGE)
   
-    document.save("Partie9.docx")
+  #  document.save("Partie9.docx")
     
     
     
