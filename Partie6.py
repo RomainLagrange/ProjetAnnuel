@@ -374,10 +374,10 @@ def Partie6(document):
     
         #IMAGE NUMERO PATIENT
     
-#    p=document.add_paragraph()
-#    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
-#    run=p.add_run()
-#    picture=run.add_picture('num_patient.png')
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    run=p.add_run()
+    picture=run.add_picture('num_patient.png')
     
 
     p=document.add_paragraph()
