@@ -18,14 +18,14 @@ from docx.oxml import parse_xml
 from docx.oxml import OxmlElement
 import qn
 
-def main_ansm_pb():
+def main_ansm_medoc():
      document = docx.Document()
      partie_A_B(document)
      partie_C(document)
-     partie_D(document)
-     partie_E(document)
-     partie_F_G(document)
-     partie_H_I(document)
+     Partie_D(document)
+     Partie_E(document)
+     Partie_F_G(document)
+     Partie_H_I(document)
      document.save("soumission-ansm-medicament.docx")
 
 def partie_A_B(document):
@@ -451,7 +451,7 @@ def Partie_D(document):
     
     paragraph=document.add_paragraph()
     
-    table = document.add_table(rows=2, cols=6, style='Table Grid')
+    table = document.add_table(rows=3, cols=6, style='Table Grid')
     table.cell(0,0).text=("D.2.6    Un avis scientifique a-t-il été rendu sur le ME dans le cadre de cet essai clinique ?")
     table.cell(1,0).text=("D.2.6.1	Si oui en D.2.6, veuillez préciser qui a rendu l'avis et en joindre une copie à votre dossier :")
     table.cell(2,0).text=("D.2.6.1.1    Avis du CHMP  ?\n"
@@ -782,7 +782,7 @@ def Partie_D(document):
     
     paragraph=document.add_paragraph()
     
-    table = document.add_table(rows=7, cols=1, style='Table Grid')
+    table = document.add_table(rows=8, cols=1, style='Table Grid')
     table.cell(0,0).text=("D.8	ETABLISSEMENT OÙ LA PERSONNE QUALIFIEE LIBERE LES LOTS DE MEDICAMENT EXPERIMENTAL")
     table.cell(1,0).text=("Cette section concerne les ME finis, c’est-à-dire les médicaments (randomisés) conditionnés, étiquetés et libérés spécifiquement pour l’essai clinique. S'il y a plusieurs établissements en charge de la libération ou plusieurs ME à libérer, répéter cette section autant de fois que nécessaire et préciser le numéro du ME concerné, tel qu'indiqué en D.1 ou D.7.2. En cas de pluralité d'établissements libérateurs, préciser le ME libéré par chaque établissement concerné.")
     table.cell(2,0).text=("D.8.1	Ne pas remplir la section D.8.2 si le ME (conditions cumulatives) :\n"
@@ -813,7 +813,7 @@ def Partie_D(document):
                     if n==0 or n==2:
                         fontdebut.bold = True
                     elif n==4:
-                        fontdebut.ialic = True
+                        fontdebut.italic = True
                     n=n+1
     a=table.cell(0,0)
     b=table.cell(7,0)

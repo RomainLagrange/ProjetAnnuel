@@ -18,10 +18,10 @@ from docx.oxml import parse_xml
 
 #docmuents du cpp pour les dispositifs médicaux
 
-def main_cpp_RNI():
+def main_cpp_RNI(extract):
     document = docx.Document()
     cpp_rni(document)
-    page2_cpp_rni(document)
+    page2_cpp_rni(document, extract)
     document.save("soumission-cpp-RNI.docx")
 
 def cpp_rni(document):
@@ -154,7 +154,7 @@ def cpp_rni(document):
     
     document.add_page_break()
     
-def page2_cpp_rni(document):
+def page2_cpp_rni(document, extract):
 
     
     '''Marge de la page'''
@@ -204,7 +204,7 @@ def page2_cpp_rni(document):
     sentence.font.name = 'Arial Narrow'
     sentence.bold = True
     sentence.font.size = docx.shared.Pt(11)
-    sentence=paragraph.add_run('Nom, raison sociale, sigle :\nNom du responsable :\nAdresse complète :\nTéléphone :\nMél :\n')
+    sentence=paragraph.add_run('Nom, raison sociale, sigle :' + extract['promoteur_nom_organisme']+'\nNom du responsable :'+extract['promoteur_nom_personne_contact']+'\nAdresse complète :'+extract['promoteur_adresse']+'\nTéléphone :'+extract['promoteur_num_telephone']+'\nMél :' + extract['promoteur_courriel'] + '\n')
     sentence.font.name = 'Arial Narrow'
     sentence.font.size = docx.shared.Pt(11)
     
@@ -213,7 +213,7 @@ def page2_cpp_rni(document):
     sentence.font.name = 'Arial Narrow'
     sentence.bold = True
     sentence.font.size = docx.shared.Pt(11)
-    sentence=paragraph.add_run('Nom, Prénom :\nQualité :\nAdresse complète :\nTéléphone :\nMél :\n')
+    sentence=paragraph.add_run('Nom, Prénom : '+extract['investigateur_coordinateur_nom']+' '+extract['investigateur_coordinateur_prenom']+'\nQualité : '+extract['investigateur_coordinateur_qualification']+'\nAdresse complète : '+extract['investigateur_coordinateur_adresse']+'\nTéléphone : '+extract['investigateur_coordinateur_telephone']+'\nMél : '+extract['investigateur_coordinateur_courriel']+'\n')
     sentence.font.name = 'Arial Narrow'
     sentence.font.size = docx.shared.Pt(11)
     
@@ -231,7 +231,7 @@ def page2_cpp_rni(document):
     sentence.font.name = 'Arial Narrow'
     sentence.bold = True
     sentence.font.size = docx.shared.Pt(11)
-    sentence=paragraph.add_run('Intitulé de la recherche :\nNuméro d’enregistrement :\nNombre de personnes susceptibles d’être incluses dans la recherche :\nCaractéristiques de la recherche :\n')
+    sentence=paragraph.add_run('Intitulé de la recherche : ' + extract['titre_complet']+'\nNuméro d’enregistrement : '+extract['num_idrcb']+'\nNombre de personnes susceptibles d’être incluses dans la recherche : '+extract['taille_etude_longue']+'\nCaractéristiques de la recherche : \n')
     sentence.font.name = 'Arial Narrow'
     sentence.font.size = docx.shared.Pt(11)
     sentence=paragraph.add_run('              – transversale □\n              – longitudinale □\n              – comparatif ou non □\n              – cohorte □\n              – étude cas – témoin □\n              – exploratoire/démonstratif □\n              – autre □')
