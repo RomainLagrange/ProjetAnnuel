@@ -19,7 +19,7 @@ from docx.shared import Cm, Pt, RGBColor, Inches
 #    TexteGris(texte,document) --> écrire en minuscule !!!
 #    TexteGrisJustif(texte,document)
 
-def Partie18(document):
+def Partie18(document,extract):
     'Creation de la partie 18 du protcole de catégorie 1'
   #  document = docx.Document()
 
@@ -45,13 +45,34 @@ def Partie18(document):
     
     #Ecriture du 17.1  
     Titre2('18.1	Expertise scientifique',document)
+    paragraph2 = document.add_paragraph()
+    sentence2 = paragraph2.add_run(extract['investigateur_coordinateur_nom_etablissement'])
+    sentence2.font.name = 'Times New Roman'
+    sentence2.font.size = docx.shared.Pt(10)
+    
+    
     
     #Ecriture du 17.2  
     Titre2('18.2	Collaborations ',document)
+    paragraph2 = document.add_paragraph()
+    sentence2 = paragraph2.add_run(extract['titre_abrege'])
+    sentence2.font.name = 'Times New Roman'
+    sentence2.font.size = docx.shared.Pt(10)
+    paragraph2 = document.add_paragraph()
+    sentence2 = paragraph2.add_run(extract['taille_etude_courte'])
+    sentence2.font.name = 'Times New Roman'
+    sentence2.font.size = docx.shared.Pt(10)
+    paragraph2 = document.add_paragraph()
+    sentence2 = paragraph2.add_run(extract['duree_inclusion'])
+    sentence2.font.name = 'Times New Roman'
+    sentence2.font.size = docx.shared.Pt(10)
     
     #Ecriture du 17.3  
     Titre2('18.3	Financement du projet (si ce point ne fait pas partie d’un document distinct)',document)
-
+    paragraph2 = document.add_paragraph()
+    sentence2 = paragraph2.add_run(extract['titre_abrege'])
+    sentence2.font.name = 'Times New Roman'
+    sentence2.font.size = docx.shared.Pt(10)
     #FIN DU DOC 
     paragraph = document.add_paragraph()
     run = paragraph.add_run()

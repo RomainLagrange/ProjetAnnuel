@@ -19,7 +19,7 @@ from docx.shared import Cm, Pt, RGBColor, Inches
 #    TexteGris(texte,document) --> écrire en minuscule !!!
 #    TexteGrisJustif(texte,document)
 
-def Partie14(document):
+def Partie14(document,extract):
     'Creation de la partie 14 du protcole de catégorie 1'
    # document = docx.Document()
 
@@ -49,6 +49,8 @@ def Partie14(document):
     
     #Ecriture du 14.1  
     Titre2('14.1	Approbation de la recherche',document)
+    #nom du CPP : extract['CPP']
+    #nom du promoteur : extract['promoteur_nom_organisme']
     
     #Ecriture du 14.2  
     Titre2('14.2	Modifications au protocole',document)

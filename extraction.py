@@ -420,7 +420,6 @@ def extract1():
     #description produit
     x=re.search(r"(?<=Description du produit/médicament expérimental:).*(?=Informations sur le placebo)",texte).group()
     #puis tous les éléments du produit
-    print(x)
     y=re.search(r"(?<=Nom du produit:).*(?=Nom de code)",x).group()
     infos['produit_nom']=y
     y=re.search(r"(?<=Nom de code:).*(?=Voie d’administration)",x).group()
@@ -1019,7 +1018,6 @@ def extract3():
         texte1+=i
     texte1=texte1.replace("\xa0","")
     texte=texte1.replace("\n","")
-    print(texte)
     #creation du dico de donnes
     infos={}
     
@@ -1228,7 +1226,6 @@ def extract3():
     #on ajoute ' ' pour eviter l'erreur avec les regex en cas de non remplissage par l'investigateur
     courte+="\n"
     longue+="\n"
-    print(courte)
     #on retire l'aide au remplissage 
     courte=re.search(r"(?<=traitements/stratégies/procédures\n).*",courte).group()
     longue=re.search(r"(?<=la procédure à l’étude\n).*",longue).group()

@@ -19,7 +19,7 @@ from docx.shared import Cm, Pt, RGBColor, Inches
 #    TexteGris(texte,document) --> écrire en minuscule !!!
 #    TexteGrisJustif(texte,document)
 
-def Partie11(document):
+def Partie11(document,extract):
     'Creation de la partie 11 du protcole de catégorie 1'
  #   document = docx.Document()
 
@@ -51,10 +51,20 @@ def Partie11(document):
     
     #Ecriture du 11.1  
     Titre2('11.1	Calcul de la taille d’étude',document)
-    
+    paragraph2 = document.add_paragraph()
+    sentence2 = paragraph2.add_run(extract['critere_jugement_principal_courte'])
+    sentence2.font.name = 'Times New Roman'
+    sentence2.font.size = docx.shared.Pt(10)
+    paragraph2 = document.add_paragraph()
+    sentence2 = paragraph2.add_run(extract['taille_etude_longue'])
+    sentence2.font.name = 'Times New Roman'
+    sentence2.font.size = docx.shared.Pt(10)
     #Ecriture du 11.2  
     Titre2('11.2	Méthodes statistiques employées',document)
-    
+    paragraph2 = document.add_paragraph()
+    sentence2 = paragraph2.add_run(extract['analyse_statistique_longue'])
+    sentence2.font.name = 'Times New Roman'
+    sentence2.font.size = docx.shared.Pt(10)
     #Ecriture du 11.3  
     Titre2('11.3	Analyse de la sécurité',document)
     

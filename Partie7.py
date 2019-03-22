@@ -21,7 +21,7 @@ from docx.oxml import parse_xml
 #    TexteGris(texte,document)
 #    TexteGrisJustif(texte,document)
 
-def Partie7(document):
+def Partie7(document,extract):
 #def Partie7():
     'Creation de la partie 7 du protcole de catégorie 1'
  #   document = docx.Document()
@@ -51,6 +51,10 @@ def Partie7(document):
     
    # Ecriture du 7.1  
     Titre2('7.1	Traitement / stratégie / procédure expérimental(e)',document)
+    paragraph2 = document.add_paragraph()
+    sentence2 = paragraph2.add_run(extract['traitement_strategie_longue'])
+    sentence2.font.name = 'Times New Roman'
+    sentence2.font.size = docx.shared.Pt(10)
     
     p=document.add_paragraph()
     p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY

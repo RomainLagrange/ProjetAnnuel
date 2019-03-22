@@ -19,7 +19,7 @@ from docx.shared import Cm, Pt, RGBColor, Inches
 #    TexteGris(texte,document) --> écrire en minuscule !!!
 #    TexteGrisJustif(texte,document)
 
-def Partie10(document):
+def Partie10(document,extract):
     'Creation de la partie 10 du protcole de catégorie 1'
  #   document = docx.Document()
 
@@ -44,7 +44,10 @@ def Partie10(document):
     
      #ecriture du premier titre 
     Titre1('10	SURVEILLANCE DE LA RECHERCHE',document)
-    
+    paragraph2 = document.add_paragraph()
+    sentence2 = paragraph2.add_run(extract['comite_surveillance_independant'])
+    sentence2.font.name = 'Times New Roman'
+    sentence2.font.size = docx.shared.Pt(10)
     #FIN DU DOC 
     paragraph = document.add_paragraph()
     run = paragraph.add_run()
