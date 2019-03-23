@@ -20,11 +20,11 @@ import qn
 
 #docmuents du cpp pour les dispositifs médicaux
 
-def main_cpp_hps():
+def main_cpp_hps(extract):
     document = docx.Document()
     cpp_hps(document)
-    page2_cpp_hps(document)
-    cpp_hps_annexe2(document)
+    page2_cpp_hps(document, extract)
+    cpp_hps_annexe2(document, extract)
     document.save("soumission-cpp-hps.docx")
 
 def cpp_hps(document):
@@ -175,7 +175,7 @@ def cpp_hps(document):
     document.add_paragraph('Forme : 4 dossiers complets + 1 version électronique\n\n', style='fin_tableau')
     
     
-def page2_cpp_hps(document):
+def page2_cpp_hps(document, extract):
     document.add_page_break()
     styles= document.styles
     style=styles.add_style('debut_page', WD_STYLE_TYPE.PARAGRAPH)
@@ -595,7 +595,7 @@ def page2_cpp_hps(document):
 #        tcPr.append(tcBorders)
     
  
-def cpp_hps_annexe2(document):
+def cpp_hps_annexe2(document, extract):
     document.add_page_break()
     '''Marge de la page'''
     sections = document.sections
