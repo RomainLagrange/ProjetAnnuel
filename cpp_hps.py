@@ -258,15 +258,14 @@ def page2_cpp_hps(document, extract):
     
     paragraph = document.add_paragraph("\nA. IDENTIFICATION DE LA RECHERCHE", style="gras_tableau")
     paragraph=document.add_paragraph()
-    sentence = paragraph.add_run("Titre complet de la recherche :\n \nNuméro d'enregistrement de la recherche (délivré par l'ANSM) : \n")
+    sentence = paragraph.add_run("Titre complet de la recherche :\n"+extract['titre_complet']+" \nNuméro d'enregistrement de la recherche (délivré par l'ANSM) : \n")
     fontdebut = sentence.font
     fontdebut.name = 'Arial Narrow'
     fontdebut.size = docx.shared.Pt(10) 
     
-    table = document.add_table(rows=1, cols=3, style='Table Grid')
+    table = document.add_table(rows=1, cols=2, style='Table Grid')
     table.cell(0,0).text=("Numéro de code du promoteur de\nla recherche donné par le\npromoteur")
-    table.cell(0,1).text=("Version")
-    table.cell(0,2).text=("Date :")
+    table.cell(0,1).text=(extract['code_protocole'])
     for row in table.rows:
         for cell in row.cells:
             paragraphs = cell.paragraphs
@@ -286,7 +285,7 @@ def page2_cpp_hps(document, extract):
     fontdebut.size = docx.shared.Pt(10) 
     
     
-    paragraph = document.add_paragraph("Nom ou titre abrégé de la recherche,\nle cas échéant:\nJustifier la catégorie de votre recherche\n",style="normal")
+    paragraph = document.add_paragraph("Nom ou titre abrégé de la recherche,\nle cas échéant:\n" +extract['titre_abrege']+"\nJustifier la catégorie de votre recherche\n",style="normal")
     paragraph=document.add_paragraph()
     sentence = paragraph.add_run("Inscription au fichier VRB")
     fontdebut = sentence.font
@@ -307,16 +306,16 @@ def page2_cpp_hps(document, extract):
     c=table.cell(1,0)
     d=table.cell(1,1)
     c.merge(d)
-    table.cell(0,0).text=("Nom de l'organisme :")
-    table.cell(1,0).text=("Nom de la personne à contacter :")
+    table.cell(0,0).text=("Nom de l'organisme :"+extract['promoteur_nom_organisme']+"\n")
+    table.cell(1,0).text=("Nom de la personne à contacter :"+extract['promoteur_nom_personne_contact']+"\n")
     table.cell(0,2).text=("Avis du CPP :")
     e=table.cell(2,0)
     f=table.cell(4,0)
     e.merge(f)
-    table.cell(2,0).text=("Adresse :")
-    table.cell(2,1).text=("Numéro de téléphone :")
-    table.cell(3,1).text=("Numéro de télécopie :")
-    table.cell(4,1).text=("Courriel :")
+    table.cell(2,0).text=("Adresse :"+extract['promoteur_adresse'])
+    table.cell(2,1).text=("Numéro de téléphone :"+extract['promoteur_num_telephone'])
+    table.cell(3,1).text=("Numéro de télécopie :"+extract['promoteur_num_telecopie'])
+    table.cell(4,1).text=("Courriel :"+extract['promoteur_courriel'])
     for row in table.rows:
         for cell in row.cells:
             paragraphs = cell.paragraphs
@@ -334,16 +333,16 @@ def page2_cpp_hps(document, extract):
     c=table.cell(1,0)
     d=table.cell(1,1)
     c.merge(d)
-    table.cell(0,0).text=("Nom de l'organisme :")
-    table.cell(1,0).text=("Nom de la personne à contacter :")
+    table.cell(0,0).text=("Nom de l'organisme :"+extract['promoteur_UE_nom_organisme'])
+    table.cell(1,0).text=("Nom de la personne à contacter :"+extract['promoteur_UE_nom_personne_contact'])
     table.cell(0,2).text=("Avis du CPP :")
     e=table.cell(2,0)
     f=table.cell(4,0)
     e.merge(f)
-    table.cell(2,0).text=("Adresse :")
-    table.cell(2,1).text=("Numéro de téléphone :")
-    table.cell(3,1).text=("Numéro de télécopie :")
-    table.cell(4,1).text=("Courriel :")
+    table.cell(2,0).text=("Adresse :"+extract['promoteur_UE_adresse'])
+    table.cell(2,1).text=("Numéro de téléphone :"+extract['promoteur_UE_num_telephone'])
+    table.cell(3,1).text=("Numéro de télécopie :"+extract['promoteur_UE_num_telecopie'])
+    table.cell(4,1).text=("Courriel :"+extract['promoteur_UE_courriel'])
     g=table.cell(5,0)
     h=table.cell(5,1)
     g.merge(h)
@@ -359,7 +358,7 @@ def page2_cpp_hps(document, extract):
                     fontdebut.size = docx.shared.Pt(10)
     
     paragraph = document.add_paragraph("\nC. IDENTIFICATION DU DEMANDEUR",style="gras_tableau")
-    paragraph = document.add_paragraph("Nom de l'organisme : \n   Adresse :\n\n   Numéro de téléphone :\n   Numéro de télécopie :\n   Courriel :\n\nNom de la personne à contacter :\n\n   Adresse :\n   Numéro de téléphone :\n   Numéro de télécopie :\n   Courriel :\n",style="normal")
+    paragraph = document.add_paragraph("Nom de l'organisme : "+extract['demandeur_nom_organisme']+"\n   Adresse :\n"+extract['demandeur_UE_adresse']+"\n   Numéro de téléphone : "+extract['demandeur_UE_num_telephone']+"\n   Numéro de télécopie : "+extract['demandeur_UE_num_telecopie']+"\n   Courriel :\n"+extract['demandeur_UE_courriel']+"\nNom de la personne à contacter :\n"+extract['demandeur_nom_personne_contact']+"\n   Adresse :\n   Numéro de téléphone :\n   Numéro de télécopie :\n   Courriel :\n",style="normal")
     paragraph = document.add_paragraph("\nD. DONNEES SUR LE(S) PRODUIT(S) EXPERIMENTAL(AUX) UTILISE(S) DANS LA RECHERCHE:\nPRODUIT(S) ETUDIE(S) OU UTILISE(S) COMME COMPARATEUR(S)",style="gras_tableau")
     
     table = document.add_table(rows=4, cols=1, style='Table Grid')
@@ -379,10 +378,10 @@ def page2_cpp_hps(document, extract):
     
     paragraph = document.add_paragraph("\nDESCRIPTION DU PRODUIT EXPERIMENTAL",style="gras_tableau")
     table = document.add_table(rows=5, cols=1, style='Table Grid')
-    table.cell(0,0).text=("Nom du produit, le cas échéant :")
-    table.cell(1,0).text=("Nom de code, le cas échéant :")
-    table.cell(2,0).text=("Voie d'adiministration (utiliser les termes standard):")
-    table.cell(3,0).text=("Dosage (préciser tous les dosages utilisés) : \n-Concentration (nombre) :\n-Unité de concentration :")
+    table.cell(0,0).text=("Nom du produit, le cas échéant : "+extract['produit_nom'])
+    table.cell(1,0).text=("Nom de code, le cas échéant : "+extract['produit_nom_code'])
+    table.cell(2,0).text=("Voie d'adiministration (utiliser les termes standard) :"+extract['produit_voie_administration'])
+    table.cell(3,0).text=("Dosage (préciser tous les dosages utilisés) : \n-Concentration (nombre) : "+extract['produit_dosage_concentration']+"\n-Unité de concentration : "+extract['produit_dosage_unite_concentration'])
     table.cell(4,0).text=("Le produit expérimental contient-il une substance active :\n"
                           "\n-d'origine chimique ?       oui       non"
                           "\n-d'otirigine biologique ?   oui       non"
@@ -407,11 +406,11 @@ def page2_cpp_hps(document, extract):
                     
     paragraph = document.add_paragraph("\nE. INFORMATIONS SUR LE PLACEBO (le cas échéant) (répéter la section nécessaire)",style="gras_tableau")
     table = document.add_table(rows=6, cols=1, style='Table Grid')
-    table.cell(0,0).text=("Cette section se rapport au placebo n° :")
+    table.cell(0,0).text=("Cette section se rapport au placebo n° : "+extract['placebo_numero'])
     table.cell(1,0).text=("Un placebo est_il utilisé ?       oui       non")
     table.cell(2,0).text=("De quel produit expérimental est-ce un placebo ?")
-    table.cell(3,0).text=("Préciser le(s) numéro(s) de PE selon la section D.")
-    table.cell(4,0).text=("Voie d'admission :")
+    table.cell(3,0).text=("Préciser le(s) numéro(s) de PE selon la section D. "+extract['placebo_numero_ME'])
+    table.cell(4,0).text=("Voie d'admission : "+extract['placebo_voie_administration'])
     table.cell(5,0).text=("Composition, hormis la (les) substance(s) active(s) :"
                           "-est-elle identique à celle du produit expérimental étudié?      oui       non\n\n"
                           "        Si non, préciser les principaux composants :")
@@ -428,7 +427,7 @@ def page2_cpp_hps(document, extract):
     
     paragraph = document.add_paragraph("\nFABRICANT DU PLACEBO",style="gras_tableau")
     table = document.add_table(rows=1, cols=1, style='Table Grid')
-    table.cell(0,0).text=("Fabricant\n-Nom de l'établissement :\n-Adresse :")
+    table.cell(0,0).text=("Fabricant\n-Nom de l'établissement : "+extract['fabriquant_placebo_nom']+"\n-Adresse : "+extract['fabriquant_placebo_adresse'])
     for row in table.rows:
         for cell in row.cells:
             paragraphs = cell.paragraphs
@@ -441,17 +440,17 @@ def page2_cpp_hps(document, extract):
                     
     paragraph = document.add_paragraph("\nG. INFORMATIONS GENERALES SUR LA RECHERCHE",style="gras_tableau")
     table = document.add_table(rows=5, cols=1, style='Table Grid')
-    table.cell(0,0).text=("Condition médicale ou pathologique étudiée\n"
+    table.cell(0,0).text=("Condition médicale ou pathologique étudiée\n"+extract['pathologie_etudiee']+"\n"
                           "Préciser la condition médicale :\n"
-                          "Classification CIM :\n"
+                          "Classification CIM :\n"+extract['classification_cim']+"\n"
                           "Classification MedDRA :\n\n"
                           "Est-ce une maladie rare ?      oui      non\n"
                           "\nObjectif(s) de l'essai\n"
-                          "Objectif principal :\n"
-                          "Objectifs secondaires :\n")
-    table.cell(1,0).text=("Principaux critères d'inclusion (énumérer les plus importants)")
-    table.cell(2,0).text=("Principaux critères de non inclusion (énumérer les plus importants)")
-    table.cell(3,0).text=("Critère(s) d'évaluation principal(aux)")
+                          "Objectif principal : "+extract['objectif_principal']+"\n"
+                          "Objectifs secondaires : "+extract['objectif_secondaire']+"\n")
+    table.cell(1,0).text=("Principaux critères d'inclusion (énumérer les plus importants)\n"+extract['critere_inclusion_courte'])
+    table.cell(2,0).text=("Principaux critères de non inclusion (énumérer les plus importants)\n"+extract['critere_non_inclusion_courte'])
+    table.cell(3,0).text=("Critère(s) d'évaluation principal(aux)"+extract['critere_jugement_principal_longue']+"\n"+extract['critere_jugement_secondaire_longue'])
     table.cell(4,0).text=("Domaine(s) d'étude :\n"
                           "-Physiologie\n-Physiopathologie\n-Epidémiologie\n-Génétique\n"
                           "-Science du comportement\n-Produits à visée nutritionnelle\n"
@@ -478,12 +477,12 @@ def page2_cpp_hps(document, extract):
     e=table.cell(4,0)
     f=table.cell(4,1)
     e.merge(f)
-    table.cell(0,0).text=("Nom :")
-    table.cell(0,1).text=("Adresse :")
-    table.cell(1,0).text=("Prénoms :")
-    table.cell(2,0).text=("Qualification, spécialité :")
-    table.cell(3,0).text=("Courriel :")
-    table.cell(3,1).text=("Téléphone :")
+    table.cell(0,0).text=("Nom :"+extract['investigateur_coordinateur_nom'])
+    table.cell(0,1).text=("Adresse :"+extract['investigateur_coordinateur_adresse_professionnelle'])
+    table.cell(1,0).text=("Prénoms :"+extract['investigateur_coordinateur_prenom'])
+    table.cell(2,0).text=("Qualification, spécialité :"+extract['investigateur_coordinateur_qualification'])
+    table.cell(3,0).text=("Courriel :"+extract['investigateur_coordinateur_courriel'])
+    table.cell(3,1).text=("Téléphone :"+extract['investigateur_coordinateur_telephone'])
     table.cell(4,0).text=("N°ADELI :")
     for row in table.rows:
         for cell in row.cells:
@@ -506,12 +505,12 @@ def page2_cpp_hps(document, extract):
     e=table.cell(4,0)
     f=table.cell(4,1)
     e.merge(f)
-    table.cell(0,0).text=("Nom :")
-    table.cell(0,1).text=("Adresse :")
-    table.cell(1,0).text=("Prénoms :")
-    table.cell(2,0).text=("Qualification, spécialité :")
-    table.cell(3,0).text=("Courriel :")
-    table.cell(3,1).text=("Téléphone :")
+    table.cell(0,0).text=("Nom :"+extract['autre_investigateur_nom'])
+    table.cell(0,1).text=("Adresse :"+extract['autre_investigateur_adresse'])
+    table.cell(1,0).text=("Prénoms :"+extract['autre_investigateur_prenom'])
+    table.cell(2,0).text=("Qualification, spécialité :"+extract['autre_investigateur_qualification'])
+    table.cell(3,0).text=("Courriel :"+extract['autre_investigateur_courriel'])
+    table.cell(3,1).text=("Téléphone :"+extract['autre_investigateur_telephone'])
     table.cell(4,0).text=("N°ADELI :")
     for row in table.rows:
         for cell in row.cells:
@@ -525,11 +524,11 @@ def page2_cpp_hps(document, extract):
     
     paragraph = document.add_paragraph("\n       I.3. Lieu de recherche (le cas échéant, si la recherche doit se dérouler dans un lieu nécessitant une autorisation de l'ARS) :",style="gras_tableau")
     table = document.add_table(rows=5, cols=1, style='Table Grid')
-    table.cell(0,0).text=("Intitulé du lieu :")
-    table.cell(1,0).text=("N° d'autorisation :")
-    table.cell(2,0).text=("délivré le :")
-    table.cell(3,0).text=("date de limite de validité :")
-    table.cell(4,0).text=("Nom et adresse :")
+    table.cell(0,0).text=("Intitulé du lieu : "+extract['lieu_recherche_intitule'])
+    table.cell(1,0).text=("N° d'autorisation : "+extract['lieu_recherche_num_auto'])
+    table.cell(2,0).text=("délivré le : "+extract['lieu_recherche_delivre_le'])
+    table.cell(3,0).text=("date de limite de validité : "+extract['lieu_recherche_date_limite_validite'])
+    table.cell(4,0).text=("Nom et adresse : "+extract['lieu_rechercher_nom_adresse'])
     for row in table.rows:
         for cell in row.cells:
             paragraphs = cell.paragraphs
@@ -636,18 +635,18 @@ def cpp_hps_annexe2(document, extract):
     paragraph=document.add_paragraph('\nCe document doit être complété de façon claire, compréhensible et en français.\n', style='page2_normal')
   
     
-    paragraph=document.add_paragraph('1. Numéro d’enregistrement de la recherche :', style='page2_normal')
-    paragraph=document.add_paragraph('2. Titre complet de la recherche :', style='page2_normal')
-    paragraph=document.add_paragraph('3. Justification de la recherche :', style='page2_normal')
-    paragraph=document.add_paragraph('4. Hypothèse principale de la recherche et objectifs :', style='page2_normal')
-    paragraph=document.add_paragraph("5. Evaluation des bénéfices et des risques que présente la recherche, notamment les bénéfices escomptés pour les personnes qui se prêtent à la recherche et les risques prévisibles liés au traitement et aux procédures d'investigation de la recherche (incluant notamment la douleur, l'inconfort, l'atteinte à l'intégrité physique des personnes se prêtant à la recherche, les mesures visant à éviter et/ou prendre en charge les évènements inattendus):", style='page2_normal')
-    paragraph=document.add_paragraph("6. Justifications de l’inclusion de personnes visées aux articles L. 1121-5 à L. 1121-8 et L. 1122-1-2 du code de la santé publique (ex. : mineurs, majeurs protégés, recherches mises en oeuvre dans des situations d'urgence, etc.) et procédure mise en oeuvre afin d’informer et de recueillir le consentement de ces personnes ou de leurs représentants légaux :", style='page2_normal')
-    paragraph=document.add_paragraph('7. Description des modalités de recrutement des personnes (joindre notamment tous les supports publicitaires utilisés pour la recherche en vue du recrutement des personnes) :', style='page2_normal')
+    paragraph=document.add_paragraph('1. Numéro d’enregistrement de la recherche :'+extract['num_idrcb'], style='page2_normal')
+    paragraph=document.add_paragraph('2. Titre complet de la recherche :'+extract['titre_complet'], style='page2_normal')
+    paragraph=document.add_paragraph('3. Justification de la recherche :'+extract['justification_etude_courte'], style='page2_normal')
+    paragraph=document.add_paragraph('4. Hypothèse principale de la recherche et objectifs :'+extract['objectif_principal']+"\n"+extract['objectif_secondaire'], style='page2_normal')
+    paragraph=document.add_paragraph("5. Evaluation des bénéfices et des risques que présente la recherche, notamment les bénéfices escomptés pour les personnes qui se prêtent à la recherche et les risques prévisibles liés au traitement et aux procédures d'investigation de la recherche (incluant notamment la douleur, l'inconfort, l'atteinte à l'intégrité physique des personnes se prêtant à la recherche, les mesures visant à éviter et/ou prendre en charge les évènements inattendus):"+extract['benefices']+"\n"+extract['risques'], style='page2_normal')
+    paragraph=document.add_paragraph("6. Justifications de l’inclusion de personnes visées aux articles L. 1121-5 à L. 1121-8 et L. 1122-1-2 du code de la santé publique (ex. : mineurs, majeurs protégés, recherches mises en oeuvre dans des situations d'urgence, etc.) et procédure mise en oeuvre afin d’informer et de recueillir le consentement de ces personnes ou de leurs représentants légaux : "+extract['justification_inclusion'], style='page2_normal')
+    paragraph=document.add_paragraph('7. Description des modalités de recrutement des personnes (joindre notamment tous les supports publicitaires utilisés pour la recherche en vue du recrutement des personnes) : '+extract['modalite_recrutement'], style='page2_normal')
     paragraph=document.add_paragraph('8. Procédures d’investigation menées et différences par rapport à la prise en charge habituelle, le cas échéant :', style='page2_normal')
-    paragraph=document.add_paragraph('9. Justification de l’existence ou non :\n-d’une interdiction de participer simultanément à une autre recherche\n-d’une période d’exclusion pendant laquelle la participation à une autre recherche est interdite.', style='page2_normal')   
-    paragraph=document.add_paragraph('10. Modalités et montant de l’indemnisation des personnes se prêtant à la recherche, le cas échéant :', style='page2_normal')
-    paragraph=document.add_paragraph('11. Motifs de constitution ou non d’un comité de surveillance indépendant :', style='page2_normal')
-    paragraph=document.add_paragraph('12. Nombre prévu de personnes à inclure dans la recherche :\n', style='page2_normal')
+    paragraph=document.add_paragraph('9. Justification de l’existence ou non :\n-d’une interdiction de participer simultanément à une autre recherche\n-d’une période d’exclusion pendant laquelle la participation à une autre recherche est interdite. \n'+extract['justification_existence'], style='page2_normal')   
+    paragraph=document.add_paragraph('10. Modalités et montant de l’indemnisation des personnes se prêtant à la recherche, le cas échéant : '+extract['indemnisation'], style='page2_normal')
+    paragraph=document.add_paragraph('11. Motifs de constitution ou non d’un comité de surveillance indépendant : '+extract['comite_surveillance_independant'], style='page2_normal')
+    paragraph=document.add_paragraph('12. Nombre prévu de personnes à inclure dans la recherche :\n'+extract['taille_etude_longue']+"\n", style='page2_normal')
     paragraph=document.add_paragraph('Par la présente, j’atteste/j’atteste au nom du promoteur (rayer la mention inutile) que les informations fournies ci-dessus à l’appui de la demande d’avis sont exactes.\n', style='page2_normal')
     paragraph=document.add_paragraph('Nom :\nPrénom :\nAdresse :\nFonction :\nDate :\nSignature :', style='page2_normal')
     
