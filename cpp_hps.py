@@ -495,40 +495,41 @@ def page2_cpp_hps(document, extract):
                     fontdebut.size = docx.shared.Pt(10)
     
     paragraph = document.add_paragraph("\n       I.2. Autres investigateurs",style="gras_tableau")
-    table = document.add_table(rows=5, cols=2, style='Table Grid')
-    a=table.cell(0,1)
-    b=table.cell(1,1)
-    a.merge(b)
-    c=table.cell(2,0)
-    d=table.cell(2,1)
-    c.merge(d)
-    e=table.cell(4,0)
-    f=table.cell(4,1)
-    e.merge(f)
-    table.cell(0,0).text=("Nom :"+extract['autre_investigateur_nom'])
-    table.cell(0,1).text=("Adresse :"+extract['autre_investigateur_adresse'])
-    table.cell(1,0).text=("Prénoms :"+extract['autre_investigateur_prenom'])
-    table.cell(2,0).text=("Qualification, spécialité :"+extract['autre_investigateur_qualification'])
-    table.cell(3,0).text=("Courriel :"+extract['autre_investigateur_courriel'])
-    table.cell(3,1).text=("Téléphone :"+extract['autre_investigateur_telephone'])
-    table.cell(4,0).text=("N°ADELI :")
-    for row in table.rows:
-        for cell in row.cells:
-            paragraphs = cell.paragraphs
-            for paragraph in paragraphs:
-                paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.LEFT
-                for run in paragraph.runs:
-                    fontdebut = run.font
-                    fontdebut.name = 'Arial Narrow'
-                    fontdebut.size = docx.shared.Pt(10)
+    for i in range(len(extract['autre_investigateur_nom'])):
+        table = document.add_table(rows=5, cols=2, style='Table Grid')
+        a=table.cell(0,1)
+        b=table.cell(1,1)
+        a.merge(b)
+        c=table.cell(2,0)
+        d=table.cell(2,1)
+        c.merge(d)
+        e=table.cell(4,0)
+        f=table.cell(4,1)
+        e.merge(f)
+        table.cell(0,0).text=("Nom :"+extract['autre_investigateur_nom'][i])
+        table.cell(0,1).text=("Adresse :"+extract['autre_investigateur_adresse'][i])
+        table.cell(1,0).text=("Prénoms :"+extract['autre_investigateur_prenom'][i])
+        table.cell(2,0).text=("Qualification, spécialité :"+extract['autre_investigateur_qualification'][i])
+        table.cell(3,0).text=("Courriel :"+extract['autre_investigateur_courriel'][i])
+        table.cell(3,1).text=("Téléphone :"+extract['autre_investigateur_telephone'][i])
+        table.cell(4,0).text=("N°ADELI :")
+        for row in table.rows:
+            for cell in row.cells:
+                paragraphs = cell.paragraphs
+                for paragraph in paragraphs:
+                    paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.LEFT
+                    for run in paragraph.runs:
+                        fontdebut = run.font
+                        fontdebut.name = 'Arial Narrow'
+                        fontdebut.size = docx.shared.Pt(10)
     
     paragraph = document.add_paragraph("\n       I.3. Lieu de recherche (le cas échéant, si la recherche doit se dérouler dans un lieu nécessitant une autorisation de l'ARS) :",style="gras_tableau")
     table = document.add_table(rows=5, cols=1, style='Table Grid')
     table.cell(0,0).text=("Intitulé du lieu : "+extract['lieu_recherche_intitule'])
-    table.cell(1,0).text=("N° d'autorisation : "+extract['lieu_recherche_num_auto'])
+    table.cell(1,0).text=("N° d'autorisation : "+extract['lieu_recherche_num_autorisation'])
     table.cell(2,0).text=("délivré le : "+extract['lieu_recherche_delivre_le'])
     table.cell(3,0).text=("date de limite de validité : "+extract['lieu_recherche_date_limite_validite'])
-    table.cell(4,0).text=("Nom et adresse : "+extract['lieu_rechercher_nom_adresse'])
+    table.cell(4,0).text=("Nom et adresse : "+extract['lieu_recherche_nom_adresse'])
     for row in table.rows:
         for cell in row.cells:
             paragraphs = cell.paragraphs
