@@ -86,7 +86,7 @@ def Style(document):
     stylePara.base_style = styles['Normal']
     fontPara = stylePara.font
     fontPara.name = 'Times New Roman' #police
-    fontPara.size = docx.shared.Pt(12) #taille
+    fontPara.size = docx.shared.Pt(11) #taille
 
 #   definition du style Titre1 --> AJOUTER LA BORDURE EN BAS
     styleTitre1 = styles.add_style('Titre1', WD_STYLE_TYPE.PARAGRAPH, WD_ALIGN_PARAGRAPH.CENTER)

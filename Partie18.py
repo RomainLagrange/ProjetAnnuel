@@ -25,12 +25,12 @@ def Partie18(document,extract):
 
 
 #   Marge de la page
-    sections = document.sections
-    for section in sections:
-        section.top_margin = Cm(2)
-        section.bottom_margin = Cm(2)
-        section.left_margin = Cm(2)
-        section.right_margin = Cm(2)
+#    sections = document.sections
+#    for section in sections:
+#        section.top_margin = Cm(2)
+#        section.bottom_margin = Cm(2)
+#        section.left_margin = Cm(2)
+#        section.right_margin = Cm(2)
 
 #---------------------------DEFINITIONS DES STYLES
  
@@ -54,6 +54,7 @@ def Partie18(document,extract):
     
     #Ecriture du 17.2  
     Titre2('18.2	Collaborations ',document)
+    
     paragraph2 = document.add_paragraph()
     sentence2 = paragraph2.add_run(extract['titre_abrege'])
     sentence2.font.name = 'Times New Roman'
@@ -67,17 +68,56 @@ def Partie18(document,extract):
     sentence2.font.name = 'Times New Roman'
     sentence2.font.size = docx.shared.Pt(10)
     
-    #Ecriture du 17.3  
+    p=document.add_paragraph()
+    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    run1=p.add_run('Le  projet ')
+    run1.style='Paragraphe'
+    run2=p.add_run('« Acronyme » ')
+    run2.style='Paragraphe'
+    run2.font.color.rgb = RGBColor(0x0,0xB0,0xF0) 
+    run3=p.add_run('bénéfice…. ')
+    run3.style='Paragraphe'
+    
+    p=document.add_paragraph()
+    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    run1=p.add_run('En effet, le nombre de sujets nécessaires a été évalué à ')
+    run1.style='Paragraphe'
+    run2=p.add_run('XXX ')
+    run2.style='Paragraphe'
+    run2.font.color.rgb = RGBColor(0x0,0xB0,0xF0) 
+    run3=p.add_run('patients sur une période d’inclusion de ')
+    run3.style='Paragraphe'
+    run4=p.add_run('XX ')
+    run4.style='Paragraphe'
+    run4.font.color.rgb = RGBColor(0x0,0xB0,0xF0) 
+    run5=p.add_run('mois ce qui correspond aux capacités de recrutement des centres investigateurs pressentis')
+    run5.style='Paragraphe'
+    
+    #Ecriture du 18.3  
     Titre2('18.3	Financement du projet (si ce point ne fait pas partie d’un document distinct)',document)
     paragraph2 = document.add_paragraph()
     sentence2 = paragraph2.add_run(extract['titre_abrege'])
     sentence2.font.name = 'Times New Roman'
     sentence2.font.size = docx.shared.Pt(10)
+    
+    p=document.add_paragraph()
+    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    run1=p.add_run('Le projet ')
+    run1.style='Paragraphe'
+    run2=p.add_run('« Acronyme » ')
+    run2.style='Paragraphe'
+    run2.font.italic=True
+    run2.font.color.rgb = RGBColor(0x0,0xB0,0xF0) 
+    run3=p.add_run('bénéficie d’un financement ')
+    run3.style='Paragraphe'    
+
     #FIN DU DOC 
     paragraph = document.add_paragraph()
     run = paragraph.add_run()
     run.add_break(WD_BREAK.PAGE)
-    #document.save("Partie7.docx") 
  
     
 #    document.save("Partie18.docx")

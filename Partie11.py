@@ -71,6 +71,12 @@ def Partie11(document,extract):
     #Texte gris centré
     TexteGris('prendre contact avec la cellule de vigilance \n pour aide a la redaction de ce chapitre',document)
     
+    p=document.add_paragraph()
+    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    run1=p.add_run('Un plan d’analyse détaillé sera défini et fera l’objet d’une validation par le Conseil Scientifique de l’étude, s’il existe. Les modifications ultérieures devront intervenir avant la levée d’insu sur la base de données et seront systématiquement validées par le Conseil Scientifique.')
+    run1.style='Paragraphe'
+    
     #FIN DU DOC 
     paragraph = document.add_paragraph()
     run = paragraph.add_run()

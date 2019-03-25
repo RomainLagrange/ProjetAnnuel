@@ -50,17 +50,59 @@ def Partie12(document):
     #Ecriture du 12.1  
     Titre2('12.1	Accès aux données',document)
     
+    p=document.add_paragraph()
+    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    run1=p.add_run('L’acceptation de la participation au protocole implique que les investigateurs mettront à disposition les documents et données individuelles strictement nécessaires au suivi, au contrôle de qualité et à l’audit de la recherche, à la disposition des personnes ayant un accès à ces documents conformément aux dispositions législatives et réglementaires en vigueur (articles L.1121-3 et R.5121-13 du code de la santé publique).')
+    run1.style='Paragraphe'
+    
     #Ecriture du 12.2  
     Titre2('12.2	Données source',document)
+
+    p=document.add_paragraph()
+    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    run1=p.add_run('Ensemble des informations figurant dans des documents originaux, ou dans des copies authentifiées de ces documents, relatif aux examens cliniques, aux observations ou à d’autres activités menées dans le cadre d’une recherche et nécessaires à la reconstitution et à l’évaluation de la recherche. Les documents dans lesquels les données sources sont enregistrées sont appelés les documents sources.')
+    run1.style='Paragraphe'
     
     #Ecriture du 12.3  
     Titre2('12.3	Confidentialité des données',document)
+
+    p=document.add_paragraph()
+    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    run1=p.add_run('Conformément aux dispositions législatives en vigueur, les personnes ayant un accès direct aux données source prendront toutes les précautions nécessaires en vue d\'assurer la confidentialité des informations relatives aux médicaments expérimentaux, aux recherches, aux personnes qui s\'y prêtent et notamment en ce qui concerne leur identité ainsi qu’aux résultats obtenus.')
+    run1.style='Paragraphe'
     
+    p=document.add_paragraph()
+    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    run1=p.add_run('Ces personnes, au même titre que les investigateurs eux-mêmes, sont soumises au secret professionnel.')
+    run1.style='Paragraphe'
+
+
+    p=document.add_paragraph()
+    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    run1=p.add_run('Pendant la recherche ou à son issue, les données recueillies sur les personnes qui s’y prêtent et transmises au promoteur par les investigateurs (ou tous autres intervenants spécialisés) seront rendues anonymes. Elles ne doivent en aucun cas faire apparaître en clair les noms des personnes concernées ni leur adresse. ')
+    run1.style='Paragraphe'
+
+    p=document.add_paragraph()
+    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    run1=p.add_run('Seules les initiales du nom et du prénom du patient seront enregistrées, accompagnées d’un numéro codé propre à l’étude indiquant l’ordre d’inclusion des sujets.')
+    run1.style='Paragraphe'
+    
+    p=document.add_paragraph()
+    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    run1=p.add_run('Le promoteur s’assurera que chaque personne qui se prête à la recherche a donné son accord par écrit pour l’accès aux données individuelles la concernant et strictement nécessaires au contrôle de qualité de la recherche.')
+    run1.style='Paragraphe'
+
         #FIN DU DOC 
     paragraph = document.add_paragraph()
     run = paragraph.add_run()
     run.add_break(WD_BREAK.PAGE)
-    #document.save("Partie7.docx") 
     
  #   document.save("Partie12.docx")
     
