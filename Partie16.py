@@ -37,12 +37,18 @@ def Partie16(document):
  
 
   #  Style(document)
-    
+#    
 #---------------------------------------------------------------ECRITURE
     
     
      #ecriture du premier titre 
     Titre1('16	RAPPORT FINAL',document)
+    
+    p=document.add_paragraph()
+    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    run1=p.add_run('Dans un délai d\'un an suivant la fin de la recherche ou son interruption, un rapport final sera établi et signé par le promoteur et l\'investigateur. Ce rapport sera tenu à la disposition de l\'autorité compétente. Le promoteur transmettra au CPP et, le cas échéant, à l\'ANSM les résultats de la recherche sous forme d\'un résumé du rapport final dans un délai d\'un an après la fin de la recherche.')
+    run1.style='Paragraphe'
 
     #FIN DU DOC 
     paragraph = document.add_paragraph()
