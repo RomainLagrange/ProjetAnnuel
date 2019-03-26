@@ -24,7 +24,7 @@ from docx.enum.table import WD_TABLE_ALIGNMENT,WD_ROW_HEIGHT, WD_ALIGN_VERTICAL
 #AJOUTER IMAGES, TABLEAU 
 
 
-def Partie6(document):
+def Partie6(document,extract):
 #def Partie6():
     'Creation de la partie 6 du protocole de catégorie 1'
   #  document = docx.Document()
@@ -58,7 +58,18 @@ def Partie6(document):
     
    # Ecriture du 6.1  
     Titre2('6.1	Calendrier de la recherche',document)
-    
+    paragraph2 = document.add_paragraph()
+    sentence2 = paragraph2.add_run(extract['duree_inclusion'])
+    sentence2.font.name = 'Times New Roman'
+    sentence2.font.size = docx.shared.Pt(10)
+    paragraph2 = document.add_paragraph()
+    sentence2 = paragraph2.add_run(extract['duree_participation'])
+    sentence2.font.name = 'Times New Roman'
+    sentence2.font.size = docx.shared.Pt(10)
+    paragraph2 = document.add_paragraph()
+    sentence2 = paragraph2.add_run(extract['duree_totale_etude'])
+    sentence2.font.name = 'Times New Roman'
+    sentence2.font.size = docx.shared.Pt(10)
     #format paysage
     change_orientation(document)
     
@@ -363,7 +374,7 @@ def Partie6(document):
     
     document.add_paragraph(' ')
     
-    
+#    
     p=document.add_paragraph()
     p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
     run1=p.add_run('Décrire le processus de numérotation du patient, par exemple : \n')
@@ -374,10 +385,10 @@ def Partie6(document):
     
         #IMAGE NUMERO PATIENT
     
-#    p=document.add_paragraph()
-#    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
-#    run=p.add_run()
-#    picture=run.add_picture('num_patient.png')
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    run=p.add_run()
+    picture=run.add_picture('num_patient.png')
     
 
     p=document.add_paragraph()
@@ -603,6 +614,14 @@ def Partie6(document):
 
     #Ecriture du titre 6.8
     Titre2('6.8	Contraintes liées à la recherche et indemnisation éventuelle des participants',document)
+    paragraph2 = document.add_paragraph()
+    sentence2 = paragraph2.add_run(extract['indemnisation'])
+    sentence2.font.name = 'Times New Roman'
+    sentence2.font.size = docx.shared.Pt(10)
+    paragraph2 = document.add_paragraph()
+    sentence2 = paragraph2.add_run(extract['justification_existence'])
+    sentence2.font.name = 'Times New Roman'
+    sentence2.font.size = docx.shared.Pt(10)
     
     #Ecriture du titre 6.9
     Titre2('6.9	Collection d’échantillons biologiques',document)

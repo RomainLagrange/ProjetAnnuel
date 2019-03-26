@@ -16,13 +16,13 @@ from docx.oxml import parse_xml
 
 #docmuents du cpp pour les medoc cat 1
 
-def main_cpp_medoc():
+def main_cpp_medoc(extract):
     document = docx.Document()
-    cpp_medoc(document)
-    page2_cpp(document)
+    cpp_medoc(document, extract)
+    page2_cpp(document, extract)
     document.save("soumission-cpp-medicaments.docx")
 
-def cpp_medoc(document):
+def cpp_medoc(document, extract):
     
 
     
@@ -180,7 +180,7 @@ def cpp_medoc(document):
     document.add_paragraph('Forme : 4 dossiers complets + 1 version électronique\n\n', style='fin_tableau')
     
     
-def page2_cpp(document):
+def page2_cpp(document, extract):
 
     
     '''Marge de la page'''
@@ -226,18 +226,18 @@ def page2_cpp(document):
     fontdebut.name = 'Arial Narrow'
     fontdebut.size = docx.shared.Pt(11)
     
-    paragraph=document.add_paragraph('1. Numéro EudraCT :', style='page2_normal')
-    paragraph=document.add_paragraph('2. Titre complet de la recherche :', style='page2_normal')
-    paragraph=document.add_paragraph('3. Justification et analyse critique de la pertinence de la recherche :', style='page2_normal')
-    paragraph=document.add_paragraph('4. Hypothèse principale de la recherche et objectifs :', style='page2_normal')
-    paragraph=document.add_paragraph('5. Evaluation des bénéfices et des risques que présentent la recherche, notamment les bénéfices escomptés pour les personnes qui se prêtent à la recherche et les risques prévisibles liés au traitement et aux procédures d’investigation de la recherche (incluant notamment la douleur, l’inconfort, l’atteinte à l’intégrité physique des personnes se prêtant à la recherche, les mesures visant à éviter et/ou prendre en charge les événements inattendus) :', style='page2_normal')
-    paragraph=document.add_paragraph('6. Justifications de l’inclusion de personnes visées aux articles L. 1121-5 à L. 1121-8 et L. 1122-1-2 du code de la santé publique (ex. : mineurs, majeurs protégés, recherches mises en oeuvre dans des situations d’urgence) et procédure mise en oeuvre afin d’informer et de recueillir le consentement de ces personnes ou de leurs représentants légaux :', style='page2_normal')
-    paragraph=document.add_paragraph('7. Description des modalités de recrutement des personnes (joindre notamment tous les supports publicitaires utilisés pour la recherche en vue du recrutement des personnes) :', style='page2_normal')
-    paragraph=document.add_paragraph('8. Procédures d’investigation menées et différences par rapport à la prise en charge habituelle, le cas échéant :', style='page2_normal')
-    paragraph=document.add_paragraph('9. Justification de l’existence ou non :\n           – d’une interdiction de participer simultanément à une autre recherche ;\n           – d’une période d’exclusion pendant laquelle la participation à une autre recherche est interdite.', style='page2_normal')   
-    paragraph=document.add_paragraph('10. Modalités et montant de l’indemnisation des personnes se prêtant à la recherche, le cas échéant :', style='page2_normal')
-    paragraph=document.add_paragraph('11. Motifs de constitution ou non d’un comité de surveillance indépendant :', style='page2_normal')
-    paragraph=document.add_paragraph('12. Nombre prévu de personnes à inclure dans la recherche :\n', style='page2_normal')
+    paragraph=document.add_paragraph('1. Numéro EudraCT :\n'+ extract['num_eudract'], style='page2_normal')
+    paragraph=document.add_paragraph('2. Titre complet de la recherche :\n' + extract['titre_complet'], style='page2_normal')
+    paragraph=document.add_paragraph('3. Justification et analyse critique de la pertinence de la recherche :\n' + extract ['justification_etude_courte'], style='page2_normal')
+    paragraph=document.add_paragraph('4. Hypothèse principale de la recherche et objectifs :\n' + extract['objectif_principal'] + '\n' + extract['objectif_secondaire'], style='page2_normal')
+    paragraph=document.add_paragraph('5. Evaluation des bénéfices et des risques que présentent la recherche, notamment les bénéfices escomptés pour les personnes qui se prêtent à la recherche et les risques prévisibles liés au traitement et aux procédures d’investigation de la recherche (incluant notamment la douleur, l’inconfort, l’atteinte à l’intégrité physique des personnes se prêtant à la recherche, les mesures visant à éviter et/ou prendre en charge les événements inattendus) :\n '+extract['benefices']+'\n'+extract['risques'], style='page2_normal')
+    paragraph=document.add_paragraph('6. Justifications de l’inclusion de personnes visées aux articles L. 1121-5 à L. 1121-8 et L. 1122-1-2 du code de la santé publique (ex. : mineurs, majeurs protégés, recherches mises en oeuvre dans des situations d’urgence) et procédure mise en oeuvre afin d’informer et de recueillir le consentement de ces personnes ou de leurs représentants légaux :\n' + extract['justification_inclusion'], style='page2_normal')
+    paragraph=document.add_paragraph('7. Description des modalités de recrutement des personnes (joindre notamment tous les supports publicitaires utilisés pour la recherche en vue du recrutement des personnes) :\n'+extract['modalite_recrutement'], style='page2_normal')
+    paragraph=document.add_paragraph('8. Procédures d’investigation menées et différences par rapport à la prise en charge habituelle, le cas échéant :\n', style='page2_normal')
+    paragraph=document.add_paragraph('9. Justification de l’existence ou non :\n           – d’une interdiction de participer simultanément à une autre recherche ;\n           – d’une période d’exclusion pendant laquelle la participation à une autre recherche est interdite.\n'+extract['justification_existence'], style='page2_normal')   
+    paragraph=document.add_paragraph('10. Modalités et montant de l’indemnisation des personnes se prêtant à la recherche, le cas échéant :\n'+extract['indemnisation'], style='page2_normal')
+    paragraph=document.add_paragraph('11. Motifs de constitution ou non d’un comité de surveillance indépendant :\n'+extract['comite_surveillance_independant'], style='page2_normal')
+    paragraph=document.add_paragraph('12. Nombre prévu de personnes à inclure dans la recherche :\n' + extract['taille_etude_longue'], style='page2_normal')
     paragraph=document.add_paragraph('Par la présente, j’atteste/j’atteste au nom du promoteur (rayer la mention inutile) que les informations fournies ci-dessus à l’appui de la demande d’avis sont exactes.\n', style='page2_normal')
     paragraph=document.add_paragraph('Nom :\nPrénom :\nAdresse :\nFonction :\nDate :\nSignature :', style='page2_normal')
     

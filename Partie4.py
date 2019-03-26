@@ -19,7 +19,7 @@ from docx.shared import Cm, Pt, RGBColor, Inches
 #    TexteGris(texte,document)
 #    TexteGrisJustif(texte,document)
 
-def Partie4(document):
+def Partie4(document,extract):
     'Creation de la partie 4 du protcole de catégorie 1'
   #  document = docx.Document()
 
@@ -43,7 +43,10 @@ def Partie4(document):
 
    # Ecriture du 4.1  
     Titre2('4.1	Schéma de la recherche',document)
-    
+    paragraph2 = document.add_paragraph()
+    sentence2 = paragraph2.add_run(extract['traitement_strategie_courte'])
+    sentence2.font.name = 'Times New Roman'
+    sentence2.font.size = docx.shared.Pt(10)
     # Ecriture du 4.2  
     Titre2('4.2	Méthode pour la randomisation',document)
     

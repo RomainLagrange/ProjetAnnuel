@@ -10,18 +10,22 @@ import extraction
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 #from docx.enum.section import WD_SECTION
 from docx.enum.text import WD_BREAK
+from docx.enum.section import WD_SECTION
 import re
 from docx.shared import Cm
+from docx.oxml import OxmlElement
+from docx.oxml.ns import qn
 
-#document = docx.Document()
-#extract=extraction.extract1()
-#'''Marge des page'''
-#sections = document.sections
-#for section in sections:
-#    section.top_margin = Cm(2)
-#    section.bottom_margin = Cm(2)
-#    section.left_margin = Cm(2)
-#    section.right_margin = Cm(2)
+
+extract=extraction.extract1()
+document = docx.Document()
+'''Marge des page'''
+sections = document.sections
+for section in sections:
+    section.top_margin = Cm(2)
+    section.bottom_margin = Cm(2)
+    section.left_margin = Cm(2)
+    section.right_margin = Cm(2)
 
 def PageGarde(document,extract):
     
@@ -143,21 +147,60 @@ def PageGarde(document,extract):
    
     #document.save("page_garde.docx")                   #sauvegarde
    
-def PageSignature(document):
+def Page_version(document,extract):
     
-  #  document = docx.Document()
- 
     '''Logos de l'en-tete'''
     
     page_sign = document.add_section()
     header2 = page_sign.header
     header2.is_linked_to_previous = False
     p = header2.paragraphs[0]
+    p.alignment = 2
     r = p.add_run() 
-    r.add_text("\t\tACRONYME")
+    r.add_text('\t\t'+extract['titre_abrege'])
     p2 = header2.add_paragraph()
     r2 = p2.add_run() 
-    r2.add_picture('imageGauche.png')
+    r2.add_picture('imageGauche3.png')
+    
+    '''Titre'''
+    paragraph2 = document.add_paragraph()
+    paragraph2.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    sentence = paragraph2.add_run('HISTORIQUE DES MISES A JOUR DU PROTOCOLE')
+    '''Then format the sentence'''
+    sentence.font.name = 'Times New Roman'
+    sentence.bold = True
+    sentence.font.size = docx.shared.Pt(16)
+    
+    table = document.add_table(rows=5, cols=3, style='Table Grid')
+    table.autofit = False
+    for cell in table.columns[0].cells:
+        cell.width =Cm(4)
+    for cell in table.columns[1].cells:
+        cell.width =Cm(4)
+    for cell in table.columns[2].cells:
+        cell.width =Cm(10)
+    table.cell(0,0).text = 'Version'
+    table.cell(0,1).text = 'Date' 
+    table.cell(0,2).text = 'Raison de la Mise à Jour' 
+    
+    '''Pied de page'''
+    footer = page_sign.footer
+    footer.is_linked_to_previous = False
+    p = footer.paragraphs[0]
+    r = p.add_run(extract['code_protocole']+'\tCONFIDENTIEL')
+    r.font.name = 'Times New Roman'
+    r.font.size = docx.shared.Pt(11)
+     
+    #FIN DU DOC 
+    paragraph = document.add_paragraph()
+    run = paragraph.add_run()
+    run.add_break(WD_BREAK.PAGE)
+
+
+def PageSignature(document,extract):
+    
+    #document = docx.Document()
+
     
 #    p.style = document.styles["Header"]
         
@@ -248,25 +291,154 @@ def PageSignature(document):
                     font.size= docx.shared.Pt(11)
                     font.name = 'Times New Roman'
   
-    '''Pied de page'''
-    footer = page_sign.footer
-    footer.is_linked_to_previous = False
-    p = footer.paragraphs[0]
-    r = p.add_run('Version n°X du XX/XX/201X\tCONFIDENTIEL\tPage 3 sur 14')
-    r.font.name = 'Times New Roman'
-    r.font.size = docx.shared.Pt(11)
     
+    
+    
+    '''Fin de page'''
+    paragraph = document.add_paragraph()
+    run = paragraph.add_run()
+    run.add_break(WD_BREAK.PAGE)
+    
+    
+    #document.save("page_signature.docx")                   #sauvegarde
+    
+def PageCorespondant(document,extract):
+    
+    #document = docx.Document()
+    
+#    p.style = document.styles["Header"]
+        
+    '''Titre'''
+    paragraph2 = document.add_paragraph()
+    paragraph2.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    sentence = paragraph2.add_run('PRINCIPAUX CORRESPONDANTS')
+    '''Then format the sentence'''
+    sentence.font.name = 'Times New Roman'
+    sentence.bold = True
+    sentence.font.size = docx.shared.Pt(16)
+    
+    page_corespondant = document.add_section(WD_SECTION.CONTINUOUS)
+    sectPr = page_corespondant._sectPr
+    cols = sectPr.xpath('./w:cols')[0]
+    cols.set(qn('w:num'),'2')
+    
+    paragraph2 = document.add_paragraph()
+    sentence1 = paragraph2.add_run('Investigateur coordonnateur/principal\n')
+    '''Then format the sentence'''
+    sentence1.font.name = 'Times New Roman'
+    sentence1.font.size = docx.shared.Pt(12) 
+    sentence1.bold = True  
+    sentence2 = paragraph2.add_run(extract['investigateur_coordinateur_nom']+' '+extract['investigateur_coordinateur_prenom']+'\n'+extract['investigateur_coordinateur_nom_etablissement']+'\nService: '+extract['investigateur_coordinateur_service']+'\n'+extract['investigateur_coordinateur_adresse']+'\nTél : '+extract['investigateur_coordinateur_telephone']+'\nFax : '+extract['investigateur_coordinateur_telecopie']+'\nE-mail : ')
+    '''Then format the sentence'''
+    sentence2.font.name = 'Times New Roman'
+    sentence2.font.size = docx.shared.Pt(10) 
+    sentence3 = paragraph2.add_run(extract['investigateur_coordinateur_courriel'])
+    '''Then format the sentence'''
+    sentence3.font.name = 'Times New Roman'
+    sentence3.font.size = docx.shared.Pt(10)
+    sentence3.underline = True
+
+    paragraph2 = document.add_paragraph()
+    sentence = paragraph2.add_run('Autres Spécialités')
+    '''Then format the sentence'''
+    sentence.font.name = 'Times New Roman'
+    sentence.font.size = docx.shared.Pt(12) 
+    sentence.bold = True 
+    
+    for i in range(len(extract['autre_investigateur_nom'])):
+        paragraph2 = document.add_paragraph()
+        '''Then format the sentence'''
+        sentence1.font.name = 'Times New Roman'
+        sentence1.font.size = docx.shared.Pt(12) 
+        sentence1.bold = True  
+        sentence2 = paragraph2.add_run(extract['autre_investigateur_nom'][i]+' '+extract['autre_investigateur_prenom'][i]+'\n'+extract['autre_investigateur_nom_etablissement'][i]+'\nService: '+extract['autre_investigateur_service'][i]+'\n'+extract['autre_investigateur_adresse'][i]+'\nTél : '+extract['autre_investigateur_telephone'][i]+'\nFax : '+extract['autre_investigateur_telecopie'][i]+'\nE-mail : ')
+        '''Then format the sentence'''
+        sentence2.font.name = 'Times New Roman'
+        sentence2.font.size = docx.shared.Pt(10) 
+        sentence3 = paragraph2.add_run(extract['autre_investigateur_courriel'][i])
+        '''Then format the sentence'''
+        sentence3.font.name = 'Times New Roman'
+        sentence3.font.size = docx.shared.Pt(10)
+        sentence3.underline = True
+    
+    paragraph2 = document.add_paragraph()
+    sentence1 = paragraph2.add_run('Pharmacie coordinatrice\n')
+    '''Then format the sentence'''
+    sentence1.font.name = 'Times New Roman'
+    sentence1.font.size = docx.shared.Pt(12) 
+    sentence1.bold = True 
+    sentence2 = paragraph2.add_run('Dr. Isabelle PRINCET\nService de Pharmacie\nCHU de Poitiers\n2 rue de la Milétrie – CS 90577 \n86 021 Poitiers cedex\nTél : 05 49 44 43 64\nFax : 05 49 44 44 69\nE-mail : ')
+    '''Then format the sentence'''
+    sentence2.font.name = 'Times New Roman'
+    sentence2.font.size = docx.shared.Pt(10)
+    sentence3 = paragraph2.add_run('i.princet@chu-poitiers.fr')
+    '''Then format the sentence'''
+    sentence3.font.name = 'Times New Roman'
+    sentence3.font.size = docx.shared.Pt(10)
+    sentence3.underline = True
+    
+    paragraph2 = document.add_paragraph()
+    sentence1 = paragraph2.add_run('Unité de vigilance de la recherche\n')
+    '''Then format the sentence'''
+    sentence1.font.name = 'Times New Roman'
+    sentence1.font.size = docx.shared.Pt(12) 
+    sentence1.bold = True 
+    sentence2 = paragraph2.add_run('Dr. Sophie DURANTON\nDirection de la Recherche Clinique\nCHU de Poitiers\n2 rue de la Milétrie – CS 90577\n86021 Poitiers cedex\nTél : 05.49.44.30.50\nFax : 05.49.44.30.58\nE-mail : ')
+    '''Then format the sentence'''
+    sentence2.font.name = 'Times New Roman'
+    sentence2.font.size = docx.shared.Pt(10)
+    sentence3 = paragraph2.add_run('sophie.duranton@chu-poitiers.fr\n\n')
+    '''Then format the sentence'''
+    sentence3.font.name = 'Times New Roman'
+    sentence3.font.size = docx.shared.Pt(10)
+    sentence3.underline = True
+    
+    paragraph2 = document.add_paragraph()
+    sentence1 = paragraph2.add_run('Promoteur\n')
+    '''Then format the sentence'''
+    sentence1.font.name = 'Times New Roman'
+    sentence1.font.size = docx.shared.Pt(12) 
+    sentence1.bold = True  
+    sentence2 = paragraph2.add_run(extract['promoteur_nom_organisme']+'\n'+extract['promoteur_nom_personne_contact']+'\n'+extract['promoteur_adresse']+'\nTél : '+extract['promoteur_num_telephone']+'\nFax : '+extract['promoteur_num_telecopie']+'\nE-mail : ')
+    '''Then format the sentence'''
+    sentence2.font.name = 'Times New Roman'
+    sentence2.font.size = docx.shared.Pt(10) 
+    sentence3 = paragraph2.add_run(extract['promoteur_courriel'])
+    '''Then format the sentence'''
+    sentence3.font.name = 'Times New Roman'
+    sentence3.font.size = docx.shared.Pt(10)
+    sentence3.underline = True
+    
+    paragraph2 = document.add_paragraph()
+    sentence1 = paragraph2.add_run('Plateforme  Méthodologie\n')
+    '''Then format the sentence'''
+    sentence1.font.name = 'Times New Roman'
+    sentence1.font.size = docx.shared.Pt(12) 
+    sentence1.bold = True  
+    sentence2 = paragraph2.add_run(extract['plateau_technique_organisme']+'\n'+extract['plateau_technique_personne_contact']+'\n'+extract['plateau_technique_adresse']+'\nTél : '+extract['plateau_technique_num_telephone']+'\nFax : '+extract['plateau_technique_num_telecopie']+'\nE-mail : ')
+    '''Then format the sentence'''
+    sentence2.font.name = 'Times New Roman'
+    sentence2.font.size = docx.shared.Pt(10) 
+    sentence3 = paragraph2.add_run(extract['plateau_technique_courriel'])
+    '''Then format the sentence'''
+    sentence3.font.name = 'Times New Roman'
+    sentence3.font.size = docx.shared.Pt(10)
+    sentence3.underline = True
+    
+    docu = document.add_section(WD_SECTION.NEW_PAGE)
+    sectPr = docu._sectPr
+    cols = sectPr.xpath('./w:cols')[0]
+    cols.set(qn('w:num'),'1')
     
 #    '''Fin de page'''
 #    paragraph = document.add_paragraph()
 #    run = paragraph.add_run()
 #    run.add_break(WD_BREAK.PAGE)
-
     
-  #  document.save("page_signature.docx")                   #sauvegarde
 
 def liste_abreviation(document,extract):
    
+      
       '''Titre'''
       paragraph2 = document.add_paragraph()
       paragraph2.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
@@ -371,5 +543,118 @@ def liste_abreviation(document,extract):
       paragraph = document.add_paragraph()
       run = paragraph.add_run()
       run.add_break(WD_BREAK.PAGE)
+    
+
      
-      
+def resume_protocole(document,extract):
+
+     '''Titre'''
+     paragraph2 = document.add_paragraph()
+     paragraph2.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
+     sentence = paragraph2.add_run('RESUME DU PROTOCOLE VERSION XX')
+     '''Then format the sentence'''
+     sentence.font.name = 'Times New Roman'
+     sentence.bold = True
+     sentence.font.size = docx.shared.Pt(16)
+     
+     table = document.add_table(rows=16, cols=2, style='Table Grid')
+     table.autofit = False
+     for cell in table.columns[0].cells:
+         cell.width =Cm(4)
+     for cell in table.columns[1].cells:
+         cell.width =Cm(14.5)
+   
+     table.cell(0,0).text = 'Titre'       
+     table.cell(0,1).text = extract['titre_complet']+'\n'+extract['titre_abrege']
+     table.cell(1,0).text = 'Promoteur'
+     table.cell(1,1).text = extract['promoteur_nom_organisme']+'\n'+extract['promoteur_adresse']+'\nTél : '+extract['promoteur_num_telephone']+' / Fax : '+extract['promoteur_num_telecopie']
+     table.cell(2,0).text = 'Investigateur Coordonnateur'
+     table.cell(2,1).text = extract['investigateur_coordinateur_nom']+' '+extract['investigateur_coordinateur_prenom']+'\n'+extract['investigateur_coordinateur_nom_etablissement']+' Service: '+extract['investigateur_coordinateur_service']+'\n'+extract['investigateur_coordinateur_adresse']+'\nTél : '+extract['investigateur_coordinateur_telephone']+' / Fax : '+extract['investigateur_coordinateur_telecopie']+'\n'+extract['investigateur_coordinateur_courriel']
+     table.cell(3,0).text = 'Justification / contexte'
+     table.cell(3,1).text = extract['justification_etude_courte']
+     table.cell(4,0).text = 'Objectif Principal'
+     table.cell(4,1).text = extract['objectif_principal']
+     table.cell(5,0).text = 'Objectifs Secondaires'
+     table.cell(5,1).text = extract['objectif_secondaire']
+     table.cell(6,0).text = 'Critère de Jugement Principal'
+     table.cell(6,1).text = extract['critere_jugement_principal_courte']
+     table.cell(7,0).text = 'Critères de Jugement Secondaires'
+     table.cell(7,1).text = extract['critere_jugement_secondaire_courte']
+     table.cell(8,0).text = 'Schéma de la recherche'
+     table.cell(9,0).text = 'Critères d\'Inclusion'
+     table.cell(9,1).text = extract['critere_inclusion_courte']
+     table.cell(10,0).text = 'Critères de Non Inclusion des Sujets'
+     table.cell(10,1).text = extract['critere_non_inclusion_courte']
+     table.cell(11,0).text = 'Traitements / Stratégies / Procédures'
+     table.cell(11,1).text = extract['traitement_strategie_courte']
+     table.cell(12,0).text = 'Taille d\'étude'
+     table.cell(12,1).text = extract['taille_etude_courte']
+     table.cell(13,0).text = 'Durée de la Recherche '
+     table.cell(13,1).text = 'Durée de la période d\’inclusion : '+extract['duree_inclusion']+'\nDurée de la participation pour chaque participant : '+extract['duree_participation']+'\nDurée totale de l’étude : '+extract['duree_totale_etude']
+     table.cell(14,0).text = 'Analyse statistique des données'
+     table.cell(14,1).text = extract['analyse_statistique_courte']
+     table.cell(15,0).text = 'Retombées attendues '
+     table.cell(15,1).text = extract['retombee_attenduees_courte']
+    
+    
+     for row in table.rows:
+         for cell in row.cells:
+             paragraphs = cell.paragraphs
+             for paragraph in paragraphs:
+                 for run in paragraph.runs:
+                     font = run.font
+                     font.size= docx.shared.Pt(11)
+                     font.name = 'Times New Roman'
+                     
+    #FIN DU DOC 
+     paragraph = document.add_paragraph()
+     run = paragraph.add_run()
+     run.add_break(WD_BREAK.PAGE)
+     
+        
+def Page_abstract(document,extract):
+    
+    '''Titre'''
+    paragraph2 = document.add_paragraph()
+    paragraph2.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    sentence = paragraph2.add_run('ABSTRACT')
+    '''Then format the sentence'''
+    sentence.font.name = 'Times New Roman'
+    sentence.bold = True
+    sentence.font.size = docx.shared.Pt(16)
+     
+    document.add_paragraph('This research has been registered in http://www.clinicaltrials.gov/ the date under the n° numéro.')
+    document.add_paragraph('Titre complet de la recherche en anglais et acronyme.')
+    document.add_paragraph('Titre simplifié de la recherche de 120 caractères maximum en anglais.')
+    document.add_paragraph('Nom du promoteur is the sponsor of this research.')
+    document.add_paragraph('This research will be conducted with the support of nom de la firme pharmaceutique / source of grants (PHRC,…).')
+    document.add_paragraph('Brief summary : courte description de la recherche et de son objectif principal en anglais, en 5 lignes environ. ')
+    document.add_paragraph('Detailed description : résumé de la recherche en anglais comportant une partie justification scientifique détaillée de 10 lignes environ, description du traitement/stratégie/procédure en 3 lignes environ et description du suivi en 5 lignes environ. ')
+    document.add_paragraph('Primary outcome: critère de jugement principal  et visite au cours de laquelle celui-ci est recueilli en anglais (exemples : at inclusion (D0) ou 6 months after inclusion).')
+    document.add_paragraph('Secondary outcomes: liste de tous les critères de jugement secondaires et visites durant lesquels ceux-ci sont recueillis en anglais.')
+    document.add_paragraph('•	Study design : description des principales caractéristiques de la recherche selon le type de recherche.')
+    document.add_paragraph('•	Eligibility criteria: \no	inclusion criteria: liste des principaux critères d’inclusion en anglais.\no	exclusion criteria: liste des principaux critères de non inclusion en anglais.')
+    document.add_paragraph('•	Arm number or label and arm type : brève description des bras du protocole (experimental/active comparator/placebo, comparator/sham comparator/no intervention/other.')
+    document.add_paragraph('•	Interventions : description succincte des traitements/stratégies/procédures de la recherche, pour chacun des bras le cas échéant. ')
+    document.add_paragraph('•	Number of subjects : taille d’étude.')
+    document.add_paragraph('•	Statistical analysis : bref rappel des méthodes statistiques.')
+    document.add_paragraph('•	Conditions : pathologie ou objet de la recherche. Utiliser des termes du MeSH (National Library of Medecine’s Medical Subject Headings).')
+    document.add_paragraph('•	Key-words : mot-clés décrivant la recherche.')
+     
+    #FIN DU DOC 
+    paragraph = document.add_paragraph()
+    run = paragraph.add_run()
+    run.add_break(WD_BREAK.PAGE)
+     
+def test():
+    PageGarde(document,extract)
+    Page_version(document,extract)
+    PageCorespondant(document,extract)
+    PageSignature(document,extract)
+    liste_abreviation(document,extract)
+    resume_protocole(document,extract)
+    Page_abstract(document,extract)
+    
+    
+                    
+    document.save("test_cat1.docx") 

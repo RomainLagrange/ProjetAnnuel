@@ -54,31 +54,31 @@ def construit_doc():
     
     
     page_garde.PageGarde(document,extract)
-    #historique des mises a jour
-    page_garde.PageSignature(document)
-    #principaux correspondants
+    page_garde.Page_version(document,extract)
+    page_garde.PageSignature(document,extract)
+    page_garde.PageCorespondant(document,extract)
     #sommaire
     page_garde.liste_abreviation(document,extract)
-    #resume du proto version XX
-    #abstract
-    Partie1(document)
-    Partie2(document)
-    Partie3(document)
-    Partie4(document)
-    Partie5(document)
-    Partie6(document)
-    Partie7(document)
+    page_garde.resume_protocole(document,extract)
+
+    Partie1(document,extract)
+    Partie2(document,extract)
+    Partie3(document,extract)
+    Partie4(document,extract)
+    Partie5(document,extract)
+    Partie6(document,extract)
+    Partie7(document,extract)
     Partie8(document)
     Partie9(document)
-    Partie10(document)
-    Partie11(document)
+    Partie10(document,extract)
+    Partie11(document,extract)
     Partie12(document)
     Partie13(document)
-    Partie14(document)
+    Partie14(document,extract)
     Partie15(document)
     Partie16(document)
     Partie17(document)
-    Partie18(document)
+    Partie18(document,extract)
     Partie19(document)
     Partie20(document)
     #grand 21 annexes (pas mal de trucs a faire)

@@ -20,7 +20,7 @@ from docx.shared import Cm, Pt, RGBColor, Inches
 #    TexteGrisJustif(texte,document)
 
 
-def Partie5(document):
+def Partie5(document,extract):
 #def Partie5():
     'Creation de la partie 5 du protcole de catégorie 1'
  #   document = docx.Document()
@@ -47,6 +47,14 @@ def Partie5(document):
     p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     run1=p.add_run('Tous les patients inclus dans cette recherche devront vérifier tous les critères d’inclusion listés ci-dessous :')
     run1.style='Paragraphe'
+    paragraph2 = document.add_paragraph()
+    sentence2 = paragraph2.add_run(extract['critere_inclusion_longue'])
+    sentence2.font.name = 'Times New Roman'
+    sentence2.font.size = docx.shared.Pt(10)
+    paragraph2 = document.add_paragraph()
+    sentence2 = paragraph2.add_run(extract['justification_inclusion'])
+    sentence2.font.name = 'Times New Roman'
+    sentence2.font.size = docx.shared.Pt(10)
     
     # Ecriture du 5.2  
     Titre2('5.2	Critères de non inclusion',document)
@@ -55,10 +63,21 @@ def Partie5(document):
     p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     run1=p.add_run('Tous les patients inclus dans cette recherche ne devront avoir aucun des critères de non inclusion listés ci-dessous :')
     run1.style='Paragraphe'
+    paragraph2 = document.add_paragraph()
+    sentence2 = paragraph2.add_run(extract['critere_non_inclusion_longue'])
+    sentence2.font.name = 'Times New Roman'
+    sentence2.font.size = docx.shared.Pt(10)
     
     # Ecriture du 5.3  
     Titre2('5.3	Faisabilité et modalités de recrutement',document)
-
+    paragraph2 = document.add_paragraph()
+    sentence2 = paragraph2.add_run(extract['modalite_recrutement'])
+    sentence2.font.name = 'Times New Roman'
+    sentence2.font.size = docx.shared.Pt(10)
+    paragraph2 = document.add_paragraph()
+    sentence2 = paragraph2.add_run(extract['duree_inclusion'])
+    sentence2.font.name = 'Times New Roman'
+    sentence2.font.size = docx.shared.Pt(10)
    
                     #FIN DU DOC 
     paragraph = document.add_paragraph()

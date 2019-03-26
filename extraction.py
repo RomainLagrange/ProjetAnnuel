@@ -318,7 +318,7 @@ def extract1():
     #on retire l'aide au remplissage 
     courte=re.search(r"(?<=à la partie correspondante dans le corps du protocole § 6\.1\)\n).*",courte).group()
     infos['critere_inclusion_courte']=courte
-    infos['critere_inclusion_secondaire_longue']=longue
+    infos['critere_inclusion_longue']=longue
     
     #critères de non inclusion
     table = doc.tables[5]  
@@ -348,7 +348,7 @@ def extract1():
     #on retire l'aide au remplissage 
     courte=re.search(r"(?<=à la partie correspondante dans le corps du protocole § 6\.2\)\n).*",courte).group()
     infos['critere_non_inclusion_courte']=courte
-    infos['critere_non_inclusion_secondaire_longue']=longue
+    infos['critere_non_inclusion_longue']=longue
     
     #justification inclusion
     justif=re.search(r"(?<=Justifications de l’inclusion de personnes visées:).*(?=Modalités de recrutements)",texte1).group()
@@ -420,7 +420,6 @@ def extract1():
     #description produit
     x=re.search(r"(?<=Description du produit/médicament expérimental:).*(?=Informations sur le placebo)",texte).group()
     #puis tous les éléments du produit
-    print(x)
     y=re.search(r"(?<=Nom du produit:).*(?=Nom de code)",x).group()
     infos['produit_nom']=y
     y=re.search(r"(?<=Nom de code:).*(?=Voie d’administration)",x).group()
@@ -562,6 +561,14 @@ def extract1():
     #CPP
     x=re.search(r"(?<=Modalités de constitution ou non d’un comité de surveillance indépendant:).*",texte1).group()
     infos['comite_surveillance_independant']=x
+    
+    #on formate pour enlever les potentiels blancs avant la valeur
+    for k, v in infos.items():
+        if type(v) is str:
+            infos[k] = v.lstrip(" ")
+        else:
+            for i in range(len(v)):
+                infos[k][i] = v[i].lstrip(" ")
             
     return infos
     
@@ -832,7 +839,7 @@ def extract2():
     #on retire l'aide au remplissage 
     courte=re.search(r"(?<=à la partie correspondante dans le corps du protocole § 4\.1\)\n).*",courte).group()
     infos['critere_inclusion_courte']=courte
-    infos['critere_inclusion_secondaire_longue']=longue
+    infos['critere_inclusion_longue']=longue
     
     #critères de non inclusion
     table = doc.tables[5]  
@@ -862,7 +869,7 @@ def extract2():
     #on retire l'aide au remplissage 
     courte=re.search(r"(?<=à la partie correspondante dans le corps du protocole § 4\.2\)\n).*",courte).group()
     infos['critere_non_inclusion_courte']=courte
-    infos['critere_non_inclusion_secondaire_longue']=longue
+    infos['critere_non_inclusion_longue']=longue
     
     #justification inclusion
     justif=re.search(r"(?<=Justifications de l’inclusion de personnes visées:).*(?=Modalités de recrutements)",texte1).group()
@@ -985,6 +992,14 @@ def extract2():
     infos['comite_surveillance_independant']=x
     
             
+    for k, v in infos.items():
+        if type(v) is str:
+            infos[k] = v.lstrip(" ")
+        else:
+            for i in range(len(v)):
+                infos[k][i] = v[i].lstrip(" ")
+            
+    
     return infos
     
 def extract3():   
@@ -1003,7 +1018,6 @@ def extract3():
         texte1+=i
     texte1=texte1.replace("\xa0","")
     texte=texte1.replace("\n","")
-    print(texte)
     #creation du dico de donnes
     infos={}
     
@@ -1212,7 +1226,6 @@ def extract3():
     #on ajoute ' ' pour eviter l'erreur avec les regex en cas de non remplissage par l'investigateur
     courte+="\n"
     longue+="\n"
-    print(courte)
     #on retire l'aide au remplissage 
     courte=re.search(r"(?<=traitements/stratégies/procédures\n).*",courte).group()
     longue=re.search(r"(?<=la procédure à l’étude\n).*",longue).group()
@@ -1292,6 +1305,14 @@ def extract3():
     longue=re.search(r"(?<=compris le calendrier des analyses intermédiaires prévues\.\n).*",longue).group()
     infos['analyse_statistique_courte']=courte
     infos['analyse_statistique_longue']=longue
+    
+    for k, v in infos.items():
+        if type(v) is str:
+            infos[k] = v.lstrip(" ")
+        else:
+            for i in range(len(v)):
+                infos[k][i] = v[i].lstrip(" ")
+            
     
     return infos
     

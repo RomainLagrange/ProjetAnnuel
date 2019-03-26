@@ -17,17 +17,17 @@ from docx.oxml import parse_xml
 from docx.oxml import OxmlElement
 import qn
 
-def main_ansm_pb():
+def main_ansm_pb(extract):
      document = docx.Document()
-     partie_A_B(document)
-     partie_C(document)
-     partie_D(document)
-     partie_E(document)
-     partie_F_G(document)
-     partie_H_I(document)
+     partie_A_B(document, extract)
+     partie_C(document, extract)
+     partie_D(document, extract)
+     partie_E(document, extract)
+     partie_F_G(document, extract)
+     partie_H_I(document, extract)
      document.save("soumission-ansm-pb.docx")
      
-def partie_A_B(document):
+def partie_A_B(document, extract):
     
     '''Marge de la page'''
     sections = document.sections
@@ -143,10 +143,10 @@ def partie_A_B(document):
     
     table = document.add_table(rows=3, cols=1, style='Table Grid')
     table.cell(0,0).text=("A.1	    Etat membre dans lequel la demande est soumise : FRANCE")
-    table.cell(1,0).text=("A.2	    Numéro d’enregistrement de la recherche en France (ID RCB)  :\n"
-                          "A.3	    Titre complet de la recherche :")
-    table.cell(2,0).text=("A.4	    Numéro de code du protocole attribué par le promoteur, version et date  : \n"
-                          "A.5	    Nom ou titre abrégé de la recherche, le cas échéant : \n"
+    table.cell(1,0).text=("A.2	    Numéro d’enregistrement de la recherche en France (ID RCB)  :\n" + extract['num_idrcb'] +
+                          "A.3	    Titre complet de la recherche :" + extract['titre_complet'])
+    table.cell(2,0).text=("A.4	    Numéro de code du protocole attribué par le promoteur, version et date  : \n" +extract['code_protocole'] +
+                          "A.5	    Nom ou titre abrégé de la recherche, le cas échéant : \n" + extract['titre_abrege'] +
                           "A.6	    Numérotation ISRCTN , le cas échéant :      \n"
                           "A.7	    S'agit-il d'une resoumission de la demande ?	□ oui 	□ non\n"
                           "A.7.1	    Si oui, indiquer la lettre de resoumission  :      ")
@@ -172,12 +172,12 @@ def partie_A_B(document):
     paragraph=document.add_paragraph("\nB. IDENTIFICATION DU PROMOTEUR RESPONSABLE DE LA DEMANDE", style='debut_page')
     table = document.add_table(rows=2, cols=1, style='Table Grid')
     table.cell(0,0).text=("B.1	PROMOTEUR ")
-    table.cell(1,0).text=("B.1.1	Organisme :      \n"
-                          "B.1.2	Nom de la personne à contacter :     \n" 
-                          "B.1.3	Adresse :     \n" 
-                          "B.1.4	Numéro de téléphone :      \n"
-                          "B.1.5	Numéro de télécopie :    \n"  
-                          "B.1.6	Mail :      ")
+    table.cell(1,0).text=("B.1.1	Organisme : " + extract['promoteur_nom_organisme'] +
+                          "\nB.1.2	Nom de la personne à contacter : " + extract['promoteur_nom_personne_contact']+
+                          "\nB.1.3	Adresse :  " + extract['promoteur_adresse']+
+                          "\nB.1.4	Numéro de téléphone : " +extract['promoteur_num_telephone']+
+                          "\nB.1.5	Numéro de télécopie : " + extract['promoteur_num_telecopie']+  
+                          "\nB.1.6	Mail :      "+extract['promoteur_courriel'])
     n=0
     for row in table.rows:
         for cell in row.cells:
@@ -194,12 +194,12 @@ def partie_A_B(document):
     paragraph=document.add_paragraph()
     table = document.add_table(rows=2, cols=1, style='Table Grid')
     table.cell(0,0).text=("B.2	REPRÉSENTANT LÉGAL DU PROMOTEUR  DANS LA COMMUNAUTÉ EUROPÉENNE POUR LA RECHERCHE CONCERNÉE")
-    table.cell(1,0).text=("B.2.1	Organisme :      \n"
-                          "B.2.2	Nom de la personne à contacter :    \n"  
-                          "B.2.3	Adresse :      \n"
-                          "B.2.4	Numéro de téléphone :  \n"    
-                          "B.2.5	Numéro de télécopie :   \n"   
-                          "B.2.6	Mail :      ")
+    table.cell(1,0).text=("B.2.1	Organisme : " + extract['promoteur_UE_nom_organisme']+
+                          "\nB.2.2	Nom de la personne à contacter : "  +extract['promoteur_UE_nom_personne_contact']+
+                          "\nB.2.3	Adresse :  " + extract['promoteur_UE_adresse']+
+                          "\nB.2.4	Numéro de téléphone : "   +extract['promoteur_UE_telephone'] +
+                          "\nB.2.5	Numéro de télécopie : "   +extract['promoteur_UE_telecopie']+
+                          "\nB.2.6	Mail :   "+extract['promoteur_UE_courriel'])
     n=0
     for row in table.rows:
         for cell in row.cells:
@@ -232,7 +232,7 @@ def partie_A_B(document):
                     n=n+1
                     
                     
-def partie_C(document):
+def partie_C(document, extract):
     
     '''Partie C'''
     paragraph=document.add_paragraph("\nC. IDENTIFICATION DU DEMANDEUR (cocher les cases appropriées)\n", style='debut_page')
@@ -289,7 +289,7 @@ def partie_C(document):
                     
     document.add_page_break()
     
-def partie_D(document):
+def partie_D(document, extract):
     
     '''Partie D1'''
     
@@ -852,7 +852,7 @@ def partie_D(document):
     
     
     
-def partie_E(document):
+def partie_E(document, extract):
 
     document.add_page_break()
     
@@ -1113,7 +1113,7 @@ def partie_E(document):
     
     document.add_page_break()
     
-def partie_F_G(document):
+def partie_F_G(document, extract):
     
     '''Partie F'''
     paragraph=document.add_paragraph("\nF. PERSONNES PARTICIPANT A LA RECHERCHE\n", style='debut_page')
@@ -1360,7 +1360,7 @@ def partie_F_G(document):
     
     document.add_page_break()
     
-def partie_H_I(document):
+def partie_H_I(document, extract):
     
     '''Partie H'''
     
