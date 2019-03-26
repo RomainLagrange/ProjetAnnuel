@@ -49,7 +49,7 @@ def Partie17(document):
     
     #Ecriture du 17.1  
     Titre2('17.1	Communications scientifiques',document)
-    
+#    
     p=document.add_paragraph()
     p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
     p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY

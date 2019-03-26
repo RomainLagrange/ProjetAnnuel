@@ -119,5 +119,5 @@ def Partie18(document,extract):
     run = paragraph.add_run()
     run.add_break(WD_BREAK.PAGE)
  
-    
+#    
 #    document.save("Partie18.docx")

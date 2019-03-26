@@ -86,7 +86,7 @@ def Partie12(document):
     p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     run1=p.add_run('Pendant la recherche ou à son issue, les données recueillies sur les personnes qui s’y prêtent et transmises au promoteur par les investigateurs (ou tous autres intervenants spécialisés) seront rendues anonymes. Elles ne doivent en aucun cas faire apparaître en clair les noms des personnes concernées ni leur adresse. ')
     run1.style='Paragraphe'
-
+#
     p=document.add_paragraph()
     p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
     p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY

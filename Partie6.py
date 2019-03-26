@@ -374,7 +374,7 @@ def Partie6(document,extract):
     
     document.add_paragraph(' ')
     
-    
+#    
     p=document.add_paragraph()
     p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
     run1=p.add_run('Décrire le processus de numérotation du patient, par exemple : \n')

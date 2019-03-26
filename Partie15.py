@@ -163,7 +163,7 @@ def Partie15(document):
     run1=p.add_run('A l’issue de la période d’utilité pratique, l’ensemble des documents à archiver, tels que définis dans la procédure DRC-DOC-004 « classement et archivage des documents liés aux recherches» du CHU de Poitiers sera transféré sur le site d’archivage (Service Central des Archives – CHU Poitiers) et sera placé sous la responsabilité du Promoteur pendant 15 ans après la fin de l’étude conformément aux pratiques institutionnelles.')
     run1.style='Paragraphe'
 
-    #FIN DU DOC 
+#    #FIN DU DOC 
     paragraph = document.add_paragraph()
     run = paragraph.add_run()
     run.add_break(WD_BREAK.PAGE)

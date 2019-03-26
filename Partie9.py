@@ -118,7 +118,7 @@ def Partie9(document):
     p.style='List Bullet 2'
     run1=p.add_run('provoque une incapacité ou un handicap important ou durable,')
     run1.style='Paragraphe'
-    
+#    
     p=document.add_paragraph()
     p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE

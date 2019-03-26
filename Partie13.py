@@ -81,7 +81,7 @@ def Partie13(document):
     p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     run1=p.add_run('Un attaché de recherche clinique mandaté par le promoteur visite de façon régulière chaque centre investigateur, lors de la mise en place de la recherche, une ou plusieurs fois en cours de recherche selon le rythme des inclusions et en fin de recherche. Lors de ces visites, et conformément au plan de monitorage basé sur le risque (participant, logistique, impact, ressources), les éléments suivants seront revus :')
     run1.style='Paragraphe'
-
+#
     p=document.add_paragraph()
     p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE

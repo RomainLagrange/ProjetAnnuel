@@ -65,7 +65,7 @@ def Partie14(document,extract):
     #Ecriture du 14.1  
     Titre2('14.1	Approbation de la recherche',document)
     #nom du CPP : extract['CPP']
-    #nom du promoteur : extract['promoteur_nom_organisme']
+#    #nom du promoteur : extract['promoteur_nom_organisme']
     
     p=document.add_paragraph()
     p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE

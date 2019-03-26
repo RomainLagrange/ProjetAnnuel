@@ -59,7 +59,7 @@ def Partie11(document,extract):
     sentence2 = paragraph2.add_run(extract['taille_etude_longue'])
     sentence2.font.name = 'Times New Roman'
     sentence2.font.size = docx.shared.Pt(10)
-    #Ecriture du 11.2  
+#    #Ecriture du 11.2  
     Titre2('11.2	Méthodes statistiques employées',document)
     paragraph2 = document.add_paragraph()
     sentence2 = paragraph2.add_run(extract['analyse_statistique_longue'])

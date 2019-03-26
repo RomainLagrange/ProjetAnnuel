@@ -63,7 +63,7 @@ def Partie10(document,extract):
     run2.font.color.rgb = RGBColor(0x0,0xB0,0xF0) 
     run3=p.add_run('membres indépendants de la recherche, les noms et les fonctions sont décrits dans la charte du CSI, jointe au protocole. Les membres se verront remettre une charte dans laquelle sont décrites les modalités de fonctionnement du comité.')
     run3.style='Paragraphe'
-    
+#    
     p=document.add_paragraph()
     p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
