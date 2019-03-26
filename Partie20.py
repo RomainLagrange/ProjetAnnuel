@@ -26,12 +26,12 @@ def Partie20(document):
 
 
 #   Marge de la page
-    sections = document.sections
-    for section in sections:
-        section.top_margin = Cm(2)
-        section.bottom_margin = Cm(2)
-        section.left_margin = Cm(2)
-        section.right_margin = Cm(2)
+#    sections = document.sections
+#    for section in sections:
+#        section.top_margin = Cm(2)
+#        section.bottom_margin = Cm(2)
+#        section.left_margin = Cm(2)
+#        section.right_margin = Cm(2)
 
 #---------------------------DEFINITIONS DES STYLES
  
@@ -44,11 +44,54 @@ def Partie20(document):
      #ecriture du premier titre 
     Titre1('20	LISTE DES ANNEXES',document)
 
+
+    
+    p=document.add_paragraph()
+    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    run1=p.add_run('Annexe X : Déclaration d’Helsinki')
+    run1.style='Paragraphe'
+
+    p=document.add_paragraph()
+    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    run1=p.add_run('Annexe X : Etiquetage et Traçabilité des Produits expérimentaux')
+    run1.style='Paragraphe'
+
+    p=document.add_paragraph()
+    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    run1=p.add_run('Annexe X : Carte patient')
+    run1.style='Paragraphe'
+
+    p=document.add_paragraph()
+    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    run1=p.add_run('Annexe X : Suivi des toxicités')
+    run1.style='Paragraphe'
+
+    p=document.add_paragraph()
+    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    run1=p.add_run('Annexe X : Critères d’évaluation de la maladie')
+    run1.style='Paragraphe'
+
+    p=document.add_paragraph()
+    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    run1=p.add_run('Annexe X : RCP ')
+    run1.style='Paragraphe'
+
+    p=document.add_paragraph()
+    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    run1=p.add_run('Annexe X : Questionnaires patients')
+    run1.style='Paragraphe'
+
     #FIN DU DOC 
     paragraph = document.add_paragraph()
     run = paragraph.add_run()
     run.add_break(WD_BREAK.PAGE)
-
   
     
 #    document.save("Partie20.docx")
