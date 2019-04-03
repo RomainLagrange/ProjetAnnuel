@@ -8,10 +8,10 @@ Created on Thu Feb 21 16:19:49 2019
 import docx
 import StyleProt1
 from StyleProt1 import Style, Titre1,Titre2, Titre3, TexteGris, TexteGrisJustif
-from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_UNDERLINE, WD_LINE_SPACING, WD_COLOR_INDEX, WD_BREAK
-
+from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_UNDERLINE, WD_LINE_SPACING, WD_COLOR_INDEX
 from docx.enum.style import WD_STYLE_TYPE
 from docx.shared import Cm, Pt, RGBColor, Inches
+from docx.enum.text import WD_BREAK
 
 #MEMO POUR ECRIRE LES TITRES :
 #    Titre1('num + texte du protocole',document)
@@ -85,7 +85,10 @@ def Partie1(document):
     Titre3('1.4.2','Risques',document)
 
 
-
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    run1=p.add_run('L’investigateur doit constamment surveiller, évaluer et documenter les risques et doit s’assurer qu’ils pourront être gérés de manière satisfaisante.')
+    run1.style='Paragraphe'
     
      #Ecriture du titre1.5
     Titre2('1.5 Retombées attendues',document)

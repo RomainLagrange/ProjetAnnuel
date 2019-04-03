@@ -50,11 +50,11 @@ def Partie5(document,extract):
     paragraph2 = document.add_paragraph()
     sentence2 = paragraph2.add_run(extract['critere_inclusion_longue'])
     sentence2.font.name = 'Times New Roman'
-    sentence2.font.size = docx.shared.Pt(10)
+    sentence2.font.size = docx.shared.Pt(11)
     paragraph2 = document.add_paragraph()
     sentence2 = paragraph2.add_run(extract['justification_inclusion'])
     sentence2.font.name = 'Times New Roman'
-    sentence2.font.size = docx.shared.Pt(10)
+    sentence2.font.size = docx.shared.Pt(11)
     
     # Ecriture du 5.2  
     Titre2('5.2	Critères de non inclusion',document)
