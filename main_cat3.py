@@ -15,7 +15,7 @@ Created on Thu Feb 21 18:26:32 2019
 #ce document va construire le protocole de categorie 1
 
 #import gestion_tableau
-import Cat3Part1,Cat3Part2,Cat3Part3,Cat3Part4,Cat3Part5,Cat3Part6,Cat3Part7,Cat3Part8,Cat3Part9,Cat3Part10,Cat3Part11,Cat3Part12,Cat3Part13,Cat3Part14,Cat3Part15
+import cpp_rni, Cat3Part1,Cat3Part2,Cat3Part3,Cat3Part4,Cat3Part5,Cat3Part6,Cat3Part7,Cat3Part8,Cat3Part9,Cat3Part10,Cat3Part11,Cat3Part12,Cat3Part13,Cat3Part14,Cat3Part15
 from Cat3Part1 import Partie1
 from Cat3Part2 import Partie2
 from Cat3Part3 import Partie3
@@ -31,7 +31,7 @@ from Cat3Part12 import Partie12
 from Cat3Part13 import Partie13
 from Cat3Part14 import Partie14
 from Cat3Part15 import Partie15
-
+from cpp_rni import main_cpp_RNI
 
 #import page_garde A FAIRE POUR CAT3
 import extraction
@@ -42,11 +42,14 @@ from docx import Document
 #def extraction_info():
 
 # construire un document 
-def construit_doc():
+def construit_doc(dico):
     
     
     document = docx.Document()
+    extract=extraction.extract3(dico)
+    main_cpp_RNI(extract)
   #  extract=extraction.extraction()
+    
     '''Marge des page'''
     sections = document.sections
     for section in sections:

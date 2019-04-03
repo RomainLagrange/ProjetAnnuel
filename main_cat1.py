@@ -8,7 +8,7 @@ Created on Fri Feb  1 15:43:54 2019
 #ce document va construire le protocole de categorie 1
 
 #import gestion_tableau
-import Partie1,Partie2,Partie3,Partie4,Partie5,Partie6,Partie7,Partie8,Partie9,Partie10,Partie11,Partie12,Partie13,Partie14,Partie15,Partie16,Partie17,Partie18,Partie19,Partie20
+import cpp_medoc, cpp_hps, cpp_dm, Partie1,Partie2,Partie3,Partie4,Partie5,Partie6,Partie7,Partie8,Partie9,Partie10,Partie11,Partie12,Partie13,Partie14,Partie15,Partie16,Partie17,Partie18,Partie19,Partie20
 
 from Partie1 import Partie1
 from Partie2 import Partie2
@@ -35,15 +35,34 @@ import extraction
 import docx
 from docx.shared import Cm
 from docx import Document
+from cpp_medoc import main_cpp_medoc
+from cpp_dm import main_cpp_dm
+from cpp_hps import main_cpp_hps
+from ansm_dm import main_ansm_dm
+from ansm_hps import main_ansm_hps
+from ansm_pb import main_ansm_pb
+from ansm_medoc import main_ansm_medoc
 
 #def extraction_info():
 
 # construire un document 
-def construit_doc():
+def construit_doc(dico):
+    
     
     
     document = docx.Document()
-    extract=extraction.extract1()
+    extract=extraction.extract1(dico)
+    if dico['le_type_recherche']=='6':
+        main_cpp_medoc(extract)
+        main_ansm_medoc()
+    elif dico['le_type_recherche']=='8':
+        main_cpp_hps(extract)
+        main_ansm_hps()
+    elif dico['le_type_recherche']=='7':
+        main_cpp_dm(extract)
+        main_ansm_dm()
+    else:
+        main_ansm_pb(extract)
     '''Marge des page'''
     sections = document.sections
     for section in sections:

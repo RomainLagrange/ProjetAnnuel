@@ -8,7 +8,7 @@ Created on Thu Feb 21 18:26:32 2019
 #ce document va construire le protocole de categorie 1
 
 #import gestion_tableau
-import Cat2Part1,Cat2Part2,Cat2Part3,Cat2Part4,Cat2Part5,Cat2Part6,Cat2Part7,Cat2Part8,Cat2Part9,Cat2Part10,Cat2Part11,Cat2Part12,Cat2Part13,Cat2Part14,Cat2Part15,Cat2Part16,Cat2Part17,Cat2Part18
+import cpp_dm, cpp_hps, Cat2Part1,Cat2Part2,Cat2Part3,Cat2Part4,Cat2Part5,Cat2Part6,Cat2Part7,Cat2Part8,Cat2Part9,Cat2Part10,Cat2Part11,Cat2Part12,Cat2Part13,Cat2Part14,Cat2Part15,Cat2Part16,Cat2Part17,Cat2Part18
 from Cat2Part1 import Partie1
 from Cat2Part2 import Partie2
 from Cat2Part3 import Partie3
@@ -27,6 +27,8 @@ from Cat2Part15 import Partie15
 from Cat2Part16 import Partie16
 from Cat2Part17 import Partie17
 from Cat2Part18 import Partie18
+from cpp_dm import main_cpp_dm
+from cpp_hps import main_cpp_hps
 
 #import page_garde A FAIRE POUR CAT2
 import extraction
@@ -37,10 +39,15 @@ from docx import Document
 #def extraction_info():
 
 # construire un document 
-def construit_doc():
+def construit_doc(dico):
     
     
     document = docx.Document()
+    extract=extraction.extract2(dico)
+    if dico['le_type_recherche']=='7':
+        main_cpp_dm(extract)
+    else:
+        main_cpp_hps(extract)
   #  extract=extraction.extraction()
     '''Marge des page'''
     sections = document.sections

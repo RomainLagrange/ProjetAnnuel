@@ -10,10 +10,10 @@ import re
 from docx import Document
 
 
-def extract1():
+def extract1(dico):
     
     #dabord on extrait tout qu'on ajoute dans une liste
-    f1 = open('Trame-simplifiée-cat-1.docx', 'rb') #ouvre le premier fichier
+    f1 = open(dico['le_chemin'], 'rb') #ouvre le premier fichier
     doc = Document(f1)
     fullText=[]
     for para in doc.paragraphs:

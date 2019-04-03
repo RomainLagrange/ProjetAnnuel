@@ -17,7 +17,7 @@ from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
 
 
-extract=extraction.extract1()
+#extract=extraction.extract1(dico)
 document = docx.Document()
 '''Marge des page'''
 sections = document.sections
