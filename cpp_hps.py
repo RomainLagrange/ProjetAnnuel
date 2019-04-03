@@ -12,10 +12,9 @@ from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.shared import Cm
 from docx.enum.style import WD_STYLE_TYPE
 from docx.shared import Inches, Pt, RGBColor
-from docx.oxml.ns import nsdecls
+from docx.oxml.ns import nsdecls, qn
 from docx.oxml import parse_xml
 from docx.oxml import OxmlElement
-import qn
 #from docx.shared import RGBColor
 
 #docmuents du cpp pour les dispositifs médicaux
