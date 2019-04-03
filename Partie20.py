@@ -89,9 +89,6 @@ def Partie20(document):
     run1.style='Paragraphe'
 
     #FIN DU DOC 
-    paragraph = document.add_paragraph()
-    run = paragraph.add_run()
-    run.add_break(WD_BREAK.PAGE)
   
     
 #    document.save("Partie20.docx")
