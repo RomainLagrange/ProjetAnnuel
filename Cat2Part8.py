@@ -45,6 +45,19 @@ def Partie8(document):
     #ecriture du premier titre 
     Titre1('8	GESTION DES ÉVÉNEMENTS INDÉSIRABLES / EFFETS INDESIRABLES / INCIDENTS',document)
 #    
+    
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+    run1=p.add_run('Les évènements indésirables / effets indésirables / incidents seront à déclarer aux différents circuits de vigilances sanitaires applicables à chaque produit ou pratique concernée (vigilance du soin, pharmacovigilance, matériovigilance, hémovigilance, cosmétovigilance…) en conformité avec la règlementation en vigueur.')
+    run1.style='Paragraphe'
+    
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+    run1=p.add_run('Il est recommandé aux déclarants de spécifier que le patient est inclus dans un essai clinique et d’identifier précisément l’essai clinique concerné.')
+    run1.style='Paragraphe'
+
 #        #FIN DU DOC 
     paragraph = document.add_paragraph()
     run = paragraph.add_run()

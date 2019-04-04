@@ -43,6 +43,18 @@ def Partie18(document):
     
     #ecriture du premier titre 
     Titre1('18	LISTE DES ANNEXES',document)
+    
+    p=document.add_paragraph()
+    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    run1=p.add_run('Annexe X : Déclaration d’Helsinki')
+    run1.style='Paragraphe'
+    
+    p=document.add_paragraph()
+    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    run1=p.add_run('Annexe X : Carte patient')
+    run1.style='Paragraphe'
 
      #FIN DU DOC 
     paragraph = document.add_paragraph()
