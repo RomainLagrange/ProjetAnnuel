@@ -5,7 +5,7 @@ Created on Fri Mar  1 22:35:39 2019
 @author: Marion
 """
 
-import pandas as pd
+#import pandas as pd
 import docx
 from docx.api import Document
 from docx.enum.text import WD_ALIGN_PARAGRAPH

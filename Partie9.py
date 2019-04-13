@@ -14,6 +14,16 @@ from docx.shared import Cm, Pt, RGBColor, Inches
 from docx.enum.table import WD_TABLE_ALIGNMENT,WD_ROW_HEIGHT, WD_ALIGN_VERTICAL
 from docx.oxml.ns import nsdecls
 from docx.oxml import parse_xml
+import os
+from os import sys
+
+def resource_path(relative_path):
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
 
 
 #MEMO POUR ECRIRE LES TITRES :
@@ -392,7 +402,7 @@ def Partie9(document):
     p=document.add_paragraph()
     p.alignment=WD_ALIGN_PARAGRAPH.CENTER
     run=p.add_run()
-    picture=run.add_picture('EvIG_partie_9.jpg')
+    picture=run.add_picture(resource_path('EvIG_partie_9.jpg'))
     picture.width = 6136363
     picture.height = 1554545
     

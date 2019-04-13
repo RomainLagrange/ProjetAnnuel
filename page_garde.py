@@ -15,7 +15,16 @@ import re
 from docx.shared import Cm
 from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
+import os
+from os import sys
 
+def resource_path(relative_path):
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
 
 #extract=extraction.extract1(dico)
 document = docx.Document()
@@ -40,9 +49,9 @@ def PageGarde(document,extract):
     header.is_linked_to_previous = False
     p = header.paragraphs[0]
     r = p.add_run() 
-    r.add_picture('imageGauche.png')
+    r.add_picture(resource_path('imageGauche.png'))
     r.add_text('                                                                                                                                     ')
-    r.add_picture('imageDroite.png')
+    r.add_picture(resource_path('imageDroite.png'))
     
     
     '''Titre de la recherche'''
@@ -160,7 +169,7 @@ def Page_version(document,extract):
     r.add_text('\t\t'+extract['titre_abrege'])
     p2 = header2.add_paragraph()
     r2 = p2.add_run() 
-    r2.add_picture('imageGauche3.png')
+    r2.add_picture(resource_path('imageGauche3.png'))
     
     '''Titre'''
     paragraph2 = document.add_paragraph()
