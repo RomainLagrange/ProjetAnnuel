@@ -30,6 +30,8 @@ from Partie17 import Partie17
 from Partie18 import Partie18
 from Partie19 import Partie19
 from Partie20 import Partie20
+import time
+from time import gmtime, strftime
 import page_garde
 import extraction
 import docx
@@ -47,8 +49,7 @@ from ansm_medoc import main_ansm_medoc
 
 # construire un document 
 def construit_doc(dico):
-    
-    
+      
     
     document = docx.Document()
     extract=extraction.extract1(dico)
@@ -100,5 +101,12 @@ def construit_doc(dico):
     Partie18(document,extract)
     Partie19(document)
     Partie20(document)
+    
+    sentence = extract['titre_abrege']
+    print(sentence)
+    
+    date = (strftime('%Y-%m-%d %H:%M',time.localtime()))
+    
+    
     #grand 21 annexes (pas mal de trucs a faire)
-    document.save("ProtocoleCat1.docx")
+    document.save("ProtocoleCat1_"+ sentence +"_" + date + ".docx")
