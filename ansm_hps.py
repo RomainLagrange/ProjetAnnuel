@@ -15,13 +15,16 @@ from docx.shared import Inches, Pt, RGBColor
 from docx.oxml.ns import nsdecls, qn
 from docx.oxml import parse_xml
 from docx.oxml import OxmlElement
+import time
+from time import gmtime, strftime
 
-def main_ansm_hps():
+def main_ansm_hps(extract):
     document = docx.Document()
     parties_ABC(document)
     partie_D_a_G(document)
     partie_H_fin(document)
-    document.save("soumission-ansm-hps.docx")
+    date = (strftime('%d-%m-%Y',time.localtime()))
+    document.save("soumission_ansm_hps"+extract['titre_abrege']+"_"+date+".docx")
     
 def parties_ABC(document):
     

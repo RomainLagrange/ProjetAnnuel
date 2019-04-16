@@ -15,6 +15,8 @@ from docx.shared import Inches, Pt, RGBColor
 from docx.oxml.ns import nsdecls, qn
 from docx.oxml import parse_xml
 from docx.oxml import OxmlElement
+import time
+from time import gmtime, strftime
 #from docx.shared import RGBColor
 
 #docmuents du cpp pour les dispositifs médicaux
@@ -24,7 +26,8 @@ def main_cpp_hps(extract):
     cpp_hps(document)
     page2_cpp_hps(document, extract)
     cpp_hps_annexe2(document, extract)
-    document.save("soumission-cpp-hps.docx")
+    date = (strftime('%d-%m-%Y',time.localtime()))
+    document.save("soumission_cpp_hps"+extract['titre_abrege']+"_"+date+".docx")
 
 def cpp_hps(document):
     

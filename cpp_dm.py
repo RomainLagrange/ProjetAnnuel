@@ -14,6 +14,8 @@ from docx.enum.style import WD_STYLE_TYPE
 from docx.shared import Inches, Pt
 from docx.oxml.ns import nsdecls
 from docx.oxml import parse_xml
+import time
+from time import gmtime, strftime
 #from docx.shared import RGBColor
 
 #docmuents du cpp pour les dispositifs médicaux
@@ -22,7 +24,8 @@ def main_cpp_dm(extract):
     document = docx.Document()
     cpp_dm(document)
     page2_cpp_dm(document, extract)
-    document.save("soumission-cpp-dm.docx")
+    date = (strftime('%d-%m-%Y',time.localtime()))
+    document.save("soumission_cpp_dm"+extract['titre_abrege']+"_"+date+".docx")
 
 def cpp_dm(document):
     

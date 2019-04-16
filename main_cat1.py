@@ -56,13 +56,13 @@ def construit_doc(dico):
     extract=extraction.extract1(dico)
     if dico['le_type_recherche']=='6':
         main_cpp_medoc(extract)
-        main_ansm_medoc()
+        main_ansm_medoc(extract)
     elif dico['le_type_recherche']=='8':
         main_cpp_hps(extract)
-        main_ansm_hps()
+        main_ansm_hps(extract)
     elif dico['le_type_recherche']=='7':
         main_cpp_dm(extract)
-        main_ansm_dm()
+        main_ansm_dm(extract)
     else:
         main_ansm_pb(extract)
     '''Marge des page'''

@@ -15,7 +15,8 @@ from docx.shared import Inches, Pt, RGBColor
 from docx.oxml.ns import nsdecls, qn
 from docx.oxml import parse_xml
 from docx.oxml import OxmlElement
-
+import time
+from time import gmtime, strftime
 
 def main_ansm_pb(extract):
      document = docx.Document()
@@ -25,7 +26,8 @@ def main_ansm_pb(extract):
      partie_E(document, extract)
      partie_F_G(document, extract)
      partie_H_I(document, extract)
-     document.save("soumission-ansm-pb.docx")
+     date = (strftime('%d-%m-%Y',time.localtime()))
+     document.save("soumission_ansm_pb_"+extract['titre_abrege']+date+".docx")
      
 def partie_A_B(document, extract):
     
@@ -197,8 +199,8 @@ def partie_A_B(document, extract):
     table.cell(1,0).text=("B.2.1	Organisme : " + extract['promoteur_UE_nom_organisme']+
                           "\nB.2.2	Nom de la personne à contacter : "  +extract['promoteur_UE_nom_personne_contact']+
                           "\nB.2.3	Adresse :  " + extract['promoteur_UE_adresse']+
-                          "\nB.2.4	Numéro de téléphone : "   +extract['promoteur_UE_telephone'] +
-                          "\nB.2.5	Numéro de télécopie : "   +extract['promoteur_UE_telecopie']+
+                          "\nB.2.4	Numéro de téléphone : "   +extract['promoteur_UE_num_telephone'] +
+                          "\nB.2.5	Numéro de télécopie : "   +extract['promoteur_UE_num_telecopie']+
                           "\nB.2.6	Mail :   "+extract['promoteur_UE_courriel'])
     n=0
     for row in table.rows:
@@ -242,12 +244,12 @@ def partie_C(document, extract):
                           "C.1.2       Représentant légal du promoteur                                                                               □\n"
                           "C.1.3	Personne ou organisme délégué par le promoteur pour soumettre la demande	     □\n"
                           "C.1.4 	Préciser ci-après les informations relatives au demandeur, même si elles figurent ailleurs dans le formulaire : Si promoteur, partie B1, si représentant légal du promoteur, partie B2\n"
-                          "C.1.4.1 	Organisme :      \n"
-                          "C.1.4.2 	Nom de la personne à contacter :      \n"
-                          "C.1.4.3 	Adresse :      \n"
-                          "C.1.4.4 	Numéro de téléphone :      \n"
-                          "C.1.4.5 	Numéro de télécopie :      \n"
-                          "C.1.4.6	Mail :      ")
+                          "C.1.4.1 	Organisme :  "+extract['demandeur_nom_organisme']+"    \n"
+                          "C.1.4.2 	Nom de la personne à contacter :  "+extract['demandeur_nom_personne_contact']+"    \n"
+                          "C.1.4.3 	Adresse :  "+extract['demandeur_UE_adresse']+"    \n"
+                          "C.1.4.4 	Numéro de téléphone : "+extract['demandeur_UE_num_telephone']+"     \n"
+                          "C.1.4.5 	Numéro de télécopie : "+extract['demandeur_UE_num_telecopie']+"     \n"
+                          "C.1.4.6	Mail : "+extract['demandeur_UE_courriel'])
     n=0
     for row in table.rows:
         for cell in row.cells:
@@ -268,12 +270,12 @@ def partie_C(document, extract):
                           "C.2.2       Représentant légal du promoteur                                                                               □\n"
                           "C.2.3	Personne ou organisme délégué par le promoteur pour soumettre la demande	     □\n"
                           "C.2.4 	Préciser ci-après les informations relatives au demandeur, même si elles figurent ailleurs dans le formulaire : Si promoteur, partie B1, si représentant légal du promoteur, partie B2\n"
-                          "C.2.4.1	Organisme :      \n"
-                          "C.2.4.2	Nom de la personne à contacter :      \n"
-                          "C.2.4.3	Adresse :      \n"
-                          "C.2.4.4	Numéro de téléphone :      \n"
-                          "C.2.4.5	Numéro de télécopie : \n"     
-                          "C.2.4.6	Mail :      ")
+                          "C.2.4.1	Organisme :  "+extract['demandeur_nom_organisme']+"   \n"
+                          "C.2.4.2	Nom de la personne à contacter :  "+extract['demandeur_nom_personne_contact']+"    \n"
+                          "C.2.4.3	Adresse :  "+extract['demandeur_UE_adresse']+"     \n"
+                          "C.2.4.4	Numéro de téléphone :   "+extract['demandeur_UE_num_telephone']+"    \n"
+                          "C.2.4.5	Numéro de télécopie : "+extract['demandeur_UE_num_telecopie']+"\n"     
+                          "C.2.4.6	Mail :  "+extract['demandeur_UE_courriel'])
     n=0
     for row in table.rows:
         for cell in row.cells:
@@ -889,8 +891,8 @@ def partie_E(document, extract):
     paragraph=document.add_paragraph()
     table = document.add_table(rows=2, cols=1, style='Table Grid')
     table.cell(0,0).text=("E.2	OBJECTIF(S) DE LA RECHERCHE")
-    table.cell(1,0).text=("E.2.1	Objectif principal : \n"
-                          "E.2.2	Objectifs secondaires : \n"
+    table.cell(1,0).text=("E.2.1	Objectif principal : "+extract['objectif_principal']+"\n"
+                          "E.2.2	Objectifs secondaires : "+extract['objectif_secondaire']+"\n"
                           "E.2.3	Une sous-étude est-elle prévue ?	                                                        □ oui   □ non\n"
                           "E.2.3.1	Si oui, préciser le titre complet, la date et la version de chaque sous-étude et leurs objectifs :      ")
     n=0
@@ -910,6 +912,7 @@ def partie_E(document, extract):
     paragraph=document.add_paragraph()
     table = document.add_table(rows=2, cols=1, style='Table Grid')
     table.cell(0,0).text=("E.3	PRINCIPAUX CRITERES D’INCLUSION (énumérer les plus importants)")
+    table.cell(1,0).text=(extract['critere_inclusion_courte'])
     n=0
     for row in table.rows:
         for cell in row.cells:
@@ -927,6 +930,7 @@ def partie_E(document, extract):
     paragraph=document.add_paragraph()
     table = document.add_table(rows=2, cols=1, style='Table Grid')
     table.cell(0,0).text=("E.4	PRINCIPAUX CRITERES DE NON INCLUSION (énumérer les plus importants)")
+    table.cell(1,0).text=(extract['critere_non_inclusion_courte'])
     n=0
     for row in table.rows:
         for cell in row.cells:
@@ -942,8 +946,10 @@ def partie_E(document, extract):
                     
     '''Partie E5'''
     paragraph=document.add_paragraph()
-    table = document.add_table(rows=2, cols=1, style='Table Grid')
+    table = document.add_table(rows=3, cols=1, style='Table Grid')
     table.cell(0,0).text=("E.5	CRITERE(S) D’EVALUATION PRINCIPAL(AUX)")
+    table.cell(1,0).text=("Critère de jugement principal :"+extract['critere_jugement_principal_longue'])
+    table.cell(1,0).text=("Critères de jugement secondaires :"+extract['critere_jugement_secondaire_courte'])
     n=0
     for row in table.rows:
         for cell in row.cells:
@@ -1058,7 +1064,7 @@ def partie_E(document, extract):
                           "E.8.7	  Un comité de surveillance indépendant a-t-il été constitué ?")
     table.cell(2,5).text=("□ oui   □ non\n□ oui   □ non\n\n□ oui   □ non\n\n□ oui   □ non\n□ oui   □ non")
     table.cell(3,0).text=("E.8.8	  Définition de la fin de la recherche, et justification si celle-ci ne correspond pas à la date de la dernière visite de la dernière personne participant à la recherche   :    \n"  
-                          "E.8.9      Estimation initiale de la durée de la recherche  (en années, mois et jours) : \n"
+                          "E.8.9      Estimation initiale de la durée de la recherche  (en années, mois et jours) : \n"+extract['duree_totale_etude']+"\n"
                           "E.8.9.1   en France : 	      années       mois       jours\n"
                           "E.8.9.2	 dans tous les pays concernés par l’essai : 	      années       mois       jours")
     n=0
@@ -1253,10 +1259,10 @@ def partie_F_G(document, extract):
     '''Partie G1'''
     table = document.add_table(rows=2, cols=1, style='Table Grid')
     table.cell(0,0).text=("G.1	INVESTIGATEUR COORDONNATEUR (si recherche multicentrique) et investigateur principal (si recherche monocentrique) ")
-    table.cell(1,0).text=("G.1.1	Nom :      \n"
-                          "G.1.3	Prénom :      \n"
-                          "G.1.4	Qualification, spécialité :      \n"
-                          "G.1.5	Adresse professionnelle :      ")
+    table.cell(1,0).text=("G.1.1	Nom : "+extract['investigateur_coordinateur_nom']+"     \n"
+                          "G.1.3	Prénom : "+extract['investigateur_coordinateur_prenom']+"     \n"
+                          "G.1.4	Qualification, spécialité : "+extract['investigateur_coordinateur_qualification']+"     \n"
+                          "G.1.5	Adresse professionnelle : "+extract['investigateur_coordinateur_adresse_professionnelle'])
     n=0
     for row in table.rows:
         for cell in row.cells:
@@ -1272,12 +1278,8 @@ def partie_F_G(document, extract):
     
     '''Partie G2'''
     paragraph=document.add_paragraph()
-    table = document.add_table(rows=2, cols=1, style='Table Grid')
+    table = document.add_table(rows=1, cols=1, style='Table Grid')
     table.cell(0,0).text=("G.2	INVESTIGATEURS PRINCIPAUX (si recherche multicentrique ; répéter cette section autant de fois que nécessaire) ")
-    table.cell(1,0).text=("G.2.1	Nom :      \n"
-                          "G.2.3	Prénom :     \n" 
-                          "G.2.4	Qualification, spécialité :      \n"
-                          "G.2.5	Adresse professionnelle :      ")
     n=0
     for row in table.rows:
         for cell in row.cells:
@@ -1291,15 +1293,30 @@ def partie_F_G(document, extract):
                         fontdebut.bold = True
                     n=n+1
     
+    for i in range(len(extract['autre_investigateur_nom'])):
+        table = document.add_table(rows=1, cols=1, style='Table Grid')
+        table.cell(0,0).text=("G.2.1	Nom :  "+extract['autre_investigateur_nom'][i]+"    \n"
+                              "G.2.3	Prénom :  "+extract['autre_investigateur_prenom'][i]+"   \n" 
+                              "G.2.4	Qualification, spécialité :  "+extract['autre_investigateur_qualification'][i]+"    \n"
+                              "G.2.5	Adresse professionnelle :  "+extract['autre_investigateur_adresse_professionnelle'][i])
+        for row in table.rows:
+            for cell in row.cells:
+                paragraphs = cell.paragraphs
+                for paragraph in paragraphs:
+                    for run in paragraph.runs:
+                        fontdebut = run.font
+                        fontdebut.name = 'Arial'
+                        fontdebut.size = docx.shared.Pt(10)
+    
     '''Partie G3'''
     paragraph=document.add_paragraph()
     table = document.add_table(rows=2, cols=1, style='Table Grid')
     table.cell(0,0).text=("G.3	PLATEAU TECHNIQUE UTILISE AU COURS DE LA RECHERCHE\nLaboratoire ou autre plateau technique où sont effectuées de façon centralisée les mesures ou évaluations des paramètres ou critères principaux étudiés dans la recherche (à compléter pour chaque organisme, répéter la section si nécessaire)")
-    table.cell(1,0).text=("G.3.1	Organisme :      \n"
-                          "G.3.2	Nom de la personne à contacter :      \n"
-                          "G.3.3	Adresse :      \n"
-                          "G.3.4	Numéro de téléphone :      \n"
-                          "G.3.5	Tâches confiées :      ")
+    table.cell(1,0).text=("G.3.1	Organisme :  "+extract['plateau_technique_organisme']+"    \n"
+                          "G.3.2	Nom de la personne à contacter : "+extract['plateau_technique_personne_contact']+"     \n"
+                          "G.3.3	Adresse :   "+extract['plateau_technique_adresse']+"   \n"
+                          "G.3.4	Numéro de téléphone :  "+extract['plateau_technique_num_telephone']+"    \n"
+                          "G.3.5	Tâches confiées :  "+extract['plateau_technique_taches_confiees'])
     n=0
     for row in table.rows:
         for cell in row.cells:
@@ -1379,7 +1396,7 @@ def partie_H_I(document, extract):
     paragraph=document.add_paragraph()
     table = document.add_table(rows=4, cols=3, style='Table Grid')
     table.cell(0,0).text=("H.1	   CPP CONCERNÉ OU PRESSENTI")
-    table.cell(1,0).text=("H.1.1	   Nom et adresse : ")
+    table.cell(1,0).text=("H.1.1	   Nom et adresse : "+extract['CPP'])
     table.cell(2,0).text=("H.2	   AVIS DU CPP :")
     table.cell(3,0).text=("H.2.1       A demander\n"
                           "H.2.2	   En cours\n"

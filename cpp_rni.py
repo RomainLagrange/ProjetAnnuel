@@ -14,6 +14,8 @@ from docx.enum.style import WD_STYLE_TYPE
 from docx.shared import Inches, Pt
 from docx.oxml.ns import nsdecls
 from docx.oxml import parse_xml
+import time
+from time import gmtime, strftime
 #from docx.shared import RGBColor
 
 #docmuents du cpp pour les dispositifs médicaux
@@ -22,7 +24,8 @@ def main_cpp_RNI(extract):
     document = docx.Document()
     cpp_rni(document)
     page2_cpp_rni(document, extract)
-    document.save("soumission-cpp-RNI.docx")
+    date = (strftime('%d-%m-%Y',time.localtime()))
+    document.save("soumission_cpp_RNI"+extract['titre_abrege']+"_"+date+".docx")
 
 def cpp_rni(document):
     

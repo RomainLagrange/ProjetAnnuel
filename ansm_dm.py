@@ -15,9 +15,11 @@ from docx.shared import Inches, Pt, RGBColor
 from docx.oxml.ns import nsdecls, qn
 from docx.oxml import parse_xml
 from docx.oxml import OxmlElement
+import time
+from time import gmtime, strftime
 
 
-def main_ansm_dm():
+def main_ansm_dm(extract):
     document = docx.Document()
     partie_une_ansm_dm(document)
     partie_B_C(document)
@@ -27,7 +29,8 @@ def main_ansm_dm():
     a_partir_F8(document)
     partie_F10(document)
     parties_H_I(document)
-    document.save("soumission-ansm-dm.docx")
+    date = (strftime('%d-%m-%Y',time.localtime()))
+    document.save("soumission_ansm_dm"+extract['titre_abrege']+"_"+date+".docx")
 
 def partie_une_ansm_dm(document):
     

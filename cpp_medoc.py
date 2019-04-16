@@ -12,6 +12,8 @@ from docx.enum.style import WD_STYLE_TYPE
 from docx.shared import Pt
 from docx.oxml.ns import nsdecls
 from docx.oxml import parse_xml
+import time
+from time import gmtime, strftime
 #from docx.shared import RGBColor
 
 #docmuents du cpp pour les medoc cat 1
@@ -20,7 +22,8 @@ def main_cpp_medoc(extract):
     document = docx.Document()
     cpp_medoc(document, extract)
     page2_cpp(document, extract)
-    document.save("soumission-cpp-medicaments.docx")
+    date = (strftime('%d-%m-%Y',time.localtime()))
+    document.save("soumission_cpp_medicaments"+extract['titre_abrege']+"_"+date+".docx")
 
 def cpp_medoc(document, extract):
     
