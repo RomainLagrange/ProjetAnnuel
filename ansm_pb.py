@@ -42,8 +42,8 @@ def partie_A_B(document, extract):
     table = document.add_table(rows=1, cols=6, style='Table Grid')
     cell=table.cell(0,0)
     paragraph = cell.paragraphs[0]
-    run = paragraph.add_run()
-    run.add_picture('ansm.jpg')
+    ca = paragraph.add_run()
+    ca.add_picture('ansm.jpg')
     a=table.cell(0,1)
     b=table.cell(0,5)
     a.merge(b)
