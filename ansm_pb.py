@@ -39,8 +39,15 @@ def partie_A_B(document, extract):
         section.left_margin = Cm(1.8)
         section.right_margin = Cm(1.8)
         
-    table = document.add_table(rows=1, cols=1, style='Table Grid')
-    table.cell(0,0).text=("\n Demande d’autorisation auprès de l’ANSM et demande d’avis a un comité de protection des personnes d'une recherche biomédicale portant sur un produit sanguin labile, un organe, un tissu d’origine humaine ou animale ou une préparation de thérapie cellulaire\n")
+    table = document.add_table(rows=1, cols=6, style='Table Grid')
+    cell=table.cell(0,0)
+    paragraph = cell.paragraphs[0]
+    run = paragraph.add_run()
+    run.add_picture('ansm.jpg')
+    a=table.cell(0,1)
+    b=table.cell(0,5)
+    a.merge(b)
+    table.cell(0,1).text=("\n Demande d’autorisation auprès de l’ANSM et demande d’avis a un comité de protection des personnes d'une recherche biomédicale portant sur un produit sanguin labile, un organe, un tissu d’origine humaine ou animale ou une préparation de thérapie cellulaire\n")
     for row in table.rows:
         for cell in row.cells:
             paragraphs = cell.paragraphs
