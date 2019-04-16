@@ -71,11 +71,28 @@ def Partie5(document):
      #ecriture du titre5.1
     Titre2('5.1	Critères d’inclusion',document) 
 
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    run1=p.add_run('Tous les patients inclus dans cette recherche devront vérifier tous les critères d’inclusion listés ci-dessous :')
+    run1.style='Paragraphe'
+    
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+    p.style='List Bullet 2'
+    run1=p.add_run('XXXX')
+    run1.style='Paragraphe'
+    run1.font.color.rgb = RGBColor(0x0,0xB0,0xF0) 
+    run2=p.add_run('Recueil de la non-opposition du participant')
+    run2.style='Paragraphe'
 
     # Ecriture du 5.2  
     Titre2('5.2	Critères de non inclusion',document)
   
-              
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    run1=p.add_run('Tous les patients inclus dans cette recherche ne devront avoir aucun des critères de non inclusion listés ci-dessous :')
+    run1.style='Paragraphe'
                                         
     #ecriture du titre5.3
     Titre2('5.3	Faisabilité et modalités de recrutement ',document) 

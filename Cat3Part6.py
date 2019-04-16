@@ -16,6 +16,7 @@ import docx
 import StyleProt1
 from StyleProt1 import Style,Titre1, Titre2, Titre3, TexteGris, TexteGrisJustif
 from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_UNDERLINE, WD_LINE_SPACING, WD_COLOR_INDEX, WD_BREAK
+from docx.enum.table import WD_TABLE_ALIGNMENT,WD_ROW_HEIGHT, WD_ALIGN_VERTICAL
 from docx.enum.style import WD_STYLE_TYPE
 from docx.shared import Cm, Pt, RGBColor, Inches
 
@@ -56,14 +57,83 @@ def Partie6(document):
    # Ecriture du 6.1  
     Titre2('6.1	Calendrier de la recherche',document)
     
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+    p.style='List Bullet 2'
+    run1=p.add_run('Durée de la période d’inclusion :')
+    run1.style='Paragraphe'
+    
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+    p.style='List Bullet 2'
+    run1=p.add_run('Durée de suivi par participant : ')
+    run1.style='Paragraphe'
+    
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+    p.style='List Bullet 2'
+    run1=p.add_run('Durée totale de la recherche ')
+    run1.style='Paragraphe'
+    run2=p.add_run('(durée de la période d’inclusion + durée de participation) : ')
+    run2.style='Paragraphe'
+    run2.font.italic = True
+    
+    
+    
     # Ecriture du 6.2  
     Titre2('6.2	Tableau récapitulatif du suivi participant',document)
     
-    #AJOUTER TABLEAU
+       #TABLEAU
+    table = document.add_table(rows = 10, cols = 5)
+    table.style = 'Table Grid' #Normal
+    table.alignment = WD_TABLE_ALIGNMENT.CENTER 
+    row = table.rows[0] #ligne 1
+    p=row.cells[1].add_paragraph('Définir les différents temps de recueil')
+    p.style.font.name='Times New Roman'
+    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    row = table.rows[1]
+    p=row.cells[0].add_paragraph('Lister les paramètres recueillis')
+    p.style.font.name='Times New Roman'
+    p.alignment=WD_ALIGN_PARAGRAPH.LEFT
     
     # Ecriture du 6.3  
     Titre2('6.3	Visites de pré-inclusion / inclusion = Visite V06.3	Information des personnes concernées',document)
     
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    run1=p.add_run('Le médecin propose au patient de participer à cette recherche et l’informe :')
+    run1.style='Paragraphe'
+    
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+    p.style='List Bullet 2'
+    run1=p.add_run('de l’objectif,')
+    run1.style='Paragraphe'
+    run1.font.color.rgb = RGBColor(0x92,0xD0,0x50) 
+    
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+    p.style='List Bullet 2'
+    run1=p.add_run('du traitement informatisé des données le concernant qui seront recueillies au cours de cette recherche et lui précise également ses droits d’accès, d’opposition et de rectification à ces données.')
+    run1.style='Paragraphe'
+
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    run1=p.add_run('Le médecin vérifie également les ')
+    run1.style='Paragraphe'
+    run2=p.add_run('critères d’éligibilité.')
+    run2.style='Paragraphe'
+    run2.font.color.rgb = RGBColor(0x92,0xD0,0x50) 
+
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    run1=p.add_run('Si la personne est d\'accord pour participer, elle donne oralement son accord et sa non-opposition est documentée dans son dossier médical. Le participant pourra, à tout moment, s’opposer à l’utilisation de ses données, dans le cadre de la recherche.')
+    run1.style='Paragraphe'
     
     #Ecriture du titre 6.4
     Titre2('6.4	Visites de suivi',document)

@@ -32,6 +32,9 @@ from Cat3Part13 import Partie13
 from Cat3Part14 import Partie14
 from Cat3Part15 import Partie15
 from cpp_rni import main_cpp_RNI
+import page_garde_cat3
+import time
+from time import gmtime, strftime
 
 #import page_garde A FAIRE POUR CAT3
 import extraction
@@ -58,15 +61,21 @@ def construit_doc(dico):
         section.left_margin = Cm(2)
         section.right_margin = Cm(2)
     
+#page de garde
+    #page_garde_cat3.PageGarde(document)
+#historique des mises a jour
+    #page_garde_cat3.Page_version(document,extract)
+#signatures
+    #page_garde_cat3.PageSignature(document)
+#principaux correspondants
+    #page_garde_cat3.PageCorespondant(document,extract)
+#sommaire
+#abbreviations
+    #page_garde_cat3.liste_abreviation(document,extract)
+#resume 
+    #page_garde_cat3.resume_protocole(document,extract)
     
-    #page_garde.PageGarde(document)
-    #historique des mises a jour
-  #  page_garde.PageSignature(document)
-    #principaux correspondants
-    #sommaire
- #   page_garde.liste_abreviation(document,extract)
-    #resume du proto version XX
-    #abstract
+
     Partie1(document)
     Partie2(document)
     Partie3(document)
@@ -83,4 +92,7 @@ def construit_doc(dico):
     Partie14(document)
     Partie15(document)
 
-    document.save("ProtocoleCat3.docx")
+    sentence = extract['titre_abrege']
+    date = (strftime('%d-%m-%Y',time.localtime()))
+
+    document.save("ProtocoleCat3_"+sentence+"_"+date+".docx")

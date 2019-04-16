@@ -44,6 +44,7 @@ from ansm_dm import main_ansm_dm
 from ansm_hps import main_ansm_hps
 from ansm_pb import main_ansm_pb
 from ansm_medoc import main_ansm_medoc
+import test_sommaire
 
 #def extraction_info():
 
@@ -78,6 +79,7 @@ def construit_doc(dico):
     page_garde.PageSignature(document,extract)
     page_garde.PageCorespondant(document,extract)
     #sommaire
+    test_sommaire.sommaire(document)
     page_garde.liste_abreviation(document,extract)
     page_garde.resume_protocole(document,extract)
 
@@ -103,9 +105,9 @@ def construit_doc(dico):
     Partie20(document)
     
     sentence = extract['titre_abrege']
-    print(sentence)
+
     
-    date = (strftime('%Y-%m-%d %H:%M',time.localtime()))
+    date = (strftime('%d-%m-%Y',time.localtime()))
     
     
     #grand 21 annexes (pas mal de trucs a faire)

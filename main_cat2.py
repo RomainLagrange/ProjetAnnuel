@@ -29,7 +29,8 @@ from Cat2Part17 import Partie17
 from Cat2Part18 import Partie18
 from cpp_dm import main_cpp_dm
 from cpp_hps import main_cpp_hps
-
+import time
+from time import gmtime, strftime
 import extraction
 import docx
 from docx.shared import Cm
@@ -57,12 +58,12 @@ def construit_doc(dico):
         section.right_margin = Cm(2)
     
     
-    page_garde_cat2.PageGarde(document)
+#    page_garde_cat2.PageGarde(document)
     #historique des mises a jour
-    page_garde_cat2.PageSignature(document)
+ #   page_garde_cat2.PageSignature(document)
     #principaux correspondants
     #sommaire
-    page_garde_cat2.liste_abreviation(document,extract)
+  #  page_garde_cat2.liste_abreviation(document,extract)
     #resume du proto version XX
     #abstract
     Partie1(document)
@@ -83,5 +84,8 @@ def construit_doc(dico):
     Partie16(document)
     Partie17(document)
     Partie18(document)
+    
+    sentence = extract['titre_abrege']
+    date = (strftime('%d-%m-%Y',time.localtime()))
 
-    document.save("ProtocoleCat2.docx")
+    document.save("ProtocoleCat2_"+ sentence+"_"+date+".docx")
