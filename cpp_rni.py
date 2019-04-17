@@ -216,7 +216,7 @@ def page2_cpp_rni(document, extract):
     sentence.font.name = 'Arial Narrow'
     sentence.bold = True
     sentence.font.size = docx.shared.Pt(11)
-    sentence=paragraph.add_run('Nom, Prénom : '+extract['investigateur_coordinateur_nom']+' '+extract['investigateur_coordinateur_prenom']+'\nQualité : '+extract['investigateur_coordinateur_qualification']+'\nAdresse complète : '+extract['investigateur_coordinateur_adresse']+'\nTéléphone : '+extract['investigateur_coordinateur_telephone']+'\nMél : '+extract['investigateur_coordinateur_courriel']+'\n')
+    sentence=paragraph.add_run('Nom, Prénom : '+extract['investigateur_coordinateur_nom']+'\nAdresse complète : '+extract['investigateur_coordinateur_adresse']+'\nTéléphone : '+extract['investigateur_coordinateur_telephone']+'\nMél : '+extract['investigateur_coordinateur_courriel']+'\n')
     sentence.font.name = 'Arial Narrow'
     sentence.font.size = docx.shared.Pt(11)
     

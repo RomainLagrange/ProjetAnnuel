@@ -28,7 +28,7 @@ from docx.shared import Cm, Pt, RGBColor, Inches
 #    TexteGrisJustif(texte,document)
     
 
-def Partie1(document):
+def Partie1(document,extract):
     'Creation de la partie 1 du protcole de catégorie 3'
    # document = docx.Document()
 
@@ -49,7 +49,10 @@ def Partie1(document):
 #    paragraph=document.add_paragraph('1	JUSTICATION SCIENTIFIQUE ET DESCRIPTION GENERALE\n', style='Titre1') #titre
 #    paragraph.alignment = WD_ALIGN_PARAGRAPH.CENTER #centrer
 
-
+    paragraph2 = document.add_paragraph()
+    sentence2 = paragraph2.add_run(extract['justification_etude_longue'])
+    sentence2.font.name = 'Times New Roman'
+    sentence2.font.size = docx.shared.Pt(10)
     
     # Ecriture du 1.1  
     Titre2('1.1	Etat actuel des connaissances',document)
@@ -58,10 +61,22 @@ def Partie1(document):
                                         
     #ecriture du titre1.2
     Titre2('1.2	Hypothèse de la recherche',document) 
-
+    paragraph2 = document.add_paragraph()
+    sentence2 = paragraph2.add_run(extract['critere_jugement_principal_courte'])
+    sentence2.font.name = 'Times New Roman'
+    sentence2.font.size = docx.shared.Pt(10)
+    
+    paragraph2 = document.add_paragraph()
+    sentence2 = paragraph2.add_run(extract['traitement_strategie_courte'])
+    sentence2.font.name = 'Times New Roman'
+    sentence2.font.size = docx.shared.Pt(10)
     
      #Ecriture du titre1.3
     Titre2('1.3 Retombées attendues',document)
+    paragraph2 = document.add_paragraph()
+    sentence2 = paragraph2.add_run(extract['retombee_attenduees_longue'])
+    sentence2.font.name = 'Times New Roman'
+    sentence2.font.size = docx.shared.Pt(10)
     
 
     #FIN DU DOC 

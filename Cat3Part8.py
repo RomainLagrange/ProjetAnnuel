@@ -49,7 +49,7 @@ from docx.shared import Cm, Pt, RGBColor, Inches
 #    TexteGrisJustif(texte,document)
     
 
-def Partie8(document):
+def Partie8(document,extract):
     'Creation de la partie 8 du protcole de catégorie 3'
    # document = docx.Document()
 
@@ -72,12 +72,18 @@ def Partie8(document):
     
     # Ecriture du 8.1  
     Titre2('8.1	Calcul de la taille d’étude',document)
-  
+    paragraph2 = document.add_paragraph()
+    sentence2 = paragraph2.add_run(extract['taille_etude_longue'])
+    sentence2.font.name = 'Times New Roman'
+    sentence2.font.size = docx.shared.Pt(10)
               
                                         
     #ecriture du titre8.2
     Titre2('8.2	Méthodes statistiques employées',document) 
-
+    paragraph2 = document.add_paragraph()
+    sentence2 = paragraph2.add_run(extract['analyse_statistique_longue'])
+    sentence2.font.name = 'Times New Roman'
+    sentence2.font.size = docx.shared.Pt(10)
 
 
     #FIN DU DOC 

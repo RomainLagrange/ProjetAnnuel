@@ -35,7 +35,7 @@ from docx.shared import Cm, Pt, RGBColor, Inches
 #    TexteGrisJustif(texte,document)
     
 
-def Partie2(document):
+def Partie2(document,extract):
     'Creation de la partie 2 du protcole de catégorie 3'
    # document = docx.Document()
 
@@ -58,12 +58,26 @@ def Partie2(document):
     
     # Ecriture du 2.1  
     Titre2('2.1	Objectif principal ',document)
-  
+    paragraph2 = document.add_paragraph()
+    sentence2 = paragraph2.add_run(extract['objectif_principal'])
+    sentence2.font.name = 'Times New Roman'
+    sentence2.font.size = docx.shared.Pt(10)
+    paragraph2 = document.add_paragraph()
+    sentence2 = paragraph2.add_run(extract['critere_jugement_principal_courte'])
+    sentence2.font.name = 'Times New Roman'
+    sentence2.font.size = docx.shared.Pt(10)
               
                                         
     #ecriture du titre2.2
     Titre2('2.2	Objectifs secondaires',document) 
-
+    paragraph2 = document.add_paragraph()
+    sentence2 = paragraph2.add_run(extract['objectif_secondaire'])
+    sentence2.font.name = 'Times New Roman'
+    sentence2.font.size = docx.shared.Pt(10)
+    paragraph2 = document.add_paragraph()
+    sentence2 = paragraph2.add_run(extract['critere_jugement_secondaire_courte'])
+    sentence2.font.name = 'Times New Roman'
+    sentence2.font.size = docx.shared.Pt(10)
 
 
     #FIN DU DOC 
