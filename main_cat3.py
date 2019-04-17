@@ -49,7 +49,7 @@ def construit_doc(dico):
     
     
     document = docx.Document()
-    extract=extraction.extract3()
+    extract=extraction.extract3(dico)
     main_cpp_RNI(extract)
     
     '''Marge des page'''
