@@ -84,21 +84,23 @@ def Partie5(document):
     # Ecriture du 5.3  
     Titre2('5.3	Calendrier de la recherche',document)
     
-    p=document.add_paragraph()
-    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
-    run1=p.add_run('Durée de la période d’inclusion : ')
-    run1.style='Paragraphe' 
+    
     
     p=document.add_paragraph()
     p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
-    run1=p.add_run('Durée de participation de chaque participant : ')
+    run1=p.add_run('Durée de la période d’inclusion : ' + extract['duree_inclusion']) 
+    run1.style='Paragraphe'
+    
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    run1=p.add_run('Durée de participation de chaque participant : ' + extract['duree_participation'])
     run1.style='Paragraphe' 
 
     p=document.add_paragraph()
     p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     run1=p.add_run('Durée totale de la recherche ')
     run1.style='Paragraphe' 
-    run2=p.add_run('(durée de la période d’inclusion + durée de participation)')
+    run2=p.add_run('(durée de la période d’inclusion + durée de participation)'+ extract['duree_inclusion'] + extract['duree_participation'])
     run2.font.italic= True
     run2.style='Paragraphe'  
     
@@ -481,6 +483,11 @@ def Partie5(document):
     
     #Ecriture du titre 5.10
     Titre2('5.10	Contraintes liées à la recherche et indemnisation éventuelle des participants',document)
+    
+    paragraph2 = document.add_paragraph()
+    sentence2 = paragraph2.add_run(extract['indemnisation'])
+    sentence2.font.name = 'Times New Roman'
+    sentence2.font.size = docx.shared.Pt(10)
     
      #Ecriture du titre 5.11
     Titre2('5.11	Collection d’échantillons biologiques',document)

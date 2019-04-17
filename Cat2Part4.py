@@ -41,6 +41,11 @@ def Partie4(document):
    # Ecriture du 4.1  
     Titre2('4.1	Critères d’inclusion',document)
     
+    paragraph2 = document.add_paragraph()
+    sentence2 = paragraph2.add_run(extract['critere_inclusion_longue'])
+    sentence2.font.name = 'Times New Roman'
+    sentence2.font.size = docx.shared.Pt(10)
+    
     p=document.add_paragraph()
     p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     run1=p.add_run('Tous les patients inclus dans cette recherche devront vérifier tous les critères d’inclusion listés ci-dessous :')
@@ -64,8 +69,23 @@ def Partie4(document):
     run1=p.add_run('Tous les patients inclus dans cette recherche ne devront avoir aucun des critères de non inclusion listés ci-dessous :')
     run1.style='Paragraphe'
     
+    paragraph2 = document.add_paragraph()
+    sentence2 = paragraph2.add_run(extract['critere_non_inclusion_longue'])
+    sentence2.font.name = 'Times New Roman'
+    sentence2.font.size = docx.shared.Pt(10)
+    
       # Ecriture du 4.3  
     Titre2('4.3	Faisabilité et modalités de recrutement',document)
+    
+    paragraph2 = document.add_paragraph()
+    sentence2 = paragraph2.add_run(extract['modalite_recrutement'])
+    sentence2.font.name = 'Times New Roman'
+    sentence2.font.size = docx.shared.Pt(10)
+    
+    paragraph2 = document.add_paragraph()
+    sentence2 = paragraph2.add_run(extract['duree_inclusion'])
+    sentence2.font.name = 'Times New Roman'
+    sentence2.font.size = docx.shared.Pt(10)
     
 #        #FIN DU DOC 
     paragraph = document.add_paragraph()

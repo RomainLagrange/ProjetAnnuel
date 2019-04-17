@@ -44,6 +44,10 @@ def Partie6(document):
     #ecriture du premier titre 
     Titre1('6	STRATEGIE(S) / PROCEDURES DE LA RECHERCHE',document)
     
+    paragraph2 = document.add_paragraph()
+    sentence2 = paragraph2.add_run(extract['traitement_strategie_longue'])
+    sentence2.font.name = 'Times New Roman'
+    sentence2.font.size = docx.shared.Pt(10)
     
    # Ecriture du 6.1  
     Titre2('6.1	Stratégie / procédure expérimental(e)',document)
