@@ -27,7 +27,7 @@ from docx.shared import Cm, Pt, RGBColor, Inches
 #    TexteGris(texte,document)
 #    TexteGrisJustif(texte,document)
 
-def Partie6(document):
+def Partie6(document,extract):
     'Creation de la partie 6 du protcole de catégorie 3'
    # document = docx.Document()
 
@@ -61,7 +61,7 @@ def Partie6(document):
     p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
     p.style='List Bullet 2'
-    run1=p.add_run('Durée de la période d’inclusion :')
+    run1=p.add_run('Durée de la période d’inclusion :' + extract['duree_inclusion'])
     run1.style='Paragraphe'
     
     p=document.add_paragraph()
@@ -77,7 +77,7 @@ def Partie6(document):
     p.style='List Bullet 2'
     run1=p.add_run('Durée totale de la recherche ')
     run1.style='Paragraphe'
-    run2=p.add_run('(durée de la période d’inclusion + durée de participation) : ')
+    run2=p.add_run('(durée de la période d’inclusion + durée de participation) : ' + extract['duree_totale_etude'])
     run2.style='Paragraphe'
     run2.font.italic = True
     
@@ -102,18 +102,28 @@ def Partie6(document):
     # Ecriture du 6.3  
     Titre2('6.3	Visites de pré-inclusion / inclusion = Visite V06.3	Information des personnes concernées',document)
     
-    p=document.add_paragraph()
-    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
-    run1=p.add_run('Le médecin propose au patient de participer à cette recherche et l’informe :')
-    run1.style='Paragraphe'
+    paragraph2 = document.add_paragraph()
+    sentence2 = paragraph2.add_run(extract['criteres_inclusion'])
+    sentence2.font.name = 'Times New Roman'
+    sentence2.font.size = docx.shared.Pt(10)
+    
+    paragraph2 = document.add_paragraph()
+    sentence2 = paragraph2.add_run(extract['criteres_non_inclusion'])
+    sentence2.font.name = 'Times New Roman'
+    sentence2.font.size = docx.shared.Pt(10)
     
     p=document.add_paragraph()
     p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
-    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
-    p.style='List Bullet 2'
-    run1=p.add_run('de l’objectif,')
+    run1=p.add_run('Le médecin propose au patient de participer à cette recherche et l’informe de l\'objectif:' + extract['objectif_principal'])
     run1.style='Paragraphe'
-    run1.font.color.rgb = RGBColor(0x92,0xD0,0x50) 
+    
+#    p=document.add_paragraph()
+#    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+#    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+#    p.style='List Bullet 2'
+#    run1=p.add_run('de l’objectif,')
+#    run1.style='Paragraphe'
+#    run1.font.color.rgb = RGBColor(0x92,0xD0,0x50) 
     
     p=document.add_paragraph()
     p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY

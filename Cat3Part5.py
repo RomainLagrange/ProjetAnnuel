@@ -49,7 +49,7 @@ from docx.shared import Cm, Pt, RGBColor, Inches
 #    TexteGrisJustif(texte,document)
     
 
-def Partie5(document):
+def Partie5(document,extract):
     'Creation de la partie 5 du protcole de catégorie 3'
    # document = docx.Document()
 
@@ -76,15 +76,14 @@ def Partie5(document):
     run1=p.add_run('Tous les patients inclus dans cette recherche devront vérifier tous les critères d’inclusion listés ci-dessous :')
     run1.style='Paragraphe'
     
-    p=document.add_paragraph()
-    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
-    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
-    p.style='List Bullet 2'
-    run1=p.add_run('XXXX')
-    run1.style='Paragraphe'
-    run1.font.color.rgb = RGBColor(0x0,0xB0,0xF0) 
-    run2=p.add_run('Recueil de la non-opposition du participant')
-    run2.style='Paragraphe'
+    paragraph2 = document.add_paragraph()
+    sentence2 = paragraph2.add_run(extract['criteres_inclusion'])
+    sentence2.font.name = 'Times New Roman'
+    sentence2.font.size = docx.shared.Pt(10)
+    paragraph2 = document.add_paragraph()
+    sentence2 = paragraph2.add_run('- Recueil de la non-opposition du participant')
+    sentence2.font.name = 'Times New Roman'
+    sentence2.font.size = docx.shared.Pt(10)
 
     # Ecriture du 5.2  
     Titre2('5.2	Critères de non inclusion',document)
@@ -93,10 +92,21 @@ def Partie5(document):
     p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     run1=p.add_run('Tous les patients inclus dans cette recherche ne devront avoir aucun des critères de non inclusion listés ci-dessous :')
     run1.style='Paragraphe'
+    paragraph2 = document.add_paragraph()
+    sentence2 = paragraph2.add_run(extract['criteres_non_inclusion'])
+    sentence2.font.name = 'Times New Roman'
+    sentence2.font.size = docx.shared.Pt(10)
                                         
     #ecriture du titre5.3
     Titre2('5.3	Faisabilité et modalités de recrutement ',document) 
-
+    paragraph2 = document.add_paragraph()
+    sentence2 = paragraph2.add_run(extract['taille_etude_courte'])
+    sentence2.font.name = 'Times New Roman'
+    sentence2.font.size = docx.shared.Pt(10)
+    paragraph2 = document.add_paragraph()
+    sentence2 = paragraph2.add_run(extract['duree_inclusion'])
+    sentence2.font.name = 'Times New Roman'
+    sentence2.font.size = docx.shared.Pt(10)
 
 
     #FIN DU DOC 

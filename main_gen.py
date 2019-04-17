@@ -23,5 +23,5 @@ def fct_gen(dic):
         main_cat1.construit_doc(dico)
     elif dico['la_categorie']=='2':
         main_cat2.construit_doc(dico)
-    else:
+    elif dico['la_categorie']=='3':
         main_cat3.construit_doc(dico)

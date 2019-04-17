@@ -63,7 +63,7 @@ from docx.shared import Cm, Pt, RGBColor, Inches
 #    TexteGrisJustif(texte,document)
     
 
-def Partie12(document):
+def Partie12(document,extract):
     'Creation de la partie 12 du protcole de catégorie 3'
    # document = docx.Document()
 
@@ -85,11 +85,11 @@ def Partie12(document):
     p=document.add_paragraph()
     p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
     p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
-    run1=p.add_run('Les documents suivants seront archivés par le nom de l’étude (')
+    run1=p.add_run('Les documents suivants seront archivés par le nom de l’étude (' + extract['titre_complet'])
     run1.style='Paragraphe'
-    run2=p.add_run('xxxxx')
-    run2.style='Paragraphe'
-    run2.font.color.rgb = RGBColor(0x92,0xD0,0x50) 
+#    run2=p.add_run('xxxxx')
+#    run2.style='Paragraphe'
+#    run2.font.color.rgb = RGBColor(0x92,0xD0,0x50) 
     run3=p.add_run(') dans les locaux du service ')
     run3.style='Paragraphe'
     run4=p.add_run('xxxxx ')

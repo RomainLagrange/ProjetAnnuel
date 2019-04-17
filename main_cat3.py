@@ -49,9 +49,8 @@ def construit_doc(dico):
     
     
     document = docx.Document()
-    extract=extraction.extract3(dico)
+    extract=extraction.extract3()
     main_cpp_RNI(extract)
-  #  extract=extraction.extraction()
     
     '''Marge des page'''
     sections = document.sections
@@ -62,32 +61,32 @@ def construit_doc(dico):
         section.right_margin = Cm(2)
     
 #page de garde
-    #page_garde_cat3.PageGarde(document)
+    page_garde_cat3.PageGarde(document,extract)
 #historique des mises a jour
-    #page_garde_cat3.Page_version(document,extract)
+    page_garde_cat3.Page_version(document,extract)
 #signatures
-    #page_garde_cat3.PageSignature(document)
+    page_garde_cat3.PageSignature(document,extract)
 #principaux correspondants
-    #page_garde_cat3.PageCorespondant(document,extract)
+    page_garde_cat3.PageCorespondant(document,extract)
 #sommaire
 #abbreviations
-    #page_garde_cat3.liste_abreviation(document,extract)
+    page_garde_cat3.liste_abreviation(document,extract)
 #resume 
-    #page_garde_cat3.resume_protocole(document,extract)
+    page_garde_cat3.resume_protocole(document,extract)
     
 
-    Partie1(document)
-    Partie2(document)
-    Partie3(document)
+    Partie1(document,extract)
+    Partie2(document,extract)
+    Partie3(document,extract)
     Partie4(document)
-    Partie5(document)
-    Partie6(document)
+    Partie5(document,extract)
+    Partie6(document,extract)
     Partie7(document)
-    Partie8(document)
+    Partie8(document,extract)
     Partie9(document)
     Partie10(document)
     Partie11(document)
-    Partie12(document)
+    Partie12(document,extract)
     Partie13(document)
     Partie14(document)
     Partie15(document)
