@@ -22,16 +22,16 @@ from time import gmtime, strftime
 
 def main_ansm_medoc(extract):
      document = docx.Document()
-     partie_A_B(document)
-     partie_C(document)
-     Partie_D(document)
-     Partie_E(document)
-     Partie_F_G(document)
-     Partie_H_I(document)
+     partie_A_B(document, extract)
+     partie_C(document, extract)
+     Partie_D(document, extract)
+     Partie_E(document, extract)
+     Partie_F_G(document, extract)
+     Partie_H_I(document, extract)
      date = (strftime('%d-%m-%Y',time.localtime()))
-     document.save("soumission_ansm_medicament"+extract['titre_abrege']+"_"+date+".docx")
+     document.save("soumission_ansm_medicament_"+extract['titre_abrege']+"_"+date+".docx")
 
-def partie_A_B(document):
+def partie_A_B(document, extract):
     
     '''Marge de la page'''
     sections = document.sections
@@ -43,7 +43,11 @@ def partie_A_B(document):
         
     '''Introduction'''
     table = document.add_table(rows=1, cols=6, style='Table Grid')
-    table.cell(0,0).text=("Formulaire de demande d’autorisation auprès de l’ANSM et de demande d’avis à un Comité de protection des personnes d'une recherche mentionnée au 1° de l’article L. 1121-1 du code de la santé publique portant sur un médicament à usage humain ")
+    cell=table.cell(0,0)
+    paragraph = cell.paragraphs[0]
+    ca = paragraph.add_run()
+    ca.add_picture('ansm.jpg')
+    table.cell(0,1).text=("Formulaire de demande d’autorisation auprès de l’ANSM et de demande d’avis à un Comité de protection des personnes d'une recherche mentionnée au 1° de l’article L. 1121-1 du code de la santé publique portant sur un médicament à usage humain ")
     table.cell(0,5).text=("FAEC")
     for row in table.rows:
         for cell in row.cells:
@@ -54,7 +58,7 @@ def partie_A_B(document):
                     fontdebut.bold = True
                     fontdebut.name = 'Arial'
                     fontdebut.size = docx.shared.Pt(11)
-    a=table.cell(0,0)
+    a=table.cell(0,1)
     b=table.cell(0,4)
     a.merge(b)
     
@@ -70,7 +74,7 @@ def partie_A_B(document):
     
     paragraph=document.add_paragraph("\nPARTIE A COMPLETER PAR L’ANSM / LE COMITE DE PROTECTION DES PERSONNES (CPP)\n", style='debut_page')
     
-    table = document.add_table(rows=8, cols=3, style='Table Grid')
+    table = document.add_table(rows=7, cols=3, style='Table Grid')
     table.cell(0,0).text=("Date de réception de la demande :     \n"
                           "Date de demande d’information pour validation :      ")
     table.cell(0,1).text=("Date de demande d’informations complémentaires :      ")
@@ -98,21 +102,23 @@ def partie_A_B(document):
     fontdebut.name = 'Arial'
     fontdebut.bold = True
     fontdebut.size = docx.shared.Pt(10)
-    fontdebut.underline=True
+    sentence=paragraph.add_run("Ce formulaire est destiné à la fois à la demande d’autorisation auprès de l’ANSM et à la demande d’avis au comité de protection des personnes (CPP). Veuillez cocher ci-après la case correspondant à l’objet de la demande.\n\n")
+    fontdebut = sentence.font
+    fontdebut.name = 'Arial'
+    fontdebut.size = docx.shared.Pt(10)
     sentence=paragraph.add_run("\nDEMANDE D’AUTORISATION À L’ANSM : 	                                                                         □\n"
                                "DEMANDE D’AVIS AU CPP	                                                                                                   □\n"
                                "\nA. IDENTIFICATION DE L’ESSAI CLINIQUE")
     fontdebut = sentence.font
     fontdebut.name = 'Arial'
-    fontdebut.bold = True
     fontdebut.size = docx.shared.Pt(10)
     
     table = document.add_table(rows=1, cols=1, style='Table Grid')
     table.cell(0,0).text=("A.1 Etat membre dans lequel la demande est soumise : FRANCE\n"
-                          "A.2 Numéro EudraCT  :      \n"
-                          "A.3 Titre complet de l’essai clinique :      \n"
-                          "A.4 Numéro de code du protocole de l’essai attribué par le promoteur, version et date  :      \n"
-                          "A.5 Nom ou titre abrégé de l’essai, le cas échéant :      \n"
+                          "A.2 Numéro EudraCT  :  "+extract['num_eudract']+"    \n"
+                          "A.3 Titre complet de l’essai clinique :  "+extract['titre_complet']+"    \n"
+                          "A.4 Numéro de code du protocole de l’essai attribué par le promoteur, version et date  :   "+extract['code_protocole']+"   \n"
+                          "A.5 Nom ou titre abrégé de l’essai, le cas échéant :  "+extract['titre_abrege']+"    \n"
                           "A.6 Numérotation ISRCTN , le cas échéant :      \n"
                           "A.7 S'agit-il d'une resoumission de la demande ?  □ oui  □ non  Si oui, indiquer la lettre de resoumission  :      ")
     for row in table.rows:
@@ -188,7 +194,7 @@ def partie_A_B(document):
                     n=n+1
                     
     
-def partie_C(document):
+def partie_C(document, extract):
     
     '''Partie C'''
     paragraph=document.add_paragraph("\nC. IDENTIFICATION DU DEMANDEUR (cocher les cases appropriées)\n", style='debut_page')
@@ -198,12 +204,12 @@ def partie_C(document):
                           "C.1.2       Représentant légal du promoteur                                                                               □\n"
                           "C.1.3	Personne ou organisme délégué par le promoteur pour soumettre la demande	     □\n"
                           "C.1.4 	Préciser ci-après les informations relatives au demandeur, même si elles figurent ailleurs dans le formulaire : Si promoteur, partie B1, si représentant légal du promoteur, partie B2\n"
-                          "C.1.4.1 	Organisme :      \n"
-                          "C.1.4.2 	Nom de la personne à contacter :      \n"
-                          "C.1.4.3 	Adresse :      \n"
-                          "C.1.4.4 	Numéro de téléphone :      \n"
-                          "C.1.4.5 	Numéro de télécopie :      \n"
-                          "C.1.4.6	Mail :      \n"
+                          "C.1.4.1 	Organisme :  "+extract['demandeur_nom_organisme']+"    \n"
+                          "C.1.4.2 	Nom de la personne à contacter :  "+extract['demandeur_nom_personne_contact']+"    \n"
+                          "C.1.4.3 	Adresse :  "+extract['demandeur_UE_adresse']+"    \n"
+                          "C.1.4.4 	Numéro de téléphone :  "+extract['demandeur_UE_num_telephone']+"    \n"
+                          "C.1.4.5 	Numéro de télécopie :  "+extract['demandeur_UE_num_telecopie']+"    \n"
+                          "C.1.4.6	Mail :  "+extract['demandeur_UE_courriel']+"    \n"
                           "C.1.5 Demande d'envoi d'une copie des données du formulaire sous format xml :\n"
                           "C.1.5.1 Souhaitez-vous recevoir une copie du fichier xml des données du formulaire sauvegardées sur la base EudraCT ?	□ oui    □ non \n"
                           "C.1.5.1.1 Si oui, indiquer les adresses mél auxquelles cette copie doit être adressée (5 adresses maximum) :      \n"
@@ -251,7 +257,7 @@ def partie_C(document):
                         fontdebut.bold = True
                     n=n+1
                     
-def Partie_D(document):
+def Partie_D(document, extract):
     
     '''Partie D'''
     paragraph=document.add_paragraph("\nD. DONNEES RELATIVES A CHAQUE MEDICAMENT EXPERIMENTAL", style='debut_page')
@@ -262,7 +268,7 @@ def Partie_D(document):
     fontdebut.size = docx.shared.Pt(10)
     
     table = document.add_table(rows=4, cols=1, style='Table Grid')
-    table.cell(0,0).text=("D.1	 IDENTIFICATION DU PRODUIT SUR LEQUEL PORTE LA RECHERCHE ")
+    table.cell(0,0).text=("D.1	 IDENTIFICATION DU MEDICAMENT EXPERIMENTAL")
     table.cell(1,0).text=("Indiquer ci-dessous quel ME est décrit dans cette section D. Le cas échéant, répéter cette section autant de fois qu'il y a de ME utilisé dans l’essai (numéroter chaque ME de 1 à n)")
     table.cell(2,0).text=("D.1.1         Cette section concerne le ME numéro :	     \n"
                           "D.1.2         ME étudié                                                                       	□\n"
@@ -277,7 +283,7 @@ def Partie_D(document):
                     fontdebut = run.font
                     fontdebut.name = 'Arial'
                     fontdebut.size = docx.shared.Pt(10)
-                    if n==0 or n==2:
+                    if n==0:
                         fontdebut.bold = True
                     n=n+1
     a=table.cell(0,0)
@@ -291,19 +297,21 @@ def Partie_D(document):
     
     '''Partie D2'''
     
-    table = document.add_table(rows=11, cols=6, style='Table Grid')
+    table = document.add_table(rows=12, cols=6, style='Table Grid')
     table.cell(0,0).text=("D.2	   STATUT DU PRODUIT SUR LEQUEL PORTE LA RECHERCHE ")
     table.cell(1,0).text=("Si le ME dispose d'une AMM en France, mais que le nom de la spécialité et le titulaire de l’AMM ne sont pas déterminés dans le protocole de l'essai, aller à la section D.2.2.")
-    table.cell(2,0).text=("D.2.1	   Le produit utilisé dans la recherche dispose-t-il d'une autorisation en France ou est-il enregistré en France  ?")
-    table.cell(3,0).text=("D.2.1.1	   Si oui en D.2.1, préciser pour le produit utilisé dans la recherche :")
-    table.cell(4,0).text=("D.2.1.1.1    Nom du produit autorisé ou enregistré ou nom commercial, le cas échéant :      ")
-    table.cell(5,0).text=("D.2.1.1.2    Nom du titulaire de l’autorisation :      ")
-    table.cell(6,0).text=("D.2.1.1.3    Numéro d’autorisation ou d’enregistrement :      ")
-    table.cell(7,0).text=("D.2.1.1.4    Le produit sur lequel porte la recherche est-il modifié par rapport à son autorisation ? ")
+    table.cell(2,0).text=("D.2.1	   Le ME utilisé dans l’essai dispose-t-il d'une AMM ?")
+    table.cell(3,0).text=("D.2.1.1	   Si oui en D.2.1, préciser pour le médicament utilisé dans l'essai :")
+    table.cell(4,0).text=("D.2.1.1.1    Nom de spécialité  :      ")
+    table.cell(5,0).text=("D.2.1.1.2    Nom du titulaire de l’AMM :      ")
+    table.cell(6,0).text=("D.2.1.1.3    Numéro d’AMM (si AMM délivrée par un Etat membre) :      ")
+    table.cell(7,0).text=("D.2.1.1.4    Le ME est-il modifié par rapport à son AMM ?")
     table.cell(8,0).text=("D.2.1.1.4.1 Si oui, veuillez préciser :      ")
-    table.cell(9,0).text=("D.2.1.2       Le produit dispose-t-il d’une autorisation ou d’un enregistrement dans un autre pays ?")
-    table.cell(10,0).text=("D.2.1.2.1    Si oui, veuillez préciser le pays et le nom de l’autorité qui a autorisé le produit :      ")
-    for i in range(1,11):
+    table.cell(9,0).text=("D.2.1.2       Quel pays a délivré l'AMM ?      ")
+    table.cell(10,0).text=("D.2.1.2.1    Est-ce la France ?")
+    table.cell(11,0).text=("D.2.1.2.2    Est-ce un autre Etat membre ?")
+    
+    for i in range(1,12):
         if i==2 or i==7 or i==10 or i==11:
             table.cell(i,5).text=("□ oui  □ non")
         else:
@@ -313,23 +321,23 @@ def Partie_D(document):
         for cell in row.cells:
             paragraphs = cell.paragraphs
             for paragraph in paragraphs:
-                if n==3 or n==13 or n==19 or n==21:
+                if n==4 or n==14 or n==20 or n==22:
                     paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
                 for run in paragraph.runs:
                     fontdebut = run.font
                     fontdebut.name = 'Arial'
                     fontdebut.size = docx.shared.Pt(10)
-                    if n==0 or n==2:
+                    if n==0 or n==3:
                         fontdebut.bold = True
                     n=n+1
     a=table.cell(0,0)
     b=table.cell(1,5)
     a.merge(b)
     a=table.cell(2,0)
-    b=table.cell(10,4)
+    b=table.cell(11,4)
     a.merge(b)
     a=table.cell(2,5)
-    b=table.cell(10,5)
+    b=table.cell(11,5)
     a.merge(b)
     
     paragraph=document.add_paragraph()
@@ -337,24 +345,24 @@ def Partie_D(document):
     table = document.add_table(rows=5, cols=6, style='Table Grid')
     table.cell(0,0).text=("D.2.2	Cas où le ME utilisé dans l’essai clinique dispose d'une AMM en France, mais le protocole autorise l’utilisation de toute spécialité pour le ME, sous réserve qu’elle dispose d'une AMM en France, et il n’est donc pas possible d’identifier précisément le/les ME avant le début de l’essai")
     table.cell(1,0).text=("D.2.2.1      Dans le protocole, le traitement est-il défini uniquement par la substance active ?\n"
-                          "D.2.2.1.1	Si oui, indiquer le nom de la substance active en D.3.8 ou D.3.9")
+                          "D.2.2.1.1 Si oui, indiquer le nom de la substance active en D.3.8 ou D.3.9")
     table.cell(2,0).text=("D.2.2.2      Dans le protocole, les schémas de traitement permettent-ils différentes combinaisons de médicaments commercialisés, utilisés selon les pratiques cliniques locales dans certains ou dans tous les lieux de recherche en France ?\n"
-                          "D.2.2.2.1	Si oui, indiquer le nom de la substance active en D.3.8 ou D.3.9")
+                          "D.2.2.2.1 Si oui, indiquer le nom de la substance active en D.3.8 ou D.3.9")
     table.cell(3,0).text=("D.2.2.3      Les produits à administrer en tant que ME sont-ils définis comme appartenant à un groupe ATC ?\n"
-                          "D.2.2.3.1	Si oui, indiquer ce groupe ATC dans le champ des codes ATC (niveau 3 ou plus jusqu’au niveau pouvant être défini) de la section D.3.3")
+                          "D.2.2.3.1 Si oui, indiquer ce groupe ATC dans le champ des codes ATC (niveau 3 ou plus jusqu’au niveau pouvant être défini) de la section D.3.3")
     table.cell(4,0).text=("D.2.2.4      Autre :\n"
-                          "D.2.2.4.1	Si oui, veuillez préciser :      ")
+                          "D.2.2.4.1 Si oui, veuillez préciser :      ")
     table.cell(0,5).text=(" ")
     table.cell(1,5).text=("□ oui  □ non")
     table.cell(2,5).text=("□ oui  □ non")
     table.cell(3,5).text=("□ oui  □ non")
-    table.cell(4,2).text=("□ oui  □ non")
+    table.cell(4,5).text=("□ oui  □ non")
     n=0
     for row in table.rows:
         for cell in row.cells:
             paragraphs = cell.paragraphs
             for paragraph in paragraphs:
-                if n==2 or n==4 or n==6 or n==8:
+                if n==3 or n==5 or n==7 or n==9:
                     paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
                 for run in paragraph.runs:
                     fontdebut = run.font
@@ -363,9 +371,14 @@ def Partie_D(document):
                     if n==0:
                         fontdebut.bold = True
                     n=n+1
+    
     a=table.cell(0,0)
     b=table.cell(0,5)
     a.merge(b)
+    for i in range (1,5) :
+        a=table.cell(i,0)
+        b=table.cell(i,4)
+        a.merge(b)
     
     paragraph=document.add_paragraph()
     
@@ -460,7 +473,7 @@ def Partie_D(document):
     table.cell(2,0).text=("D.2.6.1.1    Avis du CHMP  ?\n"
                           "D.2.6.1.2	Avis d'une autorité compétente d'un Etat membre ?")
     table.cell(0,5).text=("□ oui  □ non")
-    table.cell(2,5).text=("\n□ oui  □ non\n□ oui  □ non")
+    table.cell(2,5).text=("\n\n□ oui  □ non\n□ oui  □ non")
     n=0
     for row in table.rows:
         for cell in row.cells:
@@ -499,7 +512,7 @@ def Partie_D(document):
                           "D.3.7         Voie d’administration (utiliser les termes standard) :      \n"
                           "D.3.8         Nom de chaque substance active (DCI ou DCI proposée, le cas échéant) :      \n"
                           "D.3.9         Autre(s) nom(s) disponible(s) pour chaque substance active (numéro CAS , code précédemment attribué par le promoteur, autre nom descriptif, etc. Indiquer tous les noms disponibles) :      \n"
-                          "D.3.10        Dosage (préciser tous les dosages utilisés) : \n")
+                          "D.3.10        Dosage (préciser tous les dosages utilisés) : ")
     table.cell(2,0).text=("D.3.10.1      Unité de concentration :      \n"
                           "D.3.10.2      Type de concentration (“nombre exact ”, “intervalle”, “plus que” ou “jusqu’à”) :      \n"
                           "D.3.10.3      Concentration (nombre) :      ")
@@ -553,13 +566,15 @@ def Partie_D(document):
                     fontdebut = run.font
                     fontdebut.name = 'Arial'
                     fontdebut.size = docx.shared.Pt(10)
-                    if n==0 or n==1 or n==4 or n==7 or n==8:
+                    if n==0:
                         fontdebut.bold = True
                     n=n+1
     a=table.cell(0,0)
     b=table.cell(1,4)
     a.merge(b)
-    
+    a=table.cell(0,5)
+    b=table.cell(1,5)
+    a.merge(b)
     document.add_page_break()
     
     '''Partie D4'''
@@ -575,7 +590,7 @@ def Partie_D(document):
                           "D.4.1.4      Organisme génétiquement modifié\n"
                           "D.4.1.5      Médicament dérivé du sang\n"
                           "D.4.1.6	    Autre	\n"
-                          "D.4.1.6.1	Si oui, préciser :      ")
+                          "D.4.1.6.1 Si oui, préciser :      ")
     table.cell(2,5).text=("\n□ oui  □ non\n□ oui  □ non\n□ oui  □ non\n□ oui  □ non\n□ oui  □ non\n□ oui  □ non")
     n=0
     for row in table.rows:
@@ -601,7 +616,6 @@ def Partie_D(document):
     b=table.cell(2,5)
     a.merge(b)
         
-    document.add_page_break()
     
     '''Partie D5'''
     paragraph=document.add_paragraph()
@@ -626,7 +640,7 @@ def Partie_D(document):
         for cell in row.cells:
             paragraphs = cell.paragraphs
             for paragraph in paragraphs:
-                if n==3 or n==6:
+                if n==2 or n==5:
                     paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
                 for run in paragraph.runs:
                     fontdebut = run.font
@@ -656,21 +670,21 @@ def Partie_D(document):
     paragraph=document.add_paragraph()
     
     table = document.add_table(rows=3, cols=6, style='Table Grid')
-    table.cell(0,0).text=("D.6	MEDICAMENT EXPERIMENTAL DE THERAPIE GENIQUE")
-    table.cell(1,0).text=("D.6.1	Gène(s) d’intérêt :      \n"
-                          "D.6.2    Thérapie génique in vivo\n"
-                          "D.6.3    Thérapie génique ex vivo\n"
-                          "D.6.4    Type de vecteur utilisé\n")
+    table.cell(0,0).text=("D.6	     MEDICAMENT EXPERIMENTAL DE THERAPIE GENIQUE")
+    table.cell(1,0).text=("D.6.1	     Gène(s) d’intérêt :      \n"
+                          "D.6.2         Thérapie génique in vivo\n"
+                          "D.6.3         Thérapie génique ex vivo\n"
+                          "D.6.4         Type de vecteur utilisé")
     table.cell(1,5).text=("\n□ oui  □ non\n□ oui  □ non\n\n□ oui  □ non")
-    table.cell(2,0).text=("D.6.4.1	Acide nucléique (exemple : plasmide)	\n"
+    table.cell(2,0).text=("D.6.4.1	     Acide nucléique (exemple : plasmide)	\n"
                           "Si oui, préciser s’il s’agit :\n"
                           "D.6.4.1.1   d’un acide nucléique nu\n"
-                          "D.6.4.1.2	d'un acide nucléique complexe	\n"
-                          "D.6.4.2	Vecteur viral	\n"
-                          "D.6.4.2.1	Si oui, préciser le type : adénovirus, rétrovirus, AAV…:      \n"
-                          "D.6.4.3	Autre	\n"
-                          "D.6.4.3.1	Si oui, préciser :      ")
-    table.cell(2,5).text=("\n□ oui  □ non\n\n□ oui  □ non\n□ oui  □ non\n□ oui  □ non\n\n□ oui  □ non")
+                          "D.6.4.1.2   d'un acide nucléique complexe	\n"
+                          "D.6.4.2	    Vecteur viral	\n"
+                          "D.6.4.2.1   Si oui, préciser le type : adénovirus, rétrovirus, AAV…:      \n"
+                          "D.6.4.3	    Autre	\n"
+                          "D.6.4.3.1   Si oui, préciser :      ")
+    table.cell(2,5).text=("\n□ oui  □ non\n□ oui  □ non\n□ oui  □ non\n\n□ oui  □ non")
     n=0
     for row in table.rows:
         for cell in row.cells:
@@ -698,14 +712,14 @@ def Partie_D(document):
     paragraph=document.add_paragraph()
     
     table = document.add_table(rows=2, cols=6, style='Table Grid')
-    table.cell(0,0).text=("D.6.5	Cellules génétiquement modifiées")
+    table.cell(0,0).text=("D.6.5	    Cellules génétiquement modifiées")
     table.cell(1,0).text=("Si oui, préciser l’origine des cellules\n"
-                          "D.6.5.1  Autologue\n"
-                          "D.6.5.2  Allogénique\n"
-                          "D.6.5.3	Xénogénique	\n"
-                          "D.6.5.3.1	Si oui, préciser les espèces d’origine :      \n"
-                          "D.6.5.4	Autre type de cellules (cellules souches hématopoïétiques, …)	\n"
-                          "       Si oui, préciser :      ")
+                          "D.6.5.1      Autologue\n"
+                          "D.6.5.2      Allogénique\n"
+                          "D.6.5.3	    Xénogénique	\n"
+                          "D.6.5.3.1   Si oui, préciser les espèces d’origine :      \n"
+                          "D.6.5.4	    Autre type de cellules (cellules souches hématopoïétiques, …)	\n"
+                          "            Si oui, préciser :      ")
     table.cell(1,5).text=("□ oui  □ non\n\n□ oui  □ non\n□ oui  □ non\n□ oui  □ non\n\n□ oui  □ non")
     n=0
     for row in table.rows:
@@ -746,14 +760,14 @@ def Partie_D(document):
     paragraph=document.add_paragraph()
     
     table = document.add_table(rows=3, cols=6, style='Table Grid')
-    table.cell(0,0).text=("D.7  DONNEES RELATIVES AU PLACEBO (répéter la section autant de fois que nécessaire, le cas échéant)")
-    table.cell(1,0).text=("D.7.1	  Un placebo est-il utilisé ?\n"
-                          "D.7.2	  Cette section concerne le placebo numéro : (     )\n"
-                          "D.7.3	  Forme pharmaceutique :      \n"
-                          "D.7.4	  Voie d’administration :      \n"
-                          "D.7.5	  De quel ME est-ce le placebo ? Préciser le numéro du ME, tel qu'indiqué en D.1 : (     )")
-    table.cell(2,0).text=("D.7.5.1	  Composition, hormis la ou les substances actives :      \n"
-                          "D.7.5.2	  Est-elle identique à celle du ME étudié ?	\n"
+    table.cell(0,0).text=("D.7    DONNEES RELATIVES AU PLACEBO (répéter la section autant de fois que nécessaire, le cas échéant)")
+    table.cell(1,0).text=("D.7.1	    Un placebo est-il utilisé ?\n"
+                          "D.7.2	    Cette section concerne le placebo numéro : (     )\n"
+                          "D.7.3	    Forme pharmaceutique :      \n"
+                          "D.7.4	    Voie d’administration :      \n"
+                          "D.7.5	    De quel ME est-ce le placebo ? Préciser le numéro du ME, tel qu'indiqué en D.1 : (     )")
+    table.cell(2,0).text=("D.7.5.1	    Composition, hormis la ou les substances actives :      \n"
+                          "D.7.5.2	     Est-elle identique à celle du ME étudié ?	\n"
                           "D.7.5.2.1  Si non, préciser les principaux composants :      \n")
     table.cell(1,5).text=("□ oui  □ non\n")
     table.cell(2,5).text=("\n\n\n\n\n□ oui  □ non")
@@ -813,16 +827,19 @@ def Partie_D(document):
                     fontdebut = run.font
                     fontdebut.name = 'Arial'
                     fontdebut.size = docx.shared.Pt(10)
-                    if n==0 or n==2:
+                    if n==0 or n==3 or n==5:
                         fontdebut.bold = True
-                    elif n==4:
+                    elif n==2 or n==7:
                         fontdebut.italic = True
                     n=n+1
     a=table.cell(0,0)
+    b=table.cell(1,0)
+    a.merge(b)
+    a=table.cell(3,0)
     b=table.cell(7,0)
     a.merge(b)
     
-def Partie_E(document):
+def Partie_E(document, extract):
     
     paragraph=document.add_paragraph()
     sentence=paragraph.add_run("\nE. INFORMATIONS GENERALES RELATIVES A L'ESSAI")
@@ -830,7 +847,7 @@ def Partie_E(document):
     fontdebut.name = 'Arial'
     fontdebut.bold = True
     fontdebut.size = docx.shared.Pt(10) 
-    sentence=paragraph.add_run("\nCette section est destinée à fournir des informations concernant les objectifs, domaine et méthodologie de l'essai. Si le protocole prévoit la réalisation d'une sous-étude en France, indiquer les informations relatives à cette sous-étude en section E.2.3. Veuillez également cocher la case appropriée en section E.2 relative à l'objectif de l'essai.")
+    sentence=paragraph.add_run("\nCette section est destinée à fournir des informations concernant les objectifs, domaine et méthodologie de l'essai. Si le protocole prévoit la réalisation d'une sous-étude en France, indiquer les informations relatives à cette sous-étude en section E.2.3. Veuillez également cocher la case appropriée en section E.2 relative à l'objectif de l'essai.\n")
     fontdebut = sentence.font
     fontdebut.name = 'Arial'
     fontdebut.size = docx.shared.Pt(10) 
@@ -857,8 +874,8 @@ def Partie_E(document):
     paragraph=document.add_paragraph()
     table = document.add_table(rows=2, cols=1, style='Table Grid')
     table.cell(0,0).text=("E.2	OBJECTIF(S) DE LA RECHERCHE")
-    table.cell(1,0).text=("E.2.1	Objectif principal : \n"
-                          "E.2.2	Objectifs secondaires : \n"
+    table.cell(1,0).text=("E.2.1	Objectif principal : "+extract['objectif_principal']+"\n"
+                          "E.2.2	Objectifs secondaires : "+extract['objectif_secondaire']+"\n"
                           "E.2.3	Une sous-étude est-elle prévue ?	                                                        □ oui   □ non\n"
                           "E.2.3.1	Si oui, préciser le titre complet, la date et la version de chaque sous-étude et leurs objectifs :      ")
     n=0
@@ -878,6 +895,7 @@ def Partie_E(document):
     paragraph=document.add_paragraph()
     table = document.add_table(rows=2, cols=1, style='Table Grid')
     table.cell(0,0).text=("E.3	PRINCIPAUX CRITERES D’INCLUSION (énumérer les plus importants)")
+    table.cell(1,0).text=(extract['critere_inclusion_courte'])
     n=0
     for row in table.rows:
         for cell in row.cells:
@@ -895,6 +913,7 @@ def Partie_E(document):
     paragraph=document.add_paragraph()
     table = document.add_table(rows=2, cols=1, style='Table Grid')
     table.cell(0,0).text=("E.4	PRINCIPAUX CRITERES DE NON INCLUSION (énumérer les plus importants)")
+    table.cell(1,0).text=(extract['critere_non_inclusion_courte'])
     n=0
     for row in table.rows:
         for cell in row.cells:
@@ -912,6 +931,7 @@ def Partie_E(document):
     paragraph=document.add_paragraph()
     table = document.add_table(rows=2, cols=1, style='Table Grid')
     table.cell(0,0).text=("E.5	CRITERE(S) D’EVALUATION PRINCIPAL(AUX)")
+    table.cell(1,0).text=(extract['critere_jugement_principal_longue']+"\n"+extract['critere_jugement_secondaire_longue'])
     n=0
     for row in table.rows:
         for cell in row.cells:
@@ -965,15 +985,15 @@ def Partie_E(document):
                     
     '''Partie E7'''
     paragraph=document.add_paragraph()
-    table = document.add_table(rows=2, cols=3, style='Table Grid')
+    table = document.add_table(rows=4, cols=3, style='Table Grid')
     table.cell(0,0).text=("E.7	  TYPE D'ESSAI  ET PHASE")
-    table.cell(1,0).text=("E.7.1	  Pharmacologie humaine (Phase I)\n"
-                          "Il s'agit de :\n"
+    table.cell(1,0).text=("E.7.1	  Pharmacologie humaine (Phase I)")
+    table.cell(2,0).text=("Il s'agit de :\n"
                           "E.7.1.1    La première administration à l’homme\n"
                           "E.7.1.2    Une étude de bioéquivalence\n"
                           "E.7.1.3	  Autre\n"
-                          "E.7.1.3.1 Si autre, préciser :      \n"
-                          "E.7.2      Essai thérapeutique exploratoire (Phase II)\n"
+                          "E.7.1.3.1 Si autre, préciser :      ")
+    table.cell(3,0).text=("E.7.2      Essai thérapeutique exploratoire (Phase II)\n"
                           "E.7.3      Essai thérapeutique de confirmation (Phase III)\n"
                           "E.7.4	  Essai thérapeutique conformément à l’autorisation (Phase IV)")
     table.cell(1,2).text=("□ \n\n□ \n□ \n□ \n\n□ \n□ \n□")
@@ -986,22 +1006,25 @@ def Partie_E(document):
                     fontdebut = run.font
                     fontdebut.name = 'Arial'
                     fontdebut.size = docx.shared.Pt(10)
-                    if n==0:
+                    if n==0 or n==1 or n==4:
                         fontdebut.bold = True
                     n=n+1
     a=table.cell(0,0)
     b=table.cell(0,2)
     a.merge(b)
     a=table.cell(1,0)
-    b=table.cell(1,1)
+    b=table.cell(3,1)
+    a.merge(b)
+    a=table.cell(1,2)
+    b=table.cell(3,2)
     a.merge(b)
     
     '''Partie E8'''
     paragraph=document.add_paragraph()
-    table = document.add_table(rows=11, cols=6, style='Table Grid')
+    table = document.add_table(rows=12, cols=6, style='Table Grid')
     table.cell(0,0).text=("E.8	METHODOLOGIE DE L'ESSAI")
-    table.cell(1,0).text=("E.8.1	  Comparatif	\n"
-                          "Si oui, préciser :\n"
+    table.cell(1,0).text=("E.8.1	  Comparatif	")
+    table.cell(2,0).text=("Si oui, préciser :\n"
                           "E.8.1.1    Tirage au sort\n"
                           "E.8.1.2    Ouvert\n"
                           "E.8.1.3    Simple insu\n"
@@ -1010,30 +1033,30 @@ def Partie_E(document):
                           "E.8.1.6    Plan croisé\n"
                           "E.8.1.7	 Autre	\n"
                           "E.8.1.7.1 Si autre, préciser :      ")
-    table.cell(2,0).text=("E.8.2	  Si comparatif, préciser le comparateur utilisé")
-    table.cell(3,0).text=("E.8.2.1    Autre(s) médicament(s)\n"
+    table.cell(3,0).text=("E.8.2	  Si comparatif, préciser le comparateur utilisé")
+    table.cell(4,0).text=("E.8.2.1    Autre(s) médicament(s)\n"
                           "E.8.2.2    Placebo\n"
                           "E.8.2.4	  Autre\n"
                           "E.8.2.4.1 Si autre, préciser :      ")
     table.cell(1,5).text=("□ oui   □ non\n\n□ oui   □ non\n□ oui   □ non\n□ oui   □ non\n□ oui   □ non\n□ oui   □ non\n□ oui   □ non\n□ oui   □ non\n\n\n□ oui   □ non\n□ oui   □ non\n□ oui   □ non")
-    table.cell(4,0).text=("E.8.3      L'essai est-il monocentrique (voir aussi section G) ?\n"
+    table.cell(5,0).text=("E.8.3      L'essai est-il monocentrique (voir aussi section G) ?\n"
                           "E.8.4	  L'essai est-il multicentrique (voir aussi section G) ?")
-    table.cell(5,0).text=("E.8.4.1	  Nombre prévu de lieux de recherche en France :    ")  
-    table.cell(6,0).text=("E.8.5	  Est-il prévu de mener l'essai dans plusieurs états membres ?")
-    table.cell(7,0).text=("E.8.5.1	  Nombre prévu de lieux de recherche dans la Communauté européenne :  ")
-    table.cell(8,0).text=("E.8.6      Est-il prévu de mener la recherche dans des pays tiers ?\n"
+    table.cell(6,0).text=("E.8.4.1	  Nombre prévu de lieux de recherche en France :    ")  
+    table.cell(7,0).text=("E.8.5	  Est-il prévu de mener l'essai dans plusieurs états membres ?")
+    table.cell(8,0).text=("E.8.5.1	  Nombre prévu de lieux de recherche dans la Communauté européenne :  ")
+    table.cell(9,0).text=("E.8.6      Est-il prévu de mener la recherche dans des pays tiers ?\n"
                           "E.8.7	  Un comité de surveillance indépendant a-t-il été constitué ?")
-    table.cell(2,5).text=("□ oui   □ non\n□ oui   □ non\n\n□ oui   □ non\n\n□ oui   □ non\n□ oui   □ non")
-    table.cell(9,0).text=("E.8.8	  Définition de la fin de l'essai, et justification si celle-ci ne correspond pas à la date de la dernière visite de la dernière personne participant à l'essai   :    \n"  
-                          "E.8.9      Estimation initiale de la durée de l'essai  (en années, mois et jours) : \n")
-    table.cell(10,0).text=("E.8.9.1   en France : 	      années       mois       jours\n"
+    table.cell(5,5).text=("□ oui   □ non\n□ oui   □ non\n\n□ oui   □ non\n\n□ oui   □ non\n□ oui   □ non")
+    table.cell(10,0).text=("E.8.8	  Définition de la fin de l'essai, et justification si celle-ci ne correspond pas à la date de la dernière visite de la dernière personne participant à l'essai   :    \n"  
+                          "E.8.9      Estimation initiale de la durée de l'essai  (en années, mois et jours) : "+extract['duree_totale_etude']+"\n")
+    table.cell(11,0).text=("E.8.9.1   en France : 	      années       mois       jours\n"
                            "E.8.9.2	 dans tous les pays concernés par l’essai : 	      années       mois       jours")
     n=0
     for row in table.rows:
         for cell in row.cells:
             paragraphs = cell.paragraphs
             for paragraph in paragraphs:
-                if n==2 or n==4:
+                if n==2 or n==7:
                     paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
                 for run in paragraph.runs:
                     fontdebut = run.font
@@ -1046,22 +1069,22 @@ def Partie_E(document):
     b=table.cell(0,5)
     a.merge(b)
     a=table.cell(1,0)
-    b=table.cell(3,4)
+    b=table.cell(4,4)
     a.merge(b)
     a=table.cell(1,5)
-    b=table.cell(3,5)
+    b=table.cell(4,5)
     a.merge(b)
-    a=table.cell(4,0)
-    b=table.cell(8,4)
+    a=table.cell(5,0)
+    b=table.cell(9,4)
     a.merge(b)
-    a=table.cell(4,5)
-    b=table.cell(8,5)
+    a=table.cell(5,5)
+    b=table.cell(9,5)
     a.merge(b)
-    a=table.cell(9,0)
-    b=table.cell(10,5)
+    a=table.cell(10,0)
+    b=table.cell(11,5)
     a.merge(b)
     
-def Partie_F_G(document):
+def Partie_F_G(document, extract):
     
     '''Partie F'''
     paragraph=document.add_paragraph("\nF. PERSONNES PARTICIPANT A L'ESSAI\n", style='debut_page')
@@ -1200,10 +1223,10 @@ def Partie_F_G(document):
     '''Partie G1'''
     table = document.add_table(rows=2, cols=1, style='Table Grid')
     table.cell(0,0).text=("G.1	INVESTIGATEUR COORDONNATEUR (si essai multicentrique) et investigateur principal (si essai monocentrique) ")
-    table.cell(1,0).text=("G.1.1	Prénom :      \n"
-                          "G.1.3	Second prénom, le cas échéant :      \n"
-                          "G.1.4	Qualification, spécialité :      \n"
-                          "G.1.5	Adresse professionnelle :      ")
+    table.cell(1,0).text=("G.1.1	Prénom :  "+extract['investigateur_coordinateur_prenom']+"    \n"
+                          "G.1.3	Second prénom, le cas échéant :   "+extract['investigateur_coordinateur_nom']+"   \n"
+                          "G.1.4	Qualification, spécialité :   "+extract['investigateur_coordinateur_qualification']+"   \n"
+                          "G.1.5	Adresse professionnelle :  "+extract['investigateur_coordinateur_adresse_professionnelle']+"    ")
     n=0
     for row in table.rows:
         for cell in row.cells:
@@ -1219,12 +1242,8 @@ def Partie_F_G(document):
     
     '''Partie G2'''
     paragraph=document.add_paragraph()
-    table = document.add_table(rows=2, cols=1, style='Table Grid')
+    table = document.add_table(rows=1, cols=1, style='Table Grid')
     table.cell(0,0).text=("G.2	INVESTIGATEURS PRINCIPAUX (si essai multicentrique ; répéter cette section autant de fois que nécessaire) ")
-    table.cell(1,0).text=("G.2.1	Prénom :      \n"
-                          "G.2.3	Second prénom, le cas échéant :      \n" 
-                          "G.2.4	Qualification, spécialité :      \n"
-                          "G.2.5	Adresse professionnelle :      ")
     n=0
     for row in table.rows:
         for cell in row.cells:
@@ -1237,16 +1256,29 @@ def Partie_F_G(document):
                     if n==0:
                         fontdebut.bold = True
                     n=n+1
-    
+    for i in range(len(extract['autre_investigateur_nom'])):
+        table = document.add_table(rows=1, cols=1, style='Table Grid')
+        table.cell(0,0).text=("G.2.1	Prénom :  "+extract['autre_investigateur_nom'][i]+"    \n"
+                              "G.2.3	Second prénom, le cas échéant :  "+extract['autre_investigateur_prenom'][i]+"   \n" 
+                              "G.2.4	Qualification, spécialité :  "+extract['autre_investigateur_qualification'][i]+"    \n"
+                              "G.2.5	Adresse professionnelle :  "+extract['autre_investigateur_adresse_professionnelle'][i])
+        for row in table.rows:
+            for cell in row.cells:
+                paragraphs = cell.paragraphs
+                for paragraph in paragraphs:
+                    for run in paragraph.runs:
+                        fontdebut = run.font
+                        fontdebut.name = 'Arial'
+                        fontdebut.size = docx.shared.Pt(10)
     '''Partie G3'''
     paragraph=document.add_paragraph()
     table = document.add_table(rows=2, cols=1, style='Table Grid')
     table.cell(0,0).text=("G.3	PLATEAU TECHNIQUE UTILISE AU COURS DE L'ESSAI\nLaboratoire ou autre plateau technique où sont effectuées de façon centralisée les mesures ou évaluations des paramètres ou critères principaux étudiés dans l'essai (à compléter pour chaque organisme, répéter la section si nécessaire)")
-    table.cell(1,0).text=("G.3.1	Organisme :      \n"
-                          "G.3.2	Nom de la personne à contacter :      \n"
-                          "G.3.3	Adresse :      \n"
-                          "G.3.4	Numéro de téléphone :      \n"
-                          "G.3.5	Tâches confiées :      ")
+    table.cell(1,0).text=("G.3.1	Organisme :  "+extract['plateau_technique_organisme']+"    \n"
+                          "G.3.2	Nom de la personne à contacter : "+extract['plateau_technique_personne_contact']+"     \n"
+                          "G.3.3	Adresse :  "+extract['plateau_technique_adresse']+"    \n"
+                          "G.3.4	Numéro de téléphone : "+extract['plateau_technique_num_telephone']+"     \n"
+                          "G.3.5	Tâches confiées : "+extract['plateau_technique_taches_confiees']+"     ")
     n=0
     for row in table.rows:
         for cell in row.cells:
@@ -1261,6 +1293,7 @@ def Partie_F_G(document):
                     n=n+1
     
     '''Partie G4'''
+    paragraph=document.add_paragraph()
     table = document.add_table(rows=2, cols=6, style='Table Grid')
     table.cell(0,0).text=("G.4	PRESTATAIRE A QUI LE PROMOTEUR A CONFIE CERTAINES OBLIGATIONS ET FONCTIONS AFFERENTES A L'ESSAI (à compléter pour chaque organisme, répéter la section si nécessaire)")
     table.cell(1,0).text=("G.4.1	    Le promoteur a-t-il confié en partie ou en totalité des obligations et des fonctions majeures lui incombant au titre de l'essai à un autre organisme ou à un tiers ?\n"
@@ -1305,7 +1338,7 @@ def Partie_F_G(document):
     b=table.cell(1,4)
     a.merge(b)
     
-def Partie_H_I(document):
+def Partie_H_I(document, extract):
     
     '''Partie H'''
     
@@ -1374,7 +1407,7 @@ def Partie_H_I(document):
                           "	Si refus d'autorisation, préciser :\n"
                           "H.3.3.3.1	Les motifs :      \n"
                           "H.3.3.3.2	La date éventuelle envisagée de resoumission de le demande :      ")
-    table.cell(1,2).text=("\n\n\n\n\n□\n□\n\n□\n\n\n□\n□")
+    table.cell(1,2).text=("□\n□\n□\n\n\n□\n□")
     n=0
     for row in table.rows:
         for cell in row.cells:
@@ -1384,7 +1417,7 @@ def Partie_H_I(document):
                     fontdebut = run.font
                     fontdebut.name = 'Arial'
                     fontdebut.size = docx.shared.Pt(10)
-                    if n==0 or n==2:
+                    if n==0 or n==1:
                         fontdebut.bold = True
                     n=n+1
     a=table.cell(0,0)
@@ -1392,6 +1425,9 @@ def Partie_H_I(document):
     a.merge(b)
     a=table.cell(1,0)
     b=table.cell(2,1)
+    a.merge(b)
+    a=table.cell(1,2)
+    b=table.cell(2,2)
     a.merge(b)
     
     document.add_page_break()

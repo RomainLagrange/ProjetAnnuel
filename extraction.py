@@ -10,11 +10,11 @@ import re
 from docx import Document
 
 
-def extract1():
+def extract1(dico):
     
     #dabord on extrait tout qu'on ajoute dans une liste
-    #f1 = open(dico['le_chemin'], 'rb') #ouvre le premier fichier
-    f1 = open("trame-simplifiée-cat-1.docx", 'rb')
+    f1 = open(dico['le_chemin'], 'rb') #ouvre le premier fichier
+    #f1 = open("trame-simplifiée-cat-1.docx", 'rb')
     doc = Document(f1)
     fullText=[]
     for para in doc.paragraphs:
@@ -573,10 +573,11 @@ def extract1():
             
     return infos
     
-def extract2():   
+def extract2(dico):   
     
     #dabord on extrait tout qu'on ajoute dans une liste
-    f1 = open('Trame-simplifiée-cat-2.docx', 'rb') #ouvre le premier fichier
+    #f1 = open('Trame-simplifiée-cat-2.docx', 'rb') #ouvre le premier fichier
+    f1 = open(dico['le_chemin'], 'rb')
     doc = Document(f1)
     fullText=[]
     for para in doc.paragraphs:
@@ -1003,10 +1004,11 @@ def extract2():
     
     return infos
     
-def extract3():   
+def extract3(dico):   
     
     #dabord on extrait tout qu'on ajoute dans une liste
-    f1 = open('Trame-simplifiée-cat-3.docx', 'rb') #ouvre le premier fichier
+    #f1 = open('Trame-simplifiée-cat-3.docx', 'rb') #ouvre le premier fichier
+    f1 = open(dico['le_chemin'], 'rb')
     doc = Document(f1)
     fullText=[]
     for para in doc.paragraphs:
