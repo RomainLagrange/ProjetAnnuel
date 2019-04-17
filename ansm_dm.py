@@ -21,18 +21,18 @@ from time import gmtime, strftime
 
 def main_ansm_dm(extract):
     document = docx.Document()
-    partie_une_ansm_dm(document)
-    partie_B_C(document)
-    partie_D(document)
-    partie_E_F(document)
-    partieF5_suite(document)
-    a_partir_F8(document)
-    partie_F10(document)
-    parties_H_I(document)
+    partie_une_ansm_dm(document, extract)
+    partie_B_C(document, extract)
+    partie_D(document, extract)
+    partie_E_F(document, extract)
+    partieF5_suite(document, extract)
+    a_partir_F8(document, extract)
+    partie_F10(document, extract)
+    parties_H_I(document, extract)
     date = (strftime('%d-%m-%Y',time.localtime()))
-    document.save("soumission_ansm_dm"+extract['titre_abrege']+"_"+date+".docx")
+    document.save("soumission_ansm_dm_"+extract['titre_abrege']+"_"+date+".docx")
 
-def partie_une_ansm_dm(document):
+def partie_une_ansm_dm(document, extract):
     
     '''Marge de la page'''
     sections = document.sections
@@ -53,8 +53,15 @@ def partie_une_ansm_dm(document):
     fontdebut.bold = True
     fontdebut.size = docx.shared.Pt(11) 
     
-    paragraph=document.add_paragraph("Formulaire de demande d’autorisation auprès de l'ANSM et demande d’avis du comite de protection des personnes (CPP) pour une recherche mentionnée au 1° ou au 2° de l’article L. 1121-1 du code de la santé publique portant sur un dispositif médical (DM) ou un dispositif médical de diagnostic in vitro (DMDIV)\n", style='debut_page')
+    paragraph=document.add_paragraph()
+    ca = paragraph.add_run()
+    ca.add_picture('ansm.jpg')
+    sentence=paragraph.add_run("Formulaire de demande d’autorisation auprès de l'ANSM et demande d’avis du comite de protection des personnes (CPP) pour une recherche mentionnée au 1° ou au 2° de l’article L. 1121-1 du code de la santé publique portant sur un dispositif médical (DM) ou un dispositif médical de diagnostic in vitro (DMDIV)")
     paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+    fontdebut = sentence.font
+    fontdebut.name = 'Arial'
+    fontdebut.bold=True
+    fontdebut.size = docx.shared.Pt(11)
     
     paragraph=document.add_paragraph()
     sentence=paragraph.add_run("Toutes les rubriques du formulaire doivent être complétées.\n")
@@ -98,7 +105,7 @@ def partie_une_ansm_dm(document):
     fontdebut.name = 'Arial'
     fontdebut.italic=True
     fontdebut.size = docx.shared.Pt(10)
-    sentence=paragraph.add_run("Ce formulaire est commun pour la demande d’autorisation auprès de l’ANSM et pour la demande d’avis auprès du CPP. Veuillez cocher ci-après la case correspondant à l’objet de la demande.\n")
+    sentence=paragraph.add_run("Ce formulaire est commun pour la demande d’autorisation auprès de l’ANSM et pour la demande d’avis auprès du CPP. Veuillez cocher ci-après la case correspondant à l’objet de la demande.\n\n\n")
     fontdebut = sentence.font
     fontdebut.name = 'Arial'
     fontdebut.size = docx.shared.Pt(10)
@@ -126,11 +133,15 @@ def partie_une_ansm_dm(document):
     '''A identification de la recherche'''
     paragraph=document.add_paragraph("A. Identification de la recherche \n", style='debut_page')
     table = document.add_table(rows=9, cols=2, style='Table Grid')
-    table.cell(0,0).text=("Numéro d’enregistrement de la recherche auprès de l'ANSM (n°IDRCB)")
+    table.cell(0,0).text=("Numéro d’enregistrement de la recherche auprès de l'ANSM (n°IDRCB)\n")
+    table.cell(0,1).text=(extract['num_idrcb'])
     table.cell(1,0).text=("Numéro EUDAMED  (le cas échéant)")
-    table.cell(2,0).text=("Titre complet de la recherche ")
-    table.cell(3,0).text=("Numéro de code du protocole attribué par le promoteur, version et date")
-    table.cell(4,0).text=("Nom ou titre abrégé (le cas échéant) ")
+    table.cell(2,0).text=("Titre complet de la recherche \n")
+    table.cell(2,1).text=(extract['titre_complet'])
+    table.cell(3,0).text=("Numéro de code du protocole attribué par le promoteur, version et date\n")
+    table.cell(3,1).text=(extract['code_protocole'])
+    table.cell(4,0).text=("Nom ou titre abrégé (le cas échéant) \n")
+    table.cell(4,1).text=(extract['titre_abrege'])
     table.cell(5,0).text=("S’agit-il d’une resoumission ?")
     table.cell(5,1).text=("□ oui       □ non")
     table.cell(6,0).text=("Si oui, indiquer la lettre de resoumission  ")
@@ -155,7 +166,7 @@ def partie_une_ansm_dm(document):
  
     
 # Parties B et C du document
-def partie_B_C(document):
+def partie_B_C(document, extract):
     
     paragraph=document.add_paragraph("\n\nB. Identification du promoteur responsable de la recherche \n", style='debut_page')
     table = document.add_table(rows=7, cols=3, style='Table Grid')
@@ -163,12 +174,18 @@ def partie_B_C(document):
     b=table.cell(0,2)
     a.merge(b)
     table.cell(0,0).text=("B1. Promoteur")
-    table.cell(1,0).text=("Nom de l'organisme")
-    table.cell(2,0).text=("Nom de la personne à contacter ")
-    table.cell(3,0).text=("Adresse")
-    table.cell(4,0).text=("Numéro de téléphone")
-    table.cell(5,0).text=("Numéro de télécopie")
-    table.cell(6,0).text=("Courriel")
+    table.cell(1,0).text=("Nom de l'organisme : ")
+    table.cell(1,1).text=(extract['promoteur_nom_organisme'])
+    table.cell(2,0).text=("Nom de la personne à contacter : ")
+    table.cell(2,1).text=(extract['promoteur_nom_personne_contact'])
+    table.cell(3,0).text=("Adresse : ")
+    table.cell(3,1).text=(extract['promoteur_adresse'])
+    table.cell(4,0).text=("Numéro de téléphone : ")
+    table.cell(4,1).text=(extract['promoteur_num_telephone'])
+    table.cell(5,0).text=("Numéro de télécopie : ")
+    table.cell(5,1).text=(extract['promoteur_num_telecopie'])
+    table.cell(6,0).text=("Courriel : ")
+    table.cell(6,1).text=(extract['promoteur_courriel'])
     n=0
     for i in range (1,7):
         c=table.cell(i, 1)
@@ -195,12 +212,18 @@ def partie_B_C(document):
     b=table.cell(0,2)
     a.merge(b)
     table.cell(0,0).text=("B2. Représentant légal  du promoteur dans la Communauté européenne pour la recherche (si différent du promoteur)")
-    table.cell(1,0).text=("Nom de l'organisme")
-    table.cell(2,0).text=("Nom de la personne à contacter ")
-    table.cell(3,0).text=("Adresse")
-    table.cell(4,0).text=("Numéro de téléphone")
-    table.cell(5,0).text=("Numéro de télécopie")
-    table.cell(6,0).text=("Courriel")
+    table.cell(1,0).text=("Nom de l'organisme : ")
+    table.cell(1,1).text=(extract['promoteur_UE_nom_organisme'])
+    table.cell(2,0).text=("Nom de la personne à contacter : ")
+    table.cell(2,1).text=(extract['promoteur_UE_nom_personne_contact'])
+    table.cell(3,0).text=("Adresse : ")
+    table.cell(3,1).text=(extract['promoteur_UE_adresse'])
+    table.cell(4,0).text=("Numéro de téléphone : ")
+    table.cell(4,1).text=(extract['promoteur_UE_num_telephone'])
+    table.cell(5,0).text=("Numéro de télécopie : ")
+    table.cell(5,1).text=(extract['promoteur_UE_num_telecopie'])
+    table.cell(6,0).text=("Courriel : ")
+    table.cell(6,1).text=(extract['promoteur_UE_courriel'])
     n=0
     for i in range (1,7):
         c=table.cell(i, 1)
@@ -272,12 +295,18 @@ def partie_B_C(document):
                     n=n+1
                     
     table = document.add_table(rows=6, cols=3, style='Table Grid')
-    table.cell(0,0).text=("Nom de l'organisme")
-    table.cell(1,0).text=("Nom de la personne à contacter")
-    table.cell(2,0).text=("Adresse")
-    table.cell(3,0).text=("Numéro de téléphone")
-    table.cell(4,0).text=("Numéro de télécopie")
-    table.cell(5,0).text=("Courriel")
+    table.cell(0,0).text=("Nom de l'organisme : ")
+    table.cell(0,1).text=(extract['demandeur_nom_organisme'])
+    table.cell(1,0).text=("Nom de la personne à contacter : ")
+    table.cell(1,1).text=(extract['demandeur_nom_personne_contact'])
+    table.cell(2,0).text=("Adresse : ")
+    table.cell(2,1).text=(extract['demandeur_UE_adresse'])
+    table.cell(3,0).text=("Numéro de téléphone : ")
+    table.cell(3,1).text=(extract['demandeur_UE_num_telephone'])
+    table.cell(4,0).text=("Numéro de télécopie : ")
+    table.cell(4,1).text=(extract['demandeur_UE_num_telecopie'])
+    table.cell(5,0).text=("Courriel : ")
+    table.cell(5,1).text=(extract['demandeur_UE_courriel'])
     for i in range (0,6):
         c=table.cell(i, 1)
         d=table.cell(i,2)
@@ -293,7 +322,7 @@ def partie_B_C(document):
        
         
 #partie D
-def partie_D(document):
+def partie_D(document, extract):
     
     paragraph=document.add_paragraph("\n\nD. Fiche de données sur le(s) DM (s)/ DM-DIV (s) faisant l'objet de la recherche, y compris les comparateurs \n", style='debut_page')
     table = document.add_table(rows=2, cols=1, style='Table Grid')
@@ -418,11 +447,16 @@ def partie_D(document):
     table = document.add_table(rows=6, cols=2, style='Table Grid')
     table.cell(0,0).text=("Fabricant du dispositif à étudier ")
     table.cell(0,1).text=("(à compléter quel que soit le statut du promoteur) ")
-    table.cell(1,0).text=("Nom")
-    table.cell(2,0).text=("Adresse")
-    table.cell(3,0).text=("Numéro de téléphone")
-    table.cell(4,0).text=("Numéro de télécopie")
-    table.cell(5,0).text=("Courriel")
+    table.cell(1,0).text=("Nom : ")
+    table.cell(1,1).text=(extract['fabriquant_dispositif_nom'])
+    table.cell(2,0).text=("Adresse : ")
+    table.cell(2,1).text=(extract['fabriquant_dispositif_adresse'])
+    table.cell(3,0).text=("Numéro de téléphone : ")
+    table.cell(3,1).text=(extract['fabriquant_dispositif_num_telephone'])
+    table.cell(4,0).text=("Numéro de télécopie : ")
+    table.cell(4,1).text=(extract['fabriquant_dispositif_num_telecopie'])
+    table.cell(5,0).text=("Courriel : ")
+    table.cell(5,1).text=(extract['fabriquant_dispositif_courriel'])
     n=0
     for row in table.rows:
         for cell in row.cells:
@@ -647,7 +681,7 @@ def partie_D(document):
                     n=n+1
     
     #parties E et F
-def partie_E_F(document):
+def partie_E_F(document, extract):
     
     '''Partie E'''
     document.add_page_break()
@@ -671,11 +705,16 @@ def partie_E_F(document):
     table = document.add_table(rows=6, cols=2, style='Table Grid')
     table.cell(0,0).text=("Fabricant  du placebo ")
     table.cell(0,1).text=("(à compléter quel que soit le statut du promoteur)")
-    table.cell(1,0).text=("Nom")
-    table.cell(2,0).text=("Adresse")
-    table.cell(3,0).text=("Numéro de téléphone")
-    table.cell(4,0).text=("Numéro de télécopie")
-    table.cell(5,0).text=("Courriel")
+    table.cell(1,0).text=("Nom : ")
+    table.cell(1,1).text=(extract['fabriquant_placebo_nom'])
+    table.cell(2,0).text=("Adresse : ")
+    table.cell(2,1).text=(extract['fabriquant_placebo_adresse'])
+    table.cell(3,0).text=("Numéro de téléphone : ")
+    table.cell(3,1).text=(extract['fabriquant_placebo_num_telephone'])
+    table.cell(4,0).text=("Numéro de télécopie : ")
+    table.cell(4,1).text=(extract['fabriquant_placebo_num_telecopie'])
+    table.cell(5,0).text=("Courriel : ")
+    table.cell(5,1).text=(extract['fabriquant_placebo_courriel'])
     n=0
     for row in table.rows:
         for cell in row.cells:
@@ -1056,7 +1095,7 @@ def partie_E_F(document):
     document.add_page_break()
     
 #a partir de F5
-def partieF5_suite(document):
+def partieF5_suite(document, extract):
     ''' Partie F5'''
     paragraph=document.add_paragraph("F5 Méthodologie de la recherche ", style='debut_page')
     table = document.add_table(rows=36, cols=8, style='Table Grid')
@@ -1155,15 +1194,23 @@ def partieF5_suite(document):
         a=table.cell(i,1)
         b=table.cell(i,2)
         a.merge(b)
-    table.cell(0,0).text=("Objectif principal")
-    table.cell(1,0).text=("Objectifs secondaires")
-    table.cell(2,0).text=("Critère principal de jugement")
-    table.cell(3,0).text=("Critères secondaires de jugement")
-    table.cell(4,0).text=("Principaux critères d’inclusion")
-    table.cell(5,0).text=("Principaux critères de non inclusion")
-    table.cell(6,0).text=("Durée de participation pour une personne se prêtant à la recherche")
-    table.cell(7,0).text=("Durée de suivi pour une personne se prêtant à la recherche")
-    table.cell(8,0).text=("Durée de l’essai")
+    table.cell(0,0).text=("Objectif principal : ")
+    table.cell(0,1).text=(extract['objectif_principal'])
+    table.cell(1,0).text=("Objectifs secondaires : ")
+    table.cell(1,1).text=(extract['objectif_secondaire'])
+    table.cell(2,0).text=("Critère principal de jugement : ")
+    table.cell(2,1).text=(extract['critere_jugement_principal_longue'])
+    table.cell(3,0).text=("Critères secondaires de jugement : ")
+    table.cell(3,1).text=(extract['critere_jugement_secondaire_longue'])
+    table.cell(4,0).text=("Principaux critères d’inclusion : ")
+    table.cell(4,1).text=(extract['critere_inclusion_longue'])
+    table.cell(5,0).text=("Principaux critères de non inclusion : ")
+    table.cell(5,1).text=(extract['critere_non_inclusion_longue'])
+    table.cell(6,0).text=("Durée de participation pour une personne se prêtant à la recherche : ")
+    table.cell(6,1).text=(extract['duree_participation'])
+    table.cell(7,0).text=("Durée de suivi pour une personne se prêtant à la recherche : ")
+    table.cell(8,0).text=("Durée de l’essai : ")
+    table.cell(8,1).text=(extract['duree_totale_etude'])
     for row in table.rows:
         for cell in row.cells:
             paragraphs = cell.paragraphs
@@ -1207,7 +1254,7 @@ def partieF5_suite(document):
     
     document.add_page_break()
     
-def a_partir_F8(document):
+def a_partir_F8(document, extract):
     
     '''Partie F8'''
     paragraph=document.add_paragraph("F8. Nombre de lieux de recherche et de pays concernés par la recherche\n", style='debut_page')
@@ -1298,7 +1345,7 @@ def a_partir_F8(document):
     
     #partie F10
     
-def partie_F10(document):
+def partie_F10(document, extract):
     
     paragraph=document.add_paragraph("F10. Personnes se prêtant à la recherche\n", style='debut_page')
     table = document.add_table(rows=27, cols=8, style='Table Grid')
@@ -1435,15 +1482,24 @@ def partie_F10(document):
     paragraph=document.add_paragraph("G. Lieux de recherche envisagés en France\n\nG1. Investigateur coordonnateur \n", style='debut_page')
     
     table = document.add_table(rows=9, cols=2, style='Table Grid')
-    table.cell(0,0).text=("Nom / Prénoms")
-    table.cell(1,0).text=("Qualification, Spécialité ")
-    table.cell(2,0).text=("Adresse professionnelle")
-    table.cell(3,0).text=("Nom de l’établissement")
-    table.cell(4,0).text=("Service ")
-    table.cell(5,0).text=("Adresse")
-    table.cell(6,0).text=("Numéro de téléphone ")
-    table.cell(7,0).text=("Numéro de télécopie ")
-    table.cell(8,0).text=("Courriel")
+    table.cell(0,0).text=("Nom / Prénoms : ")
+    table.cell(0,1).text=(extract['investigateur_coordinateur_nom']+" "+extract['investigateur_coordinateur_prenom'])
+    table.cell(1,0).text=("Qualification, Spécialité : ")
+    table.cell(1,1).text=(extract['investigateur_coordinateur_qualification'])
+    table.cell(2,0).text=("Adresse professionnelle : ")
+    table.cell(2,1).text=(extract['investigateur_coordinateur_adresse_professionnelle'])
+    table.cell(3,0).text=("Nom de l’établissement : ")
+    table.cell(3,1).text=(extract['investigateur_coordinateur_nom_etablissement'])
+    table.cell(4,0).text=("Service : ")
+    table.cell(4,1).text=(extract['investigateur_coordinateur_service'])
+    table.cell(5,0).text=("Adresse : ")
+    table.cell(5,1).text=(extract['investigateur_coordinateur_adresse'])
+    table.cell(6,0).text=("Numéro de téléphone : ")
+    table.cell(6,1).text=(extract['investigateur_coordinateur_telephone'])
+    table.cell(7,0).text=("Numéro de télécopie : ")
+    table.cell(7,1).text=(extract['investigateur_coordinateur_telecopie'])
+    table.cell(8,0).text=("Courriel : ")
+    table.cell(8,1).text=(extract['investigateur_coordinateur_courriel'])
     n=0
     for row in table.rows:
         for cell in row.cells:
@@ -1471,29 +1527,39 @@ def partie_F10(document):
     fontdebut.size = docx.shared.Pt(10)
     fontdebut.italic=True
     
-    table = document.add_table(rows=9, cols=2, style='Table Grid')
-    table.cell(0,0).text=("Nom / Prénoms")
-    table.cell(1,0).text=("Qualification, Spécialité ")
-    table.cell(2,0).text=("Adresse professionnelle")
-    table.cell(3,0).text=("Nom de l’établissement")
-    table.cell(4,0).text=("Service ")
-    table.cell(5,0).text=("Adresse")
-    table.cell(6,0).text=("Numéro de téléphone ")
-    table.cell(7,0).text=("Numéro de télécopie ")
-    table.cell(8,0).text=("Courriel")
-    n=0
-    for row in table.rows:
-        for cell in row.cells:
-            paragraphs = cell.paragraphs
-            for paragraph in paragraphs:
-                for run in paragraph.runs:
-                    fontdebut = run.font
-                    fontdebut.name = 'Arial'
-                    fontdebut.size = docx.shared.Pt(10)
-                    if n==0:
-                        fontdebut.bold=True
-                        fontdebut.size = docx.shared.Pt(11)
-                    n=n+1
+    for i in range(len(extract['autre_investigateur_nom'])):
+        table = document.add_table(rows=9, cols=2, style='Table Grid')
+        table.cell(0,0).text=("Nom / Prénoms : ")
+        table.cell(0,1).text=(extract['autre_investigateur_nom'][i]+" "+extract['autre_investigateur_prenom'][i])
+        table.cell(1,0).text=("Qualification, Spécialité : ")
+        table.cell(1,1).text=(extract['autre_investigateur_qualification'][i])
+        table.cell(2,0).text=("Adresse professionnelle : ")
+        table.cell(2,1).text=(extract['autre_investigateur_adresse_professionnelle'][i])
+        table.cell(3,0).text=("Nom de l’établissement : ")
+        table.cell(3,1).text=(extract['autre_investigateur_nom_etablissement'][i])
+        table.cell(4,0).text=("Service : ")
+        table.cell(4,1).text=(extract['autre_investigateur_service'][i])
+        table.cell(5,0).text=("Adresse : ")
+        table.cell(5,1).text=(extract['autre_investigateur_adresse'][i])
+        table.cell(6,0).text=("Numéro de téléphone : ")
+        table.cell(6,1).text=(extract['autre_investigateur_telephone'][i])
+        table.cell(7,0).text=("Numéro de télécopie : ")
+        table.cell(7,1).text=(extract['autre_investigateur_telecopie'][i])
+        table.cell(8,0).text=("Courriel : ")
+        table.cell(8,1).text=(extract['autre_investigateur_courriel'][i])
+        n=0
+        for row in table.rows:
+            for cell in row.cells:
+                paragraphs = cell.paragraphs
+                for paragraph in paragraphs:
+                    for run in paragraph.runs:
+                        fontdebut = run.font
+                        fontdebut.name = 'Arial'
+                        fontdebut.size = docx.shared.Pt(10)
+                        if n==0:
+                            fontdebut.bold=True
+                            fontdebut.size = docx.shared.Pt(11)
+                        n=n+1
     
     document.add_page_break()
     
@@ -1516,13 +1582,20 @@ def partie_F10(document):
     fontdebut.italic=True
     
     table = document.add_table(rows=7, cols=2, style='Table Grid')
-    table.cell(0,0).text=("Organisme")
-    table.cell(1,0).text=("Nom de la personne à contacter")
-    table.cell(2,0).text=("Adresse")
-    table.cell(3,0).text=("Numéro de téléphone")
-    table.cell(4,0).text=("Numéro de télécopie")
-    table.cell(5,0).text=("Courriel")
-    table.cell(6,0).text=("Tâches confiées")
+    table.cell(0,0).text=("Organisme : ")
+    table.cell(0,1).text=(extract['plateau_technique_organisme'])
+    table.cell(1,0).text=("Nom de la personne à contacter : ")
+    table.cell(1,1).text=(extract['plateau_technique_personne_contact'])
+    table.cell(2,0).text=("Adresse : ")
+    table.cell(2,1).text=(extract['plateau_technique_adresse'])
+    table.cell(3,0).text=("Numéro de téléphone : ")
+    table.cell(3,1).text=(extract['plateau_technique_num_telephone'])
+    table.cell(4,0).text=("Numéro de télécopie : ")
+    table.cell(4,1).text=(extract['plateau_technique_num_telecopie'])
+    table.cell(5,0).text=("Courriel : ")
+    table.cell(5,1).text=(extract['plateau_technique_courriel'])
+    table.cell(6,0).text=("Tâches confiées : ")
+    table.cell(6,1).text=(extract['plateau_technique_taches_confiees'])
     n=0
     for row in table.rows:
         for cell in row.cells:
@@ -1676,9 +1749,23 @@ def partie_F10(document):
     table.cell(2,0).text=("- à la phase pilote européenne ? (cf guide MEDDEV 2.7.3)")
     table.cell(1,3).text=("□ oui   □ non")
     table.cell(2,3).text=("□ oui   □ non")
+    n=0
+    for row in table.rows:
+        for cell in row.cells:
+            paragraphs = cell.paragraphs
+            for paragraph in paragraphs:
+                if n==7 or n==11:
+                    paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                else:
+                    paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.LEFT
+                for run in paragraph.runs:
+                    fontdebut = run.font
+                    fontdebut.name = 'Arial'
+                    fontdebut.size = docx.shared.Pt(10)
+                    n=n+1
     
 #parties H et I
-def parties_H_I(document):
+def parties_H_I(document, extract):
     
     paragraph=document.add_paragraph()
     sentence=paragraph.add_run("\n\nH. Information sur le Comité de Protection des Personnes (CPP) / l’Autorité compétente\n\nH.1. Informations sur le CPP concerné ")
@@ -1696,7 +1783,7 @@ def parties_H_I(document):
         a=table.cell(i,1)
         b=table.cell(i,3)
         a.merge(b)
-    table.cell(0,0).text=("Nom du CPP")
+    table.cell(0,0).text=("Nom du CPP : "+extract['CPP'])
     table.cell(1,0).text=("Adresse du CPP")
     table.cell(2,0).text=("Date de soumission")
     table.cell(3,0).text=("Avis du CPP")
