@@ -20,13 +20,13 @@ from time import gmtime, strftime
 
 def main_ansm_hps(extract):
     document = docx.Document()
-    parties_ABC(document)
-    partie_D_a_G(document)
-    partie_H_fin(document)
+    parties_ABC(document, extract)
+    partie_D_a_G(document, extract)
+    partie_H_fin(document, extract)
     date = (strftime('%d-%m-%Y',time.localtime()))
-    document.save("soumission_ansm_hps"+extract['titre_abrege']+"_"+date+".docx")
+    document.save("soumission_ansm_hps_"+extract['titre_abrege']+"_"+date+".docx")
     
-def parties_ABC(document):
+def parties_ABC(document, extract):
     
     '''Marge de la page'''
     sections = document.sections
@@ -41,8 +41,12 @@ def parties_ABC(document):
     
     
     
-    table = document.add_table(rows=1, cols=1, style='Table Grid')
-    table.cell(0,0).text=("FORMULAIRE DE DEMANDE D'AUTORISATION AUPRES DE L’AGENCE NATIONALE DE SECURITE DU MEDICAMENT ET DES PRODUITS DE SANTE "
+    table = document.add_table(rows=1, cols=6, style='Table Grid')
+    cell=table.cell(0,0)
+    paragraph = cell.paragraphs[0]
+    ca = paragraph.add_run()
+    ca.add_picture('ansm.jpg')
+    table.cell(0,1).text=("FORMULAIRE DE DEMANDE D'AUTORISATION AUPRES DE L’AGENCE NATIONALE DE SECURITE DU MEDICAMENT ET DES PRODUITS DE SANTE "
                           "OU DE DEMANDE D’AVIS AU COMITÉ DE PROTECTION DES PERSONNES POUR UNE RECHERCHE MENTIONNEE AU 1° OU AU 2° DE L’ARTICLE L. 1121-1 DU CODE DE LA "
                           "SANTE PUBLIQUE NE PORTANT PAS SUR UN PRODUIT MENTIONNE A L’ARTICLE L. 5311-1 DU CODE DE LA SANTE PUBLIQUE - ")
     for row in table.rows:
@@ -56,6 +60,9 @@ def parties_ABC(document):
                     fontdebut.name = 'Arial'
                     fontdebut.size = docx.shared.Pt(10)
                     fontdebut.color.rgb = RGBColor(0x0,0x70,0xC0)
+    a=table.cell(0,1)
+    b=table.cell(0,5)
+    a.merge(b)
                     
     '''Titre du document'''
     styles= document.styles
@@ -165,12 +172,14 @@ def parties_ABC(document):
             a=table.cell(i,0)
             b=table.cell(i,5)
             a.merge(b)
-    table.cell(0,0).text=("Titre complet de la recherche : \n")
-    table.cell(1,0).text=("Numéro IDRCB d'enregistrement de la recherche :")
+    table.cell(0,0).text=("Titre complet de la recherche : "+extract['titre_complet'])
+    table.cell(1,0).text=("Numéro IDRCB d'enregistrement de la recherche :"+extract['num_idrcb'])
     table.cell(2,0).text=("Numéro de code du protocole de la recherche donné par le promoteur")
+    table.cell(3,0).text=(extract['code_protocole'])
     table.cell(2,2).text=("Version")
     table.cell(2,4).text=("Date :")
-    table.cell(4,0).text=("Nom ou titre abrégé de la recherche, le cas échéant :  ")
+    table.cell(4,0).text=("Nom ou titre abrégé de la recherche, le cas échéant : ")
+    table.cell(4,3).text=(extract['titre_abrege'])
     table.cell(5,0).text=("Inscription au fichier VRB           oui            non")
     for row in table.rows:
         for cell in row.cells:
@@ -188,10 +197,10 @@ def parties_ABC(document):
         a=table.cell(i,0)
         b=table.cell(i,1)
         a.merge(b)
-    table.cell(0,0).text=("Nom de l'organisme :")
-    table.cell(1,0).text=("Nom de la personne à contacter :")
-    table.cell(2,0).text=("Adresse : ")
-    table.cell(2,1).text=("Numéro de téléphone :\n\nNuméro de télécopie :\n\nCourriel :")
+    table.cell(0,0).text=("Nom de l'organisme : "+extract['promoteur_nom_organisme'])
+    table.cell(1,0).text=("Nom de la personne à contacter : "+extract['promoteur_nom_personne_contact'])
+    table.cell(2,0).text=("Adresse : "+extract['promoteur_adresse'])
+    table.cell(2,1).text=("Numéro de téléphone : "+extract['promoteur_num_telephone']+"\n\nNuméro de télécopie : "+extract['promoteur_num_telecopie']+"\n\nCourriel : "+extract['promoteur_courriel'])
     for row in table.rows:
         for cell in row.cells:
             paragraphs = cell.paragraphs
@@ -208,10 +217,10 @@ def parties_ABC(document):
             a=table.cell(i,0)
             b=table.cell(i,1)
             a.merge(b)
-    table.cell(0,0).text=("Nom de l'organisme :")
-    table.cell(1,0).text=("Nom de la personne à contacter :")
-    table.cell(2,0).text=("Adresse : ")
-    table.cell(2,1).text=("Numéro de téléphone :\n\nNuméro de télécopie :\n\nCourriel :")
+    table.cell(0,0).text=("Nom de l'organisme : "+extract['promoteur_UE_nom_organisme'])
+    table.cell(1,0).text=("Nom de la personne à contacter : "+extract['promoteur_UE_nom_personne_contact'])
+    table.cell(2,0).text=("Adresse : "+extract['promoteur_UE_adresse'])
+    table.cell(2,1).text=("Numéro de téléphone : "+extract['promoteur_UE_num_telephone']+"\n\nNuméro de télécopie : "+extract['promoteur_UE_num_telecopie']+"\n\nCourriel : "+extract['promoteur_UE_courriel'])
     table.cell(3,0).text=("Statut du promoteur :        commercial          non commercial")
     for row in table.rows:
         for cell in row.cells:
@@ -230,10 +239,10 @@ def parties_ABC(document):
         b=table.cell(i,1)
         a.merge(b)
     table.cell(0,0).text=("Si promoteur, partie B1, si représentant légal du promoteur, partie B2 ")
-    table.cell(1,0).text=("Nom de l'organisme :")
-    table.cell(2,0).text=("Nom de la personne à contacter :")
-    table.cell(3,0).text=("Adresse : ")
-    table.cell(3,1).text=("Numéro de téléphone :\n\nNuméro de télécopie :\n\nCourriel :")
+    table.cell(1,0).text=("Nom de l'organisme : "+extract['demandeur_nom_organisme'])
+    table.cell(2,0).text=("Nom de la personne à contacter : "+extract['demandeur_nom_personne_contact'])
+    table.cell(3,0).text=("Adresse : "+extract['demandeur_UE_adresse'])
+    table.cell(3,1).text=("Numéro de téléphone : "+extract['demandeur_UE_num_telephone']+"\n\nNuméro de télécopie : "+extract['demandeur_UE_num_telecopie']+"\n\nCourriel : "+extract['demandeur_UE_courriel'])
     for row in table.rows:
         for cell in row.cells:
             paragraphs = cell.paragraphs
@@ -250,10 +259,10 @@ def parties_ABC(document):
         b=table.cell(i,1)
         a.merge(b)
     table.cell(0,0).text=("Si promoteur, partie B1, si représentant légal du promoteur, partie B2 ")
-    table.cell(1,0).text=("Nom de l'organisme :")
-    table.cell(2,0).text=("Nom de la personne à contacter :")
-    table.cell(3,0).text=("Adresse : ")
-    table.cell(3,1).text=("Numéro de téléphone :\n\nNuméro de télécopie :\n\nCourriel :")
+    table.cell(1,0).text=("Nom de l'organisme : "+extract['demandeur_nom_organisme'])
+    table.cell(2,0).text=("Nom de la personne à contacter : "+extract['demandeur_nom_personne_contact'])
+    table.cell(3,0).text=("Adresse : "+extract['demandeur_UE_adresse'])
+    table.cell(3,1).text=("Numéro de téléphone : "+extract['demandeur_UE_num_telephone']+"\n\nNuméro de télécopie : "+extract['demandeur_UE_num_telecopie']+"\n\nCourriel : "+extract['demandeur_UE_courriel'])
     for row in table.rows:
         for cell in row.cells:
             paragraphs = cell.paragraphs
@@ -263,7 +272,7 @@ def parties_ABC(document):
                     fontdebut.name = 'Arial'
                     fontdebut.size = docx.shared.Pt(9)
     
-def partie_D_a_G(document):
+def partie_D_a_G(document, extract):
     
     '''Partie D'''
     paragraph=document.add_paragraph("\n D. DONNÉES SUR LE(S) PRODUITS(S) EXPÉRIMENTAL (AUX) UTILISÉ(S) DANS LA RECHERCHE : PRODUITS(S) ÉTUDIÉ(S) OU UTILISÉ(S) COMME COMPARATEUR(S) ", style='debut_page')
@@ -284,10 +293,10 @@ def partie_D_a_G(document):
     '''Partie D1'''
     paragraph=document.add_paragraph("\n  D.1. DESCRIPTION DU PRODUIT EXPÉRIMENTAL", style='debut_page')
     table = document.add_table(rows=5, cols=1, style='Table Grid')
-    table.cell(0,0).text=("Nom du produit, le cas échéant :")
-    table.cell(1,0).text=("Nom de code, le cas échéant :")
-    table.cell(2,0).text=("Voie d’administration (utiliser les termes standard) :")
-    table.cell(3,0).text=("Dosage (préciser tous les dosages utilisés) : \n- Concentration (nombre) : \n- Unité de concentration :")
+    table.cell(0,0).text=("Nom du produit, le cas échéant : "+extract['produit_nom'])
+    table.cell(1,0).text=("Nom de code, le cas échéant : "+extract['produit_nom_code'])
+    table.cell(2,0).text=("Voie d’administration (utiliser les termes standard) : "+extract['produit_voie_administration'])
+    table.cell(3,0).text=("Dosage (préciser tous les dosages utilisés) : \n- Concentration (nombre) : "+extract['produit_dosage_concentration']+"\n- Unité de concentration : "+extract['produit_dosage_unite_concentration'])
     table.cell(4,0).text=("Le produit expérimental contient-il une substance active :\n\n- d’origine chimique ?            oui          non	\n- d’origine biologique ?          oui          non\n\n"
                           "Est-ce :\n- un produit à base de plantes ?         oui         non\n- un produit contenant des organismes génétiquement modifiés ?		 oui  	 non\n"
                           "- un autre type de produit ?   oui        non	\n\n• Si oui, préciser :")
@@ -314,7 +323,7 @@ def partie_D_a_G(document):
     
     paragraph=document.add_paragraph("\n Fabricant du produit utilisé", style='debut_page')
     table = document.add_table(rows=1, cols=1, style='Table Grid')
-    table.cell(0,0).text=("Fabricant\n- Nom de l’établissement : \n- Adresse :")
+    table.cell(0,0).text=("Fabricant\n- Nom de l’établissement : "+extract['fabriquant_dispositif_nom']+"\n- Adresse : "+extract['fabriquant_dispositif_adresse'])
     for row in table.rows:
         for cell in row.cells:
             paragraphs = cell.paragraphs
@@ -327,11 +336,11 @@ def partie_D_a_G(document):
     '''Partie E'''
     paragraph=document.add_paragraph("\n E. INFORMATIONS SUR LE PLACEBO (le cas échéant) (répéter la section si nécessaire) ", style='debut_page')
     table = document.add_table(rows=6, cols=1, style='Table Grid')
-    table.cell(0,0).text=("Cette section se rapporte au placebo n° :  ")
+    table.cell(0,0).text=("Cette section se rapporte au placebo n° :  "+extract['placebo_numero'])
     table.cell(1,0).text=("Un placebo est-il utilisé ? 		   oui           non")
-    table.cell(2,0).text=("De quel produit expérimental est-ce un placebo ?")
+    table.cell(2,0).text=("De quel produit expérimental est-ce un placebo ? "+extract['placebo_numero_ME'])
     table.cell(3,0).text=("Préciser le(s) numéro(s) de PE selon la section D.")
-    table.cell(4,0).text=("Voie d’administration :")
+    table.cell(4,0).text=("Voie d’administration : "+extract['placebo_voie_administration'])
     table.cell(5,0).text=("Composition, hormis la (les) substance(s) active(s) : \n- est-elle identique à celle du produit expérimental étudié?       oui           non\n\n•  Si non, préciser les principaux composants :   ")
     for row in table.rows:
         for cell in row.cells:
@@ -344,7 +353,7 @@ def partie_D_a_G(document):
     
     paragraph=document.add_paragraph("\n FABRICANT DU PLACEBO", style='debut_page')
     table = document.add_table(rows=1, cols=1, style='Table Grid')
-    table.cell(0,0).text=("Fabricant\n- Nom de l’établissement : \n- Adresse :")
+    table.cell(0,0).text=("Fabricant\n- Nom de l’établissement : "+extract['fabriquant_placebo_nom']+"\n- Adresse :"+extract['fabriquant_placebo_adresse'])
     for row in table.rows:
         for cell in row.cells:
             paragraphs = cell.paragraphs
@@ -358,10 +367,10 @@ def partie_D_a_G(document):
     paragraph=document.add_paragraph("\n G. INFORMATIONS GÉNÉRALES SUR L’ESSAI", style='debut_page')
     table = document.add_table(rows=7, cols=1, style='Table Grid')
     table.cell(0,0).text=("Condition médicale ou pathologie étudiée")
-    table.cell(1,0).text=("Préciser la condition médicale :\nClassification CIM  : 	\n\nEst-ce une maladie rare ?       oui           non\n\nObjectif(s) de l’essai\nObjectif principal : p13, 2.1\nObjectifs secondaires :")
-    table.cell(2,0).text=("Principaux critères d’inclusion (énumérer les plus importants) ")
-    table.cell(3,0).text=("Principaux critères de non inclusion (énumérer les plus importants")
-    table.cell(4,0).text=("Critère(s) d’évaluation principal (aux) ")
+    table.cell(1,0).text=("Préciser la condition médicale : "+extract['pathologie_etudiee']+"\nClassification CIM  : 	"+extract['classification_cim']+"\n\nEst-ce une maladie rare ?       oui           non\n\nObjectif(s) de l’essai\nObjectif principal : "+extract['objectif_principal']+"\nObjectifs secondaires : "+extract['objectif_secondaire'])
+    table.cell(2,0).text=("Principaux critères d’inclusion (énumérer les plus importants) " +extract['critere_inclusion_longue'])
+    table.cell(3,0).text=("Principaux critères de non inclusion (énumérer les plus importants "+extract['critere_non_inclusion_longue'])
+    table.cell(4,0).text=("Critère(s) d’évaluation principal (aux) " +extract['critere_jugement_principal_longue']+" "+extract['critere_jugement_secondaire_longue'])
     table.cell(5,0).text=("Domaine(s) d’étude :\n")
     table.cell(6,0).text=("- Physiologie\n- Physiopathologie\n- Epidémiologie\n- Génétique\n- Science du comportement\n- Produits à visée nutritionnelle\n- Stratégies diagnostiques\n- Stratégies thérapeutiques et préventives\n\n                • Si autres préciser :")
     n=0
@@ -384,7 +393,7 @@ def partie_D_a_G(document):
     a.merge(b)
     
     paragraph=document.add_paragraph("\n Méthodologie de l’essai", style='debut_page')
-    table = document.add_table(rows=8, cols=4, style='Table Grid')
+    table = document.add_table(rows=7, cols=4, style='Table Grid')
     table.cell(0,0).text=("Tirage au sort :\nLa recherche comporte-t-elle une comparaison de  groupes?")
     table.cell(0,3).text=("   oui           non\n   oui           non")
     for i in range (0,8):
@@ -401,8 +410,8 @@ def partie_D_a_G(document):
     table.cell(3,0).text=("- (d’) autre(s) produits(s)\n- placebo \n- autre \n\n            • Si oui, préciser :")
     table.cell(4,0).text=("La recherche  est-elle multicentrique ?\nLa recherche  est-elle prévue pour être menée dans plusieurs Etat membres ?\nCette recherche implique-t-elle des pays tiers ?")
     table.cell(4,3).text=("   oui           non\n   oui           non\n   oui           non")
-    table.cell(5,0).text=("Durée maximale de participation pour un sujet selon le protocole : \n")
-    table.cell(6,0).text=("Définition de la fin de la recherche et justification, si celle-ci ne correspond pas à la date de la dernière visite de la dernière personne participant à la recherche :\n\nEstimation initiale de la durée de la recherche   :\n             • en France :      						 ans  mois\n             • dans tous les pays concernés par la recherche :  	 	 ans  mois")
+    table.cell(5,0).text=("Durée maximale de participation pour un sujet selon le protocole : "+extract['duree_participation']+"\n")
+    table.cell(6,0).text=("Définition de la fin de la recherche et justification, si celle-ci ne correspond pas à la date de la dernière visite de la dernière personne participant à la recherche :\n\nEstimation initiale de la durée de la recherche   :\n             • en France :       						 "+extract['duree_totale_etude']+" ans  mois\n             • dans tous les pays concernés par la recherche :  	 	 "+extract['duree_totale_etude']+" ans  mois")
     n=0
     for row in table.rows:
         for cell in row.cells:
@@ -424,7 +433,7 @@ def partie_D_a_G(document):
     b=table.cell(6,0)
     a.merge(b)
     
-def partie_H_fin(document):
+def partie_H_fin(document, extract):
     
     '''Partie H'''
     paragraph=document.add_paragraph("\nH. PERSONNES PARTICIPANT A LA RECHERCHE BIOMEDICALE", style='debut_page')
@@ -497,12 +506,12 @@ def partie_H_fin(document):
     '''Partie I'''
     paragraph=document.add_paragraph("\nI. INVESTIGATEURS ET LIEUX DE RECHERCHE\n"
                                      "          I.1. Investigateur coordonnateur ", style='debut_page')
-    table = document.add_table(rows=2, cols=2, style='Table Grid')
+    table = document.add_table(rows=1, cols=2, style='Table Grid')
     a=table.cell(0,1)
     b=table.cell(1,1)
     a.merge(b)
-    table.cell(0,0).text=("Nom :		\nPrénoms : \nQualification, spécialité :  \nCourriel : ")
-    table.cell(0,1).text=("Adresse :")
+    table.cell(0,0).text=("Nom :	"+extract['investigateur_coordinateur_nom']+"	\nPrénoms : "+extract['investigateur_coordinateur_prenom']+"\nQualification, spécialité :  "+extract['investigateur_coordinateur_qualification']+"\nCourriel : "+extract['investigateur_coordinateur_courriel'])
+    table.cell(0,1).text=("Adresse : "+extract['investigateur_coordinateur_adresse'])
     for row in table.rows:
         for cell in row.cells:
             paragraphs = cell.paragraphs
@@ -513,24 +522,25 @@ def partie_H_fin(document):
                     fontdebut.size = docx.shared.Pt(9)
     
     paragraph=document.add_paragraph("\n        I.2. Autres investigateurs ", style='debut_page')
-    table = document.add_table(rows=2, cols=2, style='Table Grid')
-    a=table.cell(0,1)
-    b=table.cell(1,1)
-    a.merge(b)
-    table.cell(0,0).text=("Nom :		\nPrénoms : \nQualification, spécialité :  \nCourriel : ")
-    table.cell(0,1).text=("Adresse :")
-    for row in table.rows:
-        for cell in row.cells:
-            paragraphs = cell.paragraphs
-            for paragraph in paragraphs:
-                for run in paragraph.runs:
-                    fontdebut = run.font
-                    fontdebut.name = 'Arial'
-                    fontdebut.size = docx.shared.Pt(9)
+    for i in range(len(extract['autre_investigateur_nom'])):
+        table = document.add_table(rows=1, cols=2, style='Table Grid')
+        a=table.cell(0,1)
+        b=table.cell(1,1)
+        a.merge(b)
+        table.cell(0,0).text=("Nom :	"+extract['autre_investigateur_nom'][i]+"	\nPrénoms : "+extract['autre_investigateur_prenom'][i]+"\nQualification, spécialité :  "+extract['autre_investigateur_qualification'][i]+"\nCourriel : "+extract['autre_investigateur_courriel'][i])
+        table.cell(0,1).text=("Adresse : "+extract['autre_investigateur_adresse'][i])
+        for row in table.rows:
+            for cell in row.cells:
+                paragraphs = cell.paragraphs
+                for paragraph in paragraphs:
+                    for run in paragraph.runs:
+                        fontdebut = run.font
+                        fontdebut.name = 'Arial'
+                        fontdebut.size = docx.shared.Pt(9)
    
     paragraph=document.add_paragraph("\n        I.3 Lieu de recherche ( le cas échéant, si la recherche doit se dérouler dans un lieu nécessitant une 	     autorisation mentionnée à l’article L. 1121-13 du code de la santé publique) :", style='debut_page')
     table = document.add_table(rows=1, cols=1, style='Table Grid')
-    table.cell(0,0).text=("Intitulé du lieu: \nN° d’autorisation: \ndélivré le: \ndate de limite de validité:")
+    table.cell(0,0).text=("Intitulé du lieu: "+extract['lieu_recherche_intitule']+"\nN° d’autorisation: "+extract['lieu_recherche_num_autorisation']+"\ndélivré le: "+extract['lieu_recherche_delivre_le']+"\ndate de limite de validité: "+extract['lieu_recherche_date_limite_validite'])
     for row in table.rows:
         for cell in row.cells:
             paragraphs = cell.paragraphs
@@ -546,7 +556,7 @@ def partie_H_fin(document):
     a=table.cell(0,0)
     b=table.cell(0,3)
     a.merge(b)
-    table.cell(0,0).text=("Nom et adresse : ")
+    table.cell(0,0).text=("Nom et adresse : "+extract['CPP'])
     table.cell(1,0).text=("Avis :")
     table.cell(1,1).text=("à demander")
     table.cell(1,2).text=("en cours\nDate de soumission :")
