@@ -85,7 +85,7 @@ def Partie13(document):
     p=document.add_paragraph()
     p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
     p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
-    run1=p.add_run('Toute communication écrite ou orale des résultats de la recherche doit recevoir l’accord préalable de la personne qui dirige et surveille la recherche et, le cas échéant, de tout comité constitué pour la recherche.')
+    run1=p.add_run('Toute communication écrite ou orale des résultats de la recherche doit recevoir l’accord préalable de la personne qui dirige et surveille la recherche et, le cas échéant, de tout comité constitué pour la recherche. ')
     run1.style='Paragraphe'
     
     p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
@@ -96,7 +96,7 @@ def Partie13(document):
     run2.style='Paragraphe'
     run2.font.italic=True
     run2.font.color.rgb = RGBColor(0x0,0xB0,0xF0) 
-    run3=p.add_run('// la source de financement. Il sera tenu compte des règles internationales d’écriture et de publication (')
+    run3=p.add_run('/ la source de financement. Il sera tenu compte des règles internationales d’écriture et de publication (')
     run3.style='Paragraphe'
     run4=p.add_run('The Uniform Requirements for Manuscripts ')
     run4.style='Paragraphe'

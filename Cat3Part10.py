@@ -206,7 +206,6 @@ def Partie10(document):
     
     p=document.add_paragraph()
     p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
-    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     run1=p.add_run('L’investigateur devra dater et signer les pages du CRF complétées à la fin du recueil des données ; elles seront considérées comme documents source.\nCe document fera partie intégrante du dossier médical du patient et y sera conservé en permanence. ')
     run1.style='Paragraphe'
     
@@ -235,7 +234,7 @@ def Partie10(document):
     p=document.add_paragraph()
     p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
     p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
-    run1=p.add_run('Un audit peut être réalisé à tout moment par des personnes mandatées par le promoteur et indépendantes des personnes menant la recherche. Il a pour objectif de vérifier la sécurité des participants et le respect de leurs droits, le respect de la réglementation applicable et la fiabilité des données')
+    run1=p.add_run('Un audit peut être réalisé à tout moment par des personnes mandatées par le promoteur et indépendantes des personnes menant la recherche. Il a pour objectif de vérifier la sécurité des participants et le respect de leurs droits, le respect de la réglementation applicable et la fiabilité des données.')
     run1.style='Paragraphe'
 
     p=document.add_paragraph()

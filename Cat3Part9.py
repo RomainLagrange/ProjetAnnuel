@@ -148,7 +148,6 @@ def Partie9(document):
     run1.font.color.rgb = RGBColor(0x0,0xB0,0xF0) 
     
     p=document.add_paragraph()
-    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     run1=p.add_run('La base de données sera installée dans le service de ')
     run1.style='Paragraphe'
     run2=p.add_run('xxxxxx ')
