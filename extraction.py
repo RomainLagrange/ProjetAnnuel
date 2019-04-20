@@ -668,7 +668,7 @@ def extract2(dico):
         infos['autre_investigateur_telephone'].append(re.search(r"(?<=N° téléphone:).*?(?=N° télécopie:)",x).group())
         infos['autre_investigateur_telecopie'].append(re.search(r"(?<=N° télécopie:).*?(?=Courriel:)",x).group())
         infos['autre_investigateur_courriel'].append(re.search(r"(?<=Courriel:).*?(?=Nom:)",x).group())
-        infos['autre_investigateur_qualification']=""
+        infos['autre_investigateur_qualification'].append("")
         #on recup la taille du premier bloc investigateur
         z=len(re.search(r"(?<=Nom:).*?(?=Nom: )",x).group())
         #on enleve ce bloc a x qui contient tous les investigateurs, ainsi a la prochaine boucle la regex se fera sur l'investigateur suivant
@@ -1020,7 +1020,11 @@ def extract2(dico):
     infos['classification_cim']=""
     infos['investigateur_coordinateur_adresse_professionnelle']=""
     infos['investigateur_coordinateur_qualification']=""
-    
+    infos['lieu_recherche_intitule']=""
+    infos['lieu_recherche_num_autorisation']=""
+    infos['lieu_recherche_delivre_le']=""
+    infos['lieu_recherche_date_limite_validite']=""
+    infos['lieu_recherche_nom_adresse']=""
             
     for k, v in infos.items():
         if type(v) is str:
