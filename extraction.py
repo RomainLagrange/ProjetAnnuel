@@ -668,6 +668,7 @@ def extract2(dico):
         infos['autre_investigateur_telephone'].append(re.search(r"(?<=N° téléphone:).*?(?=N° télécopie:)",x).group())
         infos['autre_investigateur_telecopie'].append(re.search(r"(?<=N° télécopie:).*?(?=Courriel:)",x).group())
         infos['autre_investigateur_courriel'].append(re.search(r"(?<=Courriel:).*?(?=Nom:)",x).group())
+        infos['autre_investigateur_qualification']=""
         #on recup la taille du premier bloc investigateur
         z=len(re.search(r"(?<=Nom:).*?(?=Nom: )",x).group())
         #on enleve ce bloc a x qui contient tous les investigateurs, ainsi a la prochaine boucle la regex se fera sur l'investigateur suivant
@@ -992,6 +993,33 @@ def extract2(dico):
     #CPP
     x=re.search(r"(?<=Motifs de constitution ou non d’un comité de surveillance indépendant:).*",texte1).group()
     infos['comite_surveillance_independant']=x
+    
+    infos['promoteur_UE_nom_organisme']=""
+    infos['promoteur_UE_nom_personne_contact']=""
+    infos['promoteur_UE_adresse']=""
+    infos['promoteur_UE_num_telephone']=""
+    infos['promoteur_UE_num_telecopie']=""
+    infos['promoteur_UE_courriel']=""
+    infos['demandeur_nom_organisme']=""
+    infos['demandeur_UE_adresse']=""
+    infos['demandeur_UE_num_telephone']=""
+    infos['demandeur_UE_num_telecopie']=""
+    infos['demandeur_UE_courriel']=""
+    infos['demandeur_nom_personne_contact']=""
+    infos['produit_nom']=""
+    infos['produit_nom_code']=""
+    infos['produit_voie_administration']=""
+    infos['produit_dosage_concentration']=""
+    infos['produit_dosage_unite_concentration']=""
+    infos['placebo_numero']=""
+    infos['placebo_numero_ME']=""
+    infos['placebo_voie_administration']=""
+    infos['fabriquant_placebo_nom']=""
+    infos['fabriquant_placebo_adresse']=""
+    infos['pathologie_etudiee']=""
+    infos['classification_cim']=""
+    infos['investigateur_coordinateur_adresse_professionnelle']=""
+    infos['investigateur_coordinateur_qualification']=""
     
             
     for k, v in infos.items():
