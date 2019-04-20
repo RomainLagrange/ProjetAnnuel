@@ -750,7 +750,7 @@ def extract2(dico):
     #objectif secondaire
     secondaire=re.search(r"(?<=Objectif secondaires:).*?(?=Critères de Jugement)",texte1).group()
     infos['objectif_secondaire']=secondaire
-    
+    infos['justification_existence']=""
     #critères de jugement principal
     table = doc.tables[2]  
     #créé une liste des valeurs des cases
