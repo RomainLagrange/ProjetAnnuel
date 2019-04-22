@@ -94,8 +94,21 @@ def validebutton2():
 # retourne la valeur correspondant au nombre d'investigateur    
 def valeurB6():
     y = varia.get()  
-    mon_dictionnaire['le_type_recherche'] =y
+    mon_dictionnaire['le_type_recherche'] = y
     print(y)
+    #return (y)  
+    label3 = Label(fenetre, text="Combien d’investigateurs participent à cette étude ? ")
+    label3.pack()
+    entree.pack()
+    
+    # bouton donnant le nombre d'investigateur
+    boutonChif = Button(fenetre, text="Valider", command = validebutton)
+    boutonChif.pack()
+    
+#==============================================================================  
+# retourne la valeur correspondant au nombre d'investigateur    
+def valeurB6bis():
+    mon_dictionnaire['le_type_recherche'] = 10
     #return (y)  
     label3 = Label(fenetre, text="Combien d’investigateurs participent à cette étude ? ")
     label3.pack()
@@ -108,36 +121,31 @@ def valeurB6():
 # récupère la valeur de la deuxième série de boutons radios   
 def valeurB4(): 
     x = var.get()
-    mon_dictionnaire['la_categorie'] =x
+    mon_dictionnaire['la_categorie'] = x
     print(x)
+    if x != "3": 
+        label2 = Label(fenetre, text="Il s’agit d’une recherche portant sur : ")
+        label2.pack()
+        bouton6.pack()
+        bouton7.pack()
+        bouton9.pack()
+        bouton8.pack()
+        bouton8bis.pack()
+        y=varia.get()
+        #bouton donnant la valeur du type de recherche
+        boutonRecherche = Button(fenetre, text=" Valider ", command = valeurB6)
+        boutonRecherche.pack()       
+        if x == "1":     
+            bouton8bis.configure(state = DISABLED)
+        elif x == "2": 
+            bouton8bis.configure(state = DISABLED)
+            bouton6.configure(state = DISABLED)
+            bouton9.configure(state = DISABLED)
+    else: 
+        valeurB6bis()
+        
     
-    label2 = Label(fenetre, text="Il s’agit d’une recherche portant sur : ")
-    label2.pack()
-    bouton6.pack()
-    bouton7.pack()
-    bouton9.pack()
-    bouton8.pack()
-    bouton8bis.pack()
-    
-    y=varia.get()
-    
-    #bouton donnant la valeur du type de recherche
-    boutonRecherche = Button(fenetre, text=" Valider ", command = valeurB6)
-    boutonRecherche.pack()
-    
-    if x == "1":     
-        bouton8bis.configure(state = DISABLED)
-    elif x == "2": 
-        bouton8bis.configure(state = DISABLED)
-        bouton6.configure(state = DISABLED)
-        bouton9.configure(state = DISABLED)
-    elif x == "3": 
-        bouton6.configure(state = DISABLED)
-        bouton7.configure(state = DISABLED)
-        bouton8.configure(state = DISABLED)
-        bouton9.configure(state = DISABLED)
-
-    return y
+   
    
 
 
@@ -164,6 +172,7 @@ bouton8 = Radiobutton(fenetre, text="Hors produits de santé", variable=varia, v
 bouton8bis = Radiobutton(fenetre, text="Recherche non interventionnelle", variable=varia, value=10, tristatevalue=0)
 
 #bouton qui retourne la valeur de la catégorie
+
 bouton45 = Button(fenetre, text="Valider", command = valeurB4)
 bouton45.pack()
 
