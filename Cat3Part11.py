@@ -114,8 +114,7 @@ def Partie11(document):
     
     p=document.add_paragraph()
     p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
-    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
-    run1=p.add_run('L’investigateur s’assure que l’anonymat de chaque sujet participant à l’étude est respecté : seules la première lettre du nom et la première lettre du prénom ainsi qu’un numéro de patient figurent dans le cahier d’observation et autre document de l’étude. \nCe numéro de patient sera constitué du numéro de centre suivi du numéro d’entrée dans l’étude.\nUne liste de correspondance sera conservée par l’investigateur dans le classeur de l’étude.\nCette liste de correspondance fait partie des documents de l’étude et sera conservée pour une durée de 15 ans après la fin de la recherche.')
+    run1=p.add_run('L’investigateur s’assure que l’anonymat de chaque sujet participant à l’étude est respecté : seule la première lettre du nom et la première lettre du prénom ainsi qu’un numéro de patient figurent dans le cahier d’observation et autre document de l’étude. \nCe numéro de patient sera constitué du numéro de centre suivi du numéro d’entrée dans l’étude.\nUne liste de correspondance sera conservée par l’investigateur dans le classeur de l’étude.\nCette liste de correspondance fait partie des documents de l’étude et sera conservée pour une durée de 15 ans après la fin de la recherche.')
     run1.style='Paragraphe'
     
     p=document.add_paragraph()
@@ -145,7 +144,6 @@ def Partie11(document):
     
     p=document.add_paragraph()
     p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
-    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     run1=p.add_run('Si applicable :\n')
     run1.style='Paragraphe'
     run1.font.color.rgb = RGBColor(0x0,0xB0,0xF0) 

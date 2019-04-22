@@ -77,9 +77,11 @@ def Partie6(document,extract):
     p.style='List Bullet 2'
     run1=p.add_run('Durée totale de la recherche ')
     run1.style='Paragraphe'
-    run2=p.add_run('(durée de la période d’inclusion + durée de participation) : ' + extract['duree_totale_etude'])
+    run2=p.add_run('(durée de la période d’inclusion + durée de participation) :' + extract['duree_totale_etude'])
     run2.style='Paragraphe'
     run2.font.italic = True
+    run3=p.add_run(' ')
+    run3.style='Paragraphe'
     
     
     
@@ -100,7 +102,7 @@ def Partie6(document,extract):
     p.alignment=WD_ALIGN_PARAGRAPH.LEFT
     
     # Ecriture du 6.3  
-    Titre2('6.3	Visites de pré-inclusion / inclusion = Visite V06.3	Information des personnes concernées',document)
+    Titre2('6.3	Information des personnes concernées',document)
     
     paragraph2 = document.add_paragraph()
     sentence2 = paragraph2.add_run(extract['criteres_inclusion'])
@@ -158,6 +160,10 @@ def Partie6(document,extract):
 
     TexteGris('prendre contact avec la promotion interne \n pour aide a la redaction de ce chapitre', document)
 
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    run1=p.add_run('SI APPLICABLE')
+    run1.font.italic=True
 	
     #Ecriture du titre6.6.1
     Titre3('6.6.1','Objectifs',document)

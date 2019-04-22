@@ -18,7 +18,7 @@ from docx.enum.section import WD_ORIENT, WD_SECTION
 def Titre1(texte, document):
     paragraph=document.add_paragraph(texte+'\n', style='Titre1') #titre
     paragraph.alignment = WD_ALIGN_PARAGRAPH.CENTER #centrer
-    paragraph.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+    paragraph.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE #espacement simple entre les lignes de texte
     
 def Titre2(texte,document):
     p=document.add_paragraph(texte+'\n', style='Titre2')
@@ -88,9 +88,9 @@ def Style(document):
     fontPara.name = 'Times New Roman' #police
     fontPara.size = docx.shared.Pt(11) #taille
 
-##   definition du style Titre1 --> AJOUTER LA BORDURE EN BAS
-    styleTitre1 = styles.add_style('Titre1', WD_STYLE_TYPE.PARAGRAPH, WD_ALIGN_PARAGRAPH.CENTER)
-    styleTitre1.base_style = styles['Heading1']
+#   definition du style Titre1
+    styleTitre1 = styles.add_style('Titre1', WD_STYLE_TYPE.PARAGRAPH, WD_ALIGN_PARAGRAPH.CENTER) #le style créé s'appelle Titre1 et est un paragraphe centré
+    styleTitre1.base_style = styles['Heading1']  #se base sur le style heading 1 du package
     fontTitre1 = styleTitre1.font
     fontTitre1.name = 'Times New Roman' #police
     fontTitre1.size = docx.shared.Pt(12) #taille
@@ -101,28 +101,26 @@ def Style(document):
     styles['Titre1'].next_paragraph_style = styles['Normal']
 
     #Definition du Titre2, correspond par exemple au 1.1 ou 1.2
-    styleTitre2 = styles.add_style('Titre2', WD_STYLE_TYPE.PARAGRAPH)
-    styleTitre2.base_style = styles['Heading2']
+    styleTitre2 = styles.add_style('Titre2', WD_STYLE_TYPE.PARAGRAPH) #le style va s'appeler Titre2
+    styleTitre2.base_style = styles['Heading2']  #se base sur le style heading 2 du package
     fontTitre2 = styleTitre2.font
-    fontTitre2.name = 'Times New Roman'
-    fontTitre2.size = docx.shared.Pt(14)
-    fontTitre2.bold= True
-    fontTitre2.color.rgb = RGBColor(0x0,0x0,0x0)
-    styleTitre2.paragraph_format.left_indent = Inches(0.59)
-    styles['Titre2'].next_paragraph_style = styles['Normal']
+    fontTitre2.name = 'Times New Roman' #police d'écriture
+    fontTitre2.size = docx.shared.Pt(14)  #taille de la police
+    fontTitre2.bold= True  #en gras
+    fontTitre2.color.rgb = RGBColor(0x0,0x0,0x0)   #couleur noire
+    styleTitre2.paragraph_format.left_indent = Inches(0.59)  #indentation
+    styles['Titre2'].next_paragraph_style = styles['Normal']  #le texte écrit à la suite sera en style Normal
     
     
-     #Definition du Titre3; correspond aux 1.1.1 ou 1.1.2...
-    styleTitre3 = styles.add_style('Titre3', WD_STYLE_TYPE.CHARACTER)
-  #  styleTitre3 = styles.add_style('Titre3', WD_STYLE_TYPE.CHARACTER)
-    styleTitre3.base_style = styles['Heading3']
+     #Definition du style Titre3; correspond aux 1.1.1 ou 1.1.2...
+    styleTitre3 = styles.add_style('Titre3', WD_STYLE_TYPE.CHARACTER)  #le style va s'appeler Titre3
+    styleTitre3.base_style = styles['Heading3']  #se base sur le style heading 3 du package python_docx
     fontTitre3 = styleTitre3.font
-    fontTitre3.name = 'Times New Roman'
-    fontTitre3.size = docx.shared.Pt(12)
-    fontTitre3.bold= False
-    fontTitre3.underline= True
-#    styleTitre3.paragraph_format.left_indent = Inches(0.98) #indentation en pouce, ici 2,5cm
-    fontTitre3.color.rgb = RGBColor(0x0,0x0,0x0)
+    fontTitre3.name = 'Times New Roman'  #police d'écriture
+    fontTitre3.size = docx.shared.Pt(12)  #taille de la police
+    fontTitre3.bold= False  #ne sera pas en gras
+    fontTitre3.underline= True  #souligné 
+    fontTitre3.color.rgb = RGBColor(0x0,0x0,0x0)  #couleur noire
     
     
    #Définition du ListeTitre3, correspond au nom du titre après le 1.1.1 ou 1.2.1    

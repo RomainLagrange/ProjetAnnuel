@@ -61,15 +61,14 @@ def Partie9(document):
     #Ecriture du 9.1  
     Titre2('9.1	Définitions',document)
     
-    p=document.add_paragraph()
-    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
-  #  p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
-    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
-    run1=p.add_run('Evénement indésirable ')
-    run1.style='Paragraphe'
-    run1.font.bold= True
+    p=document.add_paragraph()  #création d'un paragraphe
+    p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE  #espacement simple entre les lignes
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY  #texte justifié
+    run1=p.add_run('Evénement indésirable ')  #première partie du paragraphe
+    run1.style='Paragraphe'  #style 
+    run1.font.bold= True  #en gras
     run2=p.add_run('(article R1123-46 du code de la santé publique)\nToute manifestation nocive survenant chez une personne qui se prête à une recherche impliquant la personne humaine, que cette manifestation soit liée ou non à la recherche ou au produit sur lequel porte cette recherche.')
-    run2.style='Paragraphe'
+    run2.style='Paragraphe'  #deuxième partie
     
     p=document.add_paragraph()
     p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
