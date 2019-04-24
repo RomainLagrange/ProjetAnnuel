@@ -130,15 +130,11 @@ def valeurB4():
         bouton7.pack()
         bouton9.pack()
         bouton8.pack()
-        bouton8bis.pack()
         y=varia.get()
         #bouton donnant la valeur du type de recherche
         boutonRecherche = Button(fenetre, text=" Valider ", command = valeurB6)
-        boutonRecherche.pack()       
-        if x == "1":     
-            bouton8bis.configure(state = DISABLED)
-        elif x == "2": 
-            bouton8bis.configure(state = DISABLED)
+        boutonRecherche.pack()
+        if x == "2": 
             bouton6.configure(state = DISABLED)
             bouton9.configure(state = DISABLED)
     else: 
@@ -169,7 +165,6 @@ bouton6 = Radiobutton(fenetre, text="Médicaments", variable=varia, value=6, tri
 bouton7 = Radiobutton(fenetre, text="Dispositifs médicaux", variable=varia, value=7, tristatevalue=0)
 bouton9 = Radiobutton(fenetre, text="Produits biologiques", variable=varia, value=9, tristatevalue=0)
 bouton8 = Radiobutton(fenetre, text="Hors produits de santé", variable=varia, value=8, tristatevalue=0)
-bouton8bis = Radiobutton(fenetre, text="Recherche non interventionnelle", variable=varia, value=10, tristatevalue=0)
 
 #bouton qui retourne la valeur de la catégorie
 
