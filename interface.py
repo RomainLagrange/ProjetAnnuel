@@ -125,8 +125,8 @@ def valeurB4():
     print(x)
     if x != "3": 
         label2 = Label(fenetre, text="Il s’agit d’une recherche portant sur : ")
-        label2.pack()
-        bouton6.pack()
+        label2.pack() #active le label
+        bouton6.pack() #active le bouton6
         bouton7.pack()
         bouton9.pack()
         bouton8.pack()
@@ -135,8 +135,8 @@ def valeurB4():
         boutonRecherche = Button(fenetre, text=" Valider ", command = valeurB6)
         boutonRecherche.pack()
         if x == "2": 
-            bouton6.configure(state = DISABLED)
-            bouton9.configure(state = DISABLED)
+            bouton6.configure(state = DISABLED) #grise le bouton6
+            bouton9.configure(state = DISABLED) #grise le bouton9
     else: 
         valeurB6bis()
         
