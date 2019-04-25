@@ -138,7 +138,6 @@ def Partie12(document):
     
     p=document.add_paragraph()
     p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
-    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     run1=p.add_run('L’investigateur devra dater et signer les pages du CRF complétées à la fin du recueil des données ; elles seront considérées comme documents source.\nCe document fera partie intégrante du dossier médical du patient et y sera conservé en permanence. ')
     run1.style='Paragraphe'
     

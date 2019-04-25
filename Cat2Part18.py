@@ -56,9 +56,5 @@ def Partie18(document):
     run1=p.add_run('Annexe X : Carte patient')
     run1.style='Paragraphe'
 
-     #FIN DU DOC 
-    paragraph = document.add_paragraph()
-    run = paragraph.add_run()
-    run.add_break(WD_BREAK.PAGE)
 
   #  document.save("Cat2Part18.docx")
