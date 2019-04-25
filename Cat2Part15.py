@@ -74,6 +74,7 @@ def Partie15(document):
     run1=p.add_run('L’investigateur coordonnateur/principal s’engage à mettre à disposition du public les résultats de la recherche aussi bien négatifs et non concluants que positifs.')
     run1.style='Paragraphe'
 
+    p=document.add_paragraph()
     p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
     p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     run1=p.add_run('La publication des résultats principaux mentionne le nom du promoteur, de tous les investigateurs ayant inclus ou suivi des participants dans la recherche, des méthodologistes, biostatisticiens et data managers ayant participé à la recherche, des vigilants ayant participé à l’analyse de la sécurité des participants, des membres du(des) comité(s) constitué(s) pour la recherche et la participation éventuelle du laboratoire ')

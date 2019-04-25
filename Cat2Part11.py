@@ -87,7 +87,6 @@ def Partie11(document):
 #
     p=document.add_paragraph()
     p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
-    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     run1=p.add_run('Seules les initiales du nom et du prénom du patient seront enregistrées, accompagnées d’un numéro codé propre à l’étude indiquant l’ordre d’inclusion des sujets.\n')
     run1.style='Paragraphe'
     run2=p.add_run('Ex : n° de centre – n° d’inclusion du patient dans l’ordre chronologique, cf paragraphe 7.3.1.')

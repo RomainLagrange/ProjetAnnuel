@@ -46,6 +46,9 @@ def Partie14(document):
     
     TexteGris('prendre contact avec la promotion interne \n pour aide a la redaction de ces chapitres', document)
 
+    p=document.add_paragraph(' ')
+
+
     p=document.add_paragraph()
     p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
     p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY

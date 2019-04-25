@@ -43,7 +43,7 @@ def Partie7(document):
     
     
     #ecriture du premier titre 
-    Titre1('8	TRAITEMENTS ET PROCEDURES ASSOCIE(E)S ',document)
+    Titre1('7	TRAITEMENTS ET PROCEDURES ASSOCIE(E)S ',document)
     
     
    # Ecriture du 7.1  

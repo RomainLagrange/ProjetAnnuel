@@ -46,6 +46,9 @@ def Partie13(document):
     
     TexteGris('prendre contact avec la promotion interne \n pour aide a la redaction de ces chapitres', document)
 
+    p=document.add_paragraph(' ')
+
+
     p=document.add_paragraph()
     p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
     p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
@@ -80,7 +83,7 @@ def Partie13(document):
     p=document.add_paragraph()
     p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
     p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
-    run1=p.add_run('Assurance')
+    run1=p.add_run('Assurance\n')
     run1.style='Paragraphe'
     run1.font.underline=True
     run2=p.add_run('Le CHU de Poitiers, promoteur de cette recherche, a souscrit un contrat d’assurance en responsabilité civile auprès de SHAM (18 rue Edouard Rochet-69372 LYON Cedex 08), contrat d’assurance n° 148163 conformément aux dispositions de l’article L1121-10 du code de la santé publique.')
@@ -89,7 +92,7 @@ def Partie13(document):
     p=document.add_paragraph()
     p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
     p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
-    run1=p.add_run('CNIL/RGPD')
+    run1=p.add_run('CNIL/RGPD\n')
     run1.style='Paragraphe'
     run1.font.underline=True
     run2=p.add_run('Les données enregistrées à l’occasion de cette recherche font l’objet d’un traitement informatisé par le promoteur dans le respect de la loi n°78-17 du 6 janvier 1978 relative à l’informatique, aux fichiers et aux libertés  modifiée par la loi 2004-801 du 6 août 2004 et la loi n°2018-493 du 20 juin 2018 relative à la protection des données personnelles;. ')
@@ -110,7 +113,7 @@ def Partie13(document):
     p=document.add_paragraph()
     p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
     p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
-    run1=p.add_run('Clinical Trial')
+    run1=p.add_run('Clinical Trial\n')
     run1.style='Paragraphe'
     run1.font.underline=True
     run2=p.add_run('Cette recherche sera enregistrée sur le site http://clinicaltrials.gov/ ')
@@ -155,7 +158,6 @@ def Partie13(document):
     
     p=document.add_paragraph()
     p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
-    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     run1=p.add_run('Les patients seront informés de façon complète et loyale, en des termes compréhensibles, des objectifs et des contraintes de l\'étude, des risques éventuels encourus, des mesures de surveillance et de sécurité nécessaires, de leurs droits de refuser de participer à l\'étude ou de la possibilité de se rétracter à tout moment.\nToutes ces informations figurent sur un formulaire d’information et de consentement remis au patient. \nLe consentement libre, éclairé et écrit du patient sera recueilli par l’investigateur, ou un médecin qui le représente avant l’inclusion définitive dans l’étude. \nLe formulaire est signé par les deux parties :')
     run1.style='Paragraphe'
 
