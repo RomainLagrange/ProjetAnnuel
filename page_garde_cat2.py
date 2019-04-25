@@ -78,7 +78,7 @@ def PageGarde(document,extract):
     sentence.font.size = docx.shared.Pt(14) 
     sentence.bold = False
     
-    '''Protcole cat 1'''
+    '''Protcole cat 2'''
     paragraph = document.add_paragraph()
     sentence = paragraph.add_run('PROTOCOLE DE RECHERCHE INTERVENTIONNELLE A RISQUES ET CONTRAINTES MINIMES IMPLIQUANT LA PERSONNE HUMAINE (catégorie 2)')
     paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
@@ -94,6 +94,17 @@ def PageGarde(document,extract):
     sentence.font.name = 'Times New Roman'
     sentence.font.size = docx.shared.Pt(12) 
     sentence.bold = True
+    
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    run1=p.add_run('Cette recherche a obtenu le financement de source de financement')
+    run1.style='Paragraphe'
+
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    run1=p.add_run('Cette recherche a obtenu le financement de source de financementSi appel à projets du ministère : Cette recherche a obtenu le financement du Ministère de la Santé (nom du programme, année de sélection, n° d’enregistrement)')
+    run1.style='Paragraphe'
+    run1.font.italic= True
     
     '''Promoteur'''
     paragraph = document.add_paragraph()
