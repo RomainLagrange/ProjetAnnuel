@@ -86,10 +86,10 @@ def PageGarde(document,extract):
     sentence.bold = True
     sentence.font.size = docx.shared.Pt(14) 
     
-    '''N° EudraCT : '''
+    '''N° IDRCB : '''
     paragraph2 = document.add_paragraph()
     paragraph2.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    sentence = paragraph2.add_run('N°ID-RCB  : '+extract['num_eudract']+'\n')
+    sentence = paragraph2.add_run('N°ID-RCB  : '+extract['num_idrcb']+'\n')
     '''Then format the sentence'''
     sentence.font.name = 'Times New Roman'
     sentence.font.size = docx.shared.Pt(12) 

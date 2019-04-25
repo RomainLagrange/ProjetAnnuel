@@ -74,7 +74,7 @@ def Partie5(document):
     
     p=document.add_paragraph()
     p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
-    run1=p.add_run('Exemple')
+    run1=p.add_run('Exemple\n')
     run1.style='Paragraphe' 
     run1.font.italic=True
     run2=p.add_run('Vue d’ensemble du déroulement de la recherche :')
@@ -162,6 +162,9 @@ def Partie5(document):
 
     document.add_paragraph(' ')
     
+    TexteGris('prendre contact avec la promotion interne \n pour aide a la redaction de ce chapitre', document)
+
+    
     p=document.add_paragraph()
     p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
@@ -185,9 +188,8 @@ def Partie5(document):
     run1.style='Paragraphe'
     
     p=document.add_paragraph()
-    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
-    run1=p.add_run('Après cette séance d’information, le participant dispose d’un délai de réflexion. Le médecin investigateur est responsable de l’obtention du consentement éclairé écrit du participant.\nSi le participant donne son accord de participation, ce dernier et l’investigateur inscrivent leurs noms et prénoms en clair, datent et signent le formulaire de consentement. Celui-ci ')
+    run1=p.add_run('Après cette séance d’information, le participant dispose d’un délai de réflexion. Le médecin investigateur est responsable de l’obtention du consentement éclairé écrit du participant.\n\nSi le participant donne son accord de participation, ce dernier et l’investigateur inscrivent leurs noms et prénoms en clair, datent et signent le formulaire de consentement. Celui-ci ')
     run1.style='Paragraphe'
     run2=p.add_run('doit être signé avant la réalisation de tout examen ')
     run2.style='Paragraphe'
@@ -212,17 +214,12 @@ def Partie5(document):
     p.line_spacing_rule = WD_LINE_SPACING.SINGLE
     run1=p.add_run('L’investigateur précisera dans le dossier médical du patient sa participation à la recherche, les modalités du recueil du consentement ainsi que celle de l’information. ')
     run1.style='Paragraphe'
-    
-    document.add_paragraph(' ')
-    
+        
 #    
     p=document.add_paragraph()
     p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
-    run1=p.add_run('Décrire le processus de numérotation du patient, par exemple : \n')
+    run1=p.add_run('Le patient se verra attribuer un numéro de patient, selon la règle : ')
     run1.style='Paragraphe'
-    run1.font.italic=True
-    run2=p.add_run('Le patient se verra attribuer un numéro de patient, selon la règle : ')
-    run2.style='Paragraphe'
     
         #IMAGE NUMERO PATIENT
     
@@ -486,6 +483,8 @@ def Partie5(document):
     Titre2('5.11	Collection d’échantillons biologiques',document)
     
     TexteGris('prendre contact avec la promotion interne \n pour aide a la redaction de ce chapitre', document)
+
+    p=document.add_paragraph(' ')
 
     p=document.add_paragraph()
     p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
