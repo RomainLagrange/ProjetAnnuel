@@ -19,7 +19,7 @@ from docx.shared import Cm, Pt, RGBColor, Inches
 #    TexteGris(texte,document)
 #    TexteGrisJustif(texte,document)
 
-def Partie6(document):
+def Partie6(document,extract):
     'Creation de la partie 6 du protcole de catégorie 2'
    # document = docx.Document()
 

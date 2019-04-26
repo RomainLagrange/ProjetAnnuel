@@ -58,7 +58,7 @@ def construit_doc(dico):
         section.right_margin = Cm(2)
     
     #page de garde
-#    page_garde_cat2.PageGarde(document,extract)
+    #page_garde_cat2.PageGarde(document,extract)
     #historique des mises a jour
  #   page_garde_cat2.Page_version(document,extract)
     #signature
@@ -74,22 +74,22 @@ def construit_doc(dico):
     #abstract
   #  page_garde_cat2.Page_abstract(document,extract)
     
-    Partie1(document)
-    Partie2(document)
-    Partie3(document)
-    Partie4(document)
-    Partie5(document)
-    Partie6(document)
+    Partie1(document,extract)
+    Partie2(document,extract)
+    Partie3(document,extract)
+    Partie4(document,extract)
+    Partie5(document,extract)
+    Partie6(document,extract)
     Partie7(document)
     Partie8(document)
-    Partie9(document)
-    Partie10(document)
+    Partie9(document,extract)
+    Partie10(document,extract)
     Partie11(document)
     Partie12(document)
     Partie13(document)
     Partie14(document)
     Partie15(document)
-    Partie16(document)
+    Partie16(document,extract)
     Partie17(document)
     Partie18(document)
     

@@ -21,7 +21,7 @@ from docx.enum.text import WD_BREAK
 #    TexteGrisJustif(texte,document)
     
 
-def Partie1(document):
+def Partie1(document,extract):
     'Creation de la partie 1 du protcole de catégorie 2'
    # document = docx.Document()
 
