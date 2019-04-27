@@ -97,6 +97,11 @@ def PageGarde(document,extract):
     sentence.font.size = docx.shared.Pt(12) 
     sentence.bold = True
     
+    p=document.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    run1=p.add_run('Cette recherche a obtenu le financement')
+    run1.style='Paragraphe'
+    
     '''Promoteur'''
     paragraph = document.add_paragraph()
     paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
