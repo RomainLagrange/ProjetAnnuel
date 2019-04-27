@@ -396,7 +396,7 @@ def partie_D_a_G(document, extract):
     table = document.add_table(rows=7, cols=4, style='Table Grid')
     table.cell(0,0).text=("Tirage au sort :\nLa recherche comporte-t-elle une comparaison de  groupes?")
     table.cell(0,3).text=("   oui           non\n   oui           non")
-    for i in range (0,8):
+    for i in range (0,7):
         if i==0 or i==4:
             a=table.cell(i,0)
             b=table.cell(i,2)
@@ -507,9 +507,7 @@ def partie_H_fin(document, extract):
     paragraph=document.add_paragraph("\nI. INVESTIGATEURS ET LIEUX DE RECHERCHE\n"
                                      "          I.1. Investigateur coordonnateur ", style='debut_page')
     table = document.add_table(rows=1, cols=2, style='Table Grid')
-    a=table.cell(0,1)
-    b=table.cell(1,1)
-    a.merge(b)
+    
     table.cell(0,0).text=("Nom :	"+extract['investigateur_coordinateur_nom']+"	\nPrénoms : "+extract['investigateur_coordinateur_prenom']+"\nQualification, spécialité :  "+extract['investigateur_coordinateur_qualification']+"\nCourriel : "+extract['investigateur_coordinateur_courriel'])
     table.cell(0,1).text=("Adresse : "+extract['investigateur_coordinateur_adresse'])
     for row in table.rows:
@@ -524,9 +522,7 @@ def partie_H_fin(document, extract):
     paragraph=document.add_paragraph("\n        I.2. Autres investigateurs ", style='debut_page')
     for i in range(len(extract['autre_investigateur_nom'])):
         table = document.add_table(rows=1, cols=2, style='Table Grid')
-        a=table.cell(0,1)
-        b=table.cell(1,1)
-        a.merge(b)
+        
         table.cell(0,0).text=("Nom :	"+extract['autre_investigateur_nom'][i]+"	\nPrénoms : "+extract['autre_investigateur_prenom'][i]+"\nQualification, spécialité :  "+extract['autre_investigateur_qualification'][i]+"\nCourriel : "+extract['autre_investigateur_courriel'][i])
         table.cell(0,1).text=("Adresse : "+extract['autre_investigateur_adresse'][i])
         for row in table.rows:
