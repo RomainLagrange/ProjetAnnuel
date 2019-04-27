@@ -43,7 +43,7 @@ def construit_doc(dico):
     
     
     document = docx.Document()
-    extract=extraction.extract2()
+    extract=extraction.extract2(dico)
     if dico['le_type_recherche']=='7':
         main_cpp_dm(extract)
     else:
