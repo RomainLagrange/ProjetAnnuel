@@ -406,11 +406,7 @@ def PageCorespondant(document,extract):
     sentence1.font.name = 'Times New Roman'
     sentence1.font.size = docx.shared.Pt(12) 
     sentence1.bold = True  
-    sentence2 = paragraph2.add_run(extract['plateau_technique_organisme']+'\n'+extract['plateau_technique_personne_contact']+'\n'+extract['plateau_technique_adresse']+'\nTél : '+extract['plateau_technique_num_telephone']+'\nFax : '+extract['plateau_technique_num_telecopie']+'\nE-mail : ')
-    '''Then format the sentence'''
-    sentence2.font.name = 'Times New Roman'
-    sentence2.font.size = docx.shared.Pt(10) 
-    sentence3 = paragraph2.add_run(extract['plateau_technique_courriel'])
+    sentence2 = paragraph2.add_run('Nom organisme :\n'+'Nom Prénom personne contact : \n'+'Adresse : \nTél : \nFax : \nE-mail : ')
     '''Then format the sentence'''
     sentence3.font.name = 'Times New Roman'
     sentence3.font.size = docx.shared.Pt(10)
