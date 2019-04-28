@@ -35,7 +35,7 @@ def Partie1(document,extract):
 #        section.left_margin = Cm(2)
 #        section.right_margin = Cm(2)
         
-    Style(document)
+  #  Style(document)
 
      #ecriture du premier titre 
     Titre1('1	JUSTICATION SCIENTIFIQUE ET DESCRIPTION GENERALE',document)

@@ -22,6 +22,8 @@ import re
 from docx.shared import Cm
 from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
+import StyleProt1
+from StyleProt1 import Style, Titre1,Titre2, Titre3, TexteGris, TexteGrisJustif
 
 
 #extract=extraction.extract1(dico)
@@ -37,6 +39,7 @@ for section in sections:
 def PageGarde(document,extract):
     
  #   document = docx.Document()
+    Style(document)
     
     sections = document.sections
     page_garde = sections[0]
