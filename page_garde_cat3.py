@@ -15,10 +15,14 @@ import re
 from docx.shared import Cm
 from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
+import StyleProt1
+from StyleProt1 import Style, Titre1,Titre2, Titre3, TexteGris, TexteGrisJustif
 
 
 #extract=extraction.extract1(dico)
 document = docx.Document()
+Style(document)
+
 '''Marge des page'''
 sections = document.sections
 for section in sections:
