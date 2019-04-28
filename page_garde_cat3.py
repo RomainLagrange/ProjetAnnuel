@@ -3,14 +3,7 @@
 Created on Tue Apr 16 11:21:37 2019
 
 @author: Asuspc
-"""
 
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Dec  6 16:44:16 2018
-
-@author: romain
 """
 import docx
 import extraction
@@ -100,7 +93,7 @@ def PageGarde(document,extract):
     p=document.add_paragraph()
     p.alignment=WD_ALIGN_PARAGRAPH.CENTER
     run1=p.add_run('Cette recherche a obtenu le financement')
-    run1.style='Paragraphe'
+    run1.style='paragraphe'
     
     '''Promoteur'''
     paragraph = document.add_paragraph()
