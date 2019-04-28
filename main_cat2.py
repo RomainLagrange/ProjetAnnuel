@@ -58,21 +58,19 @@ def construit_doc(dico):
         section.right_margin = Cm(2)
     
     #page de garde
-    #page_garde_cat2.PageGarde(document,extract)
+    page_garde_cat2.PageGarde(document,extract)
     #historique des mises a jour
- #   page_garde_cat2.Page_version(document,extract)
+    page_garde_cat2.Page_version(document,extract)
     #signature
-  #  page_garde_cat2.PageSignature(document,extract)
+    page_garde_cat2.PageSignature(document,extract)
     #principaux correspondants
-   # page_garde_cat2.PageCorespondant(document,extract)
-    #sommaire
-  #  page_garde_cat2.liste_abreviation(document,extract)
+    page_garde_cat2.PageCorespondant(document,extract)
     #abreviations
-   # page_garde_cat2.liste_abreviation(document,extract)
+    page_garde_cat2.liste_abreviation(document,extract)
     #resume du proto version XX
-  #  page_garde_cat2.resume_protocole(document,extract)
+    page_garde_cat2.resume_protocole(document,extract)
     #abstract
-  #  page_garde_cat2.Page_abstract(document,extract)
+    page_garde_cat2.Page_abstract(document,extract)
     
     Partie1(document,extract)
     Partie2(document,extract)

@@ -102,7 +102,7 @@ def PageGarde(document,extract):
 
     p=document.add_paragraph()
     p.alignment=WD_ALIGN_PARAGRAPH.CENTER
-    run1=p.add_run('Cette recherche a obtenu le financement de source de financementSi appel à projets du ministère : Cette recherche a obtenu le financement du Ministère de la Santé (nom du programme, année de sélection, n° d’enregistrement)')
+    run1=p.add_run('Cette recherche a obtenu le financement de source de financement Si appel à projets du ministère : Cette recherche a obtenu le financement du Ministère de la Santé (nom du programme, année de sélection, n° d’enregistrement)')
     run1.style='Paragraphe'
     run1.font.italic= True
     
