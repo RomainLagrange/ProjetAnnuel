@@ -5,7 +5,7 @@ Created on Tue Feb 26 12:13:42 2019
 @author: Utilisateur
 """
 
-import pandas as pd
+#import pandas as pd
 import docx
 from docx.api import Document
 from docx.enum.text import WD_ALIGN_PARAGRAPH
@@ -17,6 +17,16 @@ from docx.oxml import parse_xml
 from docx.oxml import OxmlElement
 import time
 from time import gmtime, strftime
+import os
+from os import sys
+
+def resource_path(relative_path):
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
 
 def main_ansm_hps(extract):
     document = docx.Document()
@@ -45,7 +55,7 @@ def parties_ABC(document, extract):
     cell=table.cell(0,0)
     paragraph = cell.paragraphs[0]
     ca = paragraph.add_run()
-    ca.add_picture('ansm.jpg')
+    ca.add_picture(resource_path('ansm.jpg'))
     table.cell(0,1).text=("FORMULAIRE DE DEMANDE D'AUTORISATION AUPRES DE L’AGENCE NATIONALE DE SECURITE DU MEDICAMENT ET DES PRODUITS DE SANTE "
                           "OU DE DEMANDE D’AVIS AU COMITÉ DE PROTECTION DES PERSONNES POUR UNE RECHERCHE MENTIONNEE AU 1° OU AU 2° DE L’ARTICLE L. 1121-1 DU CODE DE LA "
                           "SANTE PUBLIQUE NE PORTANT PAS SUR UN PRODUIT MENTIONNE A L’ARTICLE L. 5311-1 DU CODE DE LA SANTE PUBLIQUE - ")

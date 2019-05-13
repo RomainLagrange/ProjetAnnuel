@@ -5,7 +5,7 @@ Created on Fri Mar  1 22:35:39 2019
 @author: Marion
 """
 
-import pandas as pd
+#import pandas as pd
 import docx
 from docx.api import Document
 from docx.enum.text import WD_ALIGN_PARAGRAPH
@@ -17,6 +17,16 @@ from docx.oxml import parse_xml
 from docx.oxml import OxmlElement
 import time
 from time import gmtime, strftime
+import os
+from os import sys
+
+def resource_path(relative_path):
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
 
 def main_ansm_pb(extract):
      document = docx.Document()
@@ -43,7 +53,7 @@ def partie_A_B(document, extract):
     cell=table.cell(0,0)
     paragraph = cell.paragraphs[0]
     ca = paragraph.add_run()
-    ca.add_picture('ansm.jpg')
+    ca.add_picture(resource_path('ansm.jpg'))
     a=table.cell(0,1)
     b=table.cell(0,5)
     a.merge(b)

@@ -5,7 +5,7 @@ Created on Wed Feb 20 22:04:40 2019
 @author: Marion
 """
 
-import pandas as pd
+#import pandas as pd
 import docx
 from docx.api import Document
 from docx.enum.text import WD_ALIGN_PARAGRAPH
@@ -17,6 +17,16 @@ from docx.oxml import parse_xml
 from docx.oxml import OxmlElement
 import time
 from time import gmtime, strftime
+import os
+from os import sys
+
+def resource_path(relative_path):
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
 
 
 def main_ansm_dm(extract):
@@ -55,7 +65,7 @@ def partie_une_ansm_dm(document, extract):
     
     paragraph=document.add_paragraph()
     ca = paragraph.add_run()
-    ca.add_picture('ansm.jpg')
+    ca.add_picture(resource_path('ansm.jpg'))
     sentence=paragraph.add_run("Formulaire de demande d’autorisation auprès de l'ANSM et demande d’avis du comite de protection des personnes (CPP) pour une recherche mentionnée au 1° ou au 2° de l’article L. 1121-1 du code de la santé publique portant sur un dispositif médical (DM) ou un dispositif médical de diagnostic in vitro (DMDIV)")
     paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
     fontdebut = sentence.font
