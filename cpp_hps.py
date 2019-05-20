@@ -260,13 +260,13 @@ def page2_cpp_hps(document, extract):
     
     paragraph = document.add_paragraph("\nA. IDENTIFICATION DE LA RECHERCHE", style="gras_tableau")
     paragraph=document.add_paragraph()
-    sentence = paragraph.add_run("Titre complet de la recherche :\n"+extract['titre_complet']+" \nNuméro d'enregistrement de la recherche (délivré par l'ANSM) : \n")
+    sentence = paragraph.add_run("Titre complet de la recherche : "+extract['titre_complet']+" \nNuméro d'enregistrement de la recherche (délivré par l'ANSM) : \n")
     fontdebut = sentence.font
     fontdebut.name = 'Arial Narrow'
     fontdebut.size = docx.shared.Pt(10) 
     
     table = document.add_table(rows=1, cols=2, style='Table Grid')
-    table.cell(0,0).text=("Numéro de code du promoteur de\nla recherche donné par le\npromoteur")
+    table.cell(0,0).text=("Numéro de code du promoteur de la recherche donné par le promoteur")
     table.cell(0,1).text=(extract['code_protocole'])
     for row in table.rows:
         for cell in row.cells:
@@ -287,7 +287,7 @@ def page2_cpp_hps(document, extract):
     fontdebut.size = docx.shared.Pt(10) 
     
     
-    paragraph = document.add_paragraph("Nom ou titre abrégé de la recherche,\nle cas échéant:\n" +extract['titre_abrege']+"\nJustifier la catégorie de votre recherche\n",style="normal")
+    paragraph = document.add_paragraph("Nom ou titre abrégé de la recherche, le cas échéant: " +extract['titre_abrege']+"\nJustifier la catégorie de votre recherche\n",style="normal")
     paragraph=document.add_paragraph()
     sentence = paragraph.add_run("Inscription au fichier VRB")
     fontdebut = sentence.font
@@ -308,16 +308,16 @@ def page2_cpp_hps(document, extract):
     c=table.cell(1,0)
     d=table.cell(1,1)
     c.merge(d)
-    table.cell(0,0).text=("Nom de l'organisme :"+extract['promoteur_nom_organisme']+"\n")
-    table.cell(1,0).text=("Nom de la personne à contacter :"+extract['promoteur_nom_personne_contact']+"\n")
-    table.cell(0,2).text=("Avis du CPP :")
+    table.cell(0,0).text=("Nom de l'organisme : "+extract['promoteur_nom_organisme']+"\n")
+    table.cell(1,0).text=("Nom de la personne à contacter : "+extract['promoteur_nom_personne_contact']+"\n")
+    table.cell(0,2).text=("Avis du CPP : ")
     e=table.cell(2,0)
     f=table.cell(4,0)
     e.merge(f)
-    table.cell(2,0).text=("Adresse :"+extract['promoteur_adresse'])
-    table.cell(2,1).text=("Numéro de téléphone :"+extract['promoteur_num_telephone'])
-    table.cell(3,1).text=("Numéro de télécopie :"+extract['promoteur_num_telecopie'])
-    table.cell(4,1).text=("Courriel :"+extract['promoteur_courriel'])
+    table.cell(2,0).text=("Adresse : "+extract['promoteur_adresse'])
+    table.cell(2,1).text=("Numéro de téléphone : "+extract['promoteur_num_telephone'])
+    table.cell(3,1).text=("Numéro de télécopie : "+extract['promoteur_num_telecopie'])
+    table.cell(4,1).text=("Courriel : "+extract['promoteur_courriel'])
     for row in table.rows:
         for cell in row.cells:
             paragraphs = cell.paragraphs
@@ -411,7 +411,7 @@ def page2_cpp_hps(document, extract):
     table.cell(0,0).text=("Cette section se rapport au placebo n° : "+extract['placebo_numero'])
     table.cell(1,0).text=("Un placebo est_il utilisé ?       oui       non")
     table.cell(2,0).text=("De quel produit expérimental est-ce un placebo ?")
-    table.cell(3,0).text=("Préciser le(s) numéro(s) de PE selon la section D. "+extract['placebo_numero_ME'])
+    table.cell(3,0).text=("Préciser le(s) numéro(s) de PE selon la section D : "+extract['placebo_numero_ME'])
     table.cell(4,0).text=("Voie d'admission : "+extract['placebo_voie_administration'])
     table.cell(5,0).text=("Composition, hormis la (les) substance(s) active(s) :"
                           "-est-elle identique à celle du produit expérimental étudié?      oui       non\n\n"
@@ -479,13 +479,13 @@ def page2_cpp_hps(document, extract):
     e=table.cell(4,0)
     f=table.cell(4,1)
     e.merge(f)
-    table.cell(0,0).text=("Nom :"+extract['investigateur_coordinateur_nom'])
-    table.cell(0,1).text=("Adresse :"+extract['investigateur_coordinateur_adresse_professionnelle'])
-    table.cell(1,0).text=("Prénoms :"+extract['investigateur_coordinateur_prenom'])
-    table.cell(2,0).text=("Qualification, spécialité :"+extract['investigateur_coordinateur_qualification'])
-    table.cell(3,0).text=("Courriel :"+extract['investigateur_coordinateur_courriel'])
-    table.cell(3,1).text=("Téléphone :"+extract['investigateur_coordinateur_telephone'])
-    table.cell(4,0).text=("N°ADELI :")
+    table.cell(0,0).text=("Nom : "+extract['investigateur_coordinateur_nom'])
+    table.cell(0,1).text=("Adresse : "+extract['investigateur_coordinateur_adresse'])
+    table.cell(1,0).text=("Prénoms : "+extract['investigateur_coordinateur_prenom'])
+    table.cell(2,0).text=("Qualification, spécialité : "+extract['investigateur_coordinateur_qualification'])
+    table.cell(3,0).text=("Courriel : "+extract['investigateur_coordinateur_courriel'])
+    table.cell(3,1).text=("Téléphone : "+extract['investigateur_coordinateur_telephone'])
+    table.cell(4,0).text=("N°ADELI : ")
     for row in table.rows:
         for cell in row.cells:
             paragraphs = cell.paragraphs

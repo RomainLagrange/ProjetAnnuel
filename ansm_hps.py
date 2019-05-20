@@ -378,9 +378,9 @@ def partie_D_a_G(document, extract):
     table = document.add_table(rows=7, cols=1, style='Table Grid')
     table.cell(0,0).text=("Condition médicale ou pathologie étudiée")
     table.cell(1,0).text=("Préciser la condition médicale : "+extract['pathologie_etudiee']+"\nClassification CIM  : 	"+extract['classification_cim']+"\n\nEst-ce une maladie rare ?       oui           non\n\nObjectif(s) de l’essai\nObjectif principal : "+extract['objectif_principal']+"\nObjectifs secondaires : "+extract['objectif_secondaire'])
-    table.cell(2,0).text=("Principaux critères d’inclusion (énumérer les plus importants) " +extract['critere_inclusion_longue'])
-    table.cell(3,0).text=("Principaux critères de non inclusion (énumérer les plus importants "+extract['critere_non_inclusion_longue'])
-    table.cell(4,0).text=("Critère(s) d’évaluation principal (aux) " +extract['critere_jugement_principal_longue']+" "+extract['critere_jugement_secondaire_longue'])
+    table.cell(2,0).text=("Principaux critères d’inclusion (énumérer les plus importants) : " +extract['critere_inclusion_longue'])
+    table.cell(3,0).text=("Principaux critères de non inclusion (énumérer les plus importants) : "+extract['critere_non_inclusion_longue'])
+    table.cell(4,0).text=("Critère(s) d’évaluation principal (aux) : " +extract['critere_jugement_principal_longue']+" "+extract['critere_jugement_secondaire_longue'])
     table.cell(5,0).text=("Domaine(s) d’étude :\n")
     table.cell(6,0).text=("- Physiologie\n- Physiopathologie\n- Epidémiologie\n- Génétique\n- Science du comportement\n- Produits à visée nutritionnelle\n- Stratégies diagnostiques\n- Stratégies thérapeutiques et préventives\n\n                • Si autres préciser :")
     n=0
@@ -421,7 +421,7 @@ def partie_D_a_G(document, extract):
     table.cell(4,0).text=("La recherche  est-elle multicentrique ?\nLa recherche  est-elle prévue pour être menée dans plusieurs Etat membres ?\nCette recherche implique-t-elle des pays tiers ?")
     table.cell(4,3).text=("   oui           non\n   oui           non\n   oui           non")
     table.cell(5,0).text=("Durée maximale de participation pour un sujet selon le protocole : "+extract['duree_participation']+"\n")
-    table.cell(6,0).text=("Définition de la fin de la recherche et justification, si celle-ci ne correspond pas à la date de la dernière visite de la dernière personne participant à la recherche :\n\nEstimation initiale de la durée de la recherche   :\n             • en France :       						 "+extract['duree_totale_etude']+" ans  mois\n             • dans tous les pays concernés par la recherche :  	 	 "+extract['duree_totale_etude']+" ans  mois")
+    table.cell(6,0).text=("Définition de la fin de la recherche et justification, si celle-ci ne correspond pas à la date de la dernière visite de la dernière personne participant à la recherche :\n\nEstimation initiale de la durée de la recherche   :\n             • en France :       						 "+extract['duree_totale_etude']+"\n             • dans tous les pays concernés par la recherche :  	 	 "+extract['duree_totale_etude']+" ans  mois")
     n=0
     for row in table.rows:
         for cell in row.cells:

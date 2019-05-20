@@ -216,7 +216,7 @@ def page2_cpp_rni(document, extract):
     sentence.font.name = 'Arial Narrow'
     sentence.bold = True
     sentence.font.size = docx.shared.Pt(11)
-    sentence=paragraph.add_run('Nom, Prénom : '+extract['investigateur_coordinateur_nom']+'\nAdresse complète : '+extract['investigateur_coordinateur_adresse']+'\nTéléphone : '+extract['investigateur_coordinateur_telephone']+'\nMél : '+extract['investigateur_coordinateur_courriel']+'\n')
+    sentence=paragraph.add_run('Nom, Prénom : '+extract['investigateur_coordinateur_nom']+'\nQualité : '+extract['investigateur_coordinateur_qualite']+'\nAdresse complète : '+extract['investigateur_coordinateur_adresse']+'\nTéléphone : '+extract['investigateur_coordinateur_telephone']+'\nMél : '+extract['investigateur_coordinateur_courriel']+'\n')
     sentence.font.name = 'Arial Narrow'
     sentence.font.size = docx.shared.Pt(11)
     
@@ -234,7 +234,7 @@ def page2_cpp_rni(document, extract):
     sentence.font.name = 'Arial Narrow'
     sentence.bold = True
     sentence.font.size = docx.shared.Pt(11)
-    sentence=paragraph.add_run('Intitulé de la recherche : ' + extract['titre_complet']+'\nNuméro d’enregistrement : '+extract['code_protocole']+'\nNombre de personnes susceptibles d’être incluses dans la recherche : '+extract['taille_etude_longue']+'\nCaractéristiques de la recherche : \n')
+    sentence=paragraph.add_run('Intitulé de la recherche : ' + extract['titre_complet']+'\nNuméro d’enregistrement : '+'\nNombre de personnes susceptibles d’être incluses dans la recherche : '+extract['taille_etude_longue']+'\nCaractéristiques de la recherche : \n')
     sentence.font.name = 'Arial Narrow'
     sentence.font.size = docx.shared.Pt(11)
     sentence=paragraph.add_run('              – transversale □\n              – longitudinale □\n              – comparatif ou non □\n              – cohorte □\n              – étude cas – témoin □\n              – exploratoire/démonstratif □\n              – autre □')
