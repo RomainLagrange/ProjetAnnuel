@@ -69,15 +69,15 @@ def Partie6(document,extract):
    # Ecriture du 6.1  
     Titre2('6.1	Calendrier de la recherche',document)
     paragraph2 = document.add_paragraph()
-    sentence2 = paragraph2.add_run(extract['duree_inclusion'])
+    sentence2 = paragraph2.add_run("Durée de la période d’inclusion :"+extract['duree_inclusion'])
     sentence2.font.name = 'Times New Roman'
     sentence2.font.size = docx.shared.Pt(10)
     paragraph2 = document.add_paragraph()
-    sentence2 = paragraph2.add_run(extract['duree_participation'])
+    sentence2 = paragraph2.add_run("Durée de la participation pour chaque participant :"+extract['duree_participation'])
     sentence2.font.name = 'Times New Roman'
     sentence2.font.size = docx.shared.Pt(10)
     paragraph2 = document.add_paragraph()
-    sentence2 = paragraph2.add_run(extract['duree_totale_etude'])
+    sentence2 = paragraph2.add_run("Durée totale de l’étude :"+extract['duree_totale_etude'])
     sentence2.font.name = 'Times New Roman'
     sentence2.font.size = docx.shared.Pt(10)
     #format paysage

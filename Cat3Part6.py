@@ -68,7 +68,7 @@ def Partie6(document,extract):
     p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
     p.style='List Bullet 2'
-    run1=p.add_run('Durée de suivi par participant : ')
+    run1=p.add_run('Durée de suivi par participant : '+extract['duree_participation'])
     run1.style='Paragraphe'
     
     p=document.add_paragraph()
@@ -79,7 +79,6 @@ def Partie6(document,extract):
     run1.style='Paragraphe'
     run2=p.add_run('(durée de la période d’inclusion + durée de participation) :' + extract['duree_totale_etude'])
     run2.style='Paragraphe'
-    run2.font.italic = True
     run3=p.add_run(' ')
     run3.style='Paragraphe'
     

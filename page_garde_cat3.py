@@ -519,7 +519,7 @@ def resume_protocole(document,extract):
      table.cell(12,0).text = 'Taille d\'étude'
      table.cell(12,1).text = extract['taille_etude_courte']
      table.cell(13,0).text = 'Durée de la Recherche '
-     table.cell(13,1).text = 'Durée de la période d\’inclusion : '+extract['duree_inclusion']+'\nDurée de la participation pour chaque participant : '+extract['duree_participation']+'\nDurée totale de l’étude : '+extract['duree_totale_etude']
+     table.cell(13,1).text = "Durée de la période d’inclusion : "+extract['duree_inclusion']+'\nDurée de la participation pour chaque participant : '+extract['duree_participation']+'\nDurée totale de l’étude : '+extract['duree_totale_etude']
      table.cell(14,0).text = 'Analyse statistique des données'
      table.cell(14,1).text = extract['analyse_statistique_courte']
      table.cell(15,0).text = 'Retombées attendues '
