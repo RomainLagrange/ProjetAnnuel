@@ -59,7 +59,10 @@ def Partie4(document,extract):
     run1.style='Paragraphe'
     run1.font.italic = True
     
-    
+    paragraph2 = document.add_paragraph()
+    sentence2 = paragraph2.add_run(extract['justification_inclusion'])
+    sentence2.font.name = 'Times New Roman'
+    sentence2.font.size = docx.shared.Pt(10)
     
     # Ecriture du 4.2  
     Titre2('4.2	Critères de non inclusion',document)

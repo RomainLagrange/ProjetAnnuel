@@ -138,8 +138,8 @@ def PageGarde(document,extract):
     run1.font.name = 'Times New Roman'
     run1.font.size = docx.shared.Pt(11) 
     run1.bold = True
-    run1.underline = True
-    run2 = paragraph.add_run(extract['investigateur_coordinateur_nom']+'\nService de : '+ extract['investigateur_coordinateur_service']+'\n'+extract['investigateur_coordinateur_adresse_professionnelle']+'\nTél : '+extract['investigateur_coordinateur_telephone']+' / Fax : '+extract['investigateur_coordinateur_telecopie']+'\nE-mail : '+extract['investigateur_coordinateur_courriel'])
+    run1.underline = True 
+    run2 = paragraph.add_run(extract['investigateur_coordinateur_nom']+extract['investigateur_coordinateur_prenom']+'\nService : '+ extract['investigateur_coordinateur_service']+'\n'+extract['investigateur_coordinateur_adresse]+'\nTél : '+extract['investigateur_coordinateur_telephone']+' / Fax : '+extract['investigateur_coordinateur_telecopie']+'\nE-mail : '+extract['investigateur_coordinateur_courriel'])
     run2.font.name = 'Times New Roman'
     run2.font.size = docx.shared.Pt(11) 
     
@@ -524,7 +524,7 @@ def resume_protocole(document,extract):
      '''Titre'''
      paragraph2 = document.add_paragraph()
      paragraph2.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
-     sentence = paragraph2.add_run('RESUME DU PROTOCOLE VERSION XX')
+     sentence = paragraph2.add_run('RESUME DU PROTOCOLE VERSION') +extract['code_protocole']
      '''Then format the sentence'''
      sentence.font.name = 'Times New Roman'
      sentence.bold = True

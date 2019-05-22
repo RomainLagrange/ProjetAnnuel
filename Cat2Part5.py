@@ -100,7 +100,7 @@ def Partie5(document,extract):
     p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     run1=p.add_run('Durée totale de la recherche ')
     run1.style='Paragraphe' 
-    run2=p.add_run('(durée de la période d’inclusion + durée de participation)'+ extract['duree_inclusion'] + extract['duree_participation'])
+    run2=p.add_run('(durée de la période d’inclusion + durée de participation)'+ extract['duree_totale_etude'])
     run2.font.italic= True
     run2.style='Paragraphe'  
     
