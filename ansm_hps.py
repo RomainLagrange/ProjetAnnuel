@@ -5,7 +5,7 @@ Created on Tue Feb 26 12:13:42 2019
 @author: Utilisateur
 """
 
-import pandas as pd
+#import pandas as pd
 import docx
 from docx.api import Document
 from docx.enum.text import WD_ALIGN_PARAGRAPH
@@ -17,6 +17,16 @@ from docx.oxml import parse_xml
 from docx.oxml import OxmlElement
 import time
 from time import gmtime, strftime
+import os
+from os import sys
+
+def resource_path(relative_path):
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
 
 def main_ansm_hps(extract):
     document = docx.Document()
@@ -45,7 +55,7 @@ def parties_ABC(document, extract):
     cell=table.cell(0,0)
     paragraph = cell.paragraphs[0]
     ca = paragraph.add_run()
-    ca.add_picture('ansm.jpg')
+    ca.add_picture(resource_path('ansm.jpg'))
     table.cell(0,1).text=("FORMULAIRE DE DEMANDE D'AUTORISATION AUPRES DE L’AGENCE NATIONALE DE SECURITE DU MEDICAMENT ET DES PRODUITS DE SANTE "
                           "OU DE DEMANDE D’AVIS AU COMITÉ DE PROTECTION DES PERSONNES POUR UNE RECHERCHE MENTIONNEE AU 1° OU AU 2° DE L’ARTICLE L. 1121-1 DU CODE DE LA "
                           "SANTE PUBLIQUE NE PORTANT PAS SUR UN PRODUIT MENTIONNE A L’ARTICLE L. 5311-1 DU CODE DE LA SANTE PUBLIQUE - ")
@@ -368,9 +378,9 @@ def partie_D_a_G(document, extract):
     table = document.add_table(rows=7, cols=1, style='Table Grid')
     table.cell(0,0).text=("Condition médicale ou pathologie étudiée")
     table.cell(1,0).text=("Préciser la condition médicale : "+extract['pathologie_etudiee']+"\nClassification CIM  : 	"+extract['classification_cim']+"\n\nEst-ce une maladie rare ?       oui           non\n\nObjectif(s) de l’essai\nObjectif principal : "+extract['objectif_principal']+"\nObjectifs secondaires : "+extract['objectif_secondaire'])
-    table.cell(2,0).text=("Principaux critères d’inclusion (énumérer les plus importants) " +extract['critere_inclusion_longue'])
-    table.cell(3,0).text=("Principaux critères de non inclusion (énumérer les plus importants "+extract['critere_non_inclusion_longue'])
-    table.cell(4,0).text=("Critère(s) d’évaluation principal (aux) " +extract['critere_jugement_principal_longue']+" "+extract['critere_jugement_secondaire_longue'])
+    table.cell(2,0).text=("Principaux critères d’inclusion (énumérer les plus importants) : " +extract['critere_inclusion_longue'])
+    table.cell(3,0).text=("Principaux critères de non inclusion (énumérer les plus importants) : "+extract['critere_non_inclusion_longue'])
+    table.cell(4,0).text=("Critère(s) d’évaluation principal (aux) : " +extract['critere_jugement_principal_longue']+" "+extract['critere_jugement_secondaire_longue'])
     table.cell(5,0).text=("Domaine(s) d’étude :\n")
     table.cell(6,0).text=("- Physiologie\n- Physiopathologie\n- Epidémiologie\n- Génétique\n- Science du comportement\n- Produits à visée nutritionnelle\n- Stratégies diagnostiques\n- Stratégies thérapeutiques et préventives\n\n                • Si autres préciser :")
     n=0
@@ -396,7 +406,7 @@ def partie_D_a_G(document, extract):
     table = document.add_table(rows=7, cols=4, style='Table Grid')
     table.cell(0,0).text=("Tirage au sort :\nLa recherche comporte-t-elle une comparaison de  groupes?")
     table.cell(0,3).text=("   oui           non\n   oui           non")
-    for i in range (0,8):
+    for i in range (0,7):
         if i==0 or i==4:
             a=table.cell(i,0)
             b=table.cell(i,2)
@@ -411,7 +421,7 @@ def partie_D_a_G(document, extract):
     table.cell(4,0).text=("La recherche  est-elle multicentrique ?\nLa recherche  est-elle prévue pour être menée dans plusieurs Etat membres ?\nCette recherche implique-t-elle des pays tiers ?")
     table.cell(4,3).text=("   oui           non\n   oui           non\n   oui           non")
     table.cell(5,0).text=("Durée maximale de participation pour un sujet selon le protocole : "+extract['duree_participation']+"\n")
-    table.cell(6,0).text=("Définition de la fin de la recherche et justification, si celle-ci ne correspond pas à la date de la dernière visite de la dernière personne participant à la recherche :\n\nEstimation initiale de la durée de la recherche   :\n             • en France :       						 "+extract['duree_totale_etude']+" ans  mois\n             • dans tous les pays concernés par la recherche :  	 	 "+extract['duree_totale_etude']+" ans  mois")
+    table.cell(6,0).text=("Définition de la fin de la recherche et justification, si celle-ci ne correspond pas à la date de la dernière visite de la dernière personne participant à la recherche :\n\nEstimation initiale de la durée de la recherche   :\n             • en France :       						 "+extract['duree_totale_etude']+"\n             • dans tous les pays concernés par la recherche :  	 	 "+extract['duree_totale_etude']+" ans  mois")
     n=0
     for row in table.rows:
         for cell in row.cells:
@@ -507,9 +517,7 @@ def partie_H_fin(document, extract):
     paragraph=document.add_paragraph("\nI. INVESTIGATEURS ET LIEUX DE RECHERCHE\n"
                                      "          I.1. Investigateur coordonnateur ", style='debut_page')
     table = document.add_table(rows=1, cols=2, style='Table Grid')
-    a=table.cell(0,1)
-    b=table.cell(1,1)
-    a.merge(b)
+    
     table.cell(0,0).text=("Nom :	"+extract['investigateur_coordinateur_nom']+"	\nPrénoms : "+extract['investigateur_coordinateur_prenom']+"\nQualification, spécialité :  "+extract['investigateur_coordinateur_qualification']+"\nCourriel : "+extract['investigateur_coordinateur_courriel'])
     table.cell(0,1).text=("Adresse : "+extract['investigateur_coordinateur_adresse'])
     for row in table.rows:
@@ -524,9 +532,7 @@ def partie_H_fin(document, extract):
     paragraph=document.add_paragraph("\n        I.2. Autres investigateurs ", style='debut_page')
     for i in range(len(extract['autre_investigateur_nom'])):
         table = document.add_table(rows=1, cols=2, style='Table Grid')
-        a=table.cell(0,1)
-        b=table.cell(1,1)
-        a.merge(b)
+        
         table.cell(0,0).text=("Nom :	"+extract['autre_investigateur_nom'][i]+"	\nPrénoms : "+extract['autre_investigateur_prenom'][i]+"\nQualification, spécialité :  "+extract['autre_investigateur_qualification'][i]+"\nCourriel : "+extract['autre_investigateur_courriel'][i])
         table.cell(0,1).text=("Adresse : "+extract['autre_investigateur_adresse'][i])
         for row in table.rows:

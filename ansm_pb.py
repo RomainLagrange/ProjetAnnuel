@@ -5,7 +5,7 @@ Created on Fri Mar  1 22:35:39 2019
 @author: Marion
 """
 
-import pandas as pd
+#import pandas as pd
 import docx
 from docx.api import Document
 from docx.enum.text import WD_ALIGN_PARAGRAPH
@@ -17,6 +17,16 @@ from docx.oxml import parse_xml
 from docx.oxml import OxmlElement
 import time
 from time import gmtime, strftime
+import os
+from os import sys
+
+def resource_path(relative_path):
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
 
 def main_ansm_pb(extract):
      document = docx.Document()
@@ -43,7 +53,7 @@ def partie_A_B(document, extract):
     cell=table.cell(0,0)
     paragraph = cell.paragraphs[0]
     ca = paragraph.add_run()
-    ca.add_picture('ansm.jpg')
+    ca.add_picture(resource_path('ansm.jpg'))
     a=table.cell(0,1)
     b=table.cell(0,5)
     a.merge(b)
@@ -152,11 +162,11 @@ def partie_A_B(document, extract):
     
     table = document.add_table(rows=3, cols=1, style='Table Grid')
     table.cell(0,0).text=("A.1	    Etat membre dans lequel la demande est soumise : FRANCE")
-    table.cell(1,0).text=("A.2	    Numéro d’enregistrement de la recherche en France (ID RCB)  :\n" + extract['num_idrcb'] +
-                          "A.3	    Titre complet de la recherche :" + extract['titre_complet'])
-    table.cell(2,0).text=("A.4	    Numéro de code du protocole attribué par le promoteur, version et date  : \n" +extract['code_protocole'] +
-                          "A.5	    Nom ou titre abrégé de la recherche, le cas échéant : \n" + extract['titre_abrege'] +
-                          "A.6	    Numérotation ISRCTN , le cas échéant :      \n"
+    table.cell(1,0).text=("A.2	    Numéro d’enregistrement de la recherche en France (ID RCB)  :" + extract['num_idrcb'] +
+                          "\nA.3	    Titre complet de la recherche :" + extract['titre_complet'])
+    table.cell(2,0).text=("A.4	    Numéro de code du protocole attribué par le promoteur, version et date  : " +extract['code_protocole'] +
+                          "\nA.5	    Nom ou titre abrégé de la recherche, le cas échéant : " + extract['titre_abrege'] +
+                          "\nA.6	    Numérotation ISRCTN , le cas échéant :      \n"
                           "A.7	    S'agit-il d'une resoumission de la demande ?	□ oui 	□ non\n"
                           "A.7.1	    Si oui, indiquer la lettre de resoumission  :      ")
     n=0

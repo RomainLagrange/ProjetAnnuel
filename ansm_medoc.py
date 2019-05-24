@@ -6,7 +6,7 @@ Created on Mon Mar  4 22:56:32 2019
 """
 
 
-import pandas as pd
+#import pandas as pd
 import docx
 from docx.api import Document
 from docx.enum.text import WD_ALIGN_PARAGRAPH
@@ -18,6 +18,16 @@ from docx.oxml import parse_xml
 from docx.oxml import OxmlElement
 import time
 from time import gmtime, strftime
+import os
+from os import sys
+
+def resource_path(relative_path):
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
 
 
 def main_ansm_medoc(extract):
@@ -46,7 +56,7 @@ def partie_A_B(document, extract):
     cell=table.cell(0,0)
     paragraph = cell.paragraphs[0]
     ca = paragraph.add_run()
-    ca.add_picture('ansm.jpg')
+    ca.add_picture(resource_path('ansm.jpg'))
     table.cell(0,1).text=("Formulaire de demande d’autorisation auprès de l’ANSM et de demande d’avis à un Comité de protection des personnes d'une recherche mentionnée au 1° de l’article L. 1121-1 du code de la santé publique portant sur un médicament à usage humain ")
     table.cell(0,5).text=("FAEC")
     for row in table.rows:
@@ -134,12 +144,12 @@ def partie_A_B(document, extract):
     paragraph=document.add_paragraph("\nB. IDENTIFICATION DU PROMOTEUR RESPONSABLE DE LA DEMANDE", style='debut_page')
     table = document.add_table(rows=2, cols=1, style='Table Grid')
     table.cell(0,0).text=("B.1	Promoteur ")
-    table.cell(1,0).text=("B.1.1	Organisme :      \n"
-                          "B.1.2	Nom de la personne à contacter :     \n" 
-                          "B.1.3	Adresse :     \n" 
-                          "B.1.4	Numéro de téléphone :      \n"
-                          "B.1.5	Numéro de télécopie :    \n"  
-                          "B.1.6	Mél :      ")
+    table.cell(1,0).text=("B.1.1	Organisme :  "+extract['promoteur_nom_organisme']+"    \n"
+                          "B.1.2	Nom de la personne à contacter :  "+extract['promoteur_nom_personne_contact']+"   \n" 
+                          "B.1.3	Adresse :  "+extract['promoteur_adresse']+"   \n" 
+                          "B.1.4	Numéro de téléphone : "+extract['promoteur_num_telephone']+"     \n"
+                          "B.1.5	Numéro de télécopie : "+extract['promoteur_num_telecopie']+"   \n"  
+                          "B.1.6	Mél :  "+extract['promoteur_courriel']+"    ")
     n=0
     for row in table.rows:
         for cell in row.cells:
@@ -156,12 +166,12 @@ def partie_A_B(document, extract):
     paragraph=document.add_paragraph()
     table = document.add_table(rows=2, cols=1, style='Table Grid')
     table.cell(0,0).text=("B.2 Représentant légal  du promoteur dans l’Union européenne pour l’essai concerné")
-    table.cell(1,0).text=("B.2.1	Organisme :      \n"
-                          "B.2.2	Nom de la personne à contacter :    \n"  
-                          "B.2.3	Adresse :      \n"
-                          "B.2.4	Numéro de téléphone :  \n"    
-                          "B.2.5	Numéro de télécopie :   \n"   
-                          "B.2.6	Mail :      ")
+    table.cell(1,0).text=("B.2.1	Organisme :  "+extract['promoteur_UE_nom_organisme']+"    \n"
+                          "B.2.2	Nom de la personne à contacter : "+extract['promoteur_UE_nom_personne_contact']+"   \n"  
+                          "B.2.3	Adresse :  "+extract['promoteur_UE_adresse']+"    \n"
+                          "B.2.4	Numéro de téléphone : "+extract['promoteur_UE_num_telephone']+" \n"    
+                          "B.2.5	Numéro de télécopie : "+extract['promoteur_UE_num_telecopie']+"  \n"   
+                          "B.2.6	Mail :  "+extract['promoteur_UE_courriel']+"    ")
     n=0
     for row in table.rows:
         for cell in row.cells:
@@ -1224,7 +1234,8 @@ def Partie_F_G(document, extract):
     table = document.add_table(rows=2, cols=1, style='Table Grid')
     table.cell(0,0).text=("G.1	INVESTIGATEUR COORDONNATEUR (si essai multicentrique) et investigateur principal (si essai monocentrique) ")
     table.cell(1,0).text=("G.1.1	Prénom :  "+extract['investigateur_coordinateur_prenom']+"    \n"
-                          "G.1.3	Second prénom, le cas échéant :   "+extract['investigateur_coordinateur_nom']+"   \n"
+                          "G.1.2	Second prénom, le cas échéant :   \n"
+                          "G.1.3    Nom : "+extract['investigateur_coordinateur_nom']+"\n"
                           "G.1.4	Qualification, spécialité :   "+extract['investigateur_coordinateur_qualification']+"   \n"
                           "G.1.5	Adresse professionnelle :  "+extract['investigateur_coordinateur_adresse_professionnelle']+"    ")
     n=0
@@ -1258,8 +1269,9 @@ def Partie_F_G(document, extract):
                     n=n+1
     for i in range(len(extract['autre_investigateur_nom'])):
         table = document.add_table(rows=1, cols=1, style='Table Grid')
-        table.cell(0,0).text=("G.2.1	Prénom :  "+extract['autre_investigateur_nom'][i]+"    \n"
-                              "G.2.3	Second prénom, le cas échéant :  "+extract['autre_investigateur_prenom'][i]+"   \n" 
+        table.cell(0,0).text=("G.2.1	Prénom :  "+extract['autre_investigateur_prenom'][i]+"   \n" 
+                              "G.2.2	Second prénom, le cas échéant :  "+"\n"
+                              "G.2.3    Nom : "+extract['autre_investigateur_nom'][i]+"    \n"
                               "G.2.4	Qualification, spécialité :  "+extract['autre_investigateur_qualification'][i]+"    \n"
                               "G.2.5	Adresse professionnelle :  "+extract['autre_investigateur_adresse_professionnelle'][i])
         for row in table.rows:

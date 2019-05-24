@@ -72,7 +72,7 @@ def Partie14(document,extract):
     p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     run1=p.add_run('Cette recherche a reçu l’avis favorable du Comité de Protection des Personnes (CPP) de ')
     run1.style='Paragraphe'
-    run2=p.add_run('nom du CPP ')
+    run2=p.add_run(extract['CPP'])
     run2.style='Paragraphe'
     run2.font.italic=True
     run2.font.color.rgb = RGBColor(0x0,0xB0,0xF0) 
@@ -82,7 +82,7 @@ def Partie14(document,extract):
     p=document.add_paragraph()
     p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
     p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
-    run1=p.add_run('Le nom du promoteur ')
+    run1=p.add_run(extract['promoteur_nom_organisme'])
     run1.style='Paragraphe'
     run1.font.italic=True
     run1.font.color.rgb = RGBColor(0x0,0xB0,0xF0) 
@@ -144,7 +144,7 @@ def Partie14(document,extract):
     p.style='List Bullet 2'
     run1=p.add_run('Cette recherche est enregistrée dans la base européenne ')
     run1.style='Paragraphe'
-    run2=p.add_run('EudraCT ')
+    run2=p.add_run(extract['num_eudract'])
     run2.style='Paragraphe'
     run2.font.color.rgb = RGBColor(0x0,0xB0,0xF0) 
     run3=p.add_run('sous le ')

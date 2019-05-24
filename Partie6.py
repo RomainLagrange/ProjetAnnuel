@@ -13,6 +13,16 @@ from docx.enum.style import WD_STYLE_TYPE
 from docx.shared import Cm, Pt, RGBColor, Inches
 from docx.enum.section import WD_ORIENT
 from docx.enum.table import WD_TABLE_ALIGNMENT,WD_ROW_HEIGHT, WD_ALIGN_VERTICAL
+import os
+from os import sys
+
+def resource_path(relative_path):
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
 
 #MEMO POUR ECRIRE LES TITRES :
 #    Titre1('num + texte du protocole',document)
@@ -59,15 +69,15 @@ def Partie6(document,extract):
    # Ecriture du 6.1  
     Titre2('6.1	Calendrier de la recherche',document)
     paragraph2 = document.add_paragraph()
-    sentence2 = paragraph2.add_run(extract['duree_inclusion'])
+    sentence2 = paragraph2.add_run("Durée de la période d’inclusion :"+extract['duree_inclusion'])
     sentence2.font.name = 'Times New Roman'
     sentence2.font.size = docx.shared.Pt(11)
     paragraph2 = document.add_paragraph()
-    sentence2 = paragraph2.add_run(extract['duree_participation'])
+    sentence2 = paragraph2.add_run("Durée de la participation pour chaque participant :"+extract['duree_participation'])
     sentence2.font.name = 'Times New Roman'
     sentence2.font.size = docx.shared.Pt(11)
     paragraph2 = document.add_paragraph()
-    sentence2 = paragraph2.add_run(extract['duree_totale_etude'])
+    sentence2 = paragraph2.add_run("Durée totale de l’étude :"+extract['duree_totale_etude'])
     sentence2.font.name = 'Times New Roman'
     sentence2.font.size = docx.shared.Pt(11)
     #format paysage
@@ -388,7 +398,7 @@ def Partie6(document,extract):
     p=document.add_paragraph()
     p.alignment=WD_ALIGN_PARAGRAPH.CENTER
     run=p.add_run()
-    picture=run.add_picture('num_patient.png')
+    picture=run.add_picture(resource_path('num_patient.png'))
     
 
     p=document.add_paragraph()

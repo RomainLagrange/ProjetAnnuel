@@ -22,6 +22,18 @@ import re
 from docx.shared import Cm
 from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
+import StyleProt1
+from StyleProt1 import Style, Titre1,Titre2, Titre3, TexteGris, TexteGrisJustif
+import os
+from os import sys
+
+def resource_path(relative_path):
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
 
 
 #extract=extraction.extract1(dico)
@@ -37,6 +49,7 @@ for section in sections:
 def PageGarde(document,extract):
     
  #   document = docx.Document()
+    Style(document)
     
     sections = document.sections
     page_garde = sections[0]
@@ -47,9 +60,9 @@ def PageGarde(document,extract):
     header.is_linked_to_previous = False
     p = header.paragraphs[0]
     r = p.add_run() 
-    r.add_picture('imageGauche.png')
+    r.add_picture(resource_path('imageGauche.png'))
     r.add_text('                                                                                                                                     ')
-    r.add_picture('imageDroite.png')
+    r.add_picture(resource_path('imageDroite.png'))
     
     
     '''Titre de la recherche'''
@@ -102,7 +115,7 @@ def PageGarde(document,extract):
 
     p=document.add_paragraph()
     p.alignment=WD_ALIGN_PARAGRAPH.CENTER
-    run1=p.add_run('Cette recherche a obtenu le financement de source de financementSi appel à projets du ministère : Cette recherche a obtenu le financement du Ministère de la Santé (nom du programme, année de sélection, n° d’enregistrement)')
+    run1=p.add_run('Cette recherche a obtenu le financement de source de financement Si appel à projets du ministère : Cette recherche a obtenu le financement du Ministère de la Santé (nom du programme, année de sélection, n° d’enregistrement)')
     run1.style='Paragraphe'
     run1.font.italic= True
     
@@ -125,8 +138,8 @@ def PageGarde(document,extract):
     run1.font.name = 'Times New Roman'
     run1.font.size = docx.shared.Pt(11) 
     run1.bold = True
-    run1.underline = True
-    run2 = paragraph.add_run(extract['investigateur_coordinateur_nom']+'\nService de : '+extract['investigateur_coordinateur_service']+'\n'+extract['investigateur_coordinateur_adresse_professionnelle']+'\nTél : '+extract['investigateur_coordinateur_telephone']+' / Fax : '+extract['investigateur_coordinateur_telecopie']+'\nE-mail : '+extract['investigateur_coordinateur_courriel'])
+    run1.underline = True 
+    run2 = paragraph.add_run(extract['investigateur_coordinateur_nom']+extract['investigateur_coordinateur_prenom']+'\nService : '+ extract['investigateur_coordinateur_service']+'\n'+extract['investigateur_coordinateur_adresse]+'\nTél : '+extract['investigateur_coordinateur_telephone']+' / Fax : '+extract['investigateur_coordinateur_telecopie']+'\nE-mail : '+extract['investigateur_coordinateur_courriel'])
     run2.font.name = 'Times New Roman'
     run2.font.size = docx.shared.Pt(11) 
     
@@ -178,7 +191,7 @@ def Page_version(document,extract):
     r.add_text('\t\t'+extract['titre_abrege'])
     p2 = header2.add_paragraph()
     r2 = p2.add_run() 
-    r2.add_picture('imageGauche3.png')
+    r2.add_picture(resource_path('imageGauche3.png'))
     
     '''Titre'''
     paragraph2 = document.add_paragraph()
@@ -403,11 +416,7 @@ def PageCorespondant(document,extract):
     sentence1.font.name = 'Times New Roman'
     sentence1.font.size = docx.shared.Pt(12) 
     sentence1.bold = True  
-    sentence2 = paragraph2.add_run(extract['plateau_technique_organisme']+'\n'+extract['plateau_technique_personne_contact']+'\n'+extract['plateau_technique_adresse']+'\nTél : '+extract['plateau_technique_num_telephone']+'\nFax : '+extract['plateau_technique_num_telecopie']+'\nE-mail : ')
-    '''Then format the sentence'''
-    sentence2.font.name = 'Times New Roman'
-    sentence2.font.size = docx.shared.Pt(10) 
-    sentence3 = paragraph2.add_run(extract['plateau_technique_courriel'])
+    sentence2 = paragraph2.add_run('Nom organisme :\n'+'Nom Prénom personne contact : \n'+'Adresse : \nTél : \nFax : \nE-mail : ')
     '''Then format the sentence'''
     sentence3.font.name = 'Times New Roman'
     sentence3.font.size = docx.shared.Pt(10)
@@ -515,7 +524,7 @@ def resume_protocole(document,extract):
      '''Titre'''
      paragraph2 = document.add_paragraph()
      paragraph2.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
-     sentence = paragraph2.add_run('RESUME DU PROTOCOLE VERSION XX')
+     sentence = paragraph2.add_run('RESUME DU PROTOCOLE VERSION') +extract['code_protocole']
      '''Then format the sentence'''
      sentence.font.name = 'Times New Roman'
      sentence.bold = True

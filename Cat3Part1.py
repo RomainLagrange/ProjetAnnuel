@@ -41,7 +41,7 @@ def Partie1(document,extract):
 #        section.left_margin = Cm(2)
 #        section.right_margin = Cm(2)
         
-    Style(document) #LAISSER DECOMMENTE
+  #  Style(document) 
 
  
     Titre1('1	JUSTICATION SCIENTIFIQUE ET DESCRIPTION GENERALE',document)

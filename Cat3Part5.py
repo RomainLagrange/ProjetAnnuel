@@ -104,7 +104,7 @@ def Partie5(document,extract):
     sentence2.font.name = 'Times New Roman'
     sentence2.font.size = docx.shared.Pt(10)
     paragraph2 = document.add_paragraph()
-    sentence2 = paragraph2.add_run(extract['duree_inclusion'])
+    sentence2 = paragraph2.add_run("Durée de la période d’inclusion :"+extract['duree_inclusion'])
     sentence2.font.name = 'Times New Roman'
     sentence2.font.size = docx.shared.Pt(10)
 

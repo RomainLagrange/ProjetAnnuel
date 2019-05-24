@@ -19,7 +19,7 @@ from docx.shared import Cm, Pt, RGBColor, Inches
 #    TexteGris(texte,document)
 #    TexteGrisJustif(texte,document)
 
-def Partie16(document):
+def Partie16(document,extract):
     'Creation de la partie 16 du protcole de catégorie 2'
  #   document = docx.Document()
 
@@ -54,6 +54,11 @@ def Partie16(document):
     
      # Ecriture du 16.3 
     Titre2('16.3	Financement du projet (si ce point ne fait pas partie d’un document distinct)',document)
+    
+    paragraph2 = document.add_paragraph()
+    sentence2 = paragraph2.add_run(extract['titre_abrege'])
+    sentence2.font.name = 'Times New Roman'
+    sentence2.font.size = docx.shared.Pt(10)
     
      #FIN DU DOC 
     paragraph = document.add_paragraph()

@@ -56,24 +56,32 @@ def Partie18(document,extract):
     Titre2('18.2	Collaborations ',document)
     
     paragraph2 = document.add_paragraph()
-    sentence2 = paragraph2.add_run(extract['titre_abrege'])
+    sentence2 = paragraph2.add_run(extract['titre_complet'])
     sentence2.font.name = 'Times New Roman'
     sentence2.font.size = docx.shared.Pt(11)
     paragraph2 = document.add_paragraph()
     sentence2 = paragraph2.add_run(extract['taille_etude_courte'])
     sentence2.font.name = 'Times New Roman'
+<<<<<<< HEAD
     sentence2.font.size = docx.shared.Pt(11)
     paragraph2 = document.add_paragraph()
     sentence2 = paragraph2.add_run(extract['duree_inclusion'])
     sentence2.font.name = 'Times New Roman'
     sentence2.font.size = docx.shared.Pt(11)
+=======
+    sentence2.font.size = docx.shared.Pt(10)
+#    paragraph2 = document.add_paragraph()
+#    sentence2 = paragraph2.add_run(extract['duree_inclusion'])
+#    sentence2.font.name = 'Times New Roman'
+#    sentence2.font.size = docx.shared.Pt(10)
+>>>>>>> 6e66faaa4ada6d05827ea81c9767a1e677104f7b
     
     p=document.add_paragraph()
     p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
     p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     run1=p.add_run('Le  projet ')
     run1.style='Paragraphe'
-    run2=p.add_run('« Acronyme » ')
+    run2=p.add_run(extract['titre_abrege'])
     run2.style='Paragraphe'
     run2.font.color.rgb = RGBColor(0x0,0xB0,0xF0) 
     run3=p.add_run('bénéfice…. ')
@@ -87,7 +95,7 @@ def Partie18(document,extract):
     run2=p.add_run('XXX ')
     run2.style='Paragraphe'
     run2.font.color.rgb = RGBColor(0x0,0xB0,0xF0) 
-    run3=p.add_run('patients sur une période d’inclusion de ')
+    run3=p.add_run('patients sur une période d’inclusion de '+extract['duree_inclusion'])
     run3.style='Paragraphe'
     run4=p.add_run('XX ')
     run4.style='Paragraphe'
@@ -98,7 +106,7 @@ def Partie18(document,extract):
     #Ecriture du 18.3  
     Titre2('18.3	Financement du projet (si ce point ne fait pas partie d’un document distinct)',document)
     paragraph2 = document.add_paragraph()
-    sentence2 = paragraph2.add_run(extract['titre_abrege'])
+    sentence2 = paragraph2.add_run(extract['titre_complet'])
     sentence2.font.name = 'Times New Roman'
     sentence2.font.size = docx.shared.Pt(11)
     
@@ -107,7 +115,7 @@ def Partie18(document,extract):
     p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     run1=p.add_run('Le projet ')
     run1.style='Paragraphe'
-    run2=p.add_run('« Acronyme » ')
+    run2=p.add_run(extract['titre_abrege'])
     run2.style='Paragraphe'
     run2.font.italic=True
     run2.font.color.rgb = RGBColor(0x0,0xB0,0xF0) 

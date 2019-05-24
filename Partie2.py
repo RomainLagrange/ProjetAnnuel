@@ -53,7 +53,7 @@ def Partie2(document,extract):
     sentence2.font.size = docx.shared.Pt(11) 
     
     # Ecriture du 2.2  
-    Titre2('2.1	Objectifs secondaires',document)
+    Titre2('2.2	Objectifs secondaires',document)
     paragraph2 = document.add_paragraph()
     sentence2 = paragraph2.add_run(extract['objectif_secondaire'])
     sentence2.font.name = 'Times New Roman'

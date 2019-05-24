@@ -15,6 +15,18 @@ import re
 from docx.shared import Cm
 from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
+import StyleProt1
+from StyleProt1 import Style, Titre1,Titre2, Titre3, TexteGris, TexteGrisJustif
+import os
+from os import sys
+
+def resource_path(relative_path):
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
 
 
 #extract=extraction.extract1(dico)
@@ -30,7 +42,9 @@ for section in sections:
 def PageGarde(document,extract):
     
  #   document = docx.Document()
-    
+     
+    Style(document)   
+ 
     sections = document.sections
     page_garde = sections[0]
         
@@ -40,9 +54,9 @@ def PageGarde(document,extract):
     header.is_linked_to_previous = False
     p = header.paragraphs[0]
     r = p.add_run() 
-    r.add_picture('imageGauche.png')
+    r.add_picture(resource_path('imageGauche.png'))
     r.add_text('                                                                                                                                     ')
-    r.add_picture('imageDroite.png')
+    r.add_picture(resource_path('imageDroite.png'))
     
     
     '''Titre de la recherche'''
@@ -108,7 +122,7 @@ def PageGarde(document,extract):
     run1.font.size = docx.shared.Pt(11) 
     run1.bold = True
     run1.underline = True
-    run2 = paragraph.add_run(extract['investigateur_coordinateur_nom']+'\nService de : '+extract['investigateur_coordinateur_service']+'\n'+extract['investigateur_coordinateur_adresse_professionnelle']+'\nTél : '+extract['investigateur_coordinateur_telephone']+' / Fax : '+extract['investigateur_coordinateur_telecopie']+'\nE-mail : '+extract['investigateur_coordinateur_courriel'])
+    run2 = paragraph.add_run(extract['investigateur_coordinateur_nom']+' '+extract['investigateur_coordinateur_prenom']+'\nService de : '+extract['investigateur_coordinateur_service']+'\n'+extract['investigateur_coordinateur_nom_etablissement']+'\n'+extract['investigateur_coordinateur_adresse']+'\nTél : '+extract['investigateur_coordinateur_telephone']+' / Fax : '+extract['investigateur_coordinateur_telecopie']+'\nE-mail : '+extract['investigateur_coordinateur_courriel'])
     run2.font.name = 'Times New Roman'
     run2.font.size = docx.shared.Pt(11) 
     
@@ -160,7 +174,7 @@ def Page_version(document,extract):
     r.add_text('\t\t'+extract['titre_abrege'])
     p2 = header2.add_paragraph()
     r2 = p2.add_run() 
-    r2.add_picture('imageGauche3.png')
+    r2.add_picture(resource_path('imageGauche3.png'))
     
     '''Titre'''
     paragraph2 = document.add_paragraph()
@@ -328,7 +342,7 @@ def PageCorespondant(document,extract):
     sentence1.font.name = 'Times New Roman'
     sentence1.font.size = docx.shared.Pt(12) 
     sentence1.bold = True  
-    sentence2 = paragraph2.add_run(extract['investigateur_coordinateur_nom']+' '+extract['investigateur_coordinateur_prenom']+'\n'+extract['investigateur_coordinateur_nom_etablissement']+'\nService: '+extract['investigateur_coordinateur_service']+'\n'+extract['investigateur_coordinateur_adresse']+'\nTél : '+extract['investigateur_coordinateur_telephone']+'\nFax : '+extract['investigateur_coordinateur_telecopie']+'\nE-mail : ')
+    sentence2 = paragraph2.add_run(extract['investigateur_coordinateur_nom']+' '+extract['investigateur_coordinateur_prenom']+'\n'+extract['investigateur_coordinateur_nom_etablissement']+'\n'+'Service de '+extract['investigateur_coordinateur_service']+'\n'+extract['investigateur_coordinateur_adresse_professionnel']+'\nTél : '+extract['investigateur_coordinateur_telephone']+'\nFax : '+extract['investigateur_coordinateur_telecopie']+'\nE-mail : ')
     '''Then format the sentence'''
     sentence2.font.name = 'Times New Roman'
     sentence2.font.size = docx.shared.Pt(10) 
@@ -351,7 +365,7 @@ def PageCorespondant(document,extract):
         sentence1.font.name = 'Times New Roman'
         sentence1.font.size = docx.shared.Pt(12) 
         sentence1.bold = True  
-        sentence2 = paragraph2.add_run(extract['autre_investigateur_nom'][i]+' '+extract['autre_investigateur_prenom'][i]+'\n'+extract['autre_investigateur_nom_etablissement'][i]+'\nService: '+extract['autre_investigateur_service'][i]+'\n'+extract['autre_investigateur_adresse'][i]+'\nTél : '+extract['autre_investigateur_telephone'][i]+'\nFax : '+extract['autre_investigateur_telecopie'][i]+'\nE-mail : ')
+        sentence2 = paragraph2.add_run(extract['autre_investigateur_nom'][i]+' '+extract['autre_investigateur_prenom'][i]+'\n'+extract['autre_investigateur_nom_etablissement'][i]+'\nService de  '+extract['autre_investigateur_service'][i]+'\n'+extract['autre_investigateur_adresse'][i]+'\nTél : '+extract['autre_investigateur_telephone'][i]+'\nFax : '+extract['autre_investigateur_telecopie'][i]+'\nE-mail : ')
         '''Then format the sentence'''
         sentence2.font.name = 'Times New Roman'
         sentence2.font.size = docx.shared.Pt(10) 
@@ -569,7 +583,7 @@ def resume_protocole(document,extract):
      table.cell(1,0).text = 'Promoteur'
      table.cell(1,1).text = extract['promoteur_nom_organisme']+'\n'+extract['promoteur_adresse']+'\nTél : '+extract['promoteur_num_telephone']+' / Fax : '+extract['promoteur_num_telecopie']
      table.cell(2,0).text = 'Investigateur Coordonnateur'
-     table.cell(2,1).text = extract['investigateur_coordinateur_nom']+' '+extract['investigateur_coordinateur_prenom']+'\n'+extract['investigateur_coordinateur_nom_etablissement']+' Service: '+extract['investigateur_coordinateur_service']+'\n'+extract['investigateur_coordinateur_adresse']+'\nTél : '+extract['investigateur_coordinateur_telephone']+' / Fax : '+extract['investigateur_coordinateur_telecopie']+'\n'+extract['investigateur_coordinateur_courriel']
+     table.cell(2,1).text = extract['investigateur_coordinateur_nom']+' '+extract['investigateur_coordinateur_prenom']+'\n'+extract['investigateur_coordinateur_nom_etablissement']+' Service de : '+extract['investigateur_coordinateur_service']+'\n'+extract['investigateur_coordinateur_adresse']+'\nTél : '+extract['investigateur_coordinateur_telephone']+' / Fax : '+extract['investigateur_coordinateur_telecopie']+'\n'+extract['investigateur_coordinateur_courriel']
      table.cell(3,0).text = 'Justification / contexte'
      table.cell(3,1).text = extract['justification_etude_courte']
      table.cell(4,0).text = 'Objectif Principal'
@@ -581,7 +595,7 @@ def resume_protocole(document,extract):
      table.cell(7,0).text = 'Critères de Jugement Secondaires'
      table.cell(7,1).text = extract['critere_jugement_secondaire_courte']
      table.cell(8,0).text = 'Schéma de la recherche'
-     table.cell(9,0).text = 'Critères d\'Inclusion'
+     table.cell(9,0).text = "Critères d'inclusion"
      table.cell(9,1).text = extract['critere_inclusion_courte']
      table.cell(10,0).text = 'Critères de Non Inclusion des Sujets'
      table.cell(10,1).text = extract['critere_non_inclusion_courte']
@@ -590,7 +604,7 @@ def resume_protocole(document,extract):
      table.cell(12,0).text = 'Taille d\'étude'
      table.cell(12,1).text = extract['taille_etude_courte']
      table.cell(13,0).text = 'Durée de la Recherche '
-     table.cell(13,1).text = 'Durée de la période d\’inclusion : '+extract['duree_inclusion']+'\nDurée de la participation pour chaque participant : '+extract['duree_participation']+'\nDurée totale de l’étude : '+extract['duree_totale_etude']
+     table.cell(13,1).text = "Durée de la période d’inclusion : "+extract['duree_inclusion']+'\nDurée de la participation pour chaque participant : '+extract['duree_participation']+'\nDurée totale de l’étude : '+extract['duree_totale_etude']
      table.cell(14,0).text = 'Analyse statistique des données'
      table.cell(14,1).text = extract['analyse_statistique_courte']
      table.cell(15,0).text = 'Retombées attendues '
