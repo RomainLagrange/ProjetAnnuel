@@ -139,7 +139,7 @@ def PageGarde(document,extract):
     run1.font.size = docx.shared.Pt(11) 
     run1.bold = True
     run1.underline = True 
-    run2 = paragraph.add_run(extract['investigateur_coordinateur_nom']+extract['investigateur_coordinateur_prenom']+'\nService : '+ extract['investigateur_coordinateur_service']+'\n'+extract['investigateur_coordinateur_adresse]+'\nTél : '+extract['investigateur_coordinateur_telephone']+' / Fax : '+extract['investigateur_coordinateur_telecopie']+'\nE-mail : '+extract['investigateur_coordinateur_courriel'])
+    run2 = paragraph.add_run(extract['investigateur_coordinateur_nom']+' '+extract['investigateur_coordinateur_prenom']+'\nService : '+ extract['investigateur_coordinateur_service']+'\n'+extract['investigateur_coordinateur_adresse']+'\nTél : '+extract['investigateur_coordinateur_telephone']+' / Fax : '+extract['investigateur_coordinateur_telecopie']+'\nE-mail : '+extract['investigateur_coordinateur_courriel'])
     run2.font.name = 'Times New Roman'
     run2.font.size = docx.shared.Pt(11) 
     
@@ -333,7 +333,7 @@ def PageSignature(document,extract):
     
     #document.save("page_signature.docx")                   #sauvegarde
     
-def PageCorespondant(document,extract):
+def PageCorespondant(document,extract, dico):
     
     #document = docx.Document()
     
@@ -392,6 +392,18 @@ def PageCorespondant(document,extract):
         sentence3.font.size = docx.shared.Pt(10)
         sentence3.underline = True
 
+    if (len(extract['autre_investigateur_nom'])<int(dico['le_nb_investigateur'])):
+        x = int(dico['le_nb_investigateur'])-len(extract['autre_investigateur_nom'])+1
+        for i in range (1,x):
+            paragraph2 = document.add_paragraph()
+            '''Then format the sentence'''
+            sentence1.font.name = 'Times New Roman'
+            sentence1.font.size = docx.shared.Pt(12) 
+            sentence1.bold = True  
+            sentence2 = paragraph2.add_run('NOM Prenom  \nEtablissement    \nService de  \nAdresse :  \nTél : \nFax : \nE-mail : ')
+            '''Then format the sentence'''
+            sentence2.font.name = 'Times New Roman'
+            sentence2.font.size = docx.shared.Pt(10) 
 
     
     paragraph2 = document.add_paragraph()
@@ -416,11 +428,12 @@ def PageCorespondant(document,extract):
     sentence1.font.name = 'Times New Roman'
     sentence1.font.size = docx.shared.Pt(12) 
     sentence1.bold = True  
-    sentence2 = paragraph2.add_run('Nom organisme :\n'+'Nom Prénom personne contact : \n'+'Adresse : \nTél : \nFax : \nE-mail : ')
-    '''Then format the sentence'''
-    sentence3.font.name = 'Times New Roman'
-    sentence3.font.size = docx.shared.Pt(10)
-    sentence3.underline = True
+    x = dico['le_plateau']
+    for i in range(1,int(x)+1):
+        sentence3 = paragraph2.add_run('Nom organisme :\n'+'Nom Prénom personne contact : \n'+'Adresse : \nTél : \nFax : \nE-mail : \n\n')
+        '''Then format the sentence'''
+        sentence3.font.name = 'Times New Roman'
+        sentence3.font.size = docx.shared.Pt(10)
     
     docu = document.add_section(WD_SECTION.NEW_PAGE)
     sectPr = docu._sectPr
@@ -524,7 +537,7 @@ def resume_protocole(document,extract):
      '''Titre'''
      paragraph2 = document.add_paragraph()
      paragraph2.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
-     sentence = paragraph2.add_run('RESUME DU PROTOCOLE VERSION') +extract['code_protocole']
+     sentence = paragraph2.add_run('RESUME DU PROTOCOLE VERSION' +extract['code_protocole']) 
      '''Then format the sentence'''
      sentence.font.name = 'Times New Roman'
      sentence.bold = True

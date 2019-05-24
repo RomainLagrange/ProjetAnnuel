@@ -324,7 +324,7 @@ def PageSignature(document,extract):
     
     #document.save("page_signature.docx")                   #sauvegarde
     
-def PageCorespondant(document,extract):
+def PageCorespondant(document,extract, dico):
     
     #document = docx.Document()
     
@@ -366,6 +366,17 @@ def PageCorespondant(document,extract):
     sentence.font.name = 'Times New Roman'
     sentence.font.size = docx.shared.Pt(12) 
     sentence.bold = True 
+
+    for i in range (1,int(dico['le_nb_investigateur'])+1):
+        paragraph2 = document.add_paragraph()
+        '''Then format the sentence'''
+        sentence1.font.name = 'Times New Roman'
+        sentence1.font.size = docx.shared.Pt(12) 
+        sentence1.bold = True  
+        sentence2 = paragraph2.add_run('NOM Prenom  \nEtablissement    \nService de  \nAdresse :  \nTél : \nFax : \nE-mail : ')
+        '''Then format the sentence'''
+        sentence2.font.name = 'Times New Roman'
+        sentence2.font.size = docx.shared.Pt(10) 
     
     paragraph2 = document.add_paragraph()
     sentence1 = paragraph2.add_run('Plateforme  Méthodologie et Biostatistiques\n')
@@ -373,6 +384,13 @@ def PageCorespondant(document,extract):
     sentence1.font.name = 'Times New Roman'
     sentence1.font.size = docx.shared.Pt(12) 
     sentence1.bold = True  
+    
+    x = dico['le_plateau']
+    for i in range(1,int(x)+1):
+        sentence3 = paragraph2.add_run('Nom organisme :\n'+'Nom Prénom personne contact : \n'+'Adresse : \nTél : \nFax : \nE-mail : \n\n')
+        '''Then format the sentence'''
+        sentence3.font.name = 'Times New Roman'
+        sentence3.font.size = docx.shared.Pt(10)
     
     docu = document.add_section(WD_SECTION.NEW_PAGE)
     sectPr = docu._sectPr

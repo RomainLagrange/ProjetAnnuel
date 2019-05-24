@@ -67,7 +67,7 @@ def construit_doc(dico):
 #signatures
     page_garde_cat3.PageSignature(document,extract)
 #principaux correspondants
-    page_garde_cat3.PageCorespondant(document,extract)
+    page_garde_cat3.PageCorespondant(document,extract, dico)
 #sommaire
 #abbreviations
     page_garde_cat3.liste_abreviation(document,extract)

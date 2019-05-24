@@ -77,7 +77,7 @@ def construit_doc(dico):
     page_garde.PageGarde(document,extract)
     page_garde.Page_version(document,extract)
     page_garde.PageSignature(document,extract)
-    page_garde.PageCorespondant(document,extract)
+    page_garde.PageCorespondant(document,extract, dico)
     #sommaire
     test_sommaire.sommaire(document)
     page_garde.liste_abreviation(document,extract)

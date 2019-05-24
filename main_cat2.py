@@ -64,7 +64,7 @@ def construit_doc(dico):
     #signature
     page_garde_cat2.PageSignature(document,extract)
     #principaux correspondants
-    page_garde_cat2.PageCorespondant(document,extract)
+    page_garde_cat2.PageCorespondant(document,extract, dico)
     #abreviations
     page_garde_cat2.liste_abreviation(document,extract)
     #resume du proto version XX

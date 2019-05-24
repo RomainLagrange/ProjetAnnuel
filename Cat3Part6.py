@@ -103,15 +103,7 @@ def Partie6(document,extract):
     # Ecriture du 6.3  
     Titre2('6.3	Information des personnes concernées',document)
     
-    paragraph2 = document.add_paragraph()
-    sentence2 = paragraph2.add_run(extract['criteres_inclusion'])
-    sentence2.font.name = 'Times New Roman'
-    sentence2.font.size = docx.shared.Pt(10)
-    
-    paragraph2 = document.add_paragraph()
-    sentence2 = paragraph2.add_run(extract['criteres_non_inclusion'])
-    sentence2.font.name = 'Times New Roman'
-    sentence2.font.size = docx.shared.Pt(10)
+   
     
     p=document.add_paragraph()
     p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
@@ -137,9 +129,19 @@ def Partie6(document,extract):
     p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     run1=p.add_run('Le médecin vérifie également les ')
     run1.style='Paragraphe'
-    run2=p.add_run('critères d’éligibilité.')
+    run2=p.add_run('critères d’éligibilité :\n')
     run2.style='Paragraphe'
     run2.font.color.rgb = RGBColor(0x92,0xD0,0x50) 
+
+    paragraph2 = document.add_paragraph()
+    sentence2 = paragraph2.add_run(extract['criteres_inclusion'])
+    sentence2.font.name = 'Times New Roman'
+    sentence2.font.size = docx.shared.Pt(10)
+    
+    paragraph2 = document.add_paragraph()
+    sentence2 = paragraph2.add_run(extract['criteres_non_inclusion'])
+    sentence2.font.name = 'Times New Roman'
+    sentence2.font.size = docx.shared.Pt(10)
 
     p=document.add_paragraph()
     p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
