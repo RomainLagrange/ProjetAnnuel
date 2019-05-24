@@ -55,7 +55,7 @@ def Partie1(document,extract):
     paragraph2 = document.add_paragraph()
     sentence2 = paragraph2.add_run(extract['traitement_strategie_longue'])
     sentence2.font.name = 'Times New Roman'
-    sentence2.font.size = docx.shared.Pt(10) 
+    sentence2.font.size = docx.shared.Pt(11) 
 
   
                                         
@@ -65,11 +65,11 @@ def Partie1(document,extract):
     paragraph2 = document.add_paragraph()
     sentence2 = paragraph2.add_run(extract['critere_jugement_principal_courte'])
     sentence2.font.name = 'Times New Roman'
-    sentence2.font.size = docx.shared.Pt(10)
+    sentence2.font.size = docx.shared.Pt(11)
     paragraph2 = document.add_paragraph()
     sentence2 = paragraph2.add_run(extract['traitement_strategie_courte'])
     sentence2.font.name = 'Times New Roman'
-    sentence2.font.size = docx.shared.Pt(10) 
+    sentence2.font.size = docx.shared.Pt(11) 
     
 
     #Ecriture du titre1.3
@@ -77,11 +77,11 @@ def Partie1(document,extract):
     paragraph2 = document.add_paragraph()
     sentence2 = paragraph2.add_run(extract['justification_etude_longue'])
     sentence2.font.name = 'Times New Roman'
-    sentence2.font.size = docx.shared.Pt(10)
+    sentence2.font.size = docx.shared.Pt(11)
     paragraph2 = document.add_paragraph()
     sentence2 = paragraph2.add_run(extract['critere_jugement_principal_courte'])
     sentence2.font.name = 'Times New Roman'
-    sentence2.font.size = docx.shared.Pt(10) 
+    sentence2.font.size = docx.shared.Pt(11) 
     
     #Texte sur fond gris  
     TexteGris('prendre contact avec la plateforme de methodologie \n pour aide a la redaction du paragraphe 2.3', document)
@@ -99,7 +99,7 @@ def Partie1(document,extract):
     paragraph2 = document.add_paragraph()
     sentence2 = paragraph2.add_run(extract['benefices'])
     sentence2.font.name = 'Times New Roman'
-    sentence2.font.size = docx.shared.Pt(10)
+    sentence2.font.size = docx.shared.Pt(11)
 
 
    
@@ -108,7 +108,7 @@ def Partie1(document,extract):
     paragraph2 = document.add_paragraph()
     sentence2 = paragraph2.add_run(extract['risques'])
     sentence2.font.name = 'Times New Roman'
-    sentence2.font.size = docx.shared.Pt(10)
+    sentence2.font.size = docx.shared.Pt(11)
 
     p=document.add_paragraph()
     p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
@@ -120,7 +120,7 @@ def Partie1(document,extract):
     paragraph2 = document.add_paragraph()
     sentence2 = paragraph2.add_run(extract['retombee_attenduees_longue'])
     sentence2.font.name = 'Times New Roman'
-    sentence2.font.size = docx.shared.Pt(10)
+    sentence2.font.size = docx.shared.Pt(11)
 
     #FIN DU DOC 
     paragraph = document.add_paragraph()

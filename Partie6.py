@@ -71,15 +71,15 @@ def Partie6(document,extract):
     paragraph2 = document.add_paragraph()
     sentence2 = paragraph2.add_run("Durée de la période d’inclusion :"+extract['duree_inclusion'])
     sentence2.font.name = 'Times New Roman'
-    sentence2.font.size = docx.shared.Pt(10)
+    sentence2.font.size = docx.shared.Pt(11)
     paragraph2 = document.add_paragraph()
     sentence2 = paragraph2.add_run("Durée de la participation pour chaque participant :"+extract['duree_participation'])
     sentence2.font.name = 'Times New Roman'
-    sentence2.font.size = docx.shared.Pt(10)
+    sentence2.font.size = docx.shared.Pt(11)
     paragraph2 = document.add_paragraph()
     sentence2 = paragraph2.add_run("Durée totale de l’étude :"+extract['duree_totale_etude'])
     sentence2.font.name = 'Times New Roman'
-    sentence2.font.size = docx.shared.Pt(10)
+    sentence2.font.size = docx.shared.Pt(11)
     #format paysage
     change_orientation(document)
     
@@ -627,11 +627,11 @@ def Partie6(document,extract):
     paragraph2 = document.add_paragraph()
     sentence2 = paragraph2.add_run(extract['indemnisation'])
     sentence2.font.name = 'Times New Roman'
-    sentence2.font.size = docx.shared.Pt(10)
+    sentence2.font.size = docx.shared.Pt(11)
     paragraph2 = document.add_paragraph()
     sentence2 = paragraph2.add_run(extract['justification_existence'])
     sentence2.font.name = 'Times New Roman'
-    sentence2.font.size = docx.shared.Pt(10)
+    sentence2.font.size = docx.shared.Pt(11)
     
     #Ecriture du titre 6.9
     Titre2('6.9	Collection d’échantillons biologiques',document)

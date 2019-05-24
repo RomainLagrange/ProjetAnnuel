@@ -152,7 +152,7 @@ def Partie14(document,extract):
     run4=p.add_run('n° numéro enregistrement XXX')
     run4.style='Paragraphe'
     run4.font.color.rgb = RGBColor(0x0,0xB0,0xF0) 
-    run4.font.italic=True
+    run4.font.bold=True
 
     p=document.add_paragraph()
     p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
