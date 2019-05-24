@@ -54,7 +54,7 @@ def Partie7(document,extract):
     paragraph2 = document.add_paragraph()
     sentence2 = paragraph2.add_run(extract['traitement_strategie_longue'])
     sentence2.font.name = 'Times New Roman'
-    sentence2.font.size = docx.shared.Pt(10)
+    sentence2.font.size = docx.shared.Pt(11)
     
     p=document.add_paragraph()
     p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY

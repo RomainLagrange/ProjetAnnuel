@@ -66,18 +66,18 @@ def Partie5(document,extract):
     paragraph2 = document.add_paragraph()
     sentence2 = paragraph2.add_run(extract['critere_non_inclusion_longue'])
     sentence2.font.name = 'Times New Roman'
-    sentence2.font.size = docx.shared.Pt(10)
+    sentence2.font.size = docx.shared.Pt(11)
     
     # Ecriture du 5.3  
     Titre2('5.3	Faisabilité et modalités de recrutement',document)
     paragraph2 = document.add_paragraph()
     sentence2 = paragraph2.add_run(extract['modalite_recrutement'])
     sentence2.font.name = 'Times New Roman'
-    sentence2.font.size = docx.shared.Pt(10)
+    sentence2.font.size = docx.shared.Pt(11)
     paragraph2 = document.add_paragraph()
     sentence2 = paragraph2.add_run(extract['duree_inclusion'])
     sentence2.font.name = 'Times New Roman'
-    sentence2.font.size = docx.shared.Pt(10)
+    sentence2.font.size = docx.shared.Pt(11)
    
                     #FIN DU DOC 
     paragraph = document.add_paragraph()

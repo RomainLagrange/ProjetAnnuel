@@ -45,13 +45,13 @@ def Partie3(document,extract):
     paragraph2 = document.add_paragraph()
     sentence2 = paragraph2.add_run(extract['critere_jugement_principal_longue'])
     sentence2.font.name = 'Times New Roman'
-    sentence2.font.size = docx.shared.Pt(10)
+    sentence2.font.size = docx.shared.Pt(11)
     # Ecriture du 3.2  
     Titre2('3.2	Critères d’évaluation secondaires',document)
     paragraph2 = document.add_paragraph()
     sentence2 = paragraph2.add_run(extract['critere_jugement_secondaire_longue'])
     sentence2.font.name = 'Times New Roman'
-    sentence2.font.size = docx.shared.Pt(10)
+    sentence2.font.size = docx.shared.Pt(11)
             #FIN DU DOC 
     paragraph = document.add_paragraph()
     run = paragraph.add_run()

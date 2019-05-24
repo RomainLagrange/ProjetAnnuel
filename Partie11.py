@@ -54,17 +54,17 @@ def Partie11(document,extract):
     paragraph2 = document.add_paragraph()
     sentence2 = paragraph2.add_run(extract['critere_jugement_principal_courte'])
     sentence2.font.name = 'Times New Roman'
-    sentence2.font.size = docx.shared.Pt(10)
+    sentence2.font.size = docx.shared.Pt(11)
     paragraph2 = document.add_paragraph()
     sentence2 = paragraph2.add_run(extract['taille_etude_longue'])
     sentence2.font.name = 'Times New Roman'
-    sentence2.font.size = docx.shared.Pt(10)
+    sentence2.font.size = docx.shared.Pt(11)
 #    #Ecriture du 11.2  
     Titre2('11.2	Méthodes statistiques employées',document)
     paragraph2 = document.add_paragraph()
     sentence2 = paragraph2.add_run(extract['analyse_statistique_longue'])
     sentence2.font.name = 'Times New Roman'
-    sentence2.font.size = docx.shared.Pt(10)
+    sentence2.font.size = docx.shared.Pt(11)
     #Ecriture du 11.3  
     Titre2('11.3	Analyse de la sécurité',document)
     

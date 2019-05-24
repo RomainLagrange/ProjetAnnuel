@@ -46,7 +46,7 @@ def Partie4(document,extract):
     paragraph2 = document.add_paragraph()
     sentence2 = paragraph2.add_run(extract['traitement_strategie_courte'])
     sentence2.font.name = 'Times New Roman'
-    sentence2.font.size = docx.shared.Pt(10)
+    sentence2.font.size = docx.shared.Pt(11)
     # Ecriture du 4.2  
     Titre2('4.2	Méthode pour la randomisation',document)
     

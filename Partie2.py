@@ -46,22 +46,22 @@ def Partie2(document,extract):
     paragraph2 = document.add_paragraph()
     sentence2 = paragraph2.add_run(extract['objectif_principal'])
     sentence2.font.name = 'Times New Roman'
-    sentence2.font.size = docx.shared.Pt(10) 
+    sentence2.font.size = docx.shared.Pt(11) 
     paragraph2 = document.add_paragraph()
     sentence2 = paragraph2.add_run(extract['critere_jugement_principal_courte'])
     sentence2.font.name = 'Times New Roman'
-    sentence2.font.size = docx.shared.Pt(10) 
+    sentence2.font.size = docx.shared.Pt(11) 
     
     # Ecriture du 2.2  
     Titre2('2.1	Objectifs secondaires',document)
     paragraph2 = document.add_paragraph()
     sentence2 = paragraph2.add_run(extract['objectif_secondaire'])
     sentence2.font.name = 'Times New Roman'
-    sentence2.font.size = docx.shared.Pt(10) 
+    sentence2.font.size = docx.shared.Pt(11) 
     paragraph2 = document.add_paragraph()
     sentence2 = paragraph2.add_run(extract['critere_jugement_secondaire_courte'])
     sentence2.font.name = 'Times New Roman'
-    sentence2.font.size = docx.shared.Pt(10)
+    sentence2.font.size = docx.shared.Pt(11)
     
         #FIN DU DOC 
     paragraph = document.add_paragraph()
