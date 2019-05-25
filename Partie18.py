@@ -55,7 +55,6 @@ def Partie18(document,extract):
     #Ecriture du 17.2  
     Titre2('18.2	Collaborations ',document)
     
-<<<<<<< HEAD
 #    paragraph2 = document.add_paragraph()
 #    sentence2 = paragraph2.add_run(extract['titre_complet'])
 #    sentence2.font.name = 'Times New Roman'
@@ -64,7 +63,7 @@ def Partie18(document,extract):
 #    sentence2 = paragraph2.add_run(extract['taille_etude_courte'])
 #    sentence2.font.name = 'Times New Roman'
 #    sentence2.font.size = docx.shared.Pt(10)
-=======
+
     paragraph2 = document.add_paragraph()
     sentence2 = paragraph2.add_run(extract['titre_complet'])
     sentence2.font.name = 'Times New Roman'
@@ -72,21 +71,17 @@ def Partie18(document,extract):
     paragraph2 = document.add_paragraph()
     sentence2 = paragraph2.add_run(extract['taille_etude_courte'])
     sentence2.font.name = 'Times New Roman'
-<<<<<<< HEAD
     sentence2.font.size = docx.shared.Pt(11)
     paragraph2 = document.add_paragraph()
     sentence2 = paragraph2.add_run(extract['duree_inclusion'])
     sentence2.font.name = 'Times New Roman'
     sentence2.font.size = docx.shared.Pt(11)
-=======
-    sentence2.font.size = docx.shared.Pt(10)
->>>>>>> 7e26cdb91c938f03c45a45d6a4a045ef4719a354
+
 #    paragraph2 = document.add_paragraph()
 #    sentence2 = paragraph2.add_run(extract['duree_inclusion'])
 #    sentence2.font.name = 'Times New Roman'
 #    sentence2.font.size = docx.shared.Pt(10)
->>>>>>> 6e66faaa4ada6d05827ea81c9767a1e677104f7b
-    
+   
     p=document.add_paragraph()
     p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
     p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
