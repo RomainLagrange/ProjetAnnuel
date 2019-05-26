@@ -359,7 +359,7 @@ def PageCorespondant(document,extract, dico):
     sentence1.font.name = 'Times New Roman'
     sentence1.font.size = docx.shared.Pt(12) 
     sentence1.bold = True  
-    sentence2 = paragraph2.add_run(extract['investigateur_coordinateur_nom']+' '+extract['investigateur_coordinateur_prenom']+'\n'+extract['investigateur_coordinateur_nom_etablissement']+'\nService: '+extract['investigateur_coordinateur_service']+'\n'+extract['investigateur_coordinateur_adresse']+'\nTél : '+extract['investigateur_coordinateur_telephone']+'\nFax : '+extract['investigateur_coordinateur_telecopie']+'\nE-mail : ')
+    sentence2 = paragraph2.add_run(extract['investigateur_coordinateur_nom']+extract['investigateur_coordinateur_prenom']+'\n'+extract['investigateur_coordinateur_nom_etablissement']+'\nService: '+extract['investigateur_coordinateur_service']+'\n'+extract['investigateur_coordinateur_adresse']+'\nTél : '+extract['investigateur_coordinateur_telephone']+'\nFax : '+extract['investigateur_coordinateur_telecopie']+'\nE-mail : ')
     '''Then format the sentence'''
     sentence2.font.name = 'Times New Roman'
     sentence2.font.size = docx.shared.Pt(10) 
@@ -382,7 +382,7 @@ def PageCorespondant(document,extract, dico):
         sentence1.font.name = 'Times New Roman'
         sentence1.font.size = docx.shared.Pt(12) 
         sentence1.bold = True  
-        sentence2 = paragraph2.add_run(extract['autre_investigateur_nom'][i]+' '+extract['autre_investigateur_prenom'][i]+'\n'+extract['autre_investigateur_nom_etablissement'][i]+'\nService: '+extract['autre_investigateur_service'][i]+'\n'+extract['autre_investigateur_adresse'][i]+'\nTél : '+extract['autre_investigateur_telephone'][i]+'\nFax : '+extract['autre_investigateur_telecopie'][i]+'\nE-mail : ')
+        sentence2 = paragraph2.add_run(extract['autre_investigateur_nom'][i]+extract['autre_investigateur_prenom'][i]+'\n'+extract['autre_investigateur_nom_etablissement'][i]+'\nService: '+extract['autre_investigateur_service'][i]+'\n'+extract['autre_investigateur_adresse'][i]+'\nTél : '+extract['autre_investigateur_telephone'][i]+'\nFax : '+extract['autre_investigateur_telecopie'][i]+'\nE-mail : ')
         '''Then format the sentence'''
         sentence2.font.name = 'Times New Roman'
         sentence2.font.size = docx.shared.Pt(10) 
