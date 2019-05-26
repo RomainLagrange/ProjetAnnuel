@@ -260,7 +260,7 @@ def page2_cpp_hps(document, extract):
     
     paragraph = document.add_paragraph("\nA. IDENTIFICATION DE LA RECHERCHE", style="gras_tableau")
     paragraph=document.add_paragraph()
-    sentence = paragraph.add_run("Titre complet de la recherche : "+extract['titre_complet']+" \nNuméro d'enregistrement de la recherche (délivré par l'ANSM) : \n")
+    sentence = paragraph.add_run("Titre complet de la recherche : "+extract['titre_complet']+" \nNuméro d'enregistrement de la recherche (délivré par l'ANSM) : "+extract['num_idrcb']+"\n")
     fontdebut = sentence.font
     fontdebut.name = 'Arial Narrow'
     fontdebut.size = docx.shared.Pt(10) 
@@ -302,15 +302,15 @@ def page2_cpp_hps(document, extract):
     
     paragraph = document.add_paragraph("\nB. IDENTIFICATION DU PROMOTEUR RESPONSABLE DE LA DEMANDE\n    B1. Promoteur",style="gras_tableau")
     table = document.add_table(rows=5, cols=2, style='Table Grid')
-    a=table.cell(0,0)
-    b=table.cell(0,1)
-    a.merge(b)
+#    a=table.cell(0,0)
+#    b=table.cell(0,1)
+#    a.merge(b)
     c=table.cell(1,0)
     d=table.cell(1,1)
     c.merge(d)
-    table.cell(0,0).text=("Nom de l'organisme : "+extract['promoteur_nom_organisme']+"\n")
-    table.cell(1,0).text=("Nom de la personne à contacter : "+extract['promoteur_nom_personne_contact']+"\n")
-    table.cell(0,2).text=("Avis du CPP : ")
+    table.cell(0,0).text=("Nom de l'organisme : "+extract['promoteur_nom_organisme'])
+    table.cell(1,0).text=("Nom de la personne à contacter : "+extract['promoteur_nom_personne_contact'])
+    table.cell(0,1).text=("Avis du CPP : ")
     e=table.cell(2,0)
     f=table.cell(4,0)
     e.merge(f)
